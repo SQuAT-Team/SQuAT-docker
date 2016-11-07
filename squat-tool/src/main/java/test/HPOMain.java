@@ -1,0 +1,57 @@
+package test;
+
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import io.github.squat_team.performance.peropteryx.configuration.Configuration;
+import io.github.squat_team.performance.peropteryx.configuration.PerOpteryxConfig;
+import io.github.squat_team.performance.peropteryx.export.ExportMode;
+import io.github.squat_team.performance.peropteryx.export.OptimizationDirection;
+import io.github.squat_team.performance.peropteryx.export.PerOpteryxPCMResult;
+import io.github.squat_team.performance.peropteryx.start.HeadlessPerOpteryxRunner;
+
+public class HPOMain {
+	
+	private static Configuration config;
+	
+	public static void main(String[] args) throws InterruptedException, ExecutionException {
+		configurate();
+		start();
+	}
+
+	private static void configurate(){
+		config = new Configuration();
+		config.getPerOpteryxConfig().setMaxIterations(3);
+		config.getPerOpteryxConfig().setGenerationSize(7);
+		
+		config.getPcmInstanceConfig().setAllocationModel(TestConstants.ALLOCATION_FILE_PATH);
+		config.getPcmInstanceConfig().setUsageModel(TestConstants.USAGE_FILE_PATH);
+		config.getPerOpteryxConfig().setDesignDecisionFile(TestConstants.DESIGNDECISION_FILE_PATH);
+		config.getPerOpteryxConfig().setQmlDefinitionFile(TestConstants.QML_FILE_PATH);
+		config.getPerOpteryxConfig().setMode(PerOpteryxConfig.Mode.OPTIMIZE);
+		
+		config.getPcmModelsConfig().setPathmapFolder(TestConstants.PCM_MODEL_FILES);
+		
+		config.getLqnsConfig().setLqnsOutputDir(TestConstants.LQN_OUTPUT);
+		config.getExporterConfig().setPcmOutputFolder(TestConstants.PCM_STORAGE_PATH);
+		config.getExporterConfig().setExportMode(ExportMode.AMOUNT);
+		config.getExporterConfig().setAmount(2);
+		config.getExporterConfig().setOptimizationDirection(OptimizationDirection.MINIMIZE);
+		config.getExporterConfig().setBoundaryValue(6.0);
+	}
+	
+	private static void start() throws InterruptedException, ExecutionException{
+	    ExecutorService pool = Executors.newFixedThreadPool(4);
+		
+		HeadlessPerOpteryxRunner runner = new HeadlessPerOpteryxRunner();
+		runner.init(config);
+		runner.setDebugMode(true);
+	    Future<List<PerOpteryxPCMResult>> future = pool.submit(runner);
+	    future.get();
+	}
+	
+}
