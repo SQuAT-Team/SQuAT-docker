@@ -16,10 +16,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.CoreException;
 import org.palladiosimulator.pcm.repository.Repository;
 import org.palladiosimulator.solver.models.PCMInstance;
 
 import de.uka.ipd.sdq.dsexplore.analysis.PCMPhenotype;
+import de.uka.ipd.sdq.dsexplore.opt4j.start.Opt4JStarter;
 
 /**
  * Persists the given PCM instance, when
@@ -36,6 +38,8 @@ public class PCMFileExporter {
 
 	// Genotype IDs - Folder Names
 	private Map<String, String> candidates = new HashMap<String, String>();
+	// Genotype IDs - Counter
+	private Map<String, Integer> calledCounter = new HashMap<String, Integer>();
 
 	private PCMFileExporter() {
 		// THREAD SINGLETON PATTERN
@@ -45,7 +49,7 @@ public class PCMFileExporter {
 		PCMFileExporter exporter;
 		if (threadInstances.containsKey(Thread.currentThread().getId())) {
 			exporter = threadInstances.get(Thread.currentThread().getId());
-		}else{
+		} else {
 			exporter = new PCMFileExporter();
 			threadInstances.put(Thread.currentThread().getId(), exporter);
 		}
@@ -61,6 +65,34 @@ public class PCMFileExporter {
 	public void init(String storagePath) {
 		this.storagePath = storagePath;
 		this.date = getDate();
+	}
+
+	/**
+	 * Saves the PCM, if it is called the last time. It is assumed, that each
+	 * pcm is called two times for each objective.
+	 * 
+	 * @param pcmp
+	 *            - delivers the metadata
+	 * @param pcm
+	 *            - instance to save
+	 * @return if new PCM was saved
+	 */
+	public boolean savePCMChecked(PCMPhenotype pcmp, PCMInstance pcm) {
+		String candidateID = pcmp.getGenotypeID();
+		if (calledCounter.containsKey(candidateID)) {
+			calledCounter.put(candidateID, calledCounter.get(candidateID) + 1);
+		} else {
+			calledCounter.put(candidateID, 1);
+		}
+		try {
+			if (calledCounter.get(candidateID) == 2 * Opt4JStarter.getDSEEvaluator().getObjectives().size()) {
+				savePCM(pcmp, pcm);
+			}
+		} catch (CoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**
@@ -88,8 +120,8 @@ public class PCMFileExporter {
 	}
 
 	/**
-	 * Resets the saved candidates and closes the exporter. Call if you do not want to use this class in
-	 * this run anymore.
+	 * Resets the saved candidates and closes the exporter. Call if you do not
+	 * want to use this class in this run anymore.
 	 */
 	protected void close() {
 		this.candidateCounter = 0;
@@ -100,7 +132,7 @@ public class PCMFileExporter {
 	protected Map<String, String> getPCMStoragePaths() {
 		return candidates;
 	}
-	
+
 	/**
 	 * Saves all PCM files.
 	 * 
