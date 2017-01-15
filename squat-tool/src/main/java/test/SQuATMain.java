@@ -1,6 +1,8 @@
 package test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -16,18 +18,19 @@ import org.palladiosimulator.pcm.usagemodel.UsagemodelPackage;
 import io.github.squat_team.model.OptimizationType;
 import io.github.squat_team.model.PCMArchitectureInstance;
 import io.github.squat_team.model.PCMResult;
-import io.github.squat_team.model.PCMScenario;
 import io.github.squat_team.model.PCMScenarioResult;
 import io.github.squat_team.model.ResponseMeasureType;
 import io.github.squat_team.performance.PerformanceMetric;
 import io.github.squat_team.performance.PerformancePCMScenario;
 import io.github.squat_team.performance.peropteryx.PerOpteryxPCMBot;
 import io.github.squat_team.performance.peropteryx.configuration.Configuration;
-import io.github.squat_team.util.PCMHelper;
+import io.github.squat_team.performance.peropteryx.start.OptimizationInfo;
 import io.github.squat_team.util.SQuATHelper;
-import main.TestConstants;
+import test.TestConstants;
 
-
+/**
+ * Main class to run the SQuAT Performance Bot
+ */
 public class SQuATMain {
 
 	private static void register() {
@@ -52,28 +55,68 @@ public class SQuATMain {
 		// create configuration
 		Configuration configuration = new Configuration();
 		configuration.getPerOpteryxConfig().setDesignDecisionFile(TestConstants.DESIGNDECISION_FILE_PATH);
-		configuration.getPerOpteryxConfig().setQmlDefinitionFile(TestConstants.QML_FILE_PATH);
+		//configuration.getPerOpteryxConfig().setQmlDefinitionFile(TestConstants.QML_FILE_PATH);
 		configuration.getLqnsConfig().setLqnsOutputDir(TestConstants.LQN_OUTPUT);
 		configuration.getExporterConfig().setPcmOutputFolder(TestConstants.PCM_STORAGE_PATH);
 		configuration.getPcmModelsConfig().setPathmapFolder(TestConstants.PCM_MODEL_FILES);
 
 		// init bot
 		PerOpteryxPCMBot bot = new PerOpteryxPCMBot(scenario, configuration);
-		bot.setDebugMode(true);
+		bot.setDebugMode(false);
 
 		// create Instance
 		Allocation allocation = SQuATHelper.loadAllocationModel("file:/" + TestConstants.ALLOCATION_FILE_PATH);
 		UsageModel usageModel = SQuATHelper.loadUsageModel("file:/" + TestConstants.USAGE_FILE_PATH);
 		PCMArchitectureInstance architecture = new PCMArchitectureInstance("", null, null, allocation, null,
 				usageModel);
+		
+		configuration.getPerOpteryxConfig().setMaxIterations(1);
+		configuration.getPerOpteryxConfig().setGenerationSize(1);
+		//optimize(bot, architecture);
+		//analyze(bot, architecture);
+		
+		
+		// AUTOMATIC EVALUATION - cant be used
+		
+		Map<Integer, Comparable> values = new HashMap<Integer, Comparable>();
+		Map<Integer, Long> times = new HashMap<Integer, Long>();
+		for(int i = 0; i < 1; i++){
+			System.out.println("Starting iteration " + i);
+			
+			//execute
+			long start = System.currentTimeMillis();
+			List<PCMScenarioResult> results = bot.searchForAlternatives(architecture);
+			long end = System.currentTimeMillis();
 
-		optimize(bot, architecture);
+			times.put(i, (end-start));
+			Comparable value = 100000.0;
+			for(PCMScenarioResult result : results){
+				if(result.getResult().getResponse().compareTo(value) < 0){
+					value = result.getResult().getResponse();
+				}
+			}
+			values.put(i, value);
+			
+			System.gc();
+		}
+		
+		System.out.println("RESULTS:");
+		for(int i : values.keySet()){
+			System.out.println("====================");
+			System.out.println("iteration: " + i);
+			System.out.println("result: " + values.get(i));
+			System.out.println("time: " + times.get(i));
+		}
+		System.out.println("====================");
+		
 	}
 
-	public static void analyse(PerOpteryxPCMBot bot, PCMArchitectureInstance architecture) {
+	public static void analyze(PerOpteryxPCMBot bot, PCMArchitectureInstance architecture) {
 		// run bot analyse
+		long start = System.currentTimeMillis();
 		PCMScenarioResult result = bot.analyze(architecture);
-
+		long end = System.currentTimeMillis();
+		
 		System.out.println("BOT FINISHED: ");
 		System.out.println(result.getOriginatingBot());
 		System.out.println(result.getResult().getResponse());
@@ -83,12 +126,17 @@ public class SQuATMain {
 		System.out.println(result.getResultingArchitecture().getResourceEnvironment());
 		System.out.println(result.getResultingArchitecture().getSystem());
 		System.out.println(result.getResultingArchitecture().getUsageModel());
+		System.out.println(end-start);
+
 	}
 
 	public static void optimize(PerOpteryxPCMBot bot, PCMArchitectureInstance architecture) {
 		// run bot optimization
+		long start = System.currentTimeMillis();
 		List<PCMScenarioResult> results = bot.searchForAlternatives(architecture);
-
+		long end = System.currentTimeMillis();
+		System.out.println(end-start);
+		
 		System.out.println("BOT FINISHED: ");
 		for (PCMScenarioResult result : results) {
 			System.out.println(result.getOriginatingBot());
@@ -100,6 +148,7 @@ public class SQuATMain {
 			System.out.println(result.getResultingArchitecture().getSystem());
 			System.out.println(result.getResultingArchitecture().getUsageModel());
 		}
+		System.out.println(OptimizationInfo.getIterations());
 
 	}
 }

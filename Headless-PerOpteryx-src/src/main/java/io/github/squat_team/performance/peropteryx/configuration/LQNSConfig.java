@@ -2,7 +2,7 @@ package io.github.squat_team.performance.peropteryx.configuration;
 
 import java.util.Map;
 
-public class LQNSConfig extends AbstractConfig {
+public class LQNSConfig extends AbstractConfiguration {
 	
 	private String lqnsOutputDir = "";
 	

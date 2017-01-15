@@ -33,10 +33,10 @@ import de.uka.ipd.sdq.workflow.jobs.UserCanceledException;
 import de.uka.ipd.sdq.workflow.launchconfig.AbstractWorkflowConfigurationBuilder;
 import de.uka.ipd.sdq.workflow.mdsd.blackboard.MDSDBlackboard;
 import io.github.squat_team.performance.peropteryx.export.PCMFileExporter;
+import io.github.squat_team.performance.peropteryx.export.PCMResultsProvider;
 import io.github.squat_team.performance.peropteryx.overwrite.MyLqnXmlHandler;
 
 public abstract class MyAbstractLQNAnalysis extends MyAbstractAnalysis implements IAnalysis {
-	// private String lastID = "";
 
 	/** Logger for log4j. */
 	protected static Logger logger = Logger.getLogger("de.uka.ipd.sdq.dsexplore.analysis.lqn.LQNSolverAnalysis");

@@ -5,7 +5,7 @@ import java.util.Map;
 import de.uka.ipd.sdq.dsexplore.launch.DSEConstantsContainer;
 import io.github.squat_team.performance.peropteryx.start.HeadlessPerOpteryxConstants;
 
-public class PerOpteryxConfig extends AbstractConfig {
+public class PerOpteryxConfig extends AbstractConfiguration {
 
 	public enum Mode {
 		OPTIMIZE, DESIGN_DECISIONS, DESIGN_DECISIONS_AND_OPTIMIZE;

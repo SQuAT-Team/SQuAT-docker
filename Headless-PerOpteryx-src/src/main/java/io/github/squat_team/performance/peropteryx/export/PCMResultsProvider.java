@@ -23,7 +23,8 @@ import de.uka.ipd.sdq.dsexplore.opt4j.start.Opt4JStarter;
 /**
  * Provides the results of the Headless PerOpteryx run. It must be specified, if
  * only the Pareto Front, all candidates or candidates better than a boundary
- * value should be exported. The remaining PCMs will be deleted.
+ * value should be exported. The remaining PCMs will be deleted. This method
+ * works only for single objectives!
  */
 public class PCMResultsProvider {
 	private static Map<Long, PCMResultsProvider> threadInstances = new HashMap<Long, PCMResultsProvider>();

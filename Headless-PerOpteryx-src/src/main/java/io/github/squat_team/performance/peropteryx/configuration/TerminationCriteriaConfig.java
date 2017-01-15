@@ -4,7 +4,7 @@ import java.util.Map;
 
 import de.uka.ipd.sdq.dsexplore.launch.DSEConstantsContainer;
 
-public class TerminationCriteriaConfig extends AbstractConfig{
+public class TerminationCriteriaConfig extends AbstractConfiguration{
 	private Boolean activateTerminationCriteria = false;
 	private Boolean activateInsignificantFrontChange = false;
 	private Integer insignificantFrontChangeGenerationNumber = 1;

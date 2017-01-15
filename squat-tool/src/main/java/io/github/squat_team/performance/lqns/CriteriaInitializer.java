@@ -45,7 +45,7 @@ public class CriteriaInitializer {
 	}
 
 	// copied code from AbstractAnalysis
-	public void initialiseCriteria(DSEWorkflowConfiguration configuration) throws CoreException {
+	public void initializeCriteria(DSEWorkflowConfiguration configuration) throws CoreException {
 		PCMInstance pcmInstance = this.pcmInstance;
 		List<UsageScenario> scenarios = pcmInstance.getUsageModel().getUsageScenario_UsageModel();
 		UsageModel usageModel = pcmInstance.getUsageModel();

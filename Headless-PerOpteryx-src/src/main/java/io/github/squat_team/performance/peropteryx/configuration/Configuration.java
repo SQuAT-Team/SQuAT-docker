@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Configuration extends AbstractConfig {
-	private List<AbstractConfig> configs;
+public class Configuration extends AbstractConfiguration {
+	private List<AbstractConfiguration> configs;
 
-	private PcmInstanceConfig pcmInstanceConfig;
+	private PCMInstanceConfig pcmInstanceConfig;
 	private LQNSConfig lqnsConfig;
 	private TacticsConfig tacticsConfig;
-	private PcmModelsConfig pcmModelsConfig;
+	private PCMModelsConfig pcmModelsConfig;
 	private PerOpteryxConfig perOpteryxConfig;
 	private TerminationCriteriaConfig terminationCriteriaConfig;
 	
@@ -18,12 +18,12 @@ public class Configuration extends AbstractConfig {
 
 	@Override
 	public void initializeDefault() {
-		configs  = new ArrayList<AbstractConfig>();
+		configs  = new ArrayList<AbstractConfiguration>();
 		
-		pcmInstanceConfig = new PcmInstanceConfig();
+		pcmInstanceConfig = new PCMInstanceConfig();
 		lqnsConfig = new LQNSConfig();
 		tacticsConfig = new TacticsConfig();
-		pcmModelsConfig = new PcmModelsConfig();
+		pcmModelsConfig = new PCMModelsConfig();
 		perOpteryxConfig = new PerOpteryxConfig();
 		exporterConfig = new ExporterConfig();
 		terminationCriteriaConfig = new TerminationCriteriaConfig();
@@ -39,7 +39,7 @@ public class Configuration extends AbstractConfig {
 
 	@Override
 	public Map<String, Object> copyValuesTo(Map<String, Object> attr) {
-		for (AbstractConfig config : configs) {
+		for (AbstractConfiguration config : configs) {
 			config.copyValuesTo(attr);
 		}
 		return attr;
@@ -47,7 +47,7 @@ public class Configuration extends AbstractConfig {
 
 	@Override
 	public boolean validate() {
-		for (AbstractConfig config : configs) {
+		for (AbstractConfiguration config : configs) {
 			if (!config.validate()) {
 				return false;
 			}
@@ -56,7 +56,7 @@ public class Configuration extends AbstractConfig {
 	}
 
 	
-	public PcmInstanceConfig getPcmInstanceConfig() {
+	public PCMInstanceConfig getPcmInstanceConfig() {
 		return pcmInstanceConfig;
 	}
 
@@ -68,7 +68,7 @@ public class Configuration extends AbstractConfig {
 		return tacticsConfig;
 	}
 
-	public PcmModelsConfig getPcmModelsConfig() {
+	public PCMModelsConfig getPcmModelsConfig() {
 		return pcmModelsConfig;
 	}
 

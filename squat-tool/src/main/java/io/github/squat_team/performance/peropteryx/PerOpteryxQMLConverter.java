@@ -25,7 +25,6 @@ public class PerOpteryxQMLConverter {
 		String outputFileName = generateOutputFileName(scenario.getMetric());
 
 		List<String> lines = generateFileData(usageModelFileName, usageModelID, objectiveID);
-		System.out.println(usageModelFileName);
 		createFile(outputFilePath + outputFileName, lines);
 		return outputFilePath + outputFileName;
 	}

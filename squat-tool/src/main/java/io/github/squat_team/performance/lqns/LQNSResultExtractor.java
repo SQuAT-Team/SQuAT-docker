@@ -46,7 +46,7 @@ public class LQNSResultExtractor {
 			throws CoreException {
 		MyLQNQualityAttributeDeclaration declaration = new MyLQNQualityAttributeDeclaration();
 		CriteriaInitializer criteriaInitializer = new CriteriaInitializer(pcmInstance, declaration);
-		criteriaInitializer.initialiseCriteria(dseConfiguration);
+		criteriaInitializer.initializeCriteria(dseConfiguration);
 		List<Criterion> criterions = criteriaInitializer.getCriterions();
 		if (!criterions.isEmpty()) {
 			return criterions.get(0);

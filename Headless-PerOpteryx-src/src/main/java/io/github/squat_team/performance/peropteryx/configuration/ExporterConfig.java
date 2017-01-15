@@ -5,7 +5,7 @@ import java.util.Map;
 import io.github.squat_team.performance.peropteryx.export.ExportMode;
 import io.github.squat_team.performance.peropteryx.export.OptimizationDirection;
 
-public class ExporterConfig extends AbstractConfig{
+public class ExporterConfig extends AbstractConfiguration{
 
 	private String pcmOutputFolder = "";
 	private double boundaryValue;

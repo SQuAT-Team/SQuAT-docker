@@ -1,6 +1,5 @@
 package test;
 
-
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -14,6 +13,9 @@ import io.github.squat_team.performance.peropteryx.export.OptimizationDirection;
 import io.github.squat_team.performance.peropteryx.export.PerOpteryxPCMResult;
 import io.github.squat_team.performance.peropteryx.start.HeadlessPerOpteryxRunner;
 
+/**
+ * Main class to run Headless PerOpteryx
+ */
 public class HPOMain {
 	
 	private static Configuration config;
@@ -25,8 +27,8 @@ public class HPOMain {
 
 	private static void configurate(){
 		config = new Configuration();
-		config.getPerOpteryxConfig().setMaxIterations(3);
-		config.getPerOpteryxConfig().setGenerationSize(7);
+		config.getPerOpteryxConfig().setMaxIterations(1);
+		config.getPerOpteryxConfig().setGenerationSize(1);
 		
 		config.getPcmInstanceConfig().setAllocationModel(TestConstants.ALLOCATION_FILE_PATH);
 		config.getPcmInstanceConfig().setUsageModel(TestConstants.USAGE_FILE_PATH);
@@ -47,11 +49,15 @@ public class HPOMain {
 	private static void start() throws InterruptedException, ExecutionException{
 	    ExecutorService pool = Executors.newFixedThreadPool(4);
 		
+	    long start = System.currentTimeMillis();
 		HeadlessPerOpteryxRunner runner = new HeadlessPerOpteryxRunner();
 		runner.init(config);
-		runner.setDebugMode(true);
+		runner.setDebugMode(false);
 	    Future<List<PerOpteryxPCMResult>> future = pool.submit(runner);
 	    future.get();
+	    long end = System.currentTimeMillis();
+	    System.out.println("TIME: " + (end-start));
+	    System.out.println(future.get().get(0).getValue());
 	}
 	
 }

@@ -163,13 +163,15 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 	private void configurePerOpteryxForOptimization() {
 		// TODO: choose good values
 		configuration.getTacticsConfig().useTactics(true);
-		configuration.getPerOpteryxConfig().setGenerationSize(100);
-		configuration.getPerOpteryxConfig().setMaxIterations(20);
+		if(configuration.getPerOpteryxConfig().getGenerationSize() <= 1 && configuration.getPerOpteryxConfig().getMaxIterations() <=1){
+			configuration.getPerOpteryxConfig().setGenerationSize(100);
+			configuration.getPerOpteryxConfig().setMaxIterations(20);
+		}
 
 		// TODO: use a stop criteria? Will improve speed in many cases
 		configuration.getTerminationCriteriaConfig().setActivateTerminationCriteria(true);
 		configuration.getTerminationCriteriaConfig().setActivateInsignificantFrontChange(true);
-		configuration.getTerminationCriteriaConfig().setInsignificantFrontChangeGenerationNumber(4);
+		configuration.getTerminationCriteriaConfig().setInsignificantFrontChangeGenerationNumber(6);
 		configuration.getTerminationCriteriaConfig().setInsignificantFrontChangeImprovementPercentage(1);
 	}
 

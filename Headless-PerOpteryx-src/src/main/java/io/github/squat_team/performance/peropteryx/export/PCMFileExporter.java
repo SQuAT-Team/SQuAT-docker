@@ -89,7 +89,7 @@ public class PCMFileExporter {
 				savePCM(pcmp, pcm);
 			}
 		} catch (CoreException e) {
-			// TODO Auto-generated catch block
+			// should not happen
 			e.printStackTrace();
 		}
 		return false;

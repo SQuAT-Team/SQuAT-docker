@@ -4,7 +4,7 @@ import java.util.Map;
 
 import de.uka.ipd.sdq.dsexplore.launch.DSEConstantsContainer;
 
-public class TacticsConfig extends AbstractConfig{
+public class TacticsConfig extends AbstractConfiguration{
 
 	private Double tacticsProbability = new Double(0.6);
 	
