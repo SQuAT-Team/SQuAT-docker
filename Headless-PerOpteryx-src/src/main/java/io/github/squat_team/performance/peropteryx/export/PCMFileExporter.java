@@ -141,16 +141,26 @@ public class PCMFileExporter {
 	 */
 	private void saveAllFiles(PCMInstance pcm, String directoryPath) {
 		String allocationFilePath = directoryPath + FILE_PREFIX + ".allocation";
+		String usagemodelFilePath = directoryPath + FILE_PREFIX + ".usagemodel";
 		pcm.saveToXMIFile(pcm.getAllocation(), allocationFilePath);
 		fixAllocationFile(new File(allocationFilePath), directoryPath);
+		
 		List<Repository> repositories = pcm.getRepositories();
+		int i = 0;
 		for (Repository repository : repositories) {
-			pcm.saveToXMIFile(repository, directoryPath + FILE_PREFIX + ".repository");
+			if(i == 1){
+				// this should be the right one
+				pcm.saveToXMIFile(repository, directoryPath + FILE_PREFIX + ".repository");
+			}else{
+				pcm.saveToXMIFile(repository, directoryPath + FILE_PREFIX + i + ".repository");
+			}
+			i++;
 		}
 		pcm.saveToXMIFile(pcm.getResourceEnvironment(), directoryPath + FILE_PREFIX + ".resourceenvironment");
 		pcm.saveToXMIFile(pcm.getResourceRepository(), directoryPath + FILE_PREFIX + ".resourcetype");
 		pcm.saveToXMIFile(pcm.getSystem(), directoryPath + FILE_PREFIX + ".system");
 		pcm.saveToXMIFile(pcm.getUsageModel(), directoryPath + FILE_PREFIX + ".usagemodel");
+		fixUsagemodelFile(new File(usagemodelFilePath), directoryPath);
 	}
 
 	/**
@@ -208,7 +218,7 @@ public class PCMFileExporter {
 
 				// Adjust paths in allocation file
 				str = sb.toString();
-				str = str.replaceAll("file:/" + ".*" + "cand", "file:/" + directoryPath + FILE_PREFIX);
+				str = str.replaceAll("file:/" + ".*" + "cand", /*"file:/" + directoryPath + */FILE_PREFIX); // no absolute path
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
@@ -234,6 +244,61 @@ public class PCMFileExporter {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * Replaces the links to the other PCM files with the correct ones.
+	 * 
+	 * @param file
+	 *            - the usagemodel file
+	 * @param directoryPath
+	 *            - the path of the pcm directory in which the usagemodel file
+	 *            is allocated
+	 */
+	private void fixUsagemodelFile(File file, String directoryPath) {
+		String str = "";
+		BufferedReader br;
 
+		// Read allocation file
+		try {
+			br = new BufferedReader(new FileReader(file));
+			try {
+				StringBuilder sb = new StringBuilder();
+				String line = br.readLine();
+
+				while (line != null) {
+					sb.append(line);
+					sb.append(System.lineSeparator());
+					line = br.readLine();
+				}
+
+				// Adjust paths in usagemodel file
+				str = sb.toString();
+				str = str.replaceAll("file:/" + ".*" + "cand", /*"file:/" + directoryPath + */FILE_PREFIX); // no absolute path
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
+		// if successful, write back to usagemodel file
+		if (!str.equals("")) {
+			FileWriter fw;
+			try {
+				fw = new FileWriter(file.getAbsoluteFile());
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(str);
+				bw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
