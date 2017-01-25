@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -70,14 +71,14 @@ public class SQuATMain {
 		PCMArchitectureInstance architecture = new PCMArchitectureInstance("", null, null, allocation, null,
 				usageModel);
 		
-		configuration.getPerOpteryxConfig().setMaxIterations(1);
-		configuration.getPerOpteryxConfig().setGenerationSize(1);
-		//optimize(bot, architecture);
+		//configuration.getPerOpteryxConfig().setMaxIterations(1);
+		//configuration.getPerOpteryxConfig().setGenerationSize(1);
+		optimize(bot, architecture);
 		//analyze(bot, architecture);
 		
 		
 		// AUTOMATIC EVALUATION - cant be used
-		
+		/*
 		Map<Integer, Comparable> values = new HashMap<Integer, Comparable>();
 		Map<Integer, Long> times = new HashMap<Integer, Long>();
 		for(int i = 0; i < 1; i++){
@@ -107,7 +108,7 @@ public class SQuATMain {
 			System.out.println("result: " + values.get(i));
 			System.out.println("time: " + times.get(i));
 		}
-		System.out.println("====================");
+		System.out.println("====================");*/
 		
 	}
 
@@ -135,20 +136,28 @@ public class SQuATMain {
 		long start = System.currentTimeMillis();
 		List<PCMScenarioResult> results = bot.searchForAlternatives(architecture);
 		long end = System.currentTimeMillis();
-		System.out.println(end-start);
 		
 		System.out.println("BOT FINISHED: ");
+		System.out.println("Population Size: "+ 100);
+		System.out.println("Max Iterations: " + 20);
+		System.out.println("Runtime " + (end-start) + " ms");
+		System.out.println("Real Iterations: " + OptimizationInfo.getIterations());
+		System.out.println("");
+		System.out.println("Best 10 Candidates:");
 		for (PCMScenarioResult result : results) {
-			System.out.println(result.getOriginatingBot());
-			System.out.println(result.getResult().getResponse());
-			System.out.println(result.getResultingArchitecture().getName());
+			System.out.println("----");
+			String uri = result.getResultingArchitecture().getAllocation().eResource().getURI().segment(4).toString();			
+			System.out.println("Name: " + uri);
+
+			//System.out.println(result.getOriginatingBot());
+			System.out.println("Response Time: " + result.getResult().getResponse());
+			/*System.out.println(result.getResultingArchitecture().getName());
 			System.out.println(result.getResultingArchitecture().getAllocation());
 			System.out.println(result.getResultingArchitecture().getRepository());
 			System.out.println(result.getResultingArchitecture().getResourceEnvironment());
 			System.out.println(result.getResultingArchitecture().getSystem());
-			System.out.println(result.getResultingArchitecture().getUsageModel());
+			System.out.println(result.getResultingArchitecture().getUsageModel());*/
 		}
-		System.out.println(OptimizationInfo.getIterations());
 
 	}
 }
