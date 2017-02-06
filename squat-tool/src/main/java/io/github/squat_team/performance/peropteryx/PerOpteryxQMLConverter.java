@@ -91,7 +91,7 @@ public class PerOpteryxQMLConverter {
 				"<QMLDeclarations:QMLDeclarations xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:QMLContract=\"http:///QMLContract.ecore\" xmlns:QMLDeclarations=\"http:///QMLDeclarations.ecore\" xmlns:QMLProfile=\"http:///QMLProfile.ecore\" id=\"__FjEYJyKEd-NNcIT2kpSGQ3\">");
 		lines.add(
 				"<qmlDeclarations xsi:type=\"QMLProfile:SimpleQMLProfile\" id=\"__Gb1MJyKEd-NNcIT2kpGSQ\" entityName=\"PCMProfile\">");
-		lines.add("<usageModel href=\"default.usagemodel#/\"/>");
+		lines.add("<usageModel href=\"" + usageModelFileName + "#/\"/>");
 		lines.add(
 				"<requirements xsi:type=\"QMLProfile:UsageScenarioRequirement\" id=\"__IEz85yKEd-NNcIT2kpGQS\" requireContract=\"_FqNZYaCrEd-s9uTaURbrKAz\">");
 		lines.add("<usageScenario href=\"" + usageModelFileName + "#" + usageModelID + "\"/>");
