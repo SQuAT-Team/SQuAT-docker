@@ -218,7 +218,7 @@ public class PCMFileExporter {
 
 				// Adjust paths in allocation file
 				str = sb.toString();
-				str = str.replaceAll("file:/" + ".*" + "cand", /*"file:/" + directoryPath + */FILE_PREFIX); // no absolute path
+				str = str.replaceAll("href=\"" + ".*" + "cand\\.", /*"file:/" + directoryPath + */"href=\"" + FILE_PREFIX + "."); // no absolute path
 			} catch (IOException e) {
 				e.printStackTrace();
 			} finally {
