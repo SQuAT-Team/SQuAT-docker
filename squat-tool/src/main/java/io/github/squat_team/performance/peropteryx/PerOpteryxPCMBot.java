@@ -1,5 +1,6 @@
 package io.github.squat_team.performance.peropteryx;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.logging.LogManager;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.palladiosimulator.pcm.core.entity.NamedElement;
 import org.palladiosimulator.solver.models.PCMInstance;
 
 import de.fakeller.palladio.analysis.pcm2lqn.runner.PcmLqnsAnalyzer;
@@ -16,6 +18,7 @@ import de.fakeller.palladio.analysis.pcm2lqn.runner.PcmLqnsAnalyzerConfig;
 import de.fakeller.palladio.analysis.pcm2lqn.runner.PcmLqnsAnalyzerContext;
 import de.fakeller.palladio.analysis.provider.FileSystemProvider;
 import de.fakeller.palladio.config.PcmModelConfig;
+import de.fakeller.performance.analysis.result.PerformanceResult;
 import io.github.squat_team.AbstractPCMBot;
 import io.github.squat_team.model.OptimizationType;
 import io.github.squat_team.model.PCMArchitectureInstance;
@@ -23,6 +26,7 @@ import io.github.squat_team.model.PCMScenarioResult;
 import io.github.squat_team.performance.PerformancePCMScenario;
 import io.github.squat_team.performance.lqns.LQNSResultConverter;
 import io.github.squat_team.performance.lqns.LQNSResultExtractor;
+import io.github.squat_team.performance.lqns.LQNSDetailedResultWriter;
 import io.github.squat_team.performance.lqns.LQNSResult;
 import io.github.squat_team.performance.peropteryx.configuration.Configuration;
 import io.github.squat_team.performance.peropteryx.configuration.PerOpteryxConfig.Mode;
@@ -38,6 +42,7 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 	private Configuration configuration;
 	private PerformancePCMScenario performanceScenario;
 	private Boolean debugMode = false;
+	private Boolean detailedAnalysis = false;
 
 	/**
 	 * This bot uses a LQN solver to analyze, and PerOpteryx (based on the LQN
@@ -70,10 +75,39 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 			String outputPath = executeHeadlessLqns(pcmInstance);
 			LQNSResult lqnsResult = LQNSResultExtractor.extract(pcmInstance, configuration, outputPath);
 			activateLog();
+			if (detailedAnalysis) {
+				analyzeDetailed(currentArchitecture);
+			}
 			return LQNSResultConverter.convert(currentArchitecture, lqnsResult, performanceScenario.getMetric(), this);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return null;
+		}
+	}
+
+	private void analyzeDetailed(PCMArchitectureInstance currentArchitecture) {
+		try {
+			configureWith(currentArchitecture);
+			configureWith(this.performanceScenario);
+			deactivateLog();
+			setupEnvironmentforAnalysis();
+			PCMInstance pcmInstance = buildPcmInstanceForAnalysis();
+
+			PerOpteryxPCMDetailedAnalyser detailedAnalyser = new PerOpteryxPCMDetailedAnalyser(pcmInstance);
+			PerformanceResult<NamedElement> analysisResult = detailedAnalyser.analyze();
+			LQNSDetailedResultWriter detailedWriter = new LQNSDetailedResultWriter(analysisResult);
+			File exportDestination = LQNSDetailedResultWriter.determineFileDestination(currentArchitecture);
+			detailedWriter.writeTo(exportDestination);
+
+			activateLog();
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+	}
+
+	private void analyzeDetailed(List<PCMScenarioResult> results) {
+		for (PCMScenarioResult result : results) {
+			analyzeDetailed(result.getResultingArchitecture());
 		}
 	}
 
@@ -87,13 +121,16 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 			configurePerOpteryxForOptimization();
 			validateConfiguration();
 			Future<List<PerOpteryxPCMResult>> future = runPerOpteryx();
-			return exportOptimizationResults(future);
+			List<PCMScenarioResult> results = exportOptimizationResults(future);
+			if (detailedAnalysis) {
+				analyzeDetailed(results);
+			}
+			return results;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return new ArrayList<PCMScenarioResult>();
 		}
 	}
-
 
 	private void setupEnvironmentforAnalysis() {
 		PalladioEclipseEnvironment.INSTANCE.setup(configuration.getPcmModelsConfig().getPathmapFolder());
@@ -130,7 +167,6 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 		}
 	}
 
-	
 	private List<PCMScenarioResult> exportOptimizationResults(Future<List<PerOpteryxPCMResult>> future) {
 		try {
 			List<PerOpteryxPCMResult> peropteryxResult = future.get();
@@ -163,7 +199,8 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 	private void configurePerOpteryxForOptimization() {
 		// TODO: choose good values
 		configuration.getTacticsConfig().useTactics(true);
-		if(configuration.getPerOpteryxConfig().getGenerationSize() <= 1 && configuration.getPerOpteryxConfig().getMaxIterations() <=1){
+		if (configuration.getPerOpteryxConfig().getGenerationSize() <= 1
+				&& configuration.getPerOpteryxConfig().getMaxIterations() <= 1) {
 			configuration.getPerOpteryxConfig().setGenerationSize(100);
 			configuration.getPerOpteryxConfig().setMaxIterations(20);
 		}
@@ -239,8 +276,33 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 		return debugMode;
 	}
 
+	/**
+	 * Prints all information from the loggers to the console. This option
+	 * requires a higher computational effort and is therefore deactivated by
+	 * default.
+	 * 
+	 * @param debugMode
+	 *            true activates the unfiltered console output
+	 */
 	public void setDebugMode(Boolean debugMode) {
 		this.debugMode = debugMode;
+	}
+
+	public Boolean getDetailedAnalysis() {
+		return detailedAnalysis;
+	}
+
+	/**
+	 * The detailed analysis writes additional information to the destination of
+	 * the pcm instances. This includes the utilization of the components and
+	 * servers used in the model. This option requires a higher computational
+	 * effort and is therefore deactivated by default.
+	 * 
+	 * @param detailedAnalysis
+	 *            true activates the detailed analysis
+	 */
+	public void setDetailedAnalysis(Boolean detailedAnalysis) {
+		this.detailedAnalysis = detailedAnalysis;
 	}
 
 }
