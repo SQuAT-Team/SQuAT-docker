@@ -32,4 +32,4 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ADD pcm /home/pcm
 ADD squat-tool-performance-bot.jar /home/squat-tool-performance-bot.jar
 
-#ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "Main"]
+ENTRYPOINT java -jar /home/squat-tool-performance-bot.jar
