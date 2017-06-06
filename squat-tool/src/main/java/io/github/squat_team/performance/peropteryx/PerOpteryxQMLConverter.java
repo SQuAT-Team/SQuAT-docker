@@ -40,7 +40,7 @@ public class PerOpteryxQMLConverter {
 
 	private static String getFilePath(String usageModelPath) {
 		File file = new File(usageModelPath);
-		return file.getParentFile() + "\\";
+		return file.getParentFile() + File.separator;
 	}
 
 	private static String getFileName(String usageModelPath) {

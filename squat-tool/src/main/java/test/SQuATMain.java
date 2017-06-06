@@ -27,12 +27,16 @@ import io.github.squat_team.performance.peropteryx.PerOpteryxPCMBot;
 import io.github.squat_team.performance.peropteryx.configuration.Configuration;
 import io.github.squat_team.performance.peropteryx.start.OptimizationInfo;
 import io.github.squat_team.util.SQuATHelper;
-import test.TestConstants;
 
 /**
  * Main class to run the SQuAT Performance Bot
  */
 public class SQuATMain {
+	private static TestConstants testConstants = new TestConstants();
+
+	public SQuATMain(TestConstants testConstants) {
+		SQuATMain.testConstants = testConstants;
+	}
 
 	private static void register() {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
@@ -55,19 +59,19 @@ public class SQuATMain {
 
 		// create configuration
 		Configuration configuration = new Configuration();
-		configuration.getPerOpteryxConfig().setDesignDecisionFile(TestConstants.DESIGNDECISION_FILE_PATH);
-		//configuration.getPerOpteryxConfig().setQmlDefinitionFile(TestConstants.QML_FILE_PATH);
-		configuration.getLqnsConfig().setLqnsOutputDir(TestConstants.LQN_OUTPUT);
-		configuration.getExporterConfig().setPcmOutputFolder(TestConstants.PCM_STORAGE_PATH);
-		configuration.getPcmModelsConfig().setPathmapFolder(TestConstants.PCM_MODEL_FILES);
+		configuration.getPerOpteryxConfig().setDesignDecisionFile(testConstants.DESIGNDECISION_FILE_PATH);
+		//configuration.getPerOpteryxConfig().setQmlDefinitionFile(testConstants.QML_FILE_PATH);
+		configuration.getLqnsConfig().setLqnsOutputDir(testConstants.LQN_OUTPUT);
+		configuration.getExporterConfig().setPcmOutputFolder(testConstants.PCM_STORAGE_PATH);
+		configuration.getPcmModelsConfig().setPathmapFolder(testConstants.PCM_MODEL_FILES);
 
 		// init bot
 		PerOpteryxPCMBot bot = new PerOpteryxPCMBot(scenario, configuration);
 		bot.setDebugMode(false);
 
 		// create Instance
-		Allocation allocation = SQuATHelper.loadAllocationModel("file:/" + TestConstants.ALLOCATION_FILE_PATH);
-		UsageModel usageModel = SQuATHelper.loadUsageModel("file:/" + TestConstants.USAGE_FILE_PATH);
+		Allocation allocation = SQuATHelper.loadAllocationModel("file:/" + testConstants.ALLOCATION_FILE_PATH);
+		UsageModel usageModel = SQuATHelper.loadUsageModel("file:/" + testConstants.USAGE_FILE_PATH);
 		PCMArchitectureInstance architecture = new PCMArchitectureInstance("", null, null, allocation, null,
 				usageModel);
 		
