@@ -50,7 +50,7 @@ ENV MAVEN_HOME /usr/share/maven
 
 WORKDIR /home
 
-RUN ["mvn", "org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=/home/lib/fastpan-v0.2.1.jar -DgroupId=de.fakeller.performance -DartifactId=fastpan -Dversion=0.2.1 -Dpackaging=jar -DlocalRepositoryPath=localrep"]
+RUN ["mvn", "install-plugin:install-file -Dfile=/home/lib/fastpan-v0.2.1.jar -DgroupId=de.fakeller.performance -DartifactId=fastpan -Dversion=0.2.1 -Dpackaging=jar -DlocalRepositoryPath=localrep"]
 RUN ["mvn", "org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=/home/lib/guava-19.0.jar -DgroupId=com.google.guava -DartifactId=guava -Dversion=19.0 -Dpackaging=jar -DlocalRepositoryPath=localrep"]
 RUN ["mvn", "org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=/home/lib/log4j-over-slf4j-1.7.21.jar -DgroupId=org.slf4j -DartifactId=log4j-over-slf4j -Dversion=1.7.21 -Dpackaging=jar -DlocalRepositoryPath=localrep"]
 RUN ["mvn", "org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=/home/lib/hpo.jar -DgroupId=hpo -DartifactId=hpo -Dversion=1.0.0 -Dpackaging=jar -DlocalRepositoryPath=localrep"]
