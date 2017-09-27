@@ -151,8 +151,7 @@
         	<groupId>org.eclipse.emf</groupId>
         	<artifactId>org.eclipse.emf.ecore</artifactId>
         	<version>2.10.2-v20150123-0348</version>
-        	<scope>system</scope>
-        	<systemPath>${project.basedir}/lib/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar</systemPath>
+        	<scope>compile</scope>
         </dependency>
     </dependencies>
 
