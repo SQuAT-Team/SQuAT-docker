@@ -12,19 +12,18 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-
     <dependencies>
         <dependency>
             <groupId>de.fakeller.performance</groupId>
-            <artifactId>fakeller</artifactId>
+            <artifactId>fastpan</artifactId>
             <version>0.2.1</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/fastpan-v0.2.1.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>com.google</groupId>
-            <artifactId>google</artifactId>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
             <version>19.0</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/guava-19.0.jar</systemPath>
@@ -42,76 +41,88 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
-        </dependency>
-
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache</groupId>
-            <artifactId>apache</artifactId>
-            <version>1.1.1</version>
             <scope>system</scope>
+            <systemPath>${project.basedir}/lib/junit-4.12.jar</systemPath>
+        </dependency>
+
+		<dependency>
+   			<groupId>org.apache.logging.log4j</groupId>
+   			<artifactId>log4j-core</artifactId>
+   			<version>2.5</version>
+   			<scope>system</scope>
+            <systemPath>${project.basedir}/lib/log4j-1.2-api-2.5.jar</systemPath>
+		</dependency>
+
+        <dependency>
+		    <groupId>org.apache.logging.log4j</groupId>
+    		<artifactId>log4j-over-slf4j</artifactId>
+    		<version>1.7.21</version>
+    		<scope>system</scope>
+            <systemPath>${project.basedir}/lib/log4j-over-slf4j-1.7.21.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+		    <groupId>commons-logging</groupId>
+    		<artifactId>commons-logging</artifactId>
+    		<version>1.1.1</version>
+    		<scope>system</scope>
             <systemPath>${project.basedir}/lib/org.apache.commons.logging_1.1.1.v201101211721.jar</systemPath>
         </dependency>
 
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>eclipse</artifactId>
-            <version>4.3.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/org.eclipse.emf.cdo.common_4.3.0.v20140309-0644.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>eclipse</artifactId>
-            <version>4.3.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/org.eclipse.emf.cdo_4.3.0.v20140520-1823.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>eclipse</artifactId>
-            <version>2.1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/org.eclipse.emf.common_2.10.1.v20150123-0348.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>eclipse</artifactId>
-            <version>2.1.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar</systemPath>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>eclipse</artifactId>
-            <version>2.1.0</version>
-            <scope>system</scope>
+		<dependency>
+    		<groupId>org.eclipse.emf</groupId>
+    		<artifactId>org.eclipse.emf.ecore</artifactId>
+    		<version>2.10.1</version>
+    		<scope>system</scope>
             <systemPath>${project.basedir}/lib/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar</systemPath>
+		</dependency>
+		
+        <dependency>
+    		<groupId>org.eclipse.emf</groupId>
+    		<artifactId>org.eclipse.emf.cdo</artifactId>
+    		<version>4.3.0</version>
+    		<scope>system</scope>
+    		<systemPath>${project.basedir}/lib/org.eclipse.emf.cdo_4.3.0.v20140520-1823.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+    		<groupId>org.eclipse.emf</groupId>
+    		<artifactId>org.eclipse.emf.cdo.common</artifactId>
+    		<version>4.3.0</version>
+    		<scope>system</scope>
+    		<systemPath>${project.basedir}/lib/org.eclipse.emf.cdo.common_4.3.0.v20140309-0644.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+    		<groupId>org.eclipse.emf</groupId>
+    		<artifactId>org.eclipse.emf.common</artifactId>
+    		<version>4.3.0</version>
+    		<scope>system</scope>
+    		<systemPath>${project.basedir}/lib/org.eclipse.emf.common_2.10.1.v20150123-0348.jar</systemPath>
+        </dependency>
+        
+        <dependency>
+    		<groupId>org.eclipse.emf</groupId>
+    		<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+    		<version>4.3.0</version>
+    		<scope>system</scope>
+    		<systemPath>${project.basedir}/lib/org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar</systemPath>
         </dependency>
 
         <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>eclipse</artifactId>
-            <version>3.3.1</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/org.eclipse.ocl.ecore_3.3.100.v20140610-0641.jar</systemPath>
+    		<groupId>org.eclipse.ocl</groupId>
+    		<artifactId>org.eclipse.ocl</artifactId>
+    		<version>4.3.0</version>
+    		<scope>system</scope>
+    		<systemPath>${project.basedir}/lib/org.eclipse.ocl_3.4.2.v20140725-2242.jar</systemPath>
         </dependency>
-
-        <dependency>
-            <groupId>org.eclipse</groupId>
-            <artifactId>eclipse</artifactId>
-            <version>3.4.2</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/org.eclipse.ocl_3.4.2.v20140725-2242.jar</systemPath>
+        
+       <dependency>
+    		<groupId>org.eclipse.ocl</groupId>
+    		<artifactId>org.eclipse.ocl.ecore</artifactId>
+    		<version>4.3.0</version>
+    		<scope>system</scope>
+    		<systemPath>${project.basedir}/lib/org.eclipse.ocl.ecore_3.3.100.v20140610-0641.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -124,7 +135,7 @@
 
         <dependency>
             <groupId>de.fakeller.palladio.builder</groupId>
-            <artifactId>fakeller</artifactId>
+            <artifactId>fakellerBuilder</artifactId>
             <version>0.6.3</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/palladio-builder-0.6.3-SNAPSHOT.jar</systemPath>
@@ -145,13 +156,6 @@
             <version>1.7.21</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/slf4j-api-1.7.21.jar</systemPath>
-        </dependency>
-        
-        <dependency>
-        	<groupId>org.eclipse.emf</groupId>
-        	<artifactId>org.eclipse.emf.ecore</artifactId>
-        	<version>2.10.2-v20150123-0348</version>
-        	<scope>compile</scope>
         </dependency>
     </dependencies>
 
