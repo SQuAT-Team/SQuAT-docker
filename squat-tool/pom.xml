@@ -189,6 +189,7 @@
                     <archive>
                         <manifest>
                             <!-- Jar file entry point -->
+                            <addClasspath>true</addClasspath>
                             <mainClass>test.DockerMain</mainClass>
                         </manifest>
                     </archive>
