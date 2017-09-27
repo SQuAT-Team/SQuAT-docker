@@ -15,7 +15,7 @@
     <repositories>
     	<repository>
         	<id>localrep</id>
-        	<url>file://${basedir}/lib</url>
+        	<url>file://${basedir}/localrep</url>
     	</repository>
 	</repositories>
 
@@ -23,20 +23,20 @@
         <dependency>
             <groupId>de.fakeller.performance</groupId>
             <artifactId>fastpan</artifactId>
-			<version>${fastpan.version}</version>
+			<version>0.2.1</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-			<version>${Guava: Google Core Libraries for Java.version}</version>
+			<version>19.0</version>
         </dependency>
 
         <!-- TODO: -->
         <dependency>
             <groupId>hpo</groupId>
             <artifactId>hpo</artifactId>
-			<version>${hpo.version}</version>
+			<version>1.0.0</version>
         </dependency>
 
         <!-- TODO: -->
@@ -51,13 +51,13 @@
 		<dependency>
    			<groupId>org.apache.logging.log4j</groupId>
    			<artifactId>log4j-1.2-api</artifactId>
-			<version>${Apache Log4j 1.x Compatibility API.version}</version>
+			<version>1.2</version>
 		</dependency>
 
         <dependency>
 		    <groupId>org.slf4j</groupId>
     		<artifactId>log4j-over-slf4j</artifactId>
-			<version>${Log4j Implemented Over SLF4J.version}</version>
+			<version>1.7.21</version>
         </dependency>
         
         
@@ -72,7 +72,7 @@
 		<dependency>
     		<groupId>org.eclipse.emf</groupId>
     		<artifactId>org.eclipse.emf.ecore</artifactId>
-    		<version>2.10.2</version>
+    		<version>2.10.2-v20150123-0348</version>
 		</dependency>
 		
         <dependency>
@@ -114,25 +114,25 @@
         <dependency>
             <groupId>de.fakeller.palladio-headless</groupId>
             <artifactId>palladio-analysis</artifactId>
-			<version>${Palladio Headless Analysis.version}</version>
+			<version>0.6.3</version>
         </dependency>
 
         <dependency>
             <groupId>de.fakeller.palladio-headless</groupId>
             <artifactId>palladio-builder</artifactId>
-			<version>${Palladio Headless Builder.version}</version>
+			<version>0.6.3</version>
         </dependency>
 
         <dependency>
             <groupId>de.fakeller.palladio-headless</groupId>
             <artifactId>palladio-environment</artifactId>
-			<version>${Palladio Headless Environment.version}</version>
+			<version>0.6.3-SNAPSHOT</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-			<version>${SLF4J API Module.version}</version>
+			<version>1.7.21</version>
         </dependency>
     </dependencies>
 
@@ -170,7 +170,7 @@
                             <mainClass>test.DockerMain</mainClass>
                         </manifest>
                     </archive>
-                    <outputDirectory>/home</outputDirectory>
+                    <outputDirectory>build/</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
