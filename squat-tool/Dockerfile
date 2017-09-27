@@ -1,6 +1,10 @@
-#from https://runnable.com/docker/java/dockerize-your-java-application
+﻿#from https://runnable.com/docker/java/dockerize-your-java-application
 FROM  phusion/baseimage:0.9.17
 
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
 
@@ -74,3 +78,4 @@ RUN ["mvn", "package"]
 #ADD squat-tool-performance-bot.jar /home/squat-tool-performance-bot.jar
 
 ENTRYPOINT java -jar /home/squat-tool-performance-bot.jar
+
