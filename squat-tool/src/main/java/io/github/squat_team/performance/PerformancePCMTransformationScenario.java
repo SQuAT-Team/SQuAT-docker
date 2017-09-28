@@ -13,10 +13,9 @@ public interface PerformancePCMTransformationScenario {
 	 * to be applied before the analysis / optimization.
 	 * 
 	 * @param architecture
-	 *            the initial architecture, will not be changed.
-	 * @return a deep working copy of the architecture.
+ 	 *            the initial architecture, will be changed. 
 	 */
-	public PCMArchitectureInstance transform(PCMArchitectureInstance architecture);
+	public void transform(PCMArchitectureInstance architecture);
 
 	/**
 	 * The transformation which reverts the scenario transformation. Has to be
@@ -24,7 +23,6 @@ public interface PerformancePCMTransformationScenario {
 	 * 
 	 * @param architecture
 	 *            the initial architecture, will be changed.
-	 * @return the architecture with inverse state.
 	 */
-	public PCMArchitectureInstance inverseTransform(PCMArchitectureInstance architecture);
+	public void inverseTransform(PCMArchitectureInstance architecture);
 }

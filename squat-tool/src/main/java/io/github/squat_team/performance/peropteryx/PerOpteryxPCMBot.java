@@ -35,6 +35,7 @@ import io.github.squat_team.performance.peropteryx.export.ExportMode;
 import io.github.squat_team.performance.peropteryx.export.OptimizationDirection;
 import io.github.squat_team.performance.peropteryx.export.PerOpteryxPCMResult;
 import io.github.squat_team.performance.peropteryx.start.HeadlessPerOpteryxRunner;
+import io.github.squat_team.util.PCMWorkingCopyCreator; 
 import io.github.squat_team.util.SQuATHelper;
 
 public class PerOpteryxPCMBot extends AbstractPCMBot {
@@ -68,7 +69,9 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 	@Override
 	public PCMScenarioResult analyze(PCMArchitectureInstance currentArchitecture) {
 		try {
-			PCMArchitectureInstance copiedArchitecture = performanceScenario.transform(currentArchitecture);
+			PCMWorkingCopyCreator workingCopyCreator = new PCMWorkingCopyCreator();
+			PCMArchitectureInstance copiedArchitecture = workingCopyCreator.createWorkingCopy(currentArchitecture);
+			performanceScenario.transform(copiedArchitecture);
 			configureWith(copiedArchitecture);
 			configureWith(this.performanceScenario);
 			deactivateLog();
@@ -128,7 +131,9 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 	@Override
 	public List<PCMScenarioResult> searchForAlternatives(PCMArchitectureInstance currentArchitecture) {
 		try {
-			PCMArchitectureInstance copiedArchitecture = performanceScenario.transform(currentArchitecture);
+			PCMWorkingCopyCreator workingCopyCreator = new PCMWorkingCopyCreator();
+			PCMArchitectureInstance copiedArchitecture = workingCopyCreator.createWorkingCopy(currentArchitecture);
+			performanceScenario.transform(copiedArchitecture);
 			configureWith(copiedArchitecture);
 			configureWith(this.performanceScenario);
 			configurePerOpteryx();

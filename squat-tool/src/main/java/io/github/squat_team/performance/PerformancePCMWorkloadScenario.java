@@ -86,17 +86,16 @@ public class PerformancePCMWorkloadScenario extends AbstractPerformancePCMScenar
 	}
 
 	@Override
-	public PCMArchitectureInstance transform(PCMArchitectureInstance architecture) {
+	public void transform(PCMArchitectureInstance architecture) {
 		UsageModel usageModel = architecture.getUsageModel();
 		setWorkloadInUsageScenarios(usageModel, this.workloadFactor);
-		return createWorkingCopy(architecture);
+		architecture.saveModel();
 	}
 
 	@Override
-	public PCMArchitectureInstance inverseTransform(PCMArchitectureInstance architecture) {
+	public void inverseTransform(PCMArchitectureInstance architecture) {
 		setWorkloadInUsageScenarios(architecture.getUsageModel(), 1.0 / this.workloadFactor);
-		saveModel(architecture);
-		return architecture;
+		architecture.saveModel();
 	}
 
 }
