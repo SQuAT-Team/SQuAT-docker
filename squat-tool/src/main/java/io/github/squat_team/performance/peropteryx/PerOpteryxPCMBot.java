@@ -23,7 +23,7 @@ import io.github.squat_team.AbstractPCMBot;
 import io.github.squat_team.model.OptimizationType;
 import io.github.squat_team.model.PCMArchitectureInstance;
 import io.github.squat_team.model.PCMScenarioResult;
-import io.github.squat_team.performance.PerformancePCMScenario;
+import io.github.squat_team.performance.AbstractPerformancePCMScenario;
 import io.github.squat_team.performance.lqns.LQNSResultConverter;
 import io.github.squat_team.performance.lqns.LQNSResultExtractor;
 import io.github.squat_team.performance.lqns.LQNSDetailedResultWriter;
@@ -35,12 +35,13 @@ import io.github.squat_team.performance.peropteryx.export.ExportMode;
 import io.github.squat_team.performance.peropteryx.export.OptimizationDirection;
 import io.github.squat_team.performance.peropteryx.export.PerOpteryxPCMResult;
 import io.github.squat_team.performance.peropteryx.start.HeadlessPerOpteryxRunner;
+import io.github.squat_team.util.SQuATHelper;
 
 public class PerOpteryxPCMBot extends AbstractPCMBot {
 	private static Logger logger = Logger.getLogger(PerOpteryxPCMBot.class.getName());
 	private Level loglevel;
 	private Configuration configuration;
-	private PerformancePCMScenario performanceScenario;
+	private AbstractPerformancePCMScenario performanceScenario;
 	private Boolean debugMode = false;
 	private Boolean detailedAnalysis = false;
 
@@ -58,7 +59,7 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 	 *            generated automatically, if no path is given. Some values will
 	 *            be added or overwritten later.
 	 */
-	public PerOpteryxPCMBot(PerformancePCMScenario scenario, Configuration configuration) {
+	public PerOpteryxPCMBot(AbstractPerformancePCMScenario scenario, Configuration configuration) {
 		super(scenario);
 		this.configuration = configuration;
 		this.performanceScenario = scenario;
@@ -67,7 +68,8 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 	@Override
 	public PCMScenarioResult analyze(PCMArchitectureInstance currentArchitecture) {
 		try {
-			configureWith(currentArchitecture);
+			PCMArchitectureInstance copiedArchitecture = performanceScenario.transform(currentArchitecture);
+			configureWith(copiedArchitecture);
 			configureWith(this.performanceScenario);
 			deactivateLog();
 			setupEnvironmentforAnalysis();
@@ -76,8 +78,9 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 			LQNSResult lqnsResult = LQNSResultExtractor.extract(pcmInstance, configuration, outputPath);
 			activateLog();
 			if (detailedAnalysis) {
-				analyzeDetailed(currentArchitecture);
+				analyzeDetailed(copiedArchitecture, currentArchitecture);
 			}
+			SQuATHelper.delete(copiedArchitecture);
 			return LQNSResultConverter.convert(currentArchitecture, lqnsResult, performanceScenario.getMetric(), this);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -85,9 +88,20 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 		}
 	}
 
-	private void analyzeDetailed(PCMArchitectureInstance currentArchitecture) {
+	/**
+	 * Perform a detailed analysis and create output file in human readable
+	 * form.
+	 * 
+	 * @param architectureToAnalyze
+	 *            this architecture will be analyzed.
+	 * @param originalArchitecture
+	 *            the output file will be created on the properties of this
+	 *            architecture.
+	 */
+	private void analyzeDetailed(PCMArchitectureInstance architectureToAnalyze,
+			PCMArchitectureInstance originalArchitecture) {
 		try {
-			configureWith(currentArchitecture);
+			configureWith(architectureToAnalyze);
 			configureWith(this.performanceScenario);
 			deactivateLog();
 			setupEnvironmentforAnalysis();
@@ -96,7 +110,7 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 			PerOpteryxPCMDetailedAnalyser detailedAnalyser = new PerOpteryxPCMDetailedAnalyser(pcmInstance);
 			PerformanceResult<NamedElement> analysisResult = detailedAnalyser.analyze();
 			LQNSDetailedResultWriter detailedWriter = new LQNSDetailedResultWriter(analysisResult);
-			File exportDestination = LQNSDetailedResultWriter.determineFileDestination(currentArchitecture);
+			File exportDestination = LQNSDetailedResultWriter.determineFileDestination(originalArchitecture);
 			detailedWriter.writeTo(exportDestination);
 
 			activateLog();
@@ -107,14 +121,15 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 
 	private void analyzeDetailed(List<PCMScenarioResult> results) {
 		for (PCMScenarioResult result : results) {
-			analyzeDetailed(result.getResultingArchitecture());
+			analyzeDetailed(result.getResultingArchitecture(), result.getResultingArchitecture());
 		}
 	}
 
 	@Override
 	public List<PCMScenarioResult> searchForAlternatives(PCMArchitectureInstance currentArchitecture) {
 		try {
-			configureWith(currentArchitecture);
+			PCMArchitectureInstance copiedArchitecture = performanceScenario.transform(currentArchitecture);
+			configureWith(copiedArchitecture);
 			configureWith(this.performanceScenario);
 			configurePerOpteryx();
 			configureExportForOptimization();
@@ -125,10 +140,18 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 			if (detailedAnalysis) {
 				analyzeDetailed(results);
 			}
+			inverseTransformAll(results);
+			SQuATHelper.delete(copiedArchitecture);
 			return results;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return new ArrayList<PCMScenarioResult>();
+		}
+	}
+
+	private void inverseTransformAll(List<PCMScenarioResult> results) {
+		for (PCMScenarioResult result : results) {
+			performanceScenario.inverseTransform(result.getResultingArchitecture());
 		}
 	}
 
@@ -228,7 +251,7 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 		configuration.getPcmInstanceConfig().setUsageModel(usagemodelPath);
 	}
 
-	private void configureWith(PerformancePCMScenario scenario) throws IOException {
+	private void configureWith(AbstractPerformancePCMScenario scenario) throws IOException {
 		configureOptimizationDirection(scenario.getType());
 		configureBoundaryValue(scenario.getExpectedResult().getResponse());
 		String qmlPath = configuration.getPerOpteryxConfig().getQmlDefinitionFile();

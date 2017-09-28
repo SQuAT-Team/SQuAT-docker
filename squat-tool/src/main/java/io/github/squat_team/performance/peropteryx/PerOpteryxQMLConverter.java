@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.github.squat_team.performance.PerformanceMetric;
-import io.github.squat_team.performance.PerformancePCMScenario;
+import io.github.squat_team.performance.AbstractPerformancePCMScenario ;
 
 public class PerOpteryxQMLConverter {
 	private static final String FILE_EXTENSION = ".qmldeclarations";
 	private static final String FILE_NAME = "AUTOGEN_";
 
-	public static String convert(String usageModelPath, PerformancePCMScenario scenario) throws IOException {
+	public static String convert(String usageModelPath, AbstractPerformancePCMScenario  scenario) throws IOException {
 		String usageModelFileName = getFileName(usageModelPath);
 		String usageModelID = searchForUsageModelID(usageModelPath);
 		String objectiveID = chooseObjectictiveID(scenario.getMetric());
