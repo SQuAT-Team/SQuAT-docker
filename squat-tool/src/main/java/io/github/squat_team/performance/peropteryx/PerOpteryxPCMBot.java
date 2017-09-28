@@ -35,7 +35,8 @@ import io.github.squat_team.performance.peropteryx.export.ExportMode;
 import io.github.squat_team.performance.peropteryx.export.OptimizationDirection;
 import io.github.squat_team.performance.peropteryx.export.PerOpteryxPCMResult;
 import io.github.squat_team.performance.peropteryx.start.HeadlessPerOpteryxRunner;
-import io.github.squat_team.util.PCMWorkingCopyCreator; 
+import io.github.squat_team.util.PCMRepositoryModifier;
+import io.github.squat_team.util.PCMWorkingCopyCreator;
 import io.github.squat_team.util.SQuATHelper;
 
 public class PerOpteryxPCMBot extends AbstractPCMBot {
@@ -133,6 +134,8 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 		try {
 			PCMWorkingCopyCreator workingCopyCreator = new PCMWorkingCopyCreator();
 			PCMArchitectureInstance copiedArchitecture = workingCopyCreator.createWorkingCopy(currentArchitecture);
+			PCMRepositoryModifier repositoryModifier = new PCMRepositoryModifier(copiedArchitecture);
+			repositoryModifier.mergeRepositories();
 			performanceScenario.transform(copiedArchitecture);
 			configureWith(copiedArchitecture);
 			configureWith(this.performanceScenario);
@@ -145,12 +148,19 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 			if (detailedAnalysis) {
 				analyzeDetailed(results);
 			}
+			separateAll(results, repositoryModifier);
 			inverseTransformAll(results);
 			SQuATHelper.delete(copiedArchitecture);
 			return results;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			return new ArrayList<PCMScenarioResult>();
+		}
+	}
+
+	private void separateAll(List<PCMScenarioResult> results, PCMRepositoryModifier repositoryModifier) {
+		for (PCMScenarioResult result : results) {
+			repositoryModifier.separateRepository(result.getResultingArchitecture());
 		}
 	}
 

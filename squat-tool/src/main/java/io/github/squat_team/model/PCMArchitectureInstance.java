@@ -134,6 +134,9 @@ public class PCMArchitectureInstance {
 		if (usageModel != null && usageModel.eResource() != null) {
 			saveModel(usageModel.eResource());
 		}
+		if (repositoryWithAlternatives != null && repositoryWithAlternatives.eResource() != null) {
+			saveModel(repositoryWithAlternatives.eResource());
+		}
 	}
 
 	/**
