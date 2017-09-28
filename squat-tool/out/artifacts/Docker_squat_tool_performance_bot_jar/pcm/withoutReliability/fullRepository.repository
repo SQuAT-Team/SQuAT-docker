@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<repository:Repository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:reliability="http://palladiosimulator.org/PalladioComponentModel/Reliability/5.1" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.1" xmlns:seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/5.1" xmlns:stoex="http://sdq.ipd.uka.de/StochasticExpressions/2.2" id="_XPYAYC6IEd-Jla2o7wkBzQ" entityName="defaultRepository">
+<repository:Repository xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.1" xmlns:seff="http://palladiosimulator.org/PalladioComponentModel/SEFF/5.1" xmlns:stoex="http://sdq.ipd.uka.de/StochasticExpressions/2.2" id="_XPYAYC6IEd-Jla2o7wkBzQ" entityName="defaultRepository">
   <components__Repository xsi:type="repository:BasicComponent" id="_YyVn8C6IEd-Jla2o7wkBzQ" entityName="BusinessTripMgmt">
     <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_fYvUMC6IEd-Jla2o7wkBzQ" entityName="Provided_I1_C1" providedInterface__OperationProvidedRole="_bh5lgC6IEd-Jla2o7wkBzQ"/>
     <requiredRoles_InterfaceRequiringEntity xsi:type="repository:OperationRequiredRole" id="_frf4IC6IEd-Jla2o7wkBzQ" entityName="Required_I2_C1" requiredInterface__OperationRequiredRole="_cyLhoC6IEd-Jla2o7wkBzQ"/>
@@ -14,7 +14,6 @@
           <specification_ParametericResourceDemand specification="4"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:BranchAction" id="_0EkNkC6JEd-Jla2o7wkBzQ" predecessor_AbstractAction="_vGuakC6JEd-Jla2o7wkBzQ" successor_AbstractAction="_pLhAYC6JEd-Jla2o7wkBzQ">
         <branches_Branch xsi:type="seff:GuardedBranchTransition" id="_Bwzn8OszEd-swe4bkXmV_Q">
@@ -128,14 +127,12 @@
               <specification_ParametericResourceDemand specification="picture.BYTESIZE"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="3.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
           <steps_Behaviour xsi:type="seff:InternalAction" id="_682SXGB_EeaQ-qRnqvu5Tg" entityName="createFile" predecessor_AbstractAction="_84opnGB_EeaQ-qRnqvu5Tg" successor_AbstractAction="_DHwV8F_KEeahZew5WJ0QOQ">
             <resourceDemand_Action>
               <specification_ParametericResourceDemand specification="15"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
         </bodyBehaviour_Loop>
         <iterationCount_LoopAction specification="idx.NUMBER_OF_ELEMENTS"/>
@@ -161,7 +158,6 @@
           <specification_ParametericResourceDemand specification="5"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_DIhMgOtZEd-m3_hR0FtH3Q" predecessor_AbstractAction="_HcazEC6KEd-Jla2o7wkBzQ" successor_AbstractAction="_pwkOMC6JEd-Jla2o7wkBzQ" calledService_ExternalService="_1cTwcOsyEd-swe4bkXmV_Q" role_ExternalService="_6D7mkOtYEd-m3_hR0FtH3Q">
         <inputVariableUsages__CallAction>
@@ -184,7 +180,6 @@
           <specification_ParametericResourceDemand specification="3"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
     <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_34ISoOsyEd-swe4bkXmV_Q" describedService__SEFF="_1cTwcOsyEd-swe4bkXmV_Q">
@@ -200,7 +195,6 @@
                 <specification_ParametericResourceDemand specification="3"/>
                 <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
               </resourceDemand_Action>
-              <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
             </steps_Behaviour>
           </branchBehaviour_BranchTransition>
           <branchCondition_GuardedBranchTransition specification="isBank.VALUE"/>
@@ -214,7 +208,6 @@
                 <specification_ParametericResourceDemand specification="4&#xD;&#xA;"/>
                 <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
               </resourceDemand_Action>
-              <internalFailureOccurrenceDescriptions__InternalAction failureProbability="3.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
             </steps_Behaviour>
           </branchBehaviour_BranchTransition>
           <branchCondition_GuardedBranchTransition specification="NOT isBank.VALUE"/>
@@ -236,14 +229,12 @@
           <specification_ParametericResourceDemand specification="0.5"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="2.5E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_fEh4gOtmEd-m3_hR0FtH3Q" entityName="determineCheapest" predecessor_AbstractAction="_c1GMgOtmEd-m3_hR0FtH3Q" successor_AbstractAction="_5R5l8O13Ed-XnbkEivYoKw">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="2.5"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:ExternalCallAction" id="_5R5l8O13Ed-XnbkEivYoKw" predecessor_AbstractAction="_fEh4gOtmEd-m3_hR0FtH3Q" successor_AbstractAction="_Ahd-0etmEd-m3_hR0FtH3Q" calledService_ExternalService="_1cTwcOsyEd-swe4bkXmV_Q" role_ExternalService="_A39MMOtmEd-m3_hR0FtH3Q">
         <inputVariableUsages__CallAction>
@@ -271,14 +262,12 @@
           <specification_ParametericResourceDemand specification="10"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_t4H-XF47EeavvL8WcdoZSg" entityName="writeFile2HD" predecessor_AbstractAction="_sC_ovF47EeavvL8WcdoZSg" successor_AbstractAction="_rOfpoF47EeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="file.BYTESIZE"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="2.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
     <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="_Li-6J147EeavvL8WcdoZSg" describedService__SEFF="_DMVxkF42EeavvL8WcdoZSg">
@@ -293,14 +282,12 @@
               <specification_ParametericResourceDemand specification="3"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
           <steps_Behaviour xsi:type="seff:InternalAction" id="_MaYKTF49EeavvL8WcdoZSg" entityName="loadFile" predecessor_AbstractAction="_Kxzp_F49EeavvL8WcdoZSg" successor_AbstractAction="_I17zIF49EeavvL8WcdoZSg">
             <resourceDemand_Action>
               <specification_ParametericResourceDemand specification="fileSize.BYTESIZE"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="2.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
         </bodyBehaviour_Loop>
         <iterationCount_LoopAction specification="ids.NUMBER_OF_ELEMENTS"/>
@@ -330,28 +317,24 @@
           <specification_ParametericResourceDemand specification="3"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_lpsqfF7iEeavvL8WcdoZSg" entityName="loadFile" predecessor_AbstractAction="loadFilename" successor_AbstractAction="_qfYxnF7jEeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="fileSize.BYTESIZE"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="2.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_qfYxnF7jEeavvL8WcdoZSg" entityName="writeUpdate" predecessor_AbstractAction="_lpsqfF7iEeavvL8WcdoZSg" successor_AbstractAction="_nGPg_F7iEeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="4"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="_nGPg_F7iEeavvL8WcdoZSg" entityName="writeUpdate2HD" predecessor_AbstractAction="_qfYxnF7jEeavvL8WcdoZSg" successor_AbstractAction="_Da8iIF7iEeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="textUpdate.BYTESIZE"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="2.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
@@ -371,14 +354,12 @@
           <specification_ParametericResourceDemand specification="14"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="B_t4H-XF47EeavvL8WcdoZSg" entityName="writeFile2HD" predecessor_AbstractAction="B_sC_ovF47EeavvL8WcdoZSg" successor_AbstractAction="B_rOfpoF47EeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="file.BYTESIZE"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="2.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
     <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="B_Li-6J147EeavvL8WcdoZSg" describedService__SEFF="_DMVxkF42EeavvL8WcdoZSg">
@@ -393,14 +374,12 @@
               <specification_ParametericResourceDemand specification="1.5"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
           <steps_Behaviour xsi:type="seff:InternalAction" id="B_MaYKTF49EeavvL8WcdoZSg" entityName="loadFile" predecessor_AbstractAction="B_Kxzp_F49EeavvL8WcdoZSg" successor_AbstractAction="B_I17zIF49EeavvL8WcdoZSg">
             <resourceDemand_Action>
               <specification_ParametericResourceDemand specification="fileSize.BYTESIZE"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="3.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
         </bodyBehaviour_Loop>
         <iterationCount_LoopAction specification="ids.NUMBER_OF_ELEMENTS"/>
@@ -430,28 +409,24 @@
           <specification_ParametericResourceDemand specification="2"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="B_lpsqfF7iEeavvL8WcdoZSg" entityName="loadFile" predecessor_AbstractAction="B_loadFilename" successor_AbstractAction="B_qfYxnF7jEeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="fileSize.BYTESIZE"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="3.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="B_qfYxnF7jEeavvL8WcdoZSg" entityName="writeUpdate" predecessor_AbstractAction="B_lpsqfF7iEeavvL8WcdoZSg" successor_AbstractAction="B_nGPg_F7iEeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="5.5"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="B_nGPg_F7iEeavvL8WcdoZSg" entityName="writeUpdate2HD" predecessor_AbstractAction="B_qfYxnF7jEeavvL8WcdoZSg" successor_AbstractAction="B_Da8iIF7iEeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="textUpdate.BYTESIZE"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="2.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
@@ -471,14 +446,12 @@
           <specification_ParametericResourceDemand specification="8"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="C_t4H-XF47EeavvL8WcdoZSg" entityName="writeFile2HD" predecessor_AbstractAction="C_sC_ovF47EeavvL8WcdoZSg" successor_AbstractAction="C_rOfpoF47EeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="file.BYTESIZE"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="3.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
     <serviceEffectSpecifications__BasicComponent xsi:type="seff:ResourceDemandingSEFF" id="C_Li-6J147EeavvL8WcdoZSg" describedService__SEFF="_DMVxkF42EeavvL8WcdoZSg">
@@ -493,14 +466,12 @@
               <specification_ParametericResourceDemand specification="5"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
           <steps_Behaviour xsi:type="seff:InternalAction" id="C_MaYKTF49EeavvL8WcdoZSg" entityName="loadFile" predecessor_AbstractAction="C_Kxzp_F49EeavvL8WcdoZSg" successor_AbstractAction="C_I17zIF49EeavvL8WcdoZSg">
             <resourceDemand_Action>
               <specification_ParametericResourceDemand specification="fileSize.BYTESIZE"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="2.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
         </bodyBehaviour_Loop>
         <iterationCount_LoopAction specification="ids.NUMBER_OF_ELEMENTS"/>
@@ -530,28 +501,24 @@
           <specification_ParametericResourceDemand specification="5"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="C_lpsqfF7iEeavvL8WcdoZSg" entityName="loadFile" predecessor_AbstractAction="C_loadFilename" successor_AbstractAction="C_qfYxnF7jEeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="fileSize.BYTESIZE"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="2.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="C_qfYxnF7jEeavvL8WcdoZSg" entityName="writeUpdate" predecessor_AbstractAction="C_lpsqfF7iEeavvL8WcdoZSg" successor_AbstractAction="C_nGPg_F7iEeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="3"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
       <steps_Behaviour xsi:type="seff:InternalAction" id="C_nGPg_F7iEeavvL8WcdoZSg" entityName="writeUpdate2HD" predecessor_AbstractAction="C_qfYxnF7jEeavvL8WcdoZSg" successor_AbstractAction="C_Da8iIF7iEeavvL8WcdoZSg">
         <resourceDemand_Action>
           <specification_ParametericResourceDemand specification="textUpdate.BYTESIZE"/>
           <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
         </resourceDemand_Action>
-        <internalFailureOccurrenceDescriptions__InternalAction failureProbability="3.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
       </steps_Behaviour>
     </serviceEffectSpecifications__BasicComponent>
   </components__Repository>
@@ -598,21 +565,18 @@
               <specification_ParametericResourceDemand specification="picture.BYTESIZE"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="2.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
           <steps_Behaviour xsi:type="seff:InternalAction" id="_sYQ87HXbEeauMPtoFodBVw1" entityName="decompress" predecessor_AbstractAction="_84opnGB_EeaQ-qRnqvu5Tg1" successor_AbstractAction="_682SXGB_EeaQ-qRnqvu5Tg1">
             <resourceDemand_Action>
               <specification_ParametericResourceDemand specification="0.1 * picture.BYTESIZE"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
           <steps_Behaviour xsi:type="seff:InternalAction" id="_682SXGB_EeaQ-qRnqvu5Tg1" entityName="createFile" predecessor_AbstractAction="_sYQ87HXbEeauMPtoFodBVw1" successor_AbstractAction="_DHwV8F_KEeahZew5WJ0QOQ1">
             <resourceDemand_Action>
               <specification_ParametericResourceDemand specification="15"/>
               <requiredResource_ParametricResourceDemand href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
             </resourceDemand_Action>
-            <internalFailureOccurrenceDescriptions__InternalAction failureProbability="1.0E-4" softwareInducedFailureType__InternalFailureOccurrenceDescription="_PL68dtrQEd-YZv0HsvRIgQ"/>
           </steps_Behaviour>
         </bodyBehaviour_Loop>
         <iterationCount_LoopAction specification="idx.NUMBER_OF_ELEMENTS"/>
@@ -675,7 +639,6 @@
       <parameters__OperationSignature dataType__Parameter="_XnGwLF43EeavvL8WcdoZSg" parameterName="idx"/>
     </signatures__OperationInterface>
   </interfaces__Repository>
-  <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_PL68dtrQEd-YZv0HsvRIgQ" entityName="SWFailure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="//@components__Repository.0/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.2/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.3/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.3/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@branches_Branch.0/@branchBehaviour_BranchTransition/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.3/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@branches_Branch.1/@branchBehaviour_BranchTransition/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.4/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@bodyBehaviour_Loop/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.1/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@bodyBehaviour_Loop/@steps_Behaviour.4/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.8/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@bodyBehaviour_Loop/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.8/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@bodyBehaviour_Loop/@steps_Behaviour.4/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.8/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@bodyBehaviour_Loop/@steps_Behaviour.5/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.5/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.7/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.5/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.6/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.7/@serviceEffectSpecifications__BasicComponent.0/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.5/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@bodyBehaviour_Loop/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.5/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@bodyBehaviour_Loop/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.6/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@bodyBehaviour_Loop/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.7/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@bodyBehaviour_Loop/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.6/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@bodyBehaviour_Loop/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.7/@serviceEffectSpecifications__BasicComponent.1/@steps_Behaviour.2/@bodyBehaviour_Loop/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.5/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.5/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.5/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.4/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.5/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.5/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.7/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.7/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.7/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.4/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.7/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.5/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.6/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.2/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.6/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.3/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.6/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.4/@internalFailureOccurrenceDescriptions__InternalAction.0 //@components__Repository.6/@serviceEffectSpecifications__BasicComponent.2/@steps_Behaviour.5/@internalFailureOccurrenceDescriptions__InternalAction.0"/>
   <dataTypes__Repository xsi:type="repository:CompositeDataType" id="_-ixwDV42EeavvL8WcdoZSg" entityName="File"/>
   <dataTypes__Repository xsi:type="repository:CollectionDataType" id="_XnGwLF43EeavvL8WcdoZSg" entityName="ListOfStrings">
     <innerType_CollectionDataType xsi:type="repository:PrimitiveDataType" href="pathmap://PCM_MODELS/PrimitiveTypes.repository#//@dataTypes__Repository.1"/>
