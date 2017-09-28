@@ -16,7 +16,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.palladiosimulator.pcm.allocation.Allocation;
 import org.palladiosimulator.pcm.allocation.AllocationPackage;
+import org.palladiosimulator.pcm.repository.Repository;
 import org.palladiosimulator.pcm.repository.RepositoryPackage;
+import org.palladiosimulator.pcm.resourceenvironment.ResourceEnvironment;
 import org.palladiosimulator.pcm.resourceenvironment.ResourceenvironmentPackage;
 import org.palladiosimulator.pcm.system.SystemPackage;
 import org.palladiosimulator.pcm.usagemodel.UsageModel;
@@ -29,6 +31,7 @@ import io.github.squat_team.model.PCMScenarioResult;
 import io.github.squat_team.model.ResponseMeasureType;
 import io.github.squat_team.performance.AbstractPerformancePCMScenario;
 import io.github.squat_team.performance.PerformanceMetric;
+import io.github.squat_team.performance.PerformancePCMCPUScenario;
 import io.github.squat_team.performance.PerformancePCMWorkloadScenario;
 import io.github.squat_team.performance.peropteryx.PerOpteryxPCMBot;
 import io.github.squat_team.performance.peropteryx.configuration.Configuration;
@@ -61,8 +64,15 @@ public class SQuATMain {
 		workloadIDs.add(TestConstants.WORKLOAD_ID);
 
 		// create scenario
-		AbstractPerformancePCMScenario scenario = new PerformancePCMWorkloadScenario(OptimizationType.MINIMIZATION,
-				workloadIDs, 0.5);
+		ArrayList<String> cpuIDs = new ArrayList<String>();
+		cpuIDs.add(TestConstants.CPU_ID);
+
+		// AbstractPerformancePCMScenario scenario = new
+		// PerformancePCMWokloadScenario(OptimizationType.MINIMIZATION,
+		// workloadIDs, 0.5);
+		AbstractPerformancePCMScenario scenario = new PerformancePCMCPUScenario(OptimizationType.MINIMIZATION, cpuIDs,
+				0.5);
+
 		PCMResult expectedResponse = new PCMResult(ResponseMeasureType.DECIMAL);
 		expectedResponse.setResponse(6.0);
 		scenario.setExpectedResponse(expectedResponse);
@@ -122,16 +132,24 @@ public class SQuATMain {
 
 			// create Instance
 			Allocation allocation = SQuATHelper.loadAllocationModel("file:/" + basicPath + ".allocation");
+			org.palladiosimulator.pcm.system.System system = SQuATHelper
+					.loadSystemModel("file:/" + basicPath + ".system");
+			ResourceEnvironment resourceenvironment = SQuATHelper
+					.loadResourceEnvironmentModel("file:/" + basicPath + ".resourceenvironment");
+			Repository repository = SQuATHelper.loadRepositoryModel("file:/" + basicPath + ".repository");
 			UsageModel usageModel = SQuATHelper.loadUsageModel("file:/" + basicPath + ".usagemodel");
-			PCMArchitectureInstance architecture = new PCMArchitectureInstance("", null, null, allocation, null,
-					usageModel);
+			PCMArchitectureInstance architecture = new PCMArchitectureInstance("", repository, system, allocation,
+					resourceenvironment, usageModel);
+			// TODO: should not be used in multiOptimization
+			architecture.setRepositoryWithAlternatives(
+					SQuATHelper.loadRepositoryModel("file:/" + TestConstants.ALTERNATIVE_REPOSITORY_PATH));
 
 			// configuration.getPerOpteryxConfig().setMaxIterations(1);
 			// configuration.getPerOpteryxConfig().setGenerationSize(1);
 
 			// TODO:
-			optimize(bot, architecture, basicPath, configuration);
-			// analyze(bot, architecture, basicPath);
+			//optimize(bot, architecture, basicPath, configuration);
+			analyze(bot, architecture, basicPath);
 		}
 		// AUTOMATIC EVALUATION - cant be used
 		/*
