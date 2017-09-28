@@ -1,0 +1,6 @@
+version: "3"
+services:
+  performancebot:
+    build: ./squat-tool
+    ports:
+      - "9997:9997"
