@@ -170,7 +170,7 @@ public class PCMRepositoryModifier {
 			throws IOException {
 		// create file
 		File repositoryModelFile = new File(childArchitecture.getRepository().eResource().getURI().toFileString());
-		File alternativeRepositoryFile = new File(repositoryModelFile.getParent(), "alternativeRepository.repository");
+		File alternativeRepositoryFile = new File(repositoryModelFile.getParent(), "alternative"+repositoryModelFile.getName());
 		Files.copy(repositoryModelFile.toPath(), alternativeRepositoryFile.toPath(),
 				StandardCopyOption.REPLACE_EXISTING);
 
