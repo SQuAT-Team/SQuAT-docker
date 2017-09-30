@@ -14,8 +14,9 @@ public class DockerConstants extends TestConstants{
         RESOURCE_ENVIRONMENT_FILE_PATH =        File.separator + "home" + File.separator + "pcm" + File.separator + "default.resourceenvironment";
         SYSTEM_FILE_PATH =                      File.separator + "home" + File.separator + "pcm" + File.separator + "default.system";
         ALLOCATION_FILE_PATH =                  File.separator + "home" + File.separator + "pcm" + File.separator + "default.allocation";
+        ALTERNATIVE_REPOSITORY_PATH =           File.separator + "home" + File.separator + "pcm" + File.separator + "alternativeRepository.allocation";
 
-        PCM_MODEL_FILES = "file:/" +            "home" + File.separator + "pcm" + File.separator + "defaultModels" + File.separator;
+        PCM_MODEL_FILES = "file:/" + "home" + 	File.separator + "pcm" + File.separator + "defaultModels" + File.separator;
         LQN_OUTPUT =                            File.separator + "home" + File.separator + "Bot_out" + File.separator + "pcmtests" + File.separator + "lqnout";
         PCM_STORAGE_PATH =                      File.separator + "home" + File.separator + "Bot_out" + File.separator + "pcmtests" + File.separator + "testspace";
     }

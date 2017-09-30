@@ -6,11 +6,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -32,7 +29,6 @@ import io.github.squat_team.model.ResponseMeasureType;
 import io.github.squat_team.performance.AbstractPerformancePCMScenario;
 import io.github.squat_team.performance.PerformanceMetric;
 import io.github.squat_team.performance.PerformancePCMCPUScenario;
-import io.github.squat_team.performance.PerformancePCMWorkloadScenario;
 import io.github.squat_team.performance.peropteryx.PerOpteryxPCMBot;
 import io.github.squat_team.performance.peropteryx.configuration.Configuration;
 import io.github.squat_team.performance.peropteryx.start.OptimizationInfo;
@@ -71,7 +67,7 @@ public class SQuATMain {
 		// PerformancePCMWokloadScenario(OptimizationType.MINIMIZATION,
 		// workloadIDs, 0.5);
 		AbstractPerformancePCMScenario scenario = new PerformancePCMCPUScenario(OptimizationType.MINIMIZATION, cpuIDs,
-				0.5);
+				1.0); // scenario with 1.0 does nothing 
 
 		PCMResult expectedResponse = new PCMResult(ResponseMeasureType.DECIMAL);
 		expectedResponse.setResponse(6.0);
@@ -148,8 +144,8 @@ public class SQuATMain {
 			// configuration.getPerOpteryxConfig().setGenerationSize(1);
 
 			// TODO:
-			//optimize(bot, architecture, basicPath, configuration);
-			analyze(bot, architecture, basicPath);
+			optimize(bot, architecture, basicPath, configuration);
+			//analyze(bot, architecture, basicPath);
 		}
 		// AUTOMATIC EVALUATION - cant be used
 		/*
@@ -179,9 +175,7 @@ public class SQuATMain {
 
 	public static void analyze(PerOpteryxPCMBot bot, PCMArchitectureInstance architecture, String basicPath)
 			throws IOException { // run bot analyze
-		long start = System.currentTimeMillis();
 		PCMScenarioResult result = bot.analyze(architecture);
-		long end = System.currentTimeMillis();
 
 		File basicFile = new File(TestConstants.BASIC_FILE_PATH);
 		File metricFile;
@@ -209,21 +203,6 @@ public class SQuATMain {
 		w.write("-------------------");
 		w.newLine();
 		w.close();
-		/*
-		 * System.out.println(metricFile.getPath()); System.out.println("");
-		 * System.out.println(TestConstants.BASIC_FILE_PATH);
-		 * System.out.println("BOT FINISHED: ");
-		 * System.out.println(result.getOriginatingBot());
-		 * System.out.println(result.getResult().getResponse());
-		 * System.out.println(result.getResultingArchitecture().getName());
-		 * System.out.println(result.getResultingArchitecture().getAllocation())
-		 * System.out.println(result.getResultingArchitecture().getRepository())
-		 * ; System.out.println(result.getResultingArchitecture().
-		 * getResourceEnvironment());
-		 * System.out.println(result.getResultingArchitecture().getSystem());
-		 * System.out.println(result.getResultingArchitecture().getUsageModel())
-		 * ; System.out.println(end - start);
-		 */
 	}
 
 	public static void optimize(PerOpteryxPCMBot bot, PCMArchitectureInstance architecture, String basicPath,
@@ -282,18 +261,6 @@ public class SQuATMain {
 			System.out.println("Response Time: " + result.getResult().getResponse());
 			w.write("Response Time: " + result.getResult().getResponse());
 			w.newLine();
-			/*
-			 * System.out.println(result.getResultingArchitecture().getName());
-			 * System.out.println(result.getResultingArchitecture().
-			 * getAllocation());
-			 * System.out.println(result.getResultingArchitecture().
-			 * getRepository());
-			 * System.out.println(result.getResultingArchitecture().
-			 * getResourceEnvironment());
-			 * System.out.println(result.getResultingArchitecture().getSystem())
-			 * ; System.out.println(result.getResultingArchitecture().
-			 * getUsageModel());
-			 */
 		}
 		w.close();
 
