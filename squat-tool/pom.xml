@@ -1,145 +1,152 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>io.github.squat-team</groupId>
-    <artifactId>squat-tool</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>io.github.squat-team</groupId>
+	<artifactId>squat-tool</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 
-    <properties>
-        <jdk.version>1.8</jdk.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-    </properties>
-    
-    <repositories>
-    	<repository>
-        	<id>localrep</id>
-        	<url>file://${basedir}/localrep</url>
-    	</repository>
+	<properties>
+		<jdk.version>1.8</jdk.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>localrep</id>
+			<url>file://${basedir}\localrep</url>
+		</repository>
 	</repositories>
 
-    <dependencies>
-        <dependency>
-            <groupId>de.fakeller.performance</groupId>
-            <artifactId>fastpan</artifactId>
-			<version>0.2.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-			<version>19.0</version>
-        </dependency>
-
-        <!-- TODO: -->
-        <dependency>
-            <groupId>hpo</groupId>
-            <artifactId>hpo</artifactId>
-			<version>1.0.0</version>
-        </dependency>
-
-        <!-- TODO: -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/junit-4.12.jar</systemPath>
-        </dependency>
-        
+	<dependencies>
 		<dependency>
-   			<groupId>org.apache.logging.log4j</groupId>
-   			<artifactId>log4j-1.2-api</artifactId>
+			<groupId>de.fakeller.performance</groupId>
+			<artifactId>fastpan</artifactId>
+			<version>0.2.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
+
+		<!-- TODO: -->
+		<dependency>
+			<groupId>hpo</groupId>
+			<artifactId>hpo</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
+		<!-- TODO: -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/lib/junit-4.12.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-1.2-api</artifactId>
 			<version>1.2</version>
 		</dependency>
 
-        <dependency>
-		    <groupId>org.slf4j</groupId>
-    		<artifactId>log4j-over-slf4j</artifactId>
-			<version>1.7.21</version>
-        </dependency>
-        
-        
-        <!-- TODO: -->
-        <dependency>
-		    <groupId>commons-logging</groupId>
-    		<artifactId>commons-logging</artifactId>
-    		<version>1.1.1</version>
-        </dependency>
-
-        <!-- TODO: -->
 		<dependency>
-    		<groupId>org.eclipse.emf</groupId>
-    		<artifactId>org.eclipse.emf.ecore</artifactId>
-    		<version>2.10.2-v20150123-0348</version>
-		</dependency>
-		
-        <dependency>
-    		<groupId>org.eclipse.emf</groupId>
-    		<artifactId>org.eclipse.emf.cdo</artifactId>
-    		<version>4.3.0</version>
-        </dependency>
-        
-        <dependency>
-    		<groupId>org.eclipse.emf</groupId>
-    		<artifactId>org.eclipse.emf.cdo.common</artifactId>
-    		<version>4.3.0</version>
-        </dependency>
-        
-        <dependency>
-    		<groupId>org.eclipse.emf</groupId>
-    		<artifactId>org.eclipse.emf.common</artifactId>
-    		<version>2.10.1</version>
-        </dependency>
-        
-        <dependency>
-    		<groupId>org.eclipse.emf</groupId>
-    		<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
-    		<version>2.10.2</version>
-        </dependency>
-
-        <dependency>
-    		<groupId>org.eclipse.ocl</groupId>
-    		<artifactId>org.eclipse.ocl</artifactId>
-    		<version>3.4.2</version>
-        </dependency>
-        
-       <dependency>
-    		<groupId>org.eclipse.ocl</groupId>
-    		<artifactId>org.eclipse.ocl.ecore</artifactId>
-    		<version>3.3.100</version>
-        </dependency>
-
-        <dependency>
-            <groupId>de.fakeller.palladio-headless</groupId>
-            <artifactId>palladio-analysis</artifactId>
-			<version>0.6.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>de.fakeller.palladio-headless</groupId>
-            <artifactId>palladio-builder</artifactId>
-			<version>0.6.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>de.fakeller.palladio-headless</groupId>
-            <artifactId>palladio-environment</artifactId>
-			<version>0.6.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
 			<version>1.7.21</version>
-        </dependency>
-    </dependencies>
+		</dependency>
 
-    <build>
 
-        <finalName>squat-tool-performance-bot</finalName>
-        <plugins>
+		<!-- TODO: -->
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<!-- TODO: -->
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore</artifactId>
+			<version>2.10.2-v20150123-0348</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.cdo</artifactId>
+			<version>4.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.cdo.common</artifactId>
+			<version>4.3.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.common</artifactId>
+			<version>2.10.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+			<version>2.10.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.ocl</groupId>
+			<artifactId>org.eclipse.ocl</artifactId>
+			<version>3.4.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.ocl</groupId>
+			<artifactId>org.eclipse.ocl.ecore</artifactId>
+			<version>3.3.100</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.fakeller.palladio-headless</groupId>
+			<artifactId>palladio-analysis</artifactId>
+			<version>0.6.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.fakeller.palladio-headless</groupId>
+			<artifactId>palladio-builder</artifactId>
+			<version>0.6.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.fakeller.palladio-headless</groupId>
+			<artifactId>palladio-environment</artifactId>
+			<version>0.6.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.squat_team</groupId>
+			<artifactId>squat.utils</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+
+		<finalName>squat-tool-performance-bot</finalName>
+
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-install-plugin</artifactId>
@@ -148,7 +155,9 @@
 					<execution>
 						<id>fastpan</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>de.fakeller.performance</groupId>
 							<artifactId>fastpan</artifactId>
@@ -160,7 +169,9 @@
 					<execution>
 						<id>guava</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>com.google.guava</groupId>
 							<artifactId>guava</artifactId>
@@ -172,7 +183,9 @@
 					<execution>
 						<id>log4j-over</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>org.slf4j</groupId>
 							<artifactId>log4j-over-slf4j</artifactId>
@@ -184,7 +197,9 @@
 					<execution>
 						<id>hpo</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>hpo</groupId>
 							<artifactId>hpo</artifactId>
@@ -196,7 +211,9 @@
 					<execution>
 						<id>commons-loggin</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>commons-logging</groupId>
 							<artifactId>commons-logging</artifactId>
@@ -208,7 +225,9 @@
 					<execution>
 						<id>org.eclipse.emf.cdo.common</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>org.eclipse.emf</groupId>
 							<artifactId>org.eclipse.emf.cdo.common</artifactId>
@@ -220,7 +239,9 @@
 					<execution>
 						<id>org.eclipse.emf.cdo</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>org.eclipse.emf</groupId>
 							<artifactId>org.eclipse.emf.cdo</artifactId>
@@ -232,7 +253,9 @@
 					<execution>
 						<id>org.eclipse.emf.common</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>org.eclipse.emf</groupId>
 							<artifactId>org.eclipse.emf.common</artifactId>
@@ -244,7 +267,9 @@
 					<execution>
 						<id>org.eclipse.emf.core.xmi</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>org.eclipse.emf</groupId>
 							<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
@@ -256,7 +281,9 @@
 					<execution>
 						<id>org.eclipse.emf.core</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>org.eclipse.emf</groupId>
 							<artifactId>org.eclipse.emf.ecore</artifactId>
@@ -268,7 +295,9 @@
 					<execution>
 						<id>org.eclipse.ocl.ecore</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>org.eclipse.ocl</groupId>
 							<artifactId>org.eclipse.ocl.ecore</artifactId>
@@ -280,7 +309,9 @@
 					<execution>
 						<id>org.eclipse.ocl</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>org.eclipse.ocl</groupId>
 							<artifactId>org.eclipse.ocl</artifactId>
@@ -292,7 +323,9 @@
 					<execution>
 						<id>palladio-analysis</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>de.fakeller.palladio-headless</groupId>
 							<artifactId>palladio-analysis</artifactId>
@@ -304,7 +337,9 @@
 					<execution>
 						<id>palladio-build</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>de.fakeller.palladio-headless</groupId>
 							<artifactId>palladio-builder</artifactId>
@@ -316,7 +351,9 @@
 					<execution>
 						<id>palladio-environment</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>de.fakeller.palladio-headless</groupId>
 							<artifactId>palladio-environment</artifactId>
@@ -328,7 +365,9 @@
 					<execution>
 						<id>slf4j-api</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>org.sl4j</groupId>
 							<artifactId>slf4j-api</artifactId>
@@ -340,7 +379,9 @@
 					<execution>
 						<id>log4j-1.2-api</id>
 						<phase>initialize</phase>
-						<goals><goal>install-file</goal></goals>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
 						<configuration>
 							<groupId>org.apache.logging.log4j</groupId>
 							<artifactId>log4j-1.2-api</artifactId>
@@ -349,45 +390,59 @@
 							<file>/home/lib/log4j-1.2-api-2.5.jar</file>
 						</configuration>
 					</execution>
+					<execution>
+						<id>squat-util</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>io.github.squat_team</groupId>
+							<artifactId>squat.utils</artifactId>
+							<version>0.0.1-SNAPSHOT</version>
+							<packaging>jar</packaging>
+							<file>/home/lib/squat-util.jar</file>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 
 
-            <!-- Copy project dependency -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.5.1</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+			<!-- Copy project dependency -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.5.1</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 
-            <!-- Make this jar executable -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <!-- Jar file entry point -->
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>dependency/</classpathPrefix>
-                            <mainClass>test.DockerMain</mainClass>
-                        </manifest>
-                    </archive>
-                    <outputDirectory>target/</outputDirectory>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+			<!-- Make this jar executable -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<!-- Jar file entry point -->
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>dependency/</classpathPrefix>
+							<mainClass>test.DockerMain</mainClass>
+						</manifest>
+					</archive>
+					<outputDirectory>target/</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
