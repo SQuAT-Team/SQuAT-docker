@@ -8,7 +8,7 @@ public class DockerConstants extends TestConstants{
         //Does not work:
 //        DESIGNDECISION_FILE_PATH = "file:///" +    System.getProperty("user.dir") + File.separator + "pcm" + File.separator + "simpleexample.designdecision";
     	BASIC_FILE_PATH = File.separator + "home" + File.separator + "pcm" + File.separator + "default";// + ENDING + "\\" + ENDING;
-        ALTERNATIVE_REPOSITORY_PATH =           File.separator + "home" + File.separator + "pcm" + File.separator + "alternativeRepository.allocation";
+        ALTERNATIVE_REPOSITORY_PATH =           File.separator + "home" + File.separator + "pcm" + File.separator + "alternativeRepository.repository";
 
         QML_FILE_PATH =                         File.separator + "home" + File.separator + "pcm" + File.separator + "default.profile.qmldeclarations";
 
