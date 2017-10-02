@@ -30,8 +30,8 @@ public class HPOMain {
 		config.getPerOpteryxConfig().setMaxIterations(1);
 		config.getPerOpteryxConfig().setGenerationSize(1);
 		
-		config.getPcmInstanceConfig().setAllocationModel(TestConstants.ALLOCATION_FILE_PATH);
-		config.getPcmInstanceConfig().setUsageModel(TestConstants.USAGE_FILE_PATH);
+		config.getPcmInstanceConfig().setAllocationModel(TestConstants.BASIC_FILE_PATH + ".allocation");
+		config.getPcmInstanceConfig().setUsageModel(TestConstants.BASIC_FILE_PATH + ".usagemodel");
 		config.getPerOpteryxConfig().setDesignDecisionFile(TestConstants.DESIGNDECISION_FILE_PATH);
 		config.getPerOpteryxConfig().setQmlDefinitionFile(TestConstants.QML_FILE_PATH);
 		config.getPerOpteryxConfig().setMode(PerOpteryxConfig.Mode.OPTIMIZE);
