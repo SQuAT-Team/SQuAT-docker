@@ -57,11 +57,11 @@ public class SQuATMain {
 	public static void main(String[] args) throws IOException {
 		register();
 		ArrayList<String> workloadIDs = new ArrayList<String>();
-		workloadIDs.add(TestConstants.WORKLOAD_ID);
+		workloadIDs.add(testConstants.WORKLOAD_ID);
 
 		// create scenario
 		ArrayList<String> cpuIDs = new ArrayList<String>();
-		cpuIDs.add(TestConstants.CPU_ID);
+		cpuIDs.add(testConstants.CPU_ID);
 
 		// AbstractPerformancePCMScenario scenario = new
 		// PerformancePCMWokloadScenario(OptimizationType.MINIMIZATION,
@@ -76,7 +76,7 @@ public class SQuATMain {
 
 		// create configuration
 		Configuration configuration = new Configuration();
-		// configuration.getPerOpteryxConfig().setDesignDecisionFile(TestConstants.DESIGNDECISION_FILE_PATH);
+		// configuration.getPerOpteryxConfig().setDesignDecisionFile(testConstants.DESIGNDECISION_FILE_PATH);
 		// configuration.getPerOpteryxConfig().setQmlDefinitionFile(TestConstants.QML_FILE_PATH);
 		configuration.getPerOpteryxConfig().setGenerationSize(100);
 		configuration.getPerOpteryxConfig().setMaxIterations(10);
@@ -94,7 +94,7 @@ public class SQuATMain {
 		/*
 		 * Searchs for subfolders with allocation files in it.
 		 */
-		File file = new File(TestConstants.BASIC_FILE_PATH);
+		File file = new File(testConstants.BASIC_FILE_PATH);
 		multiOptimisation = file.isDirectory();
 		System.out.println("Switched to multi optimization/analysis mode");
 		if (multiOptimisation) {
@@ -115,7 +115,7 @@ public class SQuATMain {
 			}
 		} else {
 			System.out.println("Single File Mode");
-			basicPaths.add(TestConstants.BASIC_FILE_PATH);
+			basicPaths.add(testConstants.BASIC_FILE_PATH);
 		}
 		System.out.println("OPTIMIZE PCM INSTANCES:");
 		System.out.println(basicPaths);
@@ -138,7 +138,7 @@ public class SQuATMain {
 					resourceenvironment, usageModel);
 			// TODO: should not be used in multiOptimization
 			architecture.setRepositoryWithAlternatives(
-					SQuATHelper.loadRepositoryModel("file:/" + TestConstants.ALTERNATIVE_REPOSITORY_PATH));
+					SQuATHelper.loadRepositoryModel("file:/" + testConstants.ALTERNATIVE_REPOSITORY_PATH));
 
 			// configuration.getPerOpteryxConfig().setMaxIterations(1);
 			// configuration.getPerOpteryxConfig().setGenerationSize(1);
@@ -177,7 +177,7 @@ public class SQuATMain {
 			throws IOException { // run bot analyze
 		PCMScenarioResult result = bot.analyze(architecture);
 
-		File basicFile = new File(TestConstants.BASIC_FILE_PATH);
+		File basicFile = new File(testConstants.BASIC_FILE_PATH);
 		File metricFile;
 		if (basicFile.isDirectory()) {
 			metricFile = new File(basicFile, "analysisResults.txt");
