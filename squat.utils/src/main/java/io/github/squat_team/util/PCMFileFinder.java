@@ -33,10 +33,11 @@ public class PCMFileFinder {
 	public String getName() {
 		String pcmFileName = this.pcmFile.getName();
 		String pcmFileExtension = this.extension;
-		if (pcmFileExtension.length() > 0) {
+		int pcmFileExtensionLength = pcmFileExtension != null ? pcmFileExtension.length() : 0;
+		if (pcmFileExtensionLength > 0) {
 			pcmFileExtension = "." + pcmFileExtension;
 		}
-		return pcmFileName.substring(0, pcmFileName.length() - pcmFileExtension.length());
+		return pcmFileName.substring(0, pcmFileName.length() - pcmFileExtensionLength);
 	}
 
 	public String getPath() {
