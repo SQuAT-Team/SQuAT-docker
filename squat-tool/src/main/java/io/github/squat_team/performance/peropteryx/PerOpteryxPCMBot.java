@@ -154,6 +154,7 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 			return results;
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
+			e.printStackTrace();
 			return new ArrayList<PCMScenarioResult>();
 		}
 	}
@@ -260,8 +261,13 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 	private void configureWith(PCMArchitectureInstance currentArchitecture) {
 		String allocationPath = currentArchitecture.getAllocation().eResource().getURI().toString();
 		String usagemodelPath = currentArchitecture.getUsageModel().eResource().getURI().toString();
-		allocationPath = allocationPath.replaceAll("file:/", "");
-		usagemodelPath = usagemodelPath.replaceAll("file:/", "");
+		if (File.separatorChar == '/') {
+			allocationPath = allocationPath.replaceAll("file:/", "/");
+			usagemodelPath = usagemodelPath.replaceAll("file:/", "/");
+		} else {
+			allocationPath = allocationPath.replaceAll("file:/", "");
+			usagemodelPath = usagemodelPath.replaceAll("file:/", "");
+		}
 		configuration.getPcmInstanceConfig().setAllocationModel(allocationPath);
 		configuration.getPcmInstanceConfig().setUsageModel(usagemodelPath);
 	}
