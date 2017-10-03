@@ -38,7 +38,6 @@ import edu.kit.ipd.sdq.kamp.core.ArchitectureModelLookup;
 import edu.kit.ipd.sdq.kamp.core.ArchitectureVersion;
 
 import io.github.squat_team.AbstractPCMBot;
-import io.github.squat_team.agentsUtils.Proposal;
 import io.github.squat_team.model.PCMArchitectureInstance;
 import io.github.squat_team.model.PCMResult;
 import io.github.squat_team.model.PCMScenario;

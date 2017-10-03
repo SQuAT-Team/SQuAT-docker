@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ASCII"?>
+<allocation:Allocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.1" id="_-MLLwO1uEeab86LP4wB6tQ" entityName="defaultAllocation">
+  <targetResourceEnvironment_Allocation href="insert-test-0-B+C+A.resourceenvironment#/"/>
+  <system_Allocation href="insert-test-0-B+C+A.system#_uGsn4O1sEeab86LP4wB6tQ"/>
+  <allocationContexts_Allocation id="__ta8EO1uEeab86LP4wB6tQ" entityName="Allocation_Assembly_Component1 &lt;Component1> &lt;Component1>">
+    <resourceContainer_AllocationContext href="insert-test-0-B+C+A.resourceenvironment#_4L_ncO1tEeab86LP4wB6tQ"/>
+    <assemblyContext_AllocationContext href="insert-test-0-B+C+A.system#_vQXlsO1sEeab86LP4wB6tQ"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_CMUAYO1vEeab86LP4wB6tQ" entityName="Allocation_Assembly_Component2 &lt;Component2> &lt;Component2>">
+    <resourceContainer_AllocationContext href="insert-test-0-B+C+A.resourceenvironment#_Xp1HUO1uEeab86LP4wB6tQ"/>
+    <assemblyContext_AllocationContext href="insert-test-0-B+C+A.system#_DMCC4O1tEeab86LP4wB6tQ"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_C5RNAO1vEeab86LP4wB6tQ" entityName="Allocation_Assembly_Component3 &lt;Component3> &lt;Component3>">
+    <resourceContainer_AllocationContext href="insert-test-0-B+C+A.resourceenvironment#_Xp1HUO1uEeab86LP4wB6tQ"/>
+    <assemblyContext_AllocationContext href="insert-test-0-B+C+A.system#_EHzHkO1tEeab86LP4wB6tQ"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_jDO_kPMAEeain-xl-zWctA" entityName="Allocation_Assembly_Component2+Component3+Component1-Intermediate &lt;Component2+Component3+Component1-Intermediate> &lt;Component2+Component3+Component1-Intermediate>">
+    <resourceContainer_AllocationContext href="insert-test-0-B+C+A.resourceenvironment#_4L_ncO1tEeab86LP4wB6tQ"/>
+    <assemblyContext_AllocationContext href="insert-test-0-B+C+A.system#_jDMjUPMAEeain-xl-zWctA"/>
+  </allocationContexts_Allocation>
+</allocation:Allocation>

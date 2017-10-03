@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_3hCHMMIxEea2uLfVNtEP3w">
+  <imports href="../../../pcm/pcm.ecore#//core"/>
+  <imports href="../../../pcm/pcm.ecore#//repository"/>
+  <imports href="../../../pcm/pcm.ecore#//seff"/>
+  <units xsi:type="henshin:Rule" xmi:id="_N1SFAMI1Eea2uLfVNtEP3w" name="insertIntermediary">
+    <parameters xmi:id="_jiL2UMI1Eea2uLfVNtEP3w" name="originalName" kind="IN">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <parameters xmi:id="_boIEUMOqEea2uLfVNtEP3w" name="interfaceName" kind="VAR">
+      <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </parameters>
+    <lhs xmi:id="_N1VvYMI1Eea2uLfVNtEP3w" name="Lhs">
+      <nodes xmi:id="_YQ6WYMI1Eea2uLfVNtEP3w" outgoing="_cxeXgMI1Eea2uLfVNtEP3w _JuOzQMI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/Repository"/>
+      </nodes>
+      <nodes xmi:id="_aLRxUMI1Eea2uLfVNtEP3w" name="c1" description="" incoming="_cxeXgMI1Eea2uLfVNtEP3w" outgoing="_DkQkUMI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/BasicComponent"/>
+        <attributes xmi:id="_bK3mEMI1Eea2uLfVNtEP3w" value="originalName">
+          <type href="../../../pcm/pcm.ecore#//core/entity/NamedElement/entityName"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-7zygMI4Eea2uLfVNtEP3w" incoming="_DyUOcMI5Eea2uLfVNtEP3w _JuOzQMI5Eea2uLfVNtEP3w" outgoing="_LwQ8cMI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationInterface"/>
+        <attributes xmi:id="_frZsgMOqEea2uLfVNtEP3w" value="interfaceName">
+          <type href="../../../pcm/pcm.ecore#//core/entity/NamedElement/entityName"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_ChZZIMI5Eea2uLfVNtEP3w" incoming="_DkQkUMI5Eea2uLfVNtEP3w" outgoing="_DyUOcMI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole"/>
+      </nodes>
+      <nodes xmi:id="_LCaX8MI5Eea2uLfVNtEP3w" incoming="_LwQ8cMI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/Signature"/>
+      </nodes>
+      <edges xmi:id="_cxeXgMI1Eea2uLfVNtEP3w" source="_YQ6WYMI1Eea2uLfVNtEP3w" target="_aLRxUMI1Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/Repository/components__Repository"/>
+      </edges>
+      <edges xmi:id="_DkQkUMI5Eea2uLfVNtEP3w" source="_aLRxUMI1Eea2uLfVNtEP3w" target="_ChZZIMI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceProvidingEntity/providedRoles_InterfaceProvidingEntity"/>
+      </edges>
+      <edges xmi:id="_DyUOcMI5Eea2uLfVNtEP3w" source="_ChZZIMI5Eea2uLfVNtEP3w" target="_-7zygMI4Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+      </edges>
+      <edges xmi:id="_JuOzQMI5Eea2uLfVNtEP3w" source="_YQ6WYMI1Eea2uLfVNtEP3w" target="_-7zygMI4Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/Repository/interfaces__Repository"/>
+      </edges>
+      <edges xmi:id="_LwQ8cMI5Eea2uLfVNtEP3w" source="_-7zygMI4Eea2uLfVNtEP3w" target="_LCaX8MI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationInterface/signatures__OperationInterface"/>
+      </edges>
+    </lhs>
+    <rhs xmi:id="_N1VvYcI1Eea2uLfVNtEP3w" name="Rhs">
+      <nodes xmi:id="_YQ6WYcI1Eea2uLfVNtEP3w" outgoing="_cxeXgcI1Eea2uLfVNtEP3w _xBIHsMI1Eea2uLfVNtEP3w _JuPaUMI5Eea2uLfVNtEP3w _qkFbYMOsEea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/Repository"/>
+      </nodes>
+      <nodes xmi:id="_aLRxUcI1Eea2uLfVNtEP3w" incoming="_cxeXgcI1Eea2uLfVNtEP3w" outgoing="_DkQkUcI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/BasicComponent"/>
+        <attributes xmi:id="_bK3mEcI1Eea2uLfVNtEP3w" value="originalName">
+          <type href="../../../pcm/pcm.ecore#//core/entity/NamedElement/entityName"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_rJKOwMI1Eea2uLfVNtEP3w" name="intermediary" description="Intermediary Component between c1 and everyone related to it" incoming="_xBIHsMI1Eea2uLfVNtEP3w" outgoing="_UpCyUMOqEea2uLfVNtEP3w _EBOHoMOuEea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/BasicComponent"/>
+        <attributes xmi:id="_GYFYsMOrEea2uLfVNtEP3w" value="originalName+&quot;-Intermediary&quot;">
+          <type href="../../../pcm/pcm.ecore#//core/entity/NamedElement/entityName"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_DjVeoMI2Eea2uLfVNtEP3w" name="intInterface" description="" incoming="_U4aEAMOqEea2uLfVNtEP3w _qkFbYMOsEea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationInterface"/>
+        <attributes xmi:id="_cj6-MMOqEea2uLfVNtEP3w" value="interfaceName+&quot;-Intermediary&quot;">
+          <type href="../../../pcm/pcm.ecore#//core/entity/NamedElement/entityName"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_-7zygcI4Eea2uLfVNtEP3w" incoming="_DyUOccI5Eea2uLfVNtEP3w _JuPaUMI5Eea2uLfVNtEP3w _Git0AMOuEea2uLfVNtEP3w" outgoing="_LwQ8ccI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationInterface"/>
+        <attributes xmi:id="_frZsgcOqEea2uLfVNtEP3w" value="interfaceName">
+          <type href="../../../pcm/pcm.ecore#//core/entity/NamedElement/entityName"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_ChZZIcI5Eea2uLfVNtEP3w" incoming="_DkQkUcI5Eea2uLfVNtEP3w" outgoing="_DyUOccI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole"/>
+      </nodes>
+      <nodes xmi:id="_LCaX8cI5Eea2uLfVNtEP3w" incoming="_LwQ8ccI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/Signature"/>
+      </nodes>
+      <nodes xmi:id="_TSZIcMOqEea2uLfVNtEP3w" incoming="_UpCyUMOqEea2uLfVNtEP3w" outgoing="_U4aEAMOqEea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole"/>
+      </nodes>
+      <nodes xmi:id="_Hs6ywMOtEea2uLfVNtEP3w" incoming="_EBOHoMOuEea2uLfVNtEP3w" outgoing="_Git0AMOuEea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole"/>
+      </nodes>
+      <edges xmi:id="_cxeXgcI1Eea2uLfVNtEP3w" source="_YQ6WYcI1Eea2uLfVNtEP3w" target="_aLRxUcI1Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/Repository/components__Repository"/>
+      </edges>
+      <edges xmi:id="_xBIHsMI1Eea2uLfVNtEP3w" source="_YQ6WYcI1Eea2uLfVNtEP3w" target="_rJKOwMI1Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/Repository/components__Repository"/>
+      </edges>
+      <edges xmi:id="_DkQkUcI5Eea2uLfVNtEP3w" source="_aLRxUcI1Eea2uLfVNtEP3w" target="_ChZZIcI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceProvidingEntity/providedRoles_InterfaceProvidingEntity"/>
+      </edges>
+      <edges xmi:id="_DyUOccI5Eea2uLfVNtEP3w" source="_ChZZIcI5Eea2uLfVNtEP3w" target="_-7zygcI4Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+      </edges>
+      <edges xmi:id="_JuPaUMI5Eea2uLfVNtEP3w" source="_YQ6WYcI1Eea2uLfVNtEP3w" target="_-7zygcI4Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/Repository/interfaces__Repository"/>
+      </edges>
+      <edges xmi:id="_LwQ8ccI5Eea2uLfVNtEP3w" source="_-7zygcI4Eea2uLfVNtEP3w" target="_LCaX8cI5Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationInterface/signatures__OperationInterface"/>
+      </edges>
+      <edges xmi:id="_UpCyUMOqEea2uLfVNtEP3w" source="_rJKOwMI1Eea2uLfVNtEP3w" target="_TSZIcMOqEea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceProvidingEntity/providedRoles_InterfaceProvidingEntity"/>
+      </edges>
+      <edges xmi:id="_U4aEAMOqEea2uLfVNtEP3w" source="_TSZIcMOqEea2uLfVNtEP3w" target="_DjVeoMI2Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+      </edges>
+      <edges xmi:id="_qkFbYMOsEea2uLfVNtEP3w" source="_YQ6WYcI1Eea2uLfVNtEP3w" target="_DjVeoMI2Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/Repository/interfaces__Repository"/>
+      </edges>
+      <edges xmi:id="_EBOHoMOuEea2uLfVNtEP3w" source="_rJKOwMI1Eea2uLfVNtEP3w" target="_Hs6ywMOtEea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceRequiringEntity/requiredRoles_InterfaceRequiringEntity"/>
+      </edges>
+      <edges xmi:id="_Git0AMOuEea2uLfVNtEP3w" source="_Hs6ywMOtEea2uLfVNtEP3w" target="_-7zygcI4Eea2uLfVNtEP3w">
+        <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole/requiredInterface__OperationRequiredRole"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_YQ6WYsI1Eea2uLfVNtEP3w" origin="_YQ6WYMI1Eea2uLfVNtEP3w" image="_YQ6WYcI1Eea2uLfVNtEP3w"/>
+    <mappings xmi:id="_aLRxUsI1Eea2uLfVNtEP3w" origin="_aLRxUMI1Eea2uLfVNtEP3w" image="_aLRxUcI1Eea2uLfVNtEP3w"/>
+    <mappings xmi:id="_-7zygsI4Eea2uLfVNtEP3w" origin="_-7zygMI4Eea2uLfVNtEP3w" image="_-7zygcI4Eea2uLfVNtEP3w"/>
+    <mappings xmi:id="_ChZZIsI5Eea2uLfVNtEP3w" origin="_ChZZIMI5Eea2uLfVNtEP3w" image="_ChZZIcI5Eea2uLfVNtEP3w"/>
+    <mappings xmi:id="_LCaX8sI5Eea2uLfVNtEP3w" origin="_LCaX8MI5Eea2uLfVNtEP3w" image="_LCaX8cI5Eea2uLfVNtEP3w"/>
+    <multiRules xmi:id="_5TiCwsI1Eea2uLfVNtEP3w">
+      <parameters xmi:id="_5Tj38MI1Eea2uLfVNtEP3w" name="originalName" kind="IN">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </parameters>
+      <parameters xmi:id="_boIEUcOqEea2uLfVNtEP3w" name="interfaceName" kind="VAR">
+        <type xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </parameters>
+      <lhs xmi:id="_5TiCw8I1Eea2uLfVNtEP3w" name="Lhs">
+        <nodes xmi:id="_5Tip18I1Eea2uLfVNtEP3w" outgoing="_5Tip3MI1Eea2uLfVNtEP3w _-kiCUMI1Eea2uLfVNtEP3w _mgo5kMI3Eea2uLfVNtEP3w _JuPaUsI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository"/>
+        </nodes>
+        <nodes xmi:id="_5Tip2cI1Eea2uLfVNtEP3w" name="c1" description="" incoming="_5Tip3MI1Eea2uLfVNtEP3w" outgoing="_DkQkU8I5Eea2uLfVNtEP3w _xXdekMOqEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/BasicComponent"/>
+          <attributes xmi:id="_5Tip2sI1Eea2uLfVNtEP3w" value="originalName">
+            <type href="../../../pcm/pcm.ecore#//core/entity/NamedElement/entityName"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_4QsFsMI1Eea2uLfVNtEP3w" name="others" incoming="_mgo5kMI3Eea2uLfVNtEP3w" outgoing="_y_vekMI3Eea2uLfVNtEP3w _jyx8IMOrEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/BasicComponent"/>
+        </nodes>
+        <nodes xmi:id="_-E0ngMI1Eea2uLfVNtEP3w" incoming="_-kiCUMI1Eea2uLfVNtEP3w _zRqVAMI3Eea2uLfVNtEP3w _zOVgoMOqEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationInterface"/>
+        </nodes>
+        <nodes xmi:id="_WYDscMI3Eea2uLfVNtEP3w" incoming="_y_vekMI3Eea2uLfVNtEP3w" outgoing="_zRqVAMI3Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole"/>
+        </nodes>
+        <nodes xmi:id="_ChZZJcI5Eea2uLfVNtEP3w" incoming="_DyUOc8I5Eea2uLfVNtEP3w _JuPaUsI5Eea2uLfVNtEP3w _kqNTYMOrEea2uLfVNtEP3w" outgoing="_LwQ8c8I5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationInterface"/>
+        </nodes>
+        <nodes xmi:id="_ChZZKsI5Eea2uLfVNtEP3w" incoming="_DkQkU8I5Eea2uLfVNtEP3w" outgoing="_DyUOc8I5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole"/>
+        </nodes>
+        <nodes xmi:id="_LCaX9cI5Eea2uLfVNtEP3w" incoming="_LwQ8c8I5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Signature"/>
+        </nodes>
+        <nodes xmi:id="_vDepwMOqEea2uLfVNtEP3w" incoming="_xXdekMOqEea2uLfVNtEP3w" outgoing="_zOVgoMOqEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole"/>
+        </nodes>
+        <nodes xmi:id="_eLvbIMOrEea2uLfVNtEP3w" incoming="_jyx8IMOrEea2uLfVNtEP3w" outgoing="_kqNTYMOrEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole"/>
+        </nodes>
+        <edges xmi:id="_5Tip3MI1Eea2uLfVNtEP3w" source="_5Tip18I1Eea2uLfVNtEP3w" target="_5Tip2cI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository/components__Repository"/>
+        </edges>
+        <edges xmi:id="_-kiCUMI1Eea2uLfVNtEP3w" source="_5Tip18I1Eea2uLfVNtEP3w" target="_-E0ngMI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository/interfaces__Repository"/>
+        </edges>
+        <edges xmi:id="_mgo5kMI3Eea2uLfVNtEP3w" source="_5Tip18I1Eea2uLfVNtEP3w" target="_4QsFsMI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository/components__Repository"/>
+        </edges>
+        <edges xmi:id="_y_vekMI3Eea2uLfVNtEP3w" source="_4QsFsMI1Eea2uLfVNtEP3w" target="_WYDscMI3Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceProvidingEntity/providedRoles_InterfaceProvidingEntity"/>
+        </edges>
+        <edges xmi:id="_zRqVAMI3Eea2uLfVNtEP3w" source="_WYDscMI3Eea2uLfVNtEP3w" target="_-E0ngMI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+        </edges>
+        <edges xmi:id="_DkQkU8I5Eea2uLfVNtEP3w" source="_5Tip2cI1Eea2uLfVNtEP3w" target="_ChZZKsI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceProvidingEntity/providedRoles_InterfaceProvidingEntity"/>
+        </edges>
+        <edges xmi:id="_DyUOc8I5Eea2uLfVNtEP3w" source="_ChZZKsI5Eea2uLfVNtEP3w" target="_ChZZJcI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+        </edges>
+        <edges xmi:id="_JuPaUsI5Eea2uLfVNtEP3w" source="_5Tip18I1Eea2uLfVNtEP3w" target="_ChZZJcI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository/interfaces__Repository"/>
+        </edges>
+        <edges xmi:id="_LwQ8c8I5Eea2uLfVNtEP3w" source="_ChZZJcI5Eea2uLfVNtEP3w" target="_LCaX9cI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationInterface/signatures__OperationInterface"/>
+        </edges>
+        <edges xmi:id="_xXdekMOqEea2uLfVNtEP3w" source="_5Tip2cI1Eea2uLfVNtEP3w" target="_vDepwMOqEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceRequiringEntity/requiredRoles_InterfaceRequiringEntity"/>
+        </edges>
+        <edges xmi:id="_zOVgoMOqEea2uLfVNtEP3w" source="_vDepwMOqEea2uLfVNtEP3w" target="_-E0ngMI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole/requiredInterface__OperationRequiredRole"/>
+        </edges>
+        <edges xmi:id="_jyx8IMOrEea2uLfVNtEP3w" source="_4QsFsMI1Eea2uLfVNtEP3w" target="_eLvbIMOrEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceRequiringEntity/requiredRoles_InterfaceRequiringEntity"/>
+        </edges>
+        <edges xmi:id="_kqNTYMOrEea2uLfVNtEP3w" source="_eLvbIMOrEea2uLfVNtEP3w" target="_ChZZJcI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole/requiredInterface__OperationRequiredRole"/>
+        </edges>
+      </lhs>
+      <rhs xmi:id="_5TiCxMI1Eea2uLfVNtEP3w" name="Rhs">
+        <nodes xmi:id="_5TiCxcI1Eea2uLfVNtEP3w" outgoing="_5Tip08I1Eea2uLfVNtEP3w _5Tip1sI1Eea2uLfVNtEP3w _-kiCUcI1Eea2uLfVNtEP3w _mgo5kcI3Eea2uLfVNtEP3w _JuPaUcI5Eea2uLfVNtEP3w _qkGCcMOsEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository"/>
+        </nodes>
+        <nodes xmi:id="_5Tip0MI1Eea2uLfVNtEP3w" incoming="_5Tip08I1Eea2uLfVNtEP3w" outgoing="_DkQkUsI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/BasicComponent"/>
+          <attributes xmi:id="_5Tip0cI1Eea2uLfVNtEP3w" value="originalName">
+            <type href="../../../pcm/pcm.ecore#//core/entity/NamedElement/entityName"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_5Tip1MI1Eea2uLfVNtEP3w" name="intermediary" description="Intermediary Component between c1 and everyone related to it" incoming="_5Tip1sI1Eea2uLfVNtEP3w" outgoing="_7aUqoMOqEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/BasicComponent"/>
+        </nodes>
+        <nodes xmi:id="_5TiCwMI1Eea2uLfVNtEP3w" incoming="_mgo5kcI3Eea2uLfVNtEP3w" outgoing="_y_vekcI3Eea2uLfVNtEP3w _0UvSkMOrEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/BasicComponent"/>
+        </nodes>
+        <nodes xmi:id="_-E0ngcI1Eea2uLfVNtEP3w" incoming="_-kiCUcI1Eea2uLfVNtEP3w _zRqVAcI3Eea2uLfVNtEP3w _70oBAMOqEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationInterface"/>
+        </nodes>
+        <nodes xmi:id="_Xce94MI3Eea2uLfVNtEP3w" incoming="_y_vekcI3Eea2uLfVNtEP3w" outgoing="_zRqVAcI3Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole"/>
+        </nodes>
+        <nodes xmi:id="_ChZZI8I5Eea2uLfVNtEP3w" incoming="_DyUOcsI5Eea2uLfVNtEP3w _JuPaUcI5Eea2uLfVNtEP3w _GiubEMOuEea2uLfVNtEP3w" outgoing="_LwQ8csI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationInterface"/>
+        </nodes>
+        <nodes xmi:id="_ChZZKMI5Eea2uLfVNtEP3w" incoming="_DkQkUsI5Eea2uLfVNtEP3w" outgoing="_DyUOcsI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole"/>
+        </nodes>
+        <nodes xmi:id="_LCaX88I5Eea2uLfVNtEP3w" incoming="_LwQ8csI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Signature"/>
+        </nodes>
+        <nodes xmi:id="_QA5rMcI5Eea2uLfVNtEP3w" name="intInterface" description="" incoming="_04QPUMOrEea2uLfVNtEP3w _qkGCcMOsEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationInterface"/>
+        </nodes>
+        <nodes xmi:id="_61qeYMOqEea2uLfVNtEP3w" incoming="_7aUqoMOqEea2uLfVNtEP3w" outgoing="_70oBAMOqEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole"/>
+        </nodes>
+        <nodes xmi:id="_yzIV4MOrEea2uLfVNtEP3w" incoming="_0UvSkMOrEea2uLfVNtEP3w" outgoing="_04QPUMOrEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole"/>
+        </nodes>
+        <nodes xmi:id="_Ow82McOtEea2uLfVNtEP3w" outgoing="_GiubEMOuEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole"/>
+        </nodes>
+        <edges xmi:id="_5Tip08I1Eea2uLfVNtEP3w" source="_5TiCxcI1Eea2uLfVNtEP3w" target="_5Tip0MI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository/components__Repository"/>
+        </edges>
+        <edges xmi:id="_5Tip1sI1Eea2uLfVNtEP3w" source="_5TiCxcI1Eea2uLfVNtEP3w" target="_5Tip1MI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository/components__Repository"/>
+        </edges>
+        <edges xmi:id="_-kiCUcI1Eea2uLfVNtEP3w" source="_5TiCxcI1Eea2uLfVNtEP3w" target="_-E0ngcI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository/interfaces__Repository"/>
+        </edges>
+        <edges xmi:id="_mgo5kcI3Eea2uLfVNtEP3w" source="_5TiCxcI1Eea2uLfVNtEP3w" target="_5TiCwMI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository/components__Repository"/>
+        </edges>
+        <edges xmi:id="_y_vekcI3Eea2uLfVNtEP3w" source="_5TiCwMI1Eea2uLfVNtEP3w" target="_Xce94MI3Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceProvidingEntity/providedRoles_InterfaceProvidingEntity"/>
+        </edges>
+        <edges xmi:id="_zRqVAcI3Eea2uLfVNtEP3w" source="_Xce94MI3Eea2uLfVNtEP3w" target="_-E0ngcI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+        </edges>
+        <edges xmi:id="_DkQkUsI5Eea2uLfVNtEP3w" source="_5Tip0MI1Eea2uLfVNtEP3w" target="_ChZZKMI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceProvidingEntity/providedRoles_InterfaceProvidingEntity"/>
+        </edges>
+        <edges xmi:id="_DyUOcsI5Eea2uLfVNtEP3w" source="_ChZZKMI5Eea2uLfVNtEP3w" target="_ChZZI8I5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+        </edges>
+        <edges xmi:id="_JuPaUcI5Eea2uLfVNtEP3w" source="_5TiCxcI1Eea2uLfVNtEP3w" target="_ChZZI8I5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository/interfaces__Repository"/>
+        </edges>
+        <edges xmi:id="_LwQ8csI5Eea2uLfVNtEP3w" source="_ChZZI8I5Eea2uLfVNtEP3w" target="_LCaX88I5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationInterface/signatures__OperationInterface"/>
+        </edges>
+        <edges xmi:id="_7aUqoMOqEea2uLfVNtEP3w" source="_5Tip1MI1Eea2uLfVNtEP3w" target="_61qeYMOqEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceRequiringEntity/requiredRoles_InterfaceRequiringEntity"/>
+        </edges>
+        <edges xmi:id="_70oBAMOqEea2uLfVNtEP3w" source="_61qeYMOqEea2uLfVNtEP3w" target="_-E0ngcI1Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole/requiredInterface__OperationRequiredRole"/>
+        </edges>
+        <edges xmi:id="_0UvSkMOrEea2uLfVNtEP3w" source="_5TiCwMI1Eea2uLfVNtEP3w" target="_yzIV4MOrEea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//core/entity/InterfaceRequiringEntity/requiredRoles_InterfaceRequiringEntity"/>
+        </edges>
+        <edges xmi:id="_04QPUMOrEea2uLfVNtEP3w" source="_yzIV4MOrEea2uLfVNtEP3w" target="_QA5rMcI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole/requiredInterface__OperationRequiredRole"/>
+        </edges>
+        <edges xmi:id="_qkGCcMOsEea2uLfVNtEP3w" source="_5TiCxcI1Eea2uLfVNtEP3w" target="_QA5rMcI5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/Repository/interfaces__Repository"/>
+        </edges>
+        <edges xmi:id="_GiubEMOuEea2uLfVNtEP3w" source="_Ow82McOtEea2uLfVNtEP3w" target="_ChZZI8I5Eea2uLfVNtEP3w">
+          <type href="../../../pcm/pcm.ecore#//repository/OperationRequiredRole/requiredInterface__OperationRequiredRole"/>
+        </edges>
+      </rhs>
+      <mappings xmi:id="_5Tip3cI1Eea2uLfVNtEP3w" origin="_5Tip18I1Eea2uLfVNtEP3w" image="_5TiCxcI1Eea2uLfVNtEP3w"/>
+      <mappings xmi:id="_5Tip3sI1Eea2uLfVNtEP3w" origin="_5Tip2cI1Eea2uLfVNtEP3w" image="_5Tip0MI1Eea2uLfVNtEP3w"/>
+      <mappings xmi:id="_5TiCwcI1Eea2uLfVNtEP3w" origin="_4QsFsMI1Eea2uLfVNtEP3w" image="_5TiCwMI1Eea2uLfVNtEP3w"/>
+      <mappings xmi:id="_-E0ngsI1Eea2uLfVNtEP3w" origin="_-E0ngMI1Eea2uLfVNtEP3w" image="_-E0ngcI1Eea2uLfVNtEP3w"/>
+      <mappings xmi:id="_Xce94cI3Eea2uLfVNtEP3w" origin="_WYDscMI3Eea2uLfVNtEP3w" image="_Xce94MI3Eea2uLfVNtEP3w"/>
+      <mappings xmi:id="_ChZZJ8I5Eea2uLfVNtEP3w" origin="_ChZZJcI5Eea2uLfVNtEP3w" image="_ChZZI8I5Eea2uLfVNtEP3w"/>
+      <mappings xmi:id="_ChZZLMI5Eea2uLfVNtEP3w" origin="_ChZZKsI5Eea2uLfVNtEP3w" image="_ChZZKMI5Eea2uLfVNtEP3w"/>
+      <mappings xmi:id="_LCaX98I5Eea2uLfVNtEP3w" origin="_LCaX9cI5Eea2uLfVNtEP3w" image="_LCaX88I5Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_5TiCxsI1Eea2uLfVNtEP3w" origin="_YQ6WYcI1Eea2uLfVNtEP3w" image="_5TiCxcI1Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_5Tip0sI1Eea2uLfVNtEP3w" origin="_aLRxUcI1Eea2uLfVNtEP3w" image="_5Tip0MI1Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_5Tip1cI1Eea2uLfVNtEP3w" origin="_rJKOwMI1Eea2uLfVNtEP3w" image="_5Tip1MI1Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_5Tip2MI1Eea2uLfVNtEP3w" origin="_YQ6WYMI1Eea2uLfVNtEP3w" image="_5Tip18I1Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_5Tip28I1Eea2uLfVNtEP3w" origin="_aLRxUMI1Eea2uLfVNtEP3w" image="_5Tip2cI1Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_ChZZJMI5Eea2uLfVNtEP3w" origin="_-7zygcI4Eea2uLfVNtEP3w" image="_ChZZI8I5Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_ChZZJsI5Eea2uLfVNtEP3w" origin="_-7zygMI4Eea2uLfVNtEP3w" image="_ChZZJcI5Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_ChZZKcI5Eea2uLfVNtEP3w" origin="_ChZZIcI5Eea2uLfVNtEP3w" image="_ChZZKMI5Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_ChZZK8I5Eea2uLfVNtEP3w" origin="_ChZZIMI5Eea2uLfVNtEP3w" image="_ChZZKsI5Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_LCaX9MI5Eea2uLfVNtEP3w" origin="_LCaX8cI5Eea2uLfVNtEP3w" image="_LCaX88I5Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_LCaX9sI5Eea2uLfVNtEP3w" origin="_LCaX8MI5Eea2uLfVNtEP3w" image="_LCaX9cI5Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_QA5rMsI5Eea2uLfVNtEP3w" origin="_DjVeoMI2Eea2uLfVNtEP3w" image="_QA5rMcI5Eea2uLfVNtEP3w"/>
+      <multiMappings xmi:id="_Ow82MsOtEea2uLfVNtEP3w" origin="_Hs6ywMOtEea2uLfVNtEP3w" image="_Ow82McOtEea2uLfVNtEP3w"/>
+    </multiRules>
+  </units>
+</henshin:Module>

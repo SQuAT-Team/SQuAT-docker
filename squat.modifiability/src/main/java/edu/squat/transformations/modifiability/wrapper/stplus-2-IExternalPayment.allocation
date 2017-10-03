@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<allocation:Allocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.1" id="_vUBS4C6NEd-Jla2o7wkBzQ" entityName="stplus.allocation">
+  <targetResourceEnvironment_Allocation href="stplus-2-IExternalPayment.resourceenvironment#/"/>
+  <system_Allocation href="stplus-2-IExternalPayment.system#_VreA0C6MEd-Jla2o7wkBzQ"/>
+  <allocationContexts_Allocation id="_wTSXgC6NEd-Jla2o7wkBzQ" entityName="Allocation_Assembly_C1 &lt;C1> &lt;C1>">
+    <resourceContainer_AllocationContext href="stplus-2-IExternalPayment.resourceenvironment#_g7HJEC6MEd-Jla2o7wkBzQ"/>
+    <assemblyContext_AllocationContext href="stplus-2-IExternalPayment.system#_X594sC6MEd-Jla2o7wkBzQ"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_wqjA8C6NEd-Jla2o7wkBzQ" entityName="Allocation_Assembly_C2 &lt;C2> &lt;C2>">
+    <resourceContainer_AllocationContext href="stplus-2-IExternalPayment.resourceenvironment#_h3wXgC6MEd-Jla2o7wkBzQ"/>
+    <assemblyContext_AllocationContext href="stplus-2-IExternalPayment.system#_YXdtAC6MEd-Jla2o7wkBzQ"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_xECfAC6NEd-Jla2o7wkBzQ" entityName="Allocation_Assembly_C3 &lt;C3> &lt;C3>">
+    <resourceContainer_AllocationContext href="stplus-2-IExternalPayment.resourceenvironment#_vxqJwS6QEd-pNfzbJsur0g"/>
+    <assemblyContext_AllocationContext href="stplus-2-IExternalPayment.system#_Y4vOEC6MEd-Jla2o7wkBzQ"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_Sl0FoF7pEeavvL8WcdoZSg" entityName="Allocation_Assembly_DB">
+    <resourceContainer_AllocationContext href="stplus-2-IExternalPayment.resourceenvironment#_7jiyMV5LEeavvL8WcdoZSg"/>
+    <assemblyContext_AllocationContext href="stplus-2-IExternalPayment.system#_-tTDEF7oEeavvL8WcdoZSg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_xu8AMGCeEeaZ6qtnAD5gLQ" entityName="Allocation_Assembly_Exporter">
+    <resourceContainer_AllocationContext href="stplus-2-IExternalPayment.resourceenvironment#_g7HJEC6MEd-Jla2o7wkBzQ"/>
+    <assemblyContext_AllocationContext href="stplus-2-IExternalPayment.system#_Ha2JcGCTEeaQ-qRnqvu5Tg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_FI-JEPViEearbrP6qHAeTw" entityName="Allocation_Assembly_IExternalPayment-Wrapper &lt;IExternalPayment-Wrapper> &lt;IExternalPayment-Wrapper>">
+    <resourceContainer_AllocationContext href="stplus-2-IExternalPayment.resourceenvironment#_vxqJwS6QEd-pNfzbJsur0g"/>
+    <assemblyContext_AllocationContext href="stplus-2-IExternalPayment.system#_FI868PViEearbrP6qHAeTw"/>
+  </allocationContexts_Allocation>
+</allocation:Allocation>

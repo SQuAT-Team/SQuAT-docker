@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resourceenvironment="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.1" xmlns:trace="http://www.eclipse.org/emf/2011/Henshin/Trace">
+  <resourceenvironment:ResourceEnvironment>
+    <linkingResources__ResourceEnvironment id="_HogGIOc2EeaYi_qKETszAw" entityName="Network" connectedResourceContainers_LinkingResource="_jHKFkOc0EeaYi_qKETszAw _iHTyIOc0EeaYi_qKETszAw">
+      <communicationLinkResourceSpecifications_LinkingResource id="_Hoh7UOc2EeaYi_qKETszAw" failureProbability="0.05">
+        <communicationLinkResourceType_CommunicationLinkResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_o3sScH2AEdyH8uerKnHYug"/>
+        <latency_CommunicationLinkResourceSpecification specification="0.5"/>
+        <throughput_CommunicationLinkResourceSpecification specification="1000*1000"/>
+      </communicationLinkResourceSpecifications_LinkingResource>
+    </linkingResources__ResourceEnvironment>
+    <resourceContainer_ResourceEnvironment id="_iHTyIOc0EeaYi_qKETszAw" entityName="Server1">
+      <activeResourceSpecifications_ResourceContainer id="_fpARwOc2EeaYi_qKETszAw" requiredByContainer="true">
+        <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#FCFS"/>
+        <activeResourceType_ActiveResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+        <processingRate_ProcessingResourceSpecification specification="1000*1000"/>
+      </activeResourceSpecifications_ResourceContainer>
+    </resourceContainer_ResourceEnvironment>
+    <resourceContainer_ResourceEnvironment id="_jHKFkOc0EeaYi_qKETszAw" entityName="Server2">
+      <activeResourceSpecifications_ResourceContainer id="_in-kUOc2EeaYi_qKETszAw" requiredByContainer="true" numberOfReplicas="8">
+        <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#Delay"/>
+        <activeResourceType_ActiveResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+        <processingRate_ProcessingResourceSpecification specification="1000*1000"/>
+      </activeResourceSpecifications_ResourceContainer>
+      <activeResourceSpecifications_ResourceContainer id="_mKQYQOc2EeaYi_qKETszAw" numberOfReplicas="2">
+        <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#Delay"/>
+        <activeResourceType_ActiveResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_BIjHoQ3KEdyouMqirZIhzQ"/>
+        <processingRate_ProcessingResourceSpecification specification="100*100"/>
+      </activeResourceSpecifications_ResourceContainer>
+    </resourceContainer_ResourceEnvironment>
+  </resourceenvironment:ResourceEnvironment>
+</xmi:XMI>

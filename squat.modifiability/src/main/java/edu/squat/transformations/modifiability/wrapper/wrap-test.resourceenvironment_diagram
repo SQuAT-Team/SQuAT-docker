@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:resourceenvironment="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.1" xsi:schemaLocation="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.1 http://palladiosimulator.org/PalladioComponentModel/5.1#//resourceenvironment" xmi:id="_bA1UsO71Eea6wfovznEgkw" type="ResourceEnvironmentModel" name="wrap-test.resourceenvironment_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_oARmoO71Eea6wfovznEgkw" type="2004" fontName=".SF NS Text">
+    <children xmi:type="notation:DecorationNode" xmi:id="_oASNsO71Eea6wfovznEgkw" type="5019"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_oASNse71Eea6wfovznEgkw" type="7004">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_oAS0wO71Eea6wfovznEgkw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_oAS0we71Eea6wfovznEgkw"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_oAS0wu71Eea6wfovznEgkw" type="7007"/>
+    <element xmi:type="resourceenvironment:ResourceContainer" href="wrap-test.resourceenvironment#_oAPKYO71Eea6wfovznEgkw"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_oARmoe71Eea6wfovznEgkw" x="64" y="36"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_pFVKMO71Eea6wfovznEgkw" type="2004" fontName=".SF NS Text">
+    <children xmi:type="notation:DecorationNode" xmi:id="_pFVKMu71Eea6wfovznEgkw" type="5019"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_pFVKM-71Eea6wfovznEgkw" type="7004">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_pFVKNO71Eea6wfovznEgkw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_pFVKNe71Eea6wfovznEgkw"/>
+    </children>
+    <children xmi:type="notation:DecorationNode" xmi:id="_pFVKNu71Eea6wfovznEgkw" type="7007"/>
+    <element xmi:type="resourceenvironment:ResourceContainer" href="wrap-test.resourceenvironment#_pFUjIO71Eea6wfovznEgkw"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pFVKMe71Eea6wfovznEgkw" x="368" y="36"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_sIPhkO71Eea6wfovznEgkw" type="2005" fontName=".SF NS Text">
+    <children xmi:type="notation:DecorationNode" xmi:id="_sIPhku71Eea6wfovznEgkw" type="5024"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_sIPhk-71Eea6wfovznEgkw" type="7006">
+      <styles xmi:type="notation:SortingStyle" xmi:id="_sIPhlO71Eea6wfovznEgkw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_sIPhle71Eea6wfovznEgkw"/>
+    </children>
+    <element xmi:type="resourceenvironment:LinkingResource" href="wrap-test.resourceenvironment#_qt0K8O71Eea6wfovznEgkw"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_sIPhke71Eea6wfovznEgkw" x="284" y="380"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_bA1Use71Eea6wfovznEgkw"/>
+  <element xmi:type="resourceenvironment:ResourceEnvironment" href="wrap-test.resourceenvironment#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_wM5CwO71Eea6wfovznEgkw" type="4003" source="_sIPhkO71Eea6wfovznEgkw" target="_pFVKMO71Eea6wfovznEgkw">
+    <styles xmi:type="notation:FontStyle" xmi:id="_wM5Cwe71Eea6wfovznEgkw" fontName=".SF NS Text"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wM5Cwu71Eea6wfovznEgkw" points="[9, -9, -110, 104]$[118, -107, -1, 6]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wNAXgO71Eea6wfovznEgkw" id="(0.5892857142857143,0.05806451612903226)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wNAXge71Eea6wfovznEgkw" id="(0.436,0.976)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_w2up8O71Eea6wfovznEgkw" type="4003" source="_sIPhkO71Eea6wfovznEgkw" target="_oARmoO71Eea6wfovznEgkw">
+    <styles xmi:type="notation:FontStyle" xmi:id="_w2up8e71Eea6wfovznEgkw" fontName=".SF NS Text"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_w2up8u71Eea6wfovznEgkw" points="[-3, -3, 99, 101]$[-101, -97, 1, 7]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_w2wfIO71Eea6wfovznEgkw" id="(0.26785714285714285,0.01935483870967742)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_w2wfIe71Eea6wfovznEgkw" id="(0.592,0.972)"/>
+  </edges>
+</notation:Diagram>

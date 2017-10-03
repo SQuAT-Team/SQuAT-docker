@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<allocation:Allocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.1" id="_DRiX0Oc0EeaYi_qKETszAw" entityName="defaultAllocation">
+  <targetResourceEnvironment_Allocation href="split-dual.resourceenvironment#/"/>
+  <system_Allocation href="split-dual.system#_uw6zcOczEeaYi_qKETszAw"/>
+  <allocationContexts_Allocation id="_zGEj4Oc1EeaYi_qKETszAw" entityName="Allocation_Assembly_Component1 &lt;Component1> &lt;Component1>">
+    <resourceContainer_AllocationContext href="split-dual.resourceenvironment#_iHTyIOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual.system#_IPgtsOc0EeaYi_qKETszAw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_0UMj4Oc1EeaYi_qKETszAw" entityName="Allocation_Assembly_Component2 &lt;Component2> &lt;Component2>">
+    <resourceContainer_AllocationContext href="split-dual.resourceenvironment#_iHTyIOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual.system#_NzYl8Oc0EeaYi_qKETszAw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_1BQeMOc1EeaYi_qKETszAw" entityName="Allocation_Assembly_Component3.2 &lt;Component3> &lt;Component3>">
+    <resourceContainer_AllocationContext href="split-dual.resourceenvironment#_jHKFkOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual.system#_OxMSAOc0EeaYi_qKETszAw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_1oT3IOc1EeaYi_qKETszAw" entityName="Allocation_Assembly_Component3.1 &lt;Component3> &lt;Component3>">
+    <resourceContainer_AllocationContext href="split-dual.resourceenvironment#_jHKFkOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual.system#_Pj79kOc0EeaYi_qKETszAw"/>
+  </allocationContexts_Allocation>
+</allocation:Allocation>

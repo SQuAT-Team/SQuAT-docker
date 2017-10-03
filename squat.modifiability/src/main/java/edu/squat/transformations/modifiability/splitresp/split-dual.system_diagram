@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" type="CompositeModel" name="split-dual.system_diagram" measurementUnit="Pixel">
+  <children xsi:type="notation:Shape" type="2002" fontName=".SF NS Text">
+    <children xsi:type="notation:DecorationNode" type="5012"/>
+    <children xsi:type="notation:DecorationNode" type="7002">
+      <children xsi:type="notation:Shape" type="3006" fontName=".SF NS Text">
+        <children xsi:type="notation:DecorationNode" type="5009"/>
+        <children xsi:type="notation:Shape" type="3007" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5007">
+            <layoutConstraint xsi:type="notation:Location" x="-80" y="13"/>
+          </children>
+          <element href="split-dual.repository#_ljMeYM0CEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="-29" y="36"/>
+        </children>
+        <children xsi:type="notation:Shape" type="3007" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5007">
+            <layoutConstraint xsi:type="notation:Location" x="-53" y="22"/>
+          </children>
+          <element href="split-dual.repository#_mM6JwM0CEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="104" y="79"/>
+        </children>
+        <element href="split-dual.system#_IPgtsOc0EeaYi_qKETszAw"/>
+        <layoutConstraint xsi:type="notation:Bounds" x="223" y="71"/>
+      </children>
+      <children xsi:type="notation:Shape" type="3006" fontName=".SF NS Text">
+        <children xsi:type="notation:DecorationNode" type="5009"/>
+        <children xsi:type="notation:Shape" type="3008" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5008">
+            <layoutConstraint xsi:type="notation:Location" x="-68" y="13"/>
+          </children>
+          <element href="split-dual.repository#_nC0eEM0CEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="-29" y="20"/>
+        </children>
+        <children xsi:type="notation:Shape" type="3008" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5008">
+            <layoutConstraint xsi:type="notation:Location" x="-62" y="18"/>
+          </children>
+          <element href="split-dual.repository#__G5iIM0CEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="1" y="79"/>
+        </children>
+        <children xsi:type="notation:Shape" type="3008" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5008">
+            <layoutConstraint xsi:type="notation:Location" x="99" y="18"/>
+          </children>
+          <element href="split-dual.repository#_ASJNQM0DEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="100" y="79"/>
+        </children>
+        <element href="split-dual.system#_NzYl8Oc0EeaYi_qKETszAw"/>
+        <layoutConstraint xsi:type="notation:Bounds" x="539" y="83"/>
+      </children>
+      <children xsi:type="notation:Shape" type="3006" fontName=".SF NS Text">
+        <children xsi:type="notation:DecorationNode" type="5009"/>
+        <children xsi:type="notation:Shape" type="3007" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5007">
+            <layoutConstraint xsi:type="notation:Location" x="-60" y="25"/>
+          </children>
+          <element href="split-dual.repository#_7YvOUM0CEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="-29" y="16"/>
+        </children>
+        <children xsi:type="notation:Shape" type="3007" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5007">
+            <layoutConstraint xsi:type="notation:Location" x="-48" y="32"/>
+          </children>
+          <element href="split-dual.repository#_8wg5kM0CEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="-29" y="49"/>
+        </children>
+        <children xsi:type="notation:Shape" type="3008" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5008">
+            <layoutConstraint xsi:type="notation:Location" x="-49" y="14"/>
+          </children>
+          <element href="split-dual.repository#_nb6TgM0CEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="40" y="-29"/>
+        </children>
+        <element href="split-dual.system#_OxMSAOc0EeaYi_qKETszAw"/>
+        <layoutConstraint xsi:type="notation:Bounds" x="771" y="279"/>
+      </children>
+      <children xsi:type="notation:Shape" type="3006" fontName=".SF NS Text">
+        <children xsi:type="notation:DecorationNode" type="5009"/>
+        <children xsi:type="notation:Shape" type="3007" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5007">
+            <layoutConstraint xsi:type="notation:Location" x="64" y="36"/>
+          </children>
+          <element href="split-dual.repository#_7YvOUM0CEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="139" y="49"/>
+        </children>
+        <children xsi:type="notation:Shape" type="3007" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5007">
+            <layoutConstraint xsi:type="notation:Location" x="60" y="33"/>
+          </children>
+          <element href="split-dual.repository#_8wg5kM0CEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="139" y="8"/>
+        </children>
+        <children xsi:type="notation:Shape" type="3008" fontName=".SF NS Text">
+          <children xsi:type="notation:DecorationNode" type="5008">
+            <layoutConstraint xsi:type="notation:Location" y="5"/>
+          </children>
+          <element href="split-dual.repository#_nb6TgM0CEeaolPjamFsuIw"/>
+          <layoutConstraint xsi:type="notation:Bounds" x="72" y="-29"/>
+        </children>
+        <element href="split-dual.system#_Pj79kOc0EeaYi_qKETszAw"/>
+        <layoutConstraint xsi:type="notation:Bounds" x="283" y="291"/>
+      </children>
+    </children>
+    <children xsi:type="notation:Shape" type="3011" fontName=".SF NS Text">
+      <children xsi:type="notation:DecorationNode" type="5013">
+        <layoutConstraint xsi:type="notation:Location" y="5"/>
+      </children>
+      <element href="split-dual.system#_92ICkOc0EeaYi_qKETszAw"/>
+      <layoutConstraint xsi:type="notation:Bounds"/>
+    </children>
+    <element href="split-dual.system#_uw6zcOczEeaYi_qKETszAw"/>
+    <layoutConstraint xsi:type="notation:Bounds" y="8" width="1077"/>
+  </children>
+  <styles xsi:type="notation:DiagramStyle"/>
+  <element href="split-dual.system#_uw6zcOczEeaYi_qKETszAw"/>
+  <edges xsi:type="notation:Connector" type="4006" source="//@children.0/@children.2" target="//@children.0/@children.1/@children.0/@children.1">
+    <styles xsi:type="notation:FontStyle" fontName=".SF NS Text"/>
+    <element href="split-dual.system#_FuXxMOc1EeaYi_qKETszAw"/>
+    <bendpoints xsi:type="notation:RelativeBendpoints" points="[30, 0, -202, 117]$[228, -117, -4, 0]"/>
+    <sourceAnchor xsi:type="notation:IdentityAnchor" id="(1.0,0.6333333333333333)"/>
+    <targetAnchor xsi:type="notation:IdentityAnchor" id="(0.13333333333333333,0.5)"/>
+  </edges>
+  <edges xsi:type="notation:Connector" type="4004" source="//@children.0/@children.1/@children.1/@children.1" target="//@children.0/@children.1/@children.0/@children.1">
+    <styles xsi:type="notation:FontStyle" fontName=".SF NS Text"/>
+    <element href="split-dual.system#_QjoqkOc1EeaYi_qKETszAw"/>
+    <bendpoints xsi:type="notation:RelativeBendpoints" points="[-8, 0, 308, -4]$[-22, -67, 294, -71]$[-322, -67, -6, -71]$[-324, -4, -8, -8]"/>
+    <sourceAnchor xsi:type="notation:IdentityAnchor" id="(1.0,1.0)"/>
+    <targetAnchor xsi:type="notation:IdentityAnchor" id="(0.16666666666666666,0.5)"/>
+  </edges>
+  <edges xsi:type="notation:Connector" type="4004" source="//@children.0/@children.1/@children.3/@children.3" target="//@children.0/@children.1/@children.0/@children.2">
+    <styles xsi:type="notation:FontStyle" fontName=".SF NS Text"/>
+    <element href="split-dual.system#_WBW3gOc1EeaYi_qKETszAw"/>
+    <bendpoints xsi:type="notation:RelativeBendpoints" points="[7, 0, 102, 181]$[-95, -182, 0, -1]"/>
+  </edges>
+  <edges xsi:type="notation:Connector" type="4004" source="//@children.0/@children.1/@children.2/@children.3" target="//@children.0/@children.1/@children.0/@children.2">
+    <styles xsi:type="notation:FontStyle" fontName=".SF NS Text"/>
+    <element href="split-dual.system#_Yb8DkOc1EeaYi_qKETszAw"/>
+    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, -8, 484, 92]$[0, -38, 484, 62]$[-431, -38, 53, 62]$[-479, -88, 5, 12]"/>
+    <targetAnchor xsi:type="notation:IdentityAnchor" id="(0.5,0.8333333333333334)"/>
+  </edges>
+  <edges xsi:type="notation:Connector" type="4004" source="//@children.0/@children.1/@children.1/@children.2" target="//@children.0/@children.1/@children.3/@children.2">
+    <styles xsi:type="notation:FontStyle" fontName=".SF NS Text"/>
+    <element href="split-dual.system#_rq5y0Oc1EeaYi_qKETszAw"/>
+    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 7, 118, -130]$[-118, 136, 0, -1]"/>
+  </edges>
+  <edges xsi:type="notation:Connector" type="4004" source="//@children.0/@children.1/@children.1/@children.2" target="//@children.0/@children.1/@children.2/@children.1">
+    <styles xsi:type="notation:FontStyle" fontName=".SF NS Text"/>
+    <element href="split-dual.system#_sRGQIOc1EeaYi_qKETszAw"/>
+    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 7, -202, -126]$[202, 132, 0, -1]"/>
+  </edges>
+  <edges xsi:type="notation:Connector" type="4004" source="//@children.0/@children.1/@children.1/@children.3" target="//@children.0/@children.1/@children.3/@children.1">
+    <styles xsi:type="notation:FontStyle" fontName=".SF NS Text"/>
+    <element href="split-dual.system#_tPwQwOc1EeaYi_qKETszAw"/>
+    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 7, 217, -171]$[-214, 171, 3, -7]"/>
+  </edges>
+  <edges xsi:type="notation:Connector" type="4004" source="//@children.0/@children.1/@children.1/@children.3" target="//@children.0/@children.1/@children.2/@children.2">
+    <styles xsi:type="notation:FontStyle" fontName=".SF NS Text"/>
+    <element href="split-dual.system#_uei_IOc1EeaYi_qKETszAw"/>
+    <bendpoints xsi:type="notation:RelativeBendpoints" points="[0, 7, -88, -155]$[88, 162, 0, 0]"/>
+    <targetAnchor xsi:type="notation:IdentityAnchor" id="(0.0,0.36666666666666664)"/>
+  </edges>
+</notation:Diagram>

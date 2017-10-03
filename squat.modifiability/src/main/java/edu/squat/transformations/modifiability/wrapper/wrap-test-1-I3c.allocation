@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<allocation:Allocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.1" id="_kbpCQO71Eea6wfovznEgkw" entityName="defaultAllocation">
+  <targetResourceEnvironment_Allocation href="wrap-test-1-I3c.resourceenvironment#/"/>
+  <system_Allocation href="wrap-test-1-I3c.system#_XdKZoO71Eea6wfovznEgkw"/>
+  <allocationContexts_Allocation id="_E8lvgO73Eea6wfovznEgkw" entityName="Allocation_Assembly_C1 &lt;C1> &lt;C1>">
+    <resourceContainer_AllocationContext href="wrap-test-1-I3c.resourceenvironment#_oAPKYO71Eea6wfovznEgkw"/>
+    <assemblyContext_AllocationContext href="wrap-test-1-I3c.system#_y0k2sO71Eea6wfovznEgkw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_Gdru0O73Eea6wfovznEgkw" entityName="Allocation_Assembly_C2 &lt;C2> &lt;C2>">
+    <resourceContainer_AllocationContext href="wrap-test-1-I3c.resourceenvironment#_oAPKYO71Eea6wfovznEgkw"/>
+    <assemblyContext_AllocationContext href="wrap-test-1-I3c.system#_15IM0O71Eea6wfovznEgkw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_HH2tMO73Eea6wfovznEgkw" entityName="Allocation_Assembly_C4 &lt;C4> &lt;C4>">
+    <resourceContainer_AllocationContext href="wrap-test-1-I3c.resourceenvironment#_oAPKYO71Eea6wfovznEgkw"/>
+    <assemblyContext_AllocationContext href="wrap-test-1-I3c.system#_3eMGIO71Eea6wfovznEgkw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_VFbl4O74Eea6wfovznEgkw" entityName="Allocation_Assembly_C3 &lt;C3> &lt;C3>">
+    <resourceContainer_AllocationContext href="wrap-test-1-I3c.resourceenvironment#_pFUjIO71Eea6wfovznEgkw"/>
+    <assemblyContext_AllocationContext href="wrap-test-1-I3c.system#_2ucrQO71Eea6wfovznEgkw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_XaQvQO74Eea6wfovznEgkw" entityName="Allocation_Assembly_C3 &lt;C3> &lt;C3>">
+    <resourceContainer_AllocationContext href="wrap-test-1-I3c.resourceenvironment#_pFUjIO71Eea6wfovznEgkw"/>
+    <assemblyContext_AllocationContext href="wrap-test-1-I3c.system#_DWw2oO72Eea6wfovznEgkw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_fSBCI_Q8EeaUiskPcoQQvw" entityName="Allocation_Assembly_I3c-Wrapper &lt;I3c-Wrapper> &lt;I3c-Wrapper>">
+    <resourceContainer_AllocationContext href="wrap-test-1-I3c.resourceenvironment#_pFUjIO71Eea6wfovznEgkw"/>
+    <assemblyContext_AllocationContext href="wrap-test-1-I3c.system#_fSBCIPQ8EeaUiskPcoQQvw"/>
+  </allocationContexts_Allocation>
+</allocation:Allocation>

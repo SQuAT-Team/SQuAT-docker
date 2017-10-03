@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.1" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.1" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.1" xsi:schemaLocation="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.1 http://palladiosimulator.org/PalladioComponentModel/5.1#//core/composition http://palladiosimulator.org/PalladioComponentModel/Repository/5.1 http://palladiosimulator.org/PalladioComponentModel/5.1#//repository http://palladiosimulator.org/PalladioComponentModel/System/5.1 http://palladiosimulator.org/PalladioComponentModel/5.1#//system" xmi:id="_TOqXcN5jEea1KbZjf0YUJQ" type="CompositeModel" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_TW2DEN5jEea1KbZjf0YUJQ" type="2002" fontName=".SF NS Text">
+    <children xmi:type="notation:DecorationNode" xmi:id="_TW2qIN5jEea1KbZjf0YUJQ" type="5012"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_TW2qId5jEea1KbZjf0YUJQ" type="7002">
+      <children xmi:type="notation:Shape" xmi:id="_TXuz4N5jEea1KbZjf0YUJQ" type="3006" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TXuz4t5jEea1KbZjf0YUJQ" type="5009"/>
+        <children xmi:type="notation:Shape" xmi:id="_TYMt8N5jEea1KbZjf0YUJQ" type="3007" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TYMt8t5jEea1KbZjf0YUJQ" type="5007">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TYMt895jEea1KbZjf0YUJQ" y="5"/>
+          </children>
+          <element xmi:type="repository:OperationProvidedRole" href="ms.repository#_CPbfYHD2EeSA4fySuX9I2Q"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TYMt8d5jEea1KbZjf0YUJQ"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_TYNVAN5jEea1KbZjf0YUJQ" type="3008" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TYNVAt5jEea1KbZjf0YUJQ" type="5008">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TYNVA95jEea1KbZjf0YUJQ" y="5"/>
+          </children>
+          <element xmi:type="repository:OperationRequiredRole" href="ms.repository#_JLDNsHD2EeSA4fySuX9I2Q"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TYNVAd5jEea1KbZjf0YUJQ" x="139" y="16"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_TYN8EN5jEea1KbZjf0YUJQ" type="3008" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TYN8Et5jEea1KbZjf0YUJQ" type="5008">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TYN8E95jEea1KbZjf0YUJQ" y="5"/>
+          </children>
+          <element xmi:type="repository:OperationRequiredRole" href="ms.repository#_5ZXgYLhAEeSNPorBlo7x9g"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TYN8Ed5jEea1KbZjf0YUJQ" x="139" y="49"/>
+        </children>
+        <element xmi:type="composition:AssemblyContext" href="ms_base.system#_VD-4oHD4EeSA4fySuX9I2Q"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TXuz4d5jEea1KbZjf0YUJQ" x="29" y="391"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_TXva8N5jEea1KbZjf0YUJQ" type="3006" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TXva8t5jEea1KbZjf0YUJQ" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="ms_base.system#_pulfcHD4EeSA4fySuX9I2Q"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TXva8d5jEea1KbZjf0YUJQ" x="1067" y="647"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_TXwCAN5jEea1KbZjf0YUJQ" type="3006" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TXwCAt5jEea1KbZjf0YUJQ" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="ms_base.system#_4LdYsHD4EeSA4fySuX9I2Q"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TXwCAd5jEea1KbZjf0YUJQ" x="1119" y="327"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_TXwCA95jEea1KbZjf0YUJQ" type="3006" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TXwpEN5jEea1KbZjf0YUJQ" type="5009"/>
+        <children xmi:type="notation:Shape" xmi:id="_TY-KAN5jEea1KbZjf0YUJQ" type="3007" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TY-KAt5jEea1KbZjf0YUJQ" type="5007">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TY-KA95jEea1KbZjf0YUJQ" y="5"/>
+          </children>
+          <element xmi:type="repository:OperationProvidedRole" href="ms.repository#_frEeAHD2EeSA4fySuX9I2Q"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TY-KAd5jEea1KbZjf0YUJQ"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_TY-xEN5jEea1KbZjf0YUJQ" type="3008" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TY-xEt5jEea1KbZjf0YUJQ" type="5008">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TY_YIN5jEea1KbZjf0YUJQ" x="16" y="38"/>
+          </children>
+          <element xmi:type="repository:OperationRequiredRole" href="ms.repository#_T0JTUHD2EeSA4fySuX9I2Q"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TY-xEd5jEea1KbZjf0YUJQ" x="56" y="79"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_TY_YId5jEea1KbZjf0YUJQ" type="3008" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TY__MN5jEea1KbZjf0YUJQ" type="5008">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TY__Md5jEea1KbZjf0YUJQ" y="5"/>
+          </children>
+          <element xmi:type="repository:OperationRequiredRole" href="ms.repository#_cljekHD2EeSA4fySuX9I2Q"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TY_YIt5jEea1KbZjf0YUJQ"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_TY__Mt5jEea1KbZjf0YUJQ" type="3008" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TY__NN5jEea1KbZjf0YUJQ" type="5008">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TY__Nd5jEea1KbZjf0YUJQ" x="83" y="22"/>
+          </children>
+          <element xmi:type="repository:OperationRequiredRole" href="ms.repository#_mYCsUHD2EeSA4fySuX9I2Q"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TY__M95jEea1KbZjf0YUJQ" x="109" y="79"/>
+        </children>
+        <element xmi:type="composition:AssemblyContext" href="ms_base.system#_C1kK8HD5EeSA4fySuX9I2Q"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TXwCBN5jEea1KbZjf0YUJQ" x="283" y="175"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_TXwpEd5jEea1KbZjf0YUJQ" type="3006" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TXwpE95jEea1KbZjf0YUJQ" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="ms_base.system#_IPnY0HD5EeSA4fySuX9I2Q"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TXwpEt5jEea1KbZjf0YUJQ" x="1119" y="183"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_TXxQIN5jEea1KbZjf0YUJQ" type="3006" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TXxQIt5jEea1KbZjf0YUJQ" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="ms_base.system#_aMTWgLg3EeSNPorBlo7x9g"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TXxQId5jEea1KbZjf0YUJQ" x="1475" y="527"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_TXx3MN5jEea1KbZjf0YUJQ" type="3006" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TXx3Mt5jEea1KbZjf0YUJQ" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="ms_base.system#_1ek7QLg_EeSNPorBlo7x9g"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TXx3Md5jEea1KbZjf0YUJQ" x="1491" y="187"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_TXyeQN5jEea1KbZjf0YUJQ" type="3006" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TXzFUN5jEea1KbZjf0YUJQ" type="5009"/>
+        <element xmi:type="composition:AssemblyContext" href="ms_base.system#_bUxacL0ZEeSAHuL4ItXOLQ"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TXyeQd5jEea1KbZjf0YUJQ" x="435" y="647"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_TXzsYN5jEea1KbZjf0YUJQ" type="3006" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TX0TcN5jEea1KbZjf0YUJQ" type="5009"/>
+        <children xmi:type="notation:Shape" xmi:id="_TZUIQN5jEea1KbZjf0YUJQ" type="3007" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TZUIQt5jEea1KbZjf0YUJQ" type="5007">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TZUIQ95jEea1KbZjf0YUJQ" x="1" y="-14"/>
+          </children>
+          <element xmi:type="repository:OperationProvidedRole" href="ms.repository#_qrFKMLhEEeSNPorBlo7x9g"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TZUIQd5jEea1KbZjf0YUJQ" x="20" y="-29"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_TZUIRN5jEea1KbZjf0YUJQ" type="3008" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TZUvUN5jEea1KbZjf0YUJQ" type="5008">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TZUvUd5jEea1KbZjf0YUJQ" x="-18" y="61"/>
+          </children>
+          <element xmi:type="repository:OperationRequiredRole" href="ms.repository#_oyc0oLhEEeSNPorBlo7x9g"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TZUIRd5jEea1KbZjf0YUJQ"/>
+        </children>
+        <element xmi:type="composition:AssemblyContext" href="ms_base.system#_HLnHAL3NEeSvHZ5kF_aE4g"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TXzsYd5jEea1KbZjf0YUJQ" x="423" y="423"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_TX06gN5jEea1KbZjf0YUJQ" type="3006" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_TX06gt5jEea1KbZjf0YUJQ" type="5009"/>
+        <children xmi:type="notation:Shape" xmi:id="_TZXyoN5jEea1KbZjf0YUJQ" type="3007" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TZXyot5jEea1KbZjf0YUJQ" type="5007">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TZXyo95jEea1KbZjf0YUJQ" x="33" y="53"/>
+          </children>
+          <element xmi:type="repository:OperationProvidedRole" href="ms.repository#_s18OwHD0EeSqnN80MQ2uGw"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TZXyod5jEea1KbZjf0YUJQ"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_TZYZsN5jEea1KbZjf0YUJQ" type="3008" fontName=".SF NS Text">
+          <children xmi:type="notation:DecorationNode" xmi:id="_TZYZst5jEea1KbZjf0YUJQ" type="5008">
+            <layoutConstraint xmi:type="notation:Location" xmi:id="_TZYZs95jEea1KbZjf0YUJQ" y="5"/>
+          </children>
+          <element xmi:type="repository:OperationRequiredRole" href="ms.repository#_uCAZQHD0EeSqnN80MQ2uGw"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TZYZsd5jEea1KbZjf0YUJQ"/>
+        </children>
+        <element xmi:type="composition:AssemblyContext" href="ms_base.system#_H7z04L3NEeSvHZ5kF_aE4g"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TX06gd5jEea1KbZjf0YUJQ" x="731" y="427"/>
+      </children>
+    </children>
+    <element xmi:type="system:System" href="ms_base.system#_oPwBYHDhEeSqnN80MQ2uGw"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TW2DEd5jEea1KbZjf0YUJQ" width="1889" height="857"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_TOqXcd5jEea1KbZjf0YUJQ"/>
+  <element xmi:type="system:System" href="ms_base.system#_oPwBYHDhEeSqnN80MQ2uGw"/>
+</notation:Diagram>
