@@ -176,25 +176,4 @@ public class JSONification {
 		this.jsonStringer.endObject();
 		return this.jsonStringer.toString();
 	}
-	
-	public static void main(String[] args) {
-		Allocation allocation = SQuATHelper.loadAllocationModel(
-				"/home/roehrdor/Workspace.neon/headless-peropteryx/ExtendedSimpleTacticsExample/default.allocation");
-		Repository repository = SQuATHelper.loadRepositoryModel(
-				"/home/roehrdor/Workspace.neon/headless-peropteryx/ExtendedSimpleTacticsExample/default.repository");
-		org.palladiosimulator.pcm.system.System system = SQuATHelper.loadSystemModel(
-				"/home/roehrdor/Workspace.neon/headless-peropteryx/ExtendedSimpleTacticsExample/default.system");
-		ResourceEnvironment resourceenvironment = SQuATHelper.loadResourceEnvironmentModel(
-				"/home/roehrdor/Workspace.neon/headless-peropteryx/ExtendedSimpleTacticsExample/default.resourceenvironment");
-		UsageModel usageModel = SQuATHelper.loadUsageModel(
-				"/home/roehrdor/Workspace.neon/headless-peropteryx/ExtendedSimpleTacticsExample/default.usagemodel");
-
-		PCMArchitectureInstance architectureInstance = new PCMArchitectureInstance("TEST", repository, system,
-				allocation, resourceenvironment, usageModel);
-		
-		JSONification jsoNification = new JSONification();
-		jsoNification.add(architectureInstance);
-		String res = jsoNification.toJSON();
-		System.out.println(res);
-	}
 }
