@@ -60,7 +60,8 @@ public class PCMDefault {
 		Path workspacePath = currentPath.getParent();
 		String uriPath = workspacePath.normalize().toString();
 		//URI platformURI = URI.createPlatformPluginURI("org.palladiosimulator.pcm.resources", true).appendSegment("defaultModels").appendSegment("");  
-		URI physicalURI = URI.createFileURI(uriPath).appendSegment("PCM").appendSegment("org.palladiosimulator.pcm.resources").appendSegment("defaultModels").appendSegment("");
+		//URI physicalURI = URI.createFileURI(uriPath).appendSegment("PCM").appendSegment("org.palladiosimulator.pcm.resources").appendSegment("defaultModels").appendSegment("");
+		URI physicalURI = URI.createFileURI(uriPath).appendSegment("squat.modifiability").appendSegment("pcm").appendSegment("defaultModels").appendSegment("");
 		URI pcmModels = URI.createURI("pathmap://PCM_MODELS/");
 		URIConverter.URI_MAP.put(pcmModels, physicalURI);
 		//URIConverter.URI_MAP.put(URI.createURI("pathmap://PCM_MODELS/"),URI.createURI("platform:/plugin/org.palladiosimulator.pcm.resources/defaultModels/"));
