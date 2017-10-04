@@ -27,8 +27,8 @@ import io.github.squat_team.util.SQuATHelper;
 public class ModifiabilityBotTest {
 
 	private final String MODEL_NAME = "default"; // cocome-cloud
-	private final String MODEL_PATH = "C:\\Users\\Borst\\Downloads\\TestModel"; // models/cocomeWithoutPickUpStoreAndServiceAdapter
-	private final String ALTERNATIVE_REPOSITORY_PATH = "C:\\Users\\Borst\\Downloads\\TestModel\\alternativeRepository.repository"; // /Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/cocomeWithoutPickUpStoreAndServiceAdapter/alternativescocome-cloud.repository
+	private final String MODEL_PATH = "/home/sebastian/git/SQuAT-docker/squat.modifiability/model"; // models/cocomeWithoutPickUpStoreAndServiceAdapter
+	private final String ALTERNATIVE_REPOSITORY_PATH = "/home/sebastian/git/SQuAT-docker/squat.modifiability/model/alternativeRepository.repository"; // /Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/cocomeWithoutPickUpStoreAndServiceAdapter/alternativescocome-cloud.repository
 
 	@Test
 	public void runStplusTest() throws Exception {
@@ -185,17 +185,16 @@ public class ModifiabilityBotTest {
 	 * @return the loaded model.
 	 */
 	private PCMArchitectureInstance loadSpecificModel(ArchitecturalVersion architecturalVersion) {
-		// TODO: WINDOWS NEEDS FILE
-		Repository repository = SQuATHelper.loadRepositoryModel("file:\\"+
+		Repository repository = SQuATHelper.loadRepositoryModel("file:/"+
 				architecturalVersion.getPath() + File.separator + architecturalVersion.getRepositoryFilename());
 		ResourceEnvironment resourceEnvironment = SQuATHelper
-				.loadResourceEnvironmentModel("file:\\"+architecturalVersion.getPath() + File.separator
+				.loadResourceEnvironmentModel("file:/"+architecturalVersion.getPath() + File.separator
 						+ architecturalVersion.getResourceEnvironmentFilename());
-		org.palladiosimulator.pcm.system.System system = SQuATHelper.loadSystemModel("file:\\"+
+		org.palladiosimulator.pcm.system.System system = SQuATHelper.loadSystemModel("file:/"+
 				architecturalVersion.getPath() + File.separator + architecturalVersion.getSystemFilename());
-		Allocation allocation = SQuATHelper.loadAllocationModel("file:\\"+
+		Allocation allocation = SQuATHelper.loadAllocationModel("file:/"+
 				architecturalVersion.getPath() + File.separator + architecturalVersion.getAllocationFilename());
-		UsageModel usageModel = SQuATHelper.loadUsageModel("file:\\"+
+		UsageModel usageModel = SQuATHelper.loadUsageModel("file:/"+
 				architecturalVersion.getPath() + File.separator + architecturalVersion.getUsageFilename());
 		PCMArchitectureInstance instance = new PCMArchitectureInstance(architecturalVersion.getFileName(), repository,
 				system, allocation, resourceEnvironment, usageModel);
