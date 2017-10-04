@@ -54,7 +54,7 @@ public class SQuATMain {
 		EPackage.Registry.INSTANCE.put(UsagemodelPackage.eNS_URI, UsagemodelPackage.eINSTANCE);
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void mainFn(String[] args) throws IOException {
 		register();
 		ArrayList<String> workloadIDs = new ArrayList<String>();
 		workloadIDs.add(testConstants.WORKLOAD_ID);
@@ -117,6 +117,7 @@ public class SQuATMain {
 			System.out.println("Single File Mode");
 			basicPaths.add(testConstants.BASIC_FILE_PATH);
 		}
+
 		System.out.println("OPTIMIZE PCM INSTANCES:");
 		System.out.println(basicPaths);
 		System.out.println("no of instances: " + basicPaths.size());
@@ -209,6 +210,7 @@ public class SQuATMain {
 			Configuration configuration) throws IOException { // run bot
 																// optimization
 		long start = System.currentTimeMillis();
+
 		List<PCMScenarioResult> results = bot.searchForAlternatives(architecture);
 		long end = System.currentTimeMillis();
 
@@ -263,6 +265,5 @@ public class SQuATMain {
 			w.newLine();
 		}
 		w.close();
-
 	}
 }

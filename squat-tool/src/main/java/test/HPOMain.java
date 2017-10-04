@@ -20,7 +20,7 @@ public class HPOMain {
 	
 	private static Configuration config;
 	
-	public static void main(String[] args) throws InterruptedException, ExecutionException {
+	public static void mainFn(String[] args) throws InterruptedException, ExecutionException {
 		configurate();
 		start();
 	}
