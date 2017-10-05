@@ -13,6 +13,7 @@ import edu.squat.transformations.modifiability.splitrespn.SplitRespNRunner;
 import edu.squat.transformations.modifiability.wrapper.WrapperRunner;
 import io.github.squat_team.HenshinResourceSetManager;
 import io.github.squat_team.model.PCMArchitectureInstance;
+import io.github.squat_team.util.PCMHelper;
 import io.github.squat_team.util.PCMRepositoryModifier;
 
 public class ModifiabilityTransformationsFactory {
@@ -52,18 +53,18 @@ public class ModifiabilityTransformationsFactory {
 		// remove alternative components
 		for (Iterator<ArchitecturalVersion> iterator = ret.iterator(); iterator.hasNext();) {
 			ArchitecturalVersion architecturalVersion = (ArchitecturalVersion) iterator.next();
-			PCMArchitectureInstance loadedArchitecture = TestHelper.createArchitecture(architecturalVersion);
+			PCMArchitectureInstance loadedArchitecture = PCMHelper.createArchitecture(architecturalVersion);
 			
 			repoModifier.separateRepository(loadedArchitecture);
 			architecturalVersion.setFullPathToAlternativeRepository(loadedArchitecture.getRepositoryWithAlternatives().eResource().getURI().toFileString());
 		}
-		PCMArchitectureInstance loadedInitialArchitecture = TestHelper.createArchitecture(currentInitialArchitecture);
-		repoModifier.separateRepository(TestHelper.createArchitecture(currentInitialArchitecture));
+		PCMArchitectureInstance loadedInitialArchitecture = PCMHelper.createArchitecture(currentInitialArchitecture);
+		repoModifier.separateRepository(PCMHelper.createArchitecture(currentInitialArchitecture));
 		currentInitialArchitecture.setFullPathToAlternativeRepository(loadedInitialArchitecture.getRepositoryWithAlternatives().eResource().getURI().toFileString());
 	}
 
 	private void mergeRepository() {
-		repoModifier=new PCMRepositoryModifier(TestHelper.createArchitecture(currentInitialArchitecture));
+		repoModifier=new PCMRepositoryModifier(PCMHelper.createArchitecture(currentInitialArchitecture));
 		repoModifier.mergeRepositories();
 	}
 

@@ -22,6 +22,7 @@ import io.github.squat_team.modifiability.ModifiabilityElement;
 import io.github.squat_team.modifiability.ModifiabilityInstruction;
 import io.github.squat_team.modifiability.ModifiabilityOperation;
 import io.github.squat_team.modifiability.ModifiabilityPCMScenario;
+import io.github.squat_team.util.PCMHelper;
 import io.github.squat_team.util.SQuATHelper;
 
 public class ModifiabilityBotTest {
@@ -47,7 +48,7 @@ public class ModifiabilityBotTest {
 		List<Float> alternativeValues = runAnalysis(alternatives, scenario);
 		System.out.println("=========================");
 		System.out.println("The returned values are:");
-		for(Float value : alternativeValues){
+		for (Float value : alternativeValues) {
 			System.out.println(value);
 		}
 		System.out.println("Finish STPLUS Test");
@@ -110,7 +111,7 @@ public class ModifiabilityBotTest {
 	 *            the scenario of the bot.
 	 * @param initialArchitecture
 	 *            the initial architecture.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private float runInitialAnalysis(PCMScenario scenario, ArchitecturalVersion initialArchitecture) throws Exception {
 		return calculateModifiabilityComplexity(scenario, KAMPPCMBot.TYPE_COMPLEXITY, initialArchitecture);
@@ -119,13 +120,14 @@ public class ModifiabilityBotTest {
 	/**
 	 * Searches for alternatives for the given architecture.
 	 * 
-	 * @param initialArchitecture the initial architecture.
+	 * @param initialArchitecture
+	 *            the initial architecture.
 	 * @return the alternatives
 	 */
 	private List<ArchitecturalVersion> searchForAlternatives(ArchitecturalVersion initialArchitecture) {
 		return (new ModifiabilityTransformationsFactory()).runModifiabilityTransformationsInAModel(initialArchitecture);
 	}
-	
+
 	/**
 	 * Analysis the given architectures based on the given scenario.
 	 * 
@@ -134,9 +136,9 @@ public class ModifiabilityBotTest {
 	 * @return
 	 * @throws Exception
 	 */
-	private List<Float> runAnalysis(List<ArchitecturalVersion> alternatives, PCMScenario scenario) throws Exception{
+	private List<Float> runAnalysis(List<ArchitecturalVersion> alternatives, PCMScenario scenario) throws Exception {
 		List<Float> results = new ArrayList<Float>();
-		for(ArchitecturalVersion architecture : alternatives){
+		for (ArchitecturalVersion architecture : alternatives) {
 			results.add(calculateModifiabilityComplexity(scenario, KAMPPCMBot.TYPE_COMPLEXITY, architecture));
 		}
 		return results;
@@ -164,7 +166,7 @@ public class ModifiabilityBotTest {
 			java.lang.System.out.println("The evaluation type is: " + evaluationType);
 		//
 
-		PCMArchitectureInstance model = this.loadSpecificModel(architecturalVersion);
+		PCMArchitectureInstance model = PCMHelper.loadSpecificModel(architecturalVersion);
 		PCMScenarioResult scenarioResult = bot.analyze(model);
 		String satisfaction_alt1 = scenarioResult.isSatisfied() >= 0 ? "SATISFIED" : "NOT SATISFIED";
 		if (debug)
@@ -175,30 +177,6 @@ public class ModifiabilityBotTest {
 		return ((Float) response_alt1).floatValue();
 	}
 
-	/**
-	 * Loads a specific model as {@link PCMArchitectureInstance}.
-	 * 
-	 * TODO: move to other file
-	 * 
-	 * @param architecturalVersion
-	 *            the architecture to load.
-	 * @return the loaded model.
-	 */
-	private PCMArchitectureInstance loadSpecificModel(ArchitecturalVersion architecturalVersion) {
-		Repository repository = SQuATHelper.loadRepositoryModel("file:/"+
-				architecturalVersion.getPath() + File.separator + architecturalVersion.getRepositoryFilename());
-		ResourceEnvironment resourceEnvironment = SQuATHelper
-				.loadResourceEnvironmentModel("file:/"+architecturalVersion.getPath() + File.separator
-						+ architecturalVersion.getResourceEnvironmentFilename());
-		org.palladiosimulator.pcm.system.System system = SQuATHelper.loadSystemModel("file:/"+
-				architecturalVersion.getPath() + File.separator + architecturalVersion.getSystemFilename());
-		Allocation allocation = SQuATHelper.loadAllocationModel("file:/"+
-				architecturalVersion.getPath() + File.separator + architecturalVersion.getAllocationFilename());
-		UsageModel usageModel = SQuATHelper.loadUsageModel("file:/"+
-				architecturalVersion.getPath() + File.separator + architecturalVersion.getUsageFilename());
-		PCMArchitectureInstance instance = new PCMArchitectureInstance(architecturalVersion.getFileName(), repository,
-				system, allocation, resourceEnvironment, usageModel);
-		return instance;
-	}
+
 
 }
