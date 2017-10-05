@@ -1,7 +1,6 @@
 package edu.squat.transformations;
 
 import java.io.File;
-import java.io.IOException;
 
 //import io.github.squat_team.model.PCMArchitectureInstance;
 
@@ -21,8 +20,6 @@ public class ArchitecturalVersion {
 		this.fileName = fileName;
 		this.path = path;
 		this.absolutePath = new File(path).getAbsolutePath();
-		// TODO: for windows...
-		// this.absolutePath = new File(path).getPath();
 		this.lastModifiedBy = lastModifiedBy;
 		repositoryFilename = fileName + ".repository";
 		systemFilename = fileName + ".system";

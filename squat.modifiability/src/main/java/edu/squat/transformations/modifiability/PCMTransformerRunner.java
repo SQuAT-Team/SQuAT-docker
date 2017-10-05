@@ -30,8 +30,8 @@ import org.palladiosimulator.pcm.usagemodel.UsagemodelPackage;
 
 import de.uka.ipd.sdq.identifier.IdentifierPackage;
 import de.uka.ipd.sdq.stoex.StoexPackage;
-import edu.squat.pcm.PCMHelper;
 import edu.squat.transformations.ArchitecturalVersion;
+import io.github.squat_team.util.PCMHelper;
 
 public abstract class PCMTransformerRunner {
 	protected String dirPath;
