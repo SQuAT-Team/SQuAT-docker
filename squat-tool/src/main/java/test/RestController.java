@@ -53,6 +53,11 @@ public class RestController {
 	 */
 	public RestController() {
 		this.executions = Collections.synchronizedMap(new HashMap<>());
+		try {
+			SQuATMain.mainFn(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -104,7 +109,8 @@ public class RestController {
 
 					// Architecture instance
 					JSONObject jsonArchInstance = jsonBody.getJSONObject("architecture-instance");
-					PCMArchitectureInstance architectureInstance = UnJSONification.getArchitectureInstance(jsonArchInstance);
+					UnJSONification unJSONification = new UnJSONification(executionUUID);
+					PCMArchitectureInstance architectureInstance = unJSONification.getArchitectureInstance(jsonArchInstance);
 
 					// Scenario - TODO
 					JSONObject jsonScenario = null;
@@ -232,6 +238,13 @@ public class RestController {
 	 */
 	@RequestMapping(path = "/test", method = RequestMethod.POST)
 	public String tyest(@RequestBody String body) {
+		try {
+			SQuATMain.mainFn(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "executing....";
+		/*
 		return this.botFn(body, (ctx, stringer) -> {
 			try {
 				//SQuATMain.mainFn(null);
@@ -248,6 +261,7 @@ public class RestController {
 			}
 			return "";
 		});
+		*/
 	}
 
 	/**
@@ -261,10 +275,17 @@ public class RestController {
 			PerOpteryxPCMBot bot = ctx.getBot();
 			PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
 			List<PCMScenarioResult> results = bot.searchForAlternatives(architectureInstance);
+			/*
+			try {
+				SQuATMain.optimize(bot, architectureInstance, "./pcm", createDefaultConfiguration());
+			} catch(IOException e) {
+				System.out.println(e.getMessage());
+			}
+			*/
 			String resultString;
 			try {
 				JSONification jsoNification = new JSONification(stringer);
-				jsoNification.add(results);
+				//jsoNification.add(results);
 				resultString = jsoNification.toJSON();
 			} catch (JSONException e) {
 				resultString = e.getMessage();
