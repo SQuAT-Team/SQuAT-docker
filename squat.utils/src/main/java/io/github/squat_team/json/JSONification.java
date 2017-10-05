@@ -1,21 +1,18 @@
 package io.github.squat_team.json;
 
+import java.io.File;
+import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.json.JSONException;
 import org.json.JSONStringer;
-import org.palladiosimulator.pcm.allocation.Allocation;
-import org.palladiosimulator.pcm.repository.Repository;
-import org.palladiosimulator.pcm.resourceenvironment.ResourceEnvironment;
-import org.palladiosimulator.pcm.usagemodel.UsageModel;
 
 import io.github.squat_team.model.PCMArchitectureInstance;
 import io.github.squat_team.model.PCMResult;
 import io.github.squat_team.model.PCMScenario;
 import io.github.squat_team.model.PCMScenarioResult;
-import io.github.squat_team.util.SQuATHelper;
 
 /**
  * 
@@ -106,6 +103,7 @@ public class JSONification {
 	public synchronized void add(List<PCMScenarioResult> results) throws JSONException {
 		this.throwIfInvalidState();
 		Objects.requireNonNull(results);
+		this.jsonStringer.key("values");
 		this.jsonStringer.array();
 		results.forEach(this::add);
 		this.jsonStringer.endArray();
@@ -161,7 +159,15 @@ public class JSONification {
 	public synchronized void add(Resource resource, String key) throws JSONException {
 		this.throwIfInvalidState();
 		this.jsonStringer.key(key);
-		this.jsonStringer.value(JSONUtils.fromEResource(resource));
+		this.jsonStringer.object();
+		byte[] fileContent = JSONUtils.fromEResource(resource).getBytes();
+		String encoded = Base64.getEncoder().encodeToString(fileContent);
+		this.jsonStringer.key("filename");
+		String filename = new File(resource.getURI().toString()).getName();
+		this.jsonStringer.value(filename);
+		this.jsonStringer.key("filecontent");
+		this.jsonStringer.value(encoded);
+		this.jsonStringer.endObject();
 	}
 
 	/**

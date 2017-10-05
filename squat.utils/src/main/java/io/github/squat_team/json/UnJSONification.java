@@ -1,6 +1,10 @@
 package io.github.squat_team.json;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Base64;
+import java.util.function.Function;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +20,45 @@ import io.github.squat_team.model.ResponseMeasureType;
 
 public class UnJSONification {
 
+	private final String executionUUID;
+
+	/**
+	 *
+	 * @param executionUUID
+	 */
+	public UnJSONification(String executionUUID) {
+		this.executionUUID = executionUUID;
+	}
+
+	/**
+	 * Write the given content to a file on the file system and parse it using the
+	 * given function
+	 * 
+	 * @param content
+	 *            the content to be written
+	 * @param fn
+	 *            the parsing function to call
+	 * @return the created object
+	 * @throws IOException
+	 */
+	public <T> T writeToFileAndLoad(JSONObject content, Function<String, T> fn) throws IOException {
+		//		final String filename = "./pcm-tmp/" + String.valueOf(java.lang.System.currentTimeMillis())
+		//				+ String.valueOf((long) (Math.random() * Long.MAX_VALUE)) + "." + extension;
+		new File(this.executionUUID).mkdir();
+		final String filename = this.executionUUID + "/" + content.getString("filename");
+		T ret = null;
+		String fileContent = new String(Base64.getDecoder().decode(content.getString("filecontent")));
+		try (FileWriter fw = new FileWriter(filename)) {
+			fw.write(fileContent);
+		}
+		ret = fn.apply(filename);
+		// File file = new File(filename);
+		// if (file.exists()) {
+		// file.delete();
+		// }
+		return ret;
+	}
+
 	/**
 	 * Create the object based on the {@link JSONObject} and the provided key. The
 	 * {@link JSONObject} needs to provide the serialized file to the given type T
@@ -29,8 +72,8 @@ public class UnJSONification {
 	 * @throws JSONException
 	 * @throws IOException
 	 */
-	private static <T> T load(JSONObject jsonObject, String key) throws JSONException, IOException {
-		return JSONUtils.writeToFileAndLoad(jsonObject.getString(key), JSONUtils::loadResource);
+	private <T> T load(JSONObject jsonObject, String key) throws JSONException, IOException {
+		return this.writeToFileAndLoad(jsonObject.getJSONObject(key), JSONUtils::loadResource);
 	}
 
 	/**
@@ -59,10 +102,10 @@ public class UnJSONification {
 	 * @return the restored object
 	 * @throws JSONException
 	 */
-	public static PCMScenarioResult getPCMScenarioResult(JSONObject jsonObject) throws JSONException {
+	public PCMScenarioResult getPCMScenarioResult(JSONObject jsonObject) throws JSONException {
 		PCMScenarioResult result = new PCMScenarioResult(null);
 		JSONObject achitectureJson = jsonObject.getJSONObject("architecture-instance");
-		PCMArchitectureInstance achitecture = UnJSONification.getArchitectureInstance(achitectureJson);
+		PCMArchitectureInstance achitecture = this.getArchitectureInstance(achitectureJson);
 		result.setResultingArchitecture(achitecture);
 		JSONObject pcmResultJson = jsonObject.getJSONObject("pcm-result");
 		PCMResult pcmResult = UnJSONification.getPCMResult(pcmResultJson);
@@ -79,18 +122,18 @@ public class UnJSONification {
 	 * @return the restored object
 	 * @throws JSONException
 	 */
-	public static PCMArchitectureInstance getArchitectureInstance(JSONObject jsonObject) throws JSONException {
+	public PCMArchitectureInstance getArchitectureInstance(JSONObject jsonObject) throws JSONException {
 		String name = jsonObject.getString("name");
 		try {
-			Repository repository = load(jsonObject, "repository");
+			Repository repository = this.load(jsonObject, "repository");
 			Repository repositoryAlternatives = null;
 			if (jsonObject.has("repository-with-alternatives")) {
-				repositoryAlternatives = load(jsonObject, "repository-with-alternatives");
+				repositoryAlternatives = this.load(jsonObject, "repository-with-alternatives");
 			}
-			org.palladiosimulator.pcm.system.System system = load(jsonObject, "system");
-			Allocation allocation = load(jsonObject, "allocation");
-			ResourceEnvironment resource = load(jsonObject, "resource-environment");
-			UsageModel usage = load(jsonObject, "usage-model");
+			org.palladiosimulator.pcm.system.System system = this.load(jsonObject, "system");
+			Allocation allocation = this.load(jsonObject, "allocation");
+			ResourceEnvironment resource = this.load(jsonObject, "resource-environment");
+			UsageModel usage = this.load(jsonObject, "usage-model");
 			PCMArchitectureInstance instance = new PCMArchitectureInstance(name, repository, system, allocation,
 					resource, usage);
 			if (repositoryAlternatives != null) {
