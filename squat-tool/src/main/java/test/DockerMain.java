@@ -55,7 +55,8 @@ public class DockerMain {
 //		jsoNification.add(architectureInstance);
 //		String res = jsoNification.toJSON();
 //		System.out.println(res);
-		SQuATMain.mainFn(args);
-		SpringApplication.run(DockerMain.class, args);
+		//SQuATMain.mainFn(args);
+		//SpringApplication.run(DockerMain.class, args);
+		new NoSpringServer(8080, args);
 	}
 }
