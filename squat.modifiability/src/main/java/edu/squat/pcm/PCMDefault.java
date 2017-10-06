@@ -68,8 +68,7 @@ public class PCMDefault {
 		// URI physicalURI =
 		// URI.createFileURI(uriPath).appendSegment("squat.modifiability").appendSegment("pcm").appendSegment("defaultModels").appendSegment("");
 		// for docker:
-		URI physicalURI = URI.createFileURI("").appendSegment("home").appendSegment("pcm")
-				.appendSegment("defaultModels").appendSegment("");
+		URI physicalURI = URI.createFileURI("").appendSegment("pcm").appendSegment("defaultModels").appendSegment("");
 		URI pcmModels = URI.createURI("pathmap://PCM_MODELS/");
 		URIConverter.URI_MAP.put(pcmModels, physicalURI);
 		// URIConverter.URI_MAP.put(URI.createURI("pathmap://PCM_MODELS/"),URI.createURI("platform:/plugin/org.palladiosimulator.pcm.resources/defaultModels/"));
