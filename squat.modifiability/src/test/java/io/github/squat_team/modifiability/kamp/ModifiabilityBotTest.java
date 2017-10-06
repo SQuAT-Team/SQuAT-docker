@@ -21,10 +21,9 @@ import io.github.squat_team.util.PCMHelper;
  * includes analysis and search for alternatives.
  */
 public class ModifiabilityBotTest {
-
-	private final String MODEL_NAME = "default"; // cocome-cloud
-	private final String MODEL_PATH = "/home/sebastian/git/SQuAT-docker/squat.modifiability/model"; // models/cocomeWithoutPickUpStoreAndServiceAdapter
-	private final String ALTERNATIVE_REPOSITORY_PATH = "/home/sebastian/git/SQuAT-docker/squat.modifiability/model/alternativeRepository.repository"; // /Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/cocomeWithoutPickUpStoreAndServiceAdapter/alternativescocome-cloud.repository
+	public static final String MODEL_NAME = "default"; // cocome-cloud
+	public static final String MODEL_PATH = "/home/model"; // models/cocomeWithoutPickUpStoreAndServiceAdapter
+	public static final String ALTERNATIVE_REPOSITORY_PATH = "/home/model/alternativeRepository.repository"; // /Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/cocomeWithoutPickUpStoreAndServiceAdapter/alternativescocome-cloud.repository
 
 	@Test
 	public void runStplusTest() throws Exception {

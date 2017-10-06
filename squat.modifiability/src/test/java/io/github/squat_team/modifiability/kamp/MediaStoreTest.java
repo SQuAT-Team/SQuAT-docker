@@ -30,7 +30,7 @@ public class MediaStoreTest {
 	private static String baseUsageFile = dirPath + "ms_base_usage_all.usagemodel";
 	
 	@SuppressWarnings("rawtypes")
-	@Test
+	// Deactivated for Docker: @Test
 	public void testAnalysis() throws Exception {
 		PCMScenario scenario = this.createModifiabilityScenario();
 		KAMPPCMBotDeprecated bot = new KAMPPCMBotDeprecated(scenario);
