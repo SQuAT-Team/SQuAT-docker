@@ -1,8 +1,10 @@
 package io.github.squat_team.json;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.function.Function;
 
 import org.eclipse.emf.common.util.URI;
@@ -26,32 +28,6 @@ public class JSONUtils {
 			e.printStackTrace();
 		}
 		return new String(bos.toByteArray());
-	}
-
-	/**
-	 * Write the given content to a file on the file system and parse it using the
-	 * given function
-	 * 
-	 * @param content
-	 *            the content to be written
-	 * @param fn
-	 *            the parsing function to call
-	 * @return the created object
-	 * @throws IOException
-	 */
-	public static <T> T writeToFileAndLoad(String content, Function<String, T> fn) throws IOException {
-		final String filename = "./pcm/" + String.valueOf(java.lang.System.currentTimeMillis())
-				+ String.valueOf((long) (Math.random() * Long.MAX_VALUE));
-		T ret = null;
-		try (FileWriter fw = new FileWriter(filename)) {
-			fw.write(content);
-		}
-		ret = fn.apply(filename);
-		// File file = new File(filename);
-		// if (file.exists()) {
-		// file.delete();
-		// }
-		return ret;
 	}
 
 	/**
