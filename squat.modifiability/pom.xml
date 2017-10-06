@@ -391,7 +391,7 @@
 							<artifactId>de.uka.ipd.sdq.units</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/de.uka.ipd.sdq.errorhandling-0.0.1.jar</file>
+							<file>/home/lib2/de.uka.ipd.sdq.units-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
