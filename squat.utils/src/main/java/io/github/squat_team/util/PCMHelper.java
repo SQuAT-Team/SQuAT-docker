@@ -51,7 +51,7 @@ public class PCMHelper {
 		Allocation allocation = (Allocation) PCMHelper.load(allocationFile);
 		return allocation;
 	}
-	
+
 	public static UsageModel loadUsageModel(String usageFile) {
 		UsageModel usage = (UsageModel) PCMHelper.load(usageFile);
 		return usage;
@@ -143,5 +143,24 @@ public class PCMHelper {
 		}
 
 		return architecture;
+	}
+
+	/**
+	 * Converts the {@link PCMArchitectureInstance} to a
+	 * {@link ArchitecturalVersion}. This method is assumed to only work on Linux.
+	 * 
+	 * @param architecture
+	 *            the architecture to convert.
+	 * @return the converted architecture.
+	 */
+	public static ArchitecturalVersion createArchitecture(PCMArchitectureInstance architecture) {
+		File repositoryFile = new File(architecture.getRepository().eResource().getURI().toFileString());
+		String fileName = repositoryFile.getName().replace(".repository", "");
+		ArchitecturalVersion result = new ArchitecturalVersion(fileName, repositoryFile.getParent(), "");
+
+		File alternativeRepositoryFile = new File(
+				architecture.getRepositoryWithAlternatives().eResource().getURI().toFileString());
+		result.setFullPathToAlternativeRepository(alternativeRepositoryFile.getAbsolutePath());
+		return result;
 	}
 }

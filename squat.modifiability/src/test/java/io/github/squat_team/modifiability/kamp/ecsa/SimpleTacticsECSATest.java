@@ -24,7 +24,7 @@ import io.github.squat_team.modifiability.ModifiabilityElement;
 import io.github.squat_team.modifiability.ModifiabilityInstruction;
 import io.github.squat_team.modifiability.ModifiabilityOperation;
 import io.github.squat_team.modifiability.ModifiabilityPCMScenario;
-import io.github.squat_team.modifiability.kamp.KAMPPCMBot;
+import io.github.squat_team.modifiability.kamp.KAMPPCMBotDeprecated;
 import io.github.squat_team.util.SQuATHelper;
 
 @SuppressWarnings("rawtypes")
@@ -1359,14 +1359,14 @@ public class SimpleTacticsECSATest {
 		this.resultsMap.clear();
 		String evaluationType; ResponseMeasureType type; Comparable response;
 		//Affected components
-		evaluationType = KAMPPCMBot.TYPE_ELEMENTS;
+		evaluationType = KAMPPCMBotDeprecated.TYPE_ELEMENTS;
 		type = ResponseMeasureType.NUMERIC;
 		response = new Integer(5);
 		this.testModifiabilityScenario(this.createModifiabilityScenarioS1(type, response), "M1", evaluationType);
 		response = new Integer(7);
 		this.testModifiabilityScenario(this.createModifiabilityScenarioS2(type, response), "M2", evaluationType);
 		//Complexity 
-		evaluationType = KAMPPCMBot.TYPE_COMPLEXITY;
+		evaluationType = KAMPPCMBotDeprecated.TYPE_COMPLEXITY;
 		type = ResponseMeasureType.DECIMAL;
 		response = new Float(120);
 		this.testModifiabilityScenario(this.createModifiabilityScenarioS1(type, response), "M1", evaluationType);
@@ -1381,7 +1381,7 @@ public class SimpleTacticsECSATest {
 		boolean debug = false;
 		Comparable expectedResponse = scenario.getExpectedResult().getResponse();
 		if(debug) java.lang.System.out.println("The goal of scenario " + scenarioName + ": " + expectedResponse.toString());
-		KAMPPCMBot bot = new KAMPPCMBot(scenario);
+		KAMPPCMBotDeprecated bot = new KAMPPCMBotDeprecated(scenario);
 		bot.setEvaluationType(evaluationType);
 		if(debug) java.lang.System.out.println("The evaluation type is: " + evaluationType);
 		//
@@ -1557,8 +1557,8 @@ public class SimpleTacticsECSATest {
 				String variableName = r.scenario + "Bot";
 				String methodName = ".insertInOrder";
 				String classType = r.qa + "Proposal";
-				String components = r.measureValues.get(KAMPPCMBot.TYPE_ELEMENTS).toString();
-				String complexity = r.measureValues.get(KAMPPCMBot.TYPE_COMPLEXITY).toString() + "f";
+				String components = r.measureValues.get(KAMPPCMBotDeprecated.TYPE_ELEMENTS).toString();
+				String complexity = r.measureValues.get(KAMPPCMBotDeprecated.TYPE_COMPLEXITY).toString() + "f";
 				String parameters = "(" + components + ", " + complexity + ", \"" + r.model + "\")";
 				String codeLine = variableName + methodName + "(" + "new " + classType + parameters + ")" + ";";
 				java.lang.System.out.println(codeLine);

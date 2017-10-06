@@ -33,7 +33,7 @@ public class MediaStoreTest {
 	@Test
 	public void testAnalysis() throws Exception {
 		PCMScenario scenario = this.createModifiabilityScenario();
-		KAMPPCMBot bot = new KAMPPCMBot(scenario);
+		KAMPPCMBotDeprecated bot = new KAMPPCMBotDeprecated(scenario);
 		PCMArchitectureInstance mediaStore = loadMediaStore("MediaStore");
 		
 		PCMScenarioResult scenarioResult = bot.analyze(mediaStore);
@@ -47,7 +47,7 @@ public class MediaStoreTest {
 	//@Test
 	public void testAlternatives() {
 		PCMScenario scenario = this.createModifiabilityScenario();
-		KAMPPCMBot bot = new KAMPPCMBot(scenario);
+		KAMPPCMBotDeprecated bot = new KAMPPCMBotDeprecated(scenario);
 		PCMArchitectureInstance mediaStore = loadMediaStore("MediaStore");
 	}
 	

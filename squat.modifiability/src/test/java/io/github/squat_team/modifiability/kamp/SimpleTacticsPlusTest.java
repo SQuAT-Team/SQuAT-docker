@@ -67,7 +67,7 @@ public class SimpleTacticsPlusTest {
 		PCMScenario scenario = this.createModifiabilityScenario();
 		Comparable response_expected = scenario.getExpectedResult().getResponse();
 		java.lang.System.out.println("The goal of the scenario is: " + ((Float)response_expected).floatValue());
-		KAMPPCMBot bot = new KAMPPCMBot(scenario);
+		KAMPPCMBotDeprecated bot = new KAMPPCMBotDeprecated(scenario);
 		//
 		loadPCMModel();
 		Vector<PCMArchitectureInstance> pcmInstances=new Vector<PCMArchitectureInstance>();
@@ -116,7 +116,7 @@ public class SimpleTacticsPlusTest {
 	//@Test
 	public void testAlternatives() {
 		PCMScenario scenario = this.createModifiabilityScenario();
-		KAMPPCMBot bot = new KAMPPCMBot(scenario);
+		KAMPPCMBotDeprecated bot = new KAMPPCMBotDeprecated(scenario);
 	//	PCMArchitectureInstance stplus = loadSimpleTacticsPlus("SimpleTactics+");
 	}
 	
