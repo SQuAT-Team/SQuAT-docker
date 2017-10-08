@@ -1,6 +1,8 @@
 package io.github.squat_team.json;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
@@ -110,6 +112,31 @@ public class JSONification {
 	}
 
 	/**
+	 * Add the given file to the JSON
+	 *
+	 * @param key the key to use for this file
+	 * @param file the file whose content to add
+	 */
+	public synchronized void add(String key, File file) throws JSONException {
+		this.throwIfInvalidState();
+		Objects.requireNonNull(key);
+		Objects.requireNonNull(file);
+		try {
+			byte[] fileContent = Files.readAllBytes(file.toPath());
+			this.jsonStringer.key(key);
+			this.jsonStringer.object();
+			this.jsonStringer.key("filename");
+			this.jsonStringer.value(file.getName());
+			String encoded = Base64.getEncoder().encodeToString(fileContent);
+			this.jsonStringer.key("filecontent");
+			this.jsonStringer.value(encoded);
+			this.jsonStringer.endObject();
+		} catch (IOException e) {
+			e.printStackTrace(System.err);
+		}
+	}
+
+	/**
 	 * Add the {@link PCMResult} to the JSON
 	 * 
 	 * @param pcmResult
@@ -120,7 +147,7 @@ public class JSONification {
 		this.throwIfInvalidState();
 		Objects.requireNonNull(pcmResult);
 		this.jsonStringer.key("pcm-result").object();
-		this.jsonStringer.key("response").value((double) pcmResult.getResponse());
+		this.jsonStringer.key("response").value(String.valueOf(pcmResult.getResponse()));
 		this.jsonStringer.key("measure-type").value(pcmResult.getResponseMeasureType());
 		this.jsonStringer.endObject();
 	}
