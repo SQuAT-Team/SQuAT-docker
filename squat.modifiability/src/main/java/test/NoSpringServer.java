@@ -24,11 +24,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.emf.henshin.model.HenshinPackage;
-import org.eclipse.emf.henshin.trace.TracePackage;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -78,29 +73,6 @@ public class NoSpringServer {
     /** Thread pool for executions */
     private final ExecutorService threadPool = Executors.newFixedThreadPool(32);
 
-	public static void recreate() {
-		Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().clear();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().clear();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
-		//PCM Packages
-		EPackage.Registry.INSTANCE.clear();
-		EPackage.Registry.INSTANCE.put(IdentifierPackage.eNS_URI, IdentifierPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(StoexPackage.eNS_URI, StoexPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(CorePackage.eNS_URI, CorePackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(EntityPackage.eNS_URI, EntityPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(RepositoryPackage.eNS_URI, RepositoryPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(SystemPackage.eNS_URI, SystemPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(ResourceenvironmentPackage.eNS_URI, ResourceenvironmentPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(AllocationPackage.eNS_URI, AllocationPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(UsagemodelPackage.eNS_URI, UsagemodelPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(SeffPackage.eNS_URI, SeffPackage.eINSTANCE);
-		//Henshin Packages
-		EPackage.Registry.INSTANCE.put(HenshinPackage.eNS_URI, HenshinPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(TracePackage.eNS_URI, TracePackage.eINSTANCE);
-		//EPackage.Registry.INSTANCE.put(StateSpacePackage.eNS_URI, StateSpacePackage.eINSTANCE);
-		//EPackage.Registry.INSTANCE.put(WrapPackage.eNS_URI, WrapPackage.eINSTANCE);
-	}
-
     /**
 	 * Bot executor function, this functions generates the UUID and prepares asynchronous execution
 	 *
@@ -108,7 +80,6 @@ public class NoSpringServer {
 	 * @param fn the function to execute the corresponding function to the rest endpoint
 	 */
 	private String botFn(String requestBody, BiFunction<ExecutionContext, JSONStringer, String> fn) {
-        //recreate();
 		String executionUUID = UUID.randomUUID().toString();
 		String response = executionUUID;
 		try {
