@@ -22,6 +22,7 @@ public class ModifiabilityBotTest {
 
 	public static void main(String[] args) throws Exception {
 		runStplusTest();
+		runStplusTest();
 	}
 
 	private static void runStplusTest() throws Exception {
@@ -34,7 +35,7 @@ public class ModifiabilityBotTest {
 		KAMPPCMBot bot = new KAMPPCMBot(scenario);
 		bot.setEvaluationType(EvaluationType.COMPLEXITY);
 		System.out.println("Run initial analysis");
-		float initialValue = (Float) bot.analyze(initialArchitecture).getResult().getResponse();
+		float initialValue = (float) bot.analyze(initialArchitecture).getResult().getResponse();
 		System.out.println("Initial value is: " + initialValue);
 		System.out.println("Run search for alternatives");
 		List<PCMScenarioResult> alternatives = bot.searchForAlternatives(initialArchitecture);
@@ -63,8 +64,8 @@ public class ModifiabilityBotTest {
 	 * 
 	 * @return the scenario.
 	 */
-	private static ModifiabilityPCMScenario initializeScenario() {
-		Float responseTimeScenario = 120f;
+	public static ModifiabilityPCMScenario initializeScenario() {
+		double responseTimeScenario = 120;
 		return createModifiabilityScenarioForStplus(ResponseMeasureType.DECIMAL, responseTimeScenario);
 	}
 
@@ -78,7 +79,7 @@ public class ModifiabilityBotTest {
 	 * @return
 	 */
 	private static ModifiabilityPCMScenario createModifiabilityScenarioForStplus(ResponseMeasureType type,
-			Comparable<Float> response) {
+			Comparable<Double> response) {
 		ModifiabilityPCMScenario scenario = new ModifiabilityPCMScenario(OptimizationType.MINIMIZATION);
 		PCMResult expectedResult = new PCMResult(type);
 		expectedResult.setResponse(response);
