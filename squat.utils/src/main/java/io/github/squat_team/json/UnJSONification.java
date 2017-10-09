@@ -20,7 +20,11 @@ import io.github.squat_team.model.ResponseMeasureType;
 
 public class UnJSONification {
 
+	/** The execution UUID */
 	private final String executionUUID;
+
+	/** Function to create a file object from a path */
+	private Function<String, File> fileFromPath = f -> new File(f);
 
 	/**
 	 *
@@ -42,21 +46,22 @@ public class UnJSONification {
 	 * @throws IOException
 	 */
 	public <T> T writeToFileAndLoad(JSONObject content, Function<String, T> fn) throws IOException {
-		//		final String filename = "./pcm-tmp/" + String.valueOf(java.lang.System.currentTimeMillis())
-		//				+ String.valueOf((long) (Math.random() * Long.MAX_VALUE)) + "." + extension;
 		new File(this.executionUUID).mkdir();
 		final String filename = this.executionUUID + "/" + content.getString("filename");
-		T ret = null;
 		String fileContent = new String(Base64.getDecoder().decode(content.getString("filecontent")));
 		try (FileWriter fw = new FileWriter(filename)) {
 			fw.write(fileContent);
 		}
-		ret = fn.apply(filename);
-		// File file = new File(filename);
-		// if (file.exists()) {
-		// file.delete();
-		// }
-		return ret;
+		return fn.apply(filename);
+	}
+
+	/**
+	 *
+	 * @param content
+	 * @return
+	 */
+	public File getFile(JSONObject content) throws IOException {
+		return this.writeToFileAndLoad(content, this.fileFromPath);
 	}
 
 	/**
@@ -85,7 +90,7 @@ public class UnJSONification {
 	 * @throws JSONException
 	 */
 	public static PCMResult getPCMResult(JSONObject jsonObject) throws JSONException {
-		double response = jsonObject.getDouble("response");
+		double response = Double.valueOf(jsonObject.getString("response"));
 		String typeString = jsonObject.getString("measure-type");
 		ResponseMeasureType responseMeasureType = ResponseMeasureType.valueOf(typeString);
 		PCMResult pcmResult = new PCMResult(responseMeasureType);
