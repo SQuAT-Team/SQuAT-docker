@@ -57,7 +57,7 @@ RUN ["mvn", "verify"]
 RUN ["mvn", "package"]
 
 # the jar is not copied anymore but created by maven
-#ADD squat-tool-performance-bot.jar /home/squat-tool-performance-bot.jar
+#ADD squat-tool-performance-bot.jar /home/squat-tool-negotiator.jar
 
-ENTRYPOINT java -jar /home/target/squat-tool-performance-bot.jar
+ENTRYPOINT java -jar /home/target/squat-tool-negotiator.jar
 
