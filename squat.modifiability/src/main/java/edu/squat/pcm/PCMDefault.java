@@ -1,8 +1,5 @@
 package edu.squat.pcm;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -32,12 +29,17 @@ import org.palladiosimulator.pcm.usagemodel.UsagemodelPackage;
 
 import de.uka.ipd.sdq.identifier.IdentifierPackage;
 import de.uka.ipd.sdq.stoex.StoexPackage;
+import io.github.squat_team.modifiability.kamp.KAMPPCMBot;
 
 public class PCMDefault {
 	private static ResourceSet resourceSet = new ResourceSetImpl();
 	private static ResourceRepository repositoryResource = null;
 	private static Repository repositoryPrimitiveTypes = null;
 	private static Repository repositoryFailureTypes = null;
+
+	private static final URI PCM_MODEL_URI = URI.createURI("pathmap://PCM_MODELS/");
+	private static final URI PCM_PHYSICAL_MODEL_URI = URI.createFileURI("").appendSegment("pcm")
+			.appendSegment("defaultModels").appendSegment("");
 
 	static {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
@@ -55,32 +57,31 @@ public class PCMDefault {
 		EPackage.Registry.INSTANCE.put(ResourcetypePackage.eNS_URI, ResourcetypePackage.eINSTANCE);
 	}
 
-	static {
-		Path currentPath = Paths.get("").toAbsolutePath();
-		Path workspacePath = currentPath.getParent();
-		String uriPath = workspacePath.normalize().toString();
-		// URI platformURI =
-		// URI.createPlatformPluginURI("org.palladiosimulator.pcm.resources",
-		// true).appendSegment("defaultModels").appendSegment("");
-		// URI physicalURI =
-		// URI.createFileURI(uriPath).appendSegment("PCM").appendSegment("org.palladiosimulator.pcm.resources").appendSegment("defaultModels").appendSegment("");
+	/**
+	 * Registers the default model directory.
+	 */
+	private static void register() {
+		URIConverter.URI_MAP.put(PCM_MODEL_URI, PCM_PHYSICAL_MODEL_URI);
+	}
 
-		// URI physicalURI =
-		// URI.createFileURI(uriPath).appendSegment("squat.modifiability").appendSegment("pcm").appendSegment("defaultModels").appendSegment("");
-		// for docker:
-		URI physicalURI = URI.createFileURI("").appendSegment("pcm").appendSegment("defaultModels").appendSegment("");
-		URI pcmModels = URI.createURI("pathmap://PCM_MODELS/");
-		URIConverter.URI_MAP.put(pcmModels, physicalURI);
-		// URIConverter.URI_MAP.put(URI.createURI("pathmap://PCM_MODELS/"),URI.createURI("platform:/plugin/org.palladiosimulator.pcm.resources/defaultModels/"));
-		// URIConverter.URI_MAP.put(URI.createURI("pathmap://PCM_TRANSFORMATIONS/EVENTS/"),URI.createURI("platform:/plugin/org.palladiosimulator.pcm.resources/transformations/events/"));
+	/**
+	 * Deregisters the default model directory.<br>
+	 * Without this function multiple calls to
+	 * {@link KAMPPCMBot#searchForAlternatives(io.github.squat_team.model.PCMArchitectureInstance)}
+	 * with models in different directories does not work.
+	 */
+	private static void deregister() {
+		URIConverter.URI_MAP.remove(PCM_MODEL_URI);
 	}
 
 	public static ResourceRepository loadResourceRepository() {
+		register();
 		if (repositoryResource == null) {
 			Resource resource = resourceSet.getResource(URI.createURI("pathmap://PCM_MODELS/Palladio.resourcetype"),
 					true);
 			repositoryResource = (ResourceRepository) resource.getContents().get(0);
 		}
+		deregister();
 		return repositoryResource;
 	}
 
@@ -97,20 +98,24 @@ public class PCMDefault {
 	}
 
 	public static EList<DataType> loadPrimitiveTypes() {
+		register();
 		if (repositoryPrimitiveTypes == null) {
 			Resource resource = resourceSet.getResource(URI.createURI("pathmap://PCM_MODELS/PrimitiveTypes.repository"),
 					true);
 			repositoryPrimitiveTypes = (Repository) resource.getContents().get(0);
 		}
+		deregister();
 		return repositoryPrimitiveTypes.getDataTypes__Repository();
 	}
 
 	public static EList<FailureType> loadFailureTypes() {
+		register();
 		if (repositoryPrimitiveTypes == null) {
 			Resource resource = resourceSet.getResource(URI.createURI("pathmap://PCM_MODELS/FailureTypes.repository"),
 					true);
 			repositoryFailureTypes = (Repository) resource.getContents().get(0);
 		}
+		deregister();
 		return repositoryFailureTypes.getFailureTypes__Repository();
 	}
 
