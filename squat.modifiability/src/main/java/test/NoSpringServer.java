@@ -65,8 +65,8 @@ import io.github.squat_team.modifiability.kamp.EvaluationType;
 import io.github.squat_team.util.SQuATHelper;
 
 public class NoSpringServer {
-	/** The port to use */
-	private final int port;
+    /** The port to use */
+    private final int port;
 
     /** The HttpServer */
     protected final transient HttpServer httpServer;
@@ -76,7 +76,6 @@ public class NoSpringServer {
 
     /** Thread pool for executions */
     private final ExecutorService threadPool = Executors.newFixedThreadPool(32);
-
 
     /**
      * @param o
@@ -148,74 +147,71 @@ public class NoSpringServer {
     }
 
     /**
-	 * Bot executor function, this functions generates the UUID and prepares asynchronous execution
-	 *
-	 * @param requestBody the HTTP POST request body
-	 * @param fn the function to execute the corresponding function to the rest endpoint
-	 */
-	private String botFn(String requestBody, BiFunction<ExecutionContext, JSONStringer, String> fn) {
-		String executionUUID = UUID.randomUUID().toString();
-		String response = executionUUID;
-		try {
-			JSONStringer jsonStringer = new JSONStringer();
-			jsonStringer.object();
-			jsonStringer.key("executionID").value(executionUUID);
-			jsonStringer.endObject();
-			response  = jsonStringer.toString();
-			this.executions.put(executionUUID, ExecutionStatus.WAITING);
+     * Bot executor function, this functions generates the UUID and prepares asynchronous execution
+     *
+     * @param requestBody the HTTP POST request body
+     * @param fn the function to execute the corresponding function to the rest endpoint
+     */
+    private String botFn(String requestBody, BiFunction<ExecutionContext, JSONStringer, String> fn) {
+        String executionUUID = UUID.randomUUID().toString();
+        String response = executionUUID;
+        try {
+            JSONStringer jsonStringer = new JSONStringer();
+            jsonStringer.object();
+            jsonStringer.key("executionID").value(executionUUID);
+            jsonStringer.endObject();
+            response = jsonStringer.toString();
+            this.executions.put(executionUUID, ExecutionStatus.WAITING);
 
-			//
-			// Execute on the Bot thread pool
-			//
-                ExecutionStatus status = this.executions.get(executionUUID);
-                if (status == null)
-                    return "";
-                this.executions.put(executionUUID, ExecutionStatus.EXECUTING);
+            //
+            // Execute on the Bot thread pool
+            //
+            ExecutionStatus status = this.executions.get(executionUUID);
+            if (status == null)
+                return "";
+            this.executions.put(executionUUID, ExecutionStatus.EXECUTING);
 
-                try {
-                    // Retrieve parameters
-                    JSONObject jsonBody = new JSONObject(requestBody);
+            // Retrieve parameters
+            JSONObject jsonBody = new JSONObject(requestBody);
 
-                    // Write from JSON
-                    UnJSONification unJSONification = new UnJSONification(executionUUID);
-                    unJSONification.getFile(jsonBody.getJSONObject("cost"));
-                    unJSONification.getFile(jsonBody.getJSONObject("insinter-modular"));
-                    unJSONification.getFile(jsonBody.getJSONObject("splitrespn-modular"));
-                    unJSONification.getFile(jsonBody.getJSONObject("wrapper-modular"));
+            // Write from JSON
+            UnJSONification unJSONification = new UnJSONification(executionUUID);
+            unJSONification.getFile(jsonBody.getJSONObject("cost"));
+            unJSONification.getFile(jsonBody.getJSONObject("insinter-modular"));
+            unJSONification.getFile(jsonBody.getJSONObject("splitrespn-modular"));
+            unJSONification.getFile(jsonBody.getJSONObject("wrapper-modular"));
 
-                    // Architecture instance
-                    JSONObject jsonArchInstance = jsonBody.getJSONObject("architecture-instance");
-                    PCMArchitectureInstance architectureInstance = unJSONification.getArchitectureInstance(jsonArchInstance);
+            // Architecture instance
+            JSONObject jsonArchInstance = jsonBody.getJSONObject("architecture-instance");
+            PCMArchitectureInstance architectureInstance = unJSONification.getArchitectureInstance(jsonArchInstance);
 
-                    // Scenario
-                    ModifiabilityPCMScenario scenario = NoSpringServer.getScenarioFromObject(jsonBody.getJSONObject("scenario"));
+            // Scenario
+            ModifiabilityPCMScenario scenario = NoSpringServer
+                    .getScenarioFromObject(jsonBody.getJSONObject("scenario"));
 
-                    // Create the bot and context
-                    KAMPPCMBot bot = new KAMPPCMBot(scenario);
-                    bot.setEvaluationType(EvaluationType.COMPLEXITY);
-					ExecutionContext context = new ExecutionContext(bot, architectureInstance);
+            // Create the bot and context
+            KAMPPCMBot bot = new KAMPPCMBot(scenario);
+            bot.setEvaluationType(EvaluationType.COMPLEXITY);
+            ExecutionContext context = new ExecutionContext(bot, architectureInstance);
 
-					// Prepare the result stringer
-					JSONStringer resultStringer = new JSONStringer();
-					resultStringer.object().key("executionUUID").value(executionUUID);
+            // Prepare the result stringer
+            JSONStringer resultStringer = new JSONStringer();
+            resultStringer.object().key("executionUUID").value(executionUUID);
 
-					// Execute and generate result
-                    String result = fn.apply(context, resultStringer);
-                    return result;
-				} catch (JSONException e) {
-					e.printStackTrace();
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} finally {
-					this.executions.remove(executionUUID);
-				}
-			
-		} catch (JSONException e) {
-		}
+            // Execute and generate result
+            String result = fn.apply(context, resultStringer);
+            return result;
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            this.executions.remove(executionUUID);
+        }
         return response;
-	}
+    }
 
     /**
      * 
@@ -243,7 +239,7 @@ public class NoSpringServer {
         return body;
     }
 
-    public NoSpringServer(int port, String...args) throws IOException {
+    public NoSpringServer(int port, String... args) throws IOException {
         this.port = port;
         this.executions = Collections.synchronizedMap(new HashMap<>());
         this.httpServer = HttpServer.create(new InetSocketAddress(this.port), 0);
@@ -266,24 +262,24 @@ public class NoSpringServer {
 
         this.httpServer.createContext("/test", exchg -> {
             String body = readBody(exchg);
-			System.out.println(body);
-			exchg.getResponseHeaders().add("Status", "OK");
-			exchg.sendResponseHeaders(200, body.length());
-			try (OutputStream os = exchg.getResponseBody()) {
+            System.out.println(body);
+            exchg.getResponseHeaders().add("Status", "OK");
+            exchg.sendResponseHeaders(200, body.length());
+            try (OutputStream os = exchg.getResponseBody()) {
                 os.write(body.getBytes());
                 os.flush();
-			}
+            }
         });
 
-		this.httpServer.createContext("/run", exchg -> {
-			String input = readBody(exchg);
-			System.out.println(input);
-			exchg.getResponseHeaders().add("Status", "OK");
-			exchg.sendResponseHeaders(200, input.length());
-			try (OutputStream os = exchg.getResponseBody()) {
+        this.httpServer.createContext("/run", exchg -> {
+            String input = readBody(exchg);
+            System.out.println(input);
+            exchg.getResponseHeaders().add("Status", "OK");
+            exchg.sendResponseHeaders(200, input.length());
+            try (OutputStream os = exchg.getResponseBody()) {
                 os.write(input.getBytes());
                 os.flush();
-			}
+            }
         });
 
         this.httpServer.createContext("/analyze", exchg -> {
@@ -315,7 +311,7 @@ public class NoSpringServer {
                     try (OutputStream os = exchg.getResponseBody()) {
                         os.write(rsp.getBytes());
                         os.flush();
-                    } 
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -351,7 +347,7 @@ public class NoSpringServer {
                     try (OutputStream os = exchg.getResponseBody()) {
                         os.write(rsp.getBytes());
                         os.flush();
-                    } 
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -360,7 +356,7 @@ public class NoSpringServer {
 
         this.httpServer.start();
 
-        if(args.length > 0 && "print".equalsIgnoreCase(args[0])) {
+        if (args.length > 0 && "print".equalsIgnoreCase(args[0])) {
             String BASE = TestConstants.MODEL_PATH;
             String basicPath = TestConstants.MODEL_PATH + "/default";
             Allocation allocation = SQuATHelper.loadAllocationModel("file:/" + basicPath + ".allocation");
@@ -370,9 +366,11 @@ public class NoSpringServer {
                     .loadResourceEnvironmentModel("file:/" + basicPath + ".resourceenvironment");
             Repository repository = SQuATHelper.loadRepositoryModel("file:/" + basicPath + ".repository");
             UsageModel usageModel = SQuATHelper.loadUsageModel("file:/" + basicPath + ".usagemodel");
-            PCMArchitectureInstance architectureInstance = new PCMArchitectureInstance("", repository, system, allocation, resourceenvironment, usageModel);
-            
-            Repository repositoryAlternatives = SQuATHelper.loadRepositoryModel("file:/" + TestConstants.MODEL_PATH + "/alternativeRepository.repository");
+            PCMArchitectureInstance architectureInstance = new PCMArchitectureInstance("", repository, system,
+                    allocation, resourceenvironment, usageModel);
+
+            Repository repositoryAlternatives = SQuATHelper
+                    .loadRepositoryModel("file:/" + TestConstants.MODEL_PATH + "/alternativeRepository.repository");
             architectureInstance.setRepositoryWithAlternatives(repositoryAlternatives);
 
             JSONification jsoNification2 = new JSONification();
@@ -381,7 +379,7 @@ public class NoSpringServer {
             jsoNification2.add("insinter-modular", new File("" + BASE + "/insinter-modular.henshin"));
             jsoNification2.add("splitrespn-modular", new File("" + BASE + "/splitrespn-modular.henshin"));
             jsoNification2.add("wrapper-modular", new File("" + BASE + "/wrapper-modular.henshin"));
-            
+
             String jsonArch = jsoNification2.toJSON();
             System.out.println(jsonArch);
         }
