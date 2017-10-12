@@ -15,6 +15,7 @@ import org.palladiosimulator.pcm.usagemodel.UsageModel;
 
 import io.github.squat_team.model.PCMArchitectureInstance;
 import io.github.squat_team.model.PCMResult;
+import io.github.squat_team.model.PCMScenario;
 import io.github.squat_team.model.PCMScenarioResult;
 import io.github.squat_team.model.ResponseMeasureType;
 
@@ -150,5 +151,13 @@ public class UnJSONification {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public void clearDirectory() {
+		final File directory = new File(this.executionUUID + "/");
+		for(String filename : directory.list()) {
+			new File(directory.getPath(), filename).delete();
+		}
+		directory.delete();
 	}
 }
