@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -54,35 +55,38 @@ import io.github.squat_team.performance.peropteryx.configuration.Configuration;
 import io.github.squat_team.util.SQuATHelper;
 
 public class NoSpringServer {
-	/** The port to use */
-	private final int port;
+    /** The port to use */
+    private final int port;
 
     /** The HttpServer */
     protected final transient HttpServer httpServer;
 
     /** Map to save the current execution status of the various bots */
     private final Map<String, ExecutionStatus> executions;
-    
-    /**
-	 * Create the default {@link Configuration}
-	 *
-	 * @return the default configuration
-	 */
-	private static Configuration createDefaultConfiguration() {
-		TestConstants testConstants = new TestConstants();
-		Configuration configuration = new Configuration();
-		configuration.getPerOpteryxConfig().setGenerationSize(100);
-		configuration.getPerOpteryxConfig().setMaxIterations(10);
-		configuration.getLqnsConfig().setLqnsOutputDir(testConstants.LQN_OUTPUT);
-		configuration.getExporterConfig().setPcmOutputFolder(testConstants.PCM_STORAGE_PATH);
-		configuration.getPcmModelsConfig().setPathmapFolder(testConstants.PCM_MODEL_FILES);
-		return configuration;
-	}
 
-     /**
-     * @param object
-     * @return the scenario
+    /** Thread pool for executions */
+    private final ExecutorService threadPool = Executors.newFixedThreadPool(32);
+
+    /**
+     * Create the default {@link Configuration}
+     *
+     * @return the default configuration
      */
+    private static Configuration createDefaultConfiguration() {
+        TestConstants testConstants = new TestConstants();
+        Configuration configuration = new Configuration();
+        configuration.getPerOpteryxConfig().setGenerationSize(100);
+        configuration.getPerOpteryxConfig().setMaxIterations(10);
+        configuration.getLqnsConfig().setLqnsOutputDir(testConstants.LQN_OUTPUT);
+        configuration.getExporterConfig().setPcmOutputFolder(testConstants.PCM_STORAGE_PATH);
+        configuration.getPcmModelsConfig().setPathmapFolder(testConstants.PCM_MODEL_FILES);
+        return configuration;
+    }
+
+    /**
+    * @param object
+    * @return the scenario
+    */
     public static AbstractPerformancePCMScenario getScenarioFromObject(JSONObject object) {
         OptimizationType optimizationType = null;
         PCMResult expectedResult = null;
@@ -113,18 +117,18 @@ public class NoSpringServer {
         if (object.has("ids") && object.has("factor")) {
             final List<String> ids = new ArrayList<>();
             object.getJSONArray("ids").forEach(o -> {
-                ids.add((String)o);
+                ids.add((String) o);
             });
 
             double rate = object.getDouble("rate");
 
             String scenarioType = object.getString("scenario-type");
             switch (scenarioType) {
-                case "CPU":
-                    scenario = new PerformancePCMCPUScenario(optimizationType, ids, rate);
+            case "CPU":
+                scenario = new PerformancePCMCPUScenario(optimizationType, ids, rate);
                 break;
-                case "WORKLOAD":
-                    scenario = new PerformancePCMWorkloadScenario(optimizationType, ids, rate);
+            case "WORKLOAD":
+                scenario = new PerformancePCMWorkloadScenario(optimizationType, ids, rate);
                 break;
             }
 
@@ -138,89 +142,62 @@ public class NoSpringServer {
     }
 
     /**
-	 * Bot executor function, this functions generates the UUID and prepares asynchronous execution
-	 *
-	 * @param requestBody the HTTP POST request body
-	 * @param fn the function to execute the corresponding function to the rest endpoint
-	 */
-	private String botFn(String requestBody, BiFunction<ExecutionContext, JSONStringer, String> fn) {
-		String executionUUID = UUID.randomUUID().toString();
-		String response = executionUUID;
-		try {
-			JSONStringer jsonStringer = new JSONStringer();
-			jsonStringer.object();
-			jsonStringer.key("executionID").value(executionUUID);
-			jsonStringer.endObject();
-			response  = jsonStringer.toString();
-			this.executions.put(executionUUID, ExecutionStatus.WAITING);
+     * Bot executor function, this functions generates the UUID and prepares asynchronous execution
+     *
+     * @param requestBody the HTTP POST request body
+     * @param fn the function to execute the corresponding function to the rest endpoint
+     */
+    private String botFn(String requestBody, BiFunction<ExecutionContext, JSONStringer, String> fn) {
+        String executionUUID = UUID.randomUUID().toString();
+        String response = executionUUID;
+        try {
+            JSONStringer jsonStringer = new JSONStringer();
+            jsonStringer.object();
+            jsonStringer.key("executionID").value(executionUUID);
+            jsonStringer.endObject();
+            response = jsonStringer.toString();
+            this.executions.put(executionUUID, ExecutionStatus.WAITING);
 
-			//
-			// Execute on the Bot thread pool
-			//
-			ThreadPoolProvider.BOT_POOL.execute(() -> {
-				ExecutionStatus status = this.executions.get(executionUUID);
-				if (status == null)
-					return;
-				this.executions.put(executionUUID, ExecutionStatus.EXECUTING);
+            ExecutionStatus status = this.executions.get(executionUUID);
+            if (status == null)
+                return null;
+            this.executions.put(executionUUID, ExecutionStatus.EXECUTING);
 
-				try {
-					// Retrieve parameters
-					JSONObject jsonBody = new JSONObject(requestBody);
-					String callbackURL = jsonBody.getString("cbURL");
+            // Retrieve parameters
+            JSONObject jsonBody = new JSONObject(requestBody);
 
-					// Architecture instance
-                    JSONObject jsonArchInstance = jsonBody.getJSONObject("architecture-instance");
-                    UnJSONification unJSONification = new UnJSONification(executionUUID);
-					PCMArchitectureInstance architectureInstance = unJSONification.getArchitectureInstance(jsonArchInstance);
+            // Architecture instance
+            JSONObject jsonArchInstance = jsonBody.getJSONObject("architecture-instance");
+            UnJSONification unJSONification = new UnJSONification(executionUUID);
+            PCMArchitectureInstance architectureInstance = unJSONification.getArchitectureInstance(jsonArchInstance);
 
-					// Scenario
-                    AbstractPerformancePCMScenario scenario = NoSpringServer.getScenarioFromObject(jsonBody.getJSONObject("scenario"));
+            // Scenario
+            AbstractPerformancePCMScenario scenario = NoSpringServer
+                    .getScenarioFromObject(jsonBody.getJSONObject("scenario"));
 
-					// Configuration
-					Configuration configuration = createDefaultConfiguration();
+            // Configuration
+            Configuration configuration = createDefaultConfiguration();
 
-					// Create the bot and context
-					PerOpteryxPCMBot bot = new PerOpteryxPCMBot(scenario, configuration);
-					bot.setDebugMode(false);
-					bot.setDetailedAnalysis(true);
-					ExecutionContext context = new ExecutionContext(bot, architectureInstance);
+            // Create the bot and context
+            PerOpteryxPCMBot bot = new PerOpteryxPCMBot(scenario, configuration);
+            bot.setDebugMode(false);
+            bot.setDetailedAnalysis(true);
+            ExecutionContext context = new ExecutionContext(bot, architectureInstance);
 
-					// Prepare the result stringer
-					JSONStringer resultStringer = new JSONStringer();
-					resultStringer.object().key("executionUUID").value(executionUUID);
+            // Prepare the result stringer
+            JSONStringer resultStringer = new JSONStringer();
+            resultStringer.object().key("executionUUID").value(executionUUID);
 
-					// Execute and generate result
-                    String result = fn.apply(context, resultStringer);
-
-                    System.out.println(" --- RESULTS AVAILABLE --- ");
-
-					// call back the result callback url
-					URL url = new URL(callbackURL);
-					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-					connection.setRequestMethod("POST");
-                    connection.setDoOutput(true);
-                    connection.setRequestProperty( "Content-Length", String.valueOf(result.length()));
-					try (OutputStream outputStream = connection.getOutputStream()) {
-						outputStream.write(result.getBytes());
-						outputStream.flush();
-					}
-
-                    try (InputStream in = connection.getInputStream()) {
-                    }
-				} catch (JSONException e) {
-					e.printStackTrace();
-				} catch (MalformedURLException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} finally {
-					this.executions.remove(executionUUID);
-				}
-			});
-		} catch (JSONException e) {
-		}
-		return response;
-	}
+            // Execute and generate result
+            String result = fn.apply(context, resultStringer);
+            return result;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } finally {
+            this.executions.remove(executionUUID);
+        }
+        return response;
+    }
 
     /**
      * 
@@ -248,7 +225,7 @@ public class NoSpringServer {
         return body;
     }
 
-    public NoSpringServer(int port, String...args) throws IOException {
+    public NoSpringServer(int port, String... args) throws IOException {
         this.port = port;
         this.executions = Collections.synchronizedMap(new HashMap<>());
         this.httpServer = HttpServer.create(new InetSocketAddress(this.port), 0);
@@ -271,17 +248,17 @@ public class NoSpringServer {
 
         this.httpServer.createContext("/test", exchg -> {
             String body = readBody(exchg);
-			System.out.println(body);
-			exchg.getResponseHeaders().add("Status", "OK");
-			exchg.sendResponseHeaders(200, body.length());
-			try (OutputStream os = exchg.getResponseBody()) {
+            System.out.println(body);
+            exchg.getResponseHeaders().add("Status", "OK");
+            exchg.sendResponseHeaders(200, body.length());
+            try (OutputStream os = exchg.getResponseBody()) {
                 os.write(body.getBytes());
                 os.flush();
-			}
+            }
         });
 
-		this.httpServer.createContext("/run", exchg -> {
-			String input = readBody(exchg);
+        this.httpServer.createContext("/run", exchg -> {
+            String input = readBody(exchg);
 
             ThreadPoolProvider.BOT_POOL.execute(() -> {
                 try {
@@ -292,111 +269,102 @@ public class NoSpringServer {
                 }
             });
 
-			System.out.println(input);
-			exchg.getResponseHeaders().add("Status", "OK");
-			exchg.sendResponseHeaders(200, input.length());
-			try (OutputStream os = exchg.getResponseBody()) {
+            System.out.println(input);
+            exchg.getResponseHeaders().add("Status", "OK");
+            exchg.sendResponseHeaders(200, input.length());
+            try (OutputStream os = exchg.getResponseBody()) {
                 os.write(input.getBytes());
                 os.flush();
-			}
+            }
         });
 
         this.httpServer.createContext("/analyze", exchg -> {
-            String body = readBody(exchg);
-            String rsp = null;
-            if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
-                rsp = this.botFn(body, (ctx, stringer) -> {
-                    PerOpteryxPCMBot bot = ctx.getBot();
-                    PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
-                    PCMScenarioResult result = bot.analyze(architectureInstance);
-                    String resultString;
-                    try {
-                        JSONification jsoNification = new JSONification(stringer);
-                        jsoNification.add(result);
-                        resultString = jsoNification.toJSON();
-                    } catch (JSONException e) {
-                        resultString = e.getMessage();
-                    }
-                    return resultString;
-                });
-            } else {
-                rsp = "INVALID METHOD";
-            }
+            this.threadPool.execute(() -> {
+                String body = readBody(exchg);
+                String rsp = null;
+                if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
+                    rsp = this.botFn(body, (ctx, stringer) -> {
+                        PerOpteryxPCMBot bot = ctx.getBot();
+                        PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
+                        PCMScenarioResult result = bot.analyze(architectureInstance);
+                        String resultString;
+                        try {
+                            JSONification jsoNification = new JSONification(stringer);
+                            jsoNification.add(result);
+                            resultString = jsoNification.toJSON();
+                        } catch (JSONException e) {
+                            resultString = e.getMessage();
+                        }
+                        return resultString;
+                    });
+                } else {
+                    rsp = "INVALID METHOD";
+                }
 
-            exchg.getResponseHeaders().add("Status", "OK");
-			exchg.sendResponseHeaders(200, rsp.length());
-			try (OutputStream os = exchg.getResponseBody()) {
-                os.write(rsp.getBytes());
-                os.flush();
-			}
+                try {
+                    exchg.getResponseHeaders().add("Status", "OK");
+                    exchg.sendResponseHeaders(200, rsp.length());
+                    try (OutputStream os = exchg.getResponseBody()) {
+                        os.write(rsp.getBytes());
+                        os.flush();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         });
 
         this.httpServer.createContext("/searchForAlternatives", exchg -> {
-            String body = readBody(exchg);
-            String rsp = null;
-            if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
-                rsp = this.botFn(body, (ctx, stringer) -> {
-                    PerOpteryxPCMBot bot = ctx.getBot();
-                    PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
+            this.threadPool.execute(() -> {
+                String body = readBody(exchg);
+                String rsp = null;
+                if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
+                    rsp = this.botFn(body, (ctx, stringer) -> {
+                        PerOpteryxPCMBot bot = ctx.getBot();
+                        PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
 
-                    // TODO 
-                    // deserializing should create a new directory with the name of the execution-UUID
-                    // create all files there and upon finishing dlete this folder
-/*
-                    String basicPath = TestConstants.BASIC_FILE_PATH;
-                    Allocation allocation = SQuATHelper.loadAllocationModel("file:/" + basicPath + ".allocation");
-                    org.palladiosimulator.pcm.system.System system = SQuATHelper
-                            .loadSystemModel("file:/" + basicPath + ".system");
-                    ResourceEnvironment resourceenvironment = SQuATHelper
-                            .loadResourceEnvironmentModel("file:/" + basicPath + ".resourceenvironment");
-                    Repository repository = SQuATHelper.loadRepositoryModel("file:/" + basicPath + ".repository");
-                    UsageModel usageModel = SQuATHelper.loadUsageModel("file:/" + basicPath + ".usagemodel");
-                    PCMArchitectureInstance architectureInstance = new PCMArchitectureInstance("", repository, system, allocation, resourceenvironment, usageModel);
-*/
-                    //final String FILE_PREFIX = ""; // "file:/";
-                    //String basicPath = "pcm/default";
-                    //Allocation allocation = JSONUtils.loadResource(FILE_PREFIX + basicPath + ".allocation");
-                    //org.palladiosimulator.pcm.system.System system = JSONUtils.loadResource(FILE_PREFIX + basicPath + ".system");
-                    //ResourceEnvironment resourceenvironment = JSONUtils.loadResource(FILE_PREFIX + basicPath + ".resourceenvironment");
-                    //Repository repository = JSONUtils.loadResource(FILE_PREFIX + basicPath + ".repository");
-                    //UsageModel usageModel = JSONUtils.loadResource(FILE_PREFIX + basicPath + ".usagemodel");
-                    //architectureInstance = new PCMArchitectureInstance("", repository, system, allocation, resourceenvironment, usageModel);
+                        List<PCMScenarioResult> results = bot.searchForAlternatives(architectureInstance);
+                        for (PCMScenarioResult result : results) {
+                            System.out.println("----");
+                            String uri = result.getResultingArchitecture().getAllocation().eResource().getURI()
+                                    .segment(result.getResultingArchitecture().getAllocation().eResource().getURI()
+                                            .segmentCount() - 2)
+                                    .toString();
+                            System.out.println("Name: " + uri);
+                            System.out.println("Response Time: " + result.getResult().getResponse());
+                        }
 
-                    List<PCMScenarioResult> results = bot.searchForAlternatives(architectureInstance);
-                    for (PCMScenarioResult result : results) {
-                        System.out.println("----");
-                        String uri = result.getResultingArchitecture().getAllocation().eResource().getURI()
-                                .segment(result.getResultingArchitecture().getAllocation().eResource().getURI().segmentCount() - 2)
-                                .toString();
-                        System.out.println("Name: " + uri);
-                        System.out.println("Response Time: " + result.getResult().getResponse());
+                        String resultString;
+                        try {
+                            JSONification jsoNification = new JSONification(stringer);
+                            jsoNification.add(results);
+                            resultString = jsoNification.toJSON();
+                        } catch (JSONException e) {
+                            resultString = e.getMessage();
+                        }
+                        return resultString;
+                    });
+
+                } else {
+                    rsp = "INVALID METHOD";
+                }
+
+                try {
+                    exchg.getResponseHeaders().add("Status", "OK");
+                    exchg.sendResponseHeaders(200, rsp.length());
+                    try (OutputStream os = exchg.getResponseBody()) {
+                        os.write(rsp.getBytes());
+                        os.flush();
                     }
-
-                    String resultString;
-                    try {
-                        JSONification jsoNification = new JSONification(stringer);
-                        jsoNification.add(results);
-                        resultString = jsoNification.toJSON();
-                    } catch (JSONException e) {
-                        resultString = e.getMessage();
-                    }
-                    return resultString;
-                });
-            } else {
-                rsp = "INVALID METHOD";
-            }
-
-            exchg.getResponseHeaders().add("Status", "OK");
-			exchg.sendResponseHeaders(200, rsp.length());
-			try (OutputStream os = exchg.getResponseBody()) {
-                os.write(rsp.getBytes());
-                os.flush();
-			}
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         });
 
         this.httpServer.start();
 
-        if(args.length > 0 && "print".equalsIgnoreCase(args[0])) {
+        if (args.length > 0 && "print".equalsIgnoreCase(args[0])) {
             String basicPath = TestConstants.BASIC_FILE_PATH;
             Allocation allocation = SQuATHelper.loadAllocationModel("file:/" + basicPath + ".allocation");
             org.palladiosimulator.pcm.system.System system = SQuATHelper
@@ -405,7 +373,8 @@ public class NoSpringServer {
                     .loadResourceEnvironmentModel("file:/" + basicPath + ".resourceenvironment");
             Repository repository = SQuATHelper.loadRepositoryModel("file:/" + basicPath + ".repository");
             UsageModel usageModel = SQuATHelper.loadUsageModel("file:/" + basicPath + ".usagemodel");
-            PCMArchitectureInstance architectureInstance = new PCMArchitectureInstance("", repository, system, allocation, resourceenvironment, usageModel);
+            PCMArchitectureInstance architectureInstance = new PCMArchitectureInstance("", repository, system,
+                    allocation, resourceenvironment, usageModel);
             JSONification jsoNification2 = new JSONification();
             jsoNification2.add(architectureInstance);
             String jsonArch = jsoNification2.toJSON();
