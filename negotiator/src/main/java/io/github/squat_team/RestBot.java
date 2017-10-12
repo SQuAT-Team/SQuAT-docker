@@ -86,21 +86,19 @@ public class RestBot {
         return unJSONification.getPCMScenarioResult(result);
     }
 
-	public List<PCMScenarioResult> searchForAlternatives(PCMArchitectureInstance currentArchitecture) {
+    public List<PCMScenarioResult> searchForAlternatives(PCMArchitectureInstance currentArchitecture) {
         return null;
     }
-	
-	public PCMScenario getScenario() {
-		return scenario;
-	}
-	
-	public void setScenario(PCMScenario scenario) {
-		this.scenario = scenario;
+
+    public PCMScenario getScenario() {
+        return scenario;
+    }
+
+    public void setScenario(PCMScenario scenario) {
+        this.scenario = scenario;
     }
 
     public String getBotUUID() {
         return this.botUUID;
     }
-
-
 }

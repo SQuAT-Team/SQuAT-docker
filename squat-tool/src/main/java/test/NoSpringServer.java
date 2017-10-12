@@ -47,6 +47,7 @@ import io.github.squat_team.model.ResponseMeasureType;
 import io.github.squat_team.performance.AbstractPerformancePCMScenario;
 import io.github.squat_team.performance.PerformanceMetric;
 import io.github.squat_team.performance.PerformancePCMCPUScenario;
+import io.github.squat_team.performance.PerformancePCMWorkloadScenario;
 import io.github.squat_team.performance.peropteryx.PerOpteryxPCMBot;
 import io.github.squat_team.performance.peropteryx.ThreadPoolProvider;
 import io.github.squat_team.performance.peropteryx.configuration.Configuration;
@@ -77,6 +78,64 @@ public class NoSpringServer {
 		configuration.getPcmModelsConfig().setPathmapFolder(testConstants.PCM_MODEL_FILES);
 		return configuration;
 	}
+
+     /**
+     * @param object
+     * @return the scenario
+     */
+    public static AbstractPerformancePCMScenario getScenarioFromObject(JSONObject object) {
+        OptimizationType optimizationType = null;
+        PCMResult expectedResult = null;
+        AbstractPerformancePCMScenario scenario = null;
+
+        // Type
+        if (object.has("type")) {
+            optimizationType = OptimizationType.valueOf(object.getString("type"));
+        }
+
+        // Expected Result
+        if (object.has("expectedResult")) {
+            JSONObject jsonExpectedResult = object.getJSONObject("expectedResult");
+            ResponseMeasureType responseMeasureType = null;
+
+            if (jsonExpectedResult.has("responseMeasureType")) {
+                responseMeasureType = ResponseMeasureType.valueOf(jsonExpectedResult.getString("responseMeasureType"));
+            }
+
+            expectedResult = new PCMResult(responseMeasureType);
+
+            if (jsonExpectedResult.has("response")) {
+                Comparable<?> response = jsonExpectedResult.getString("response");
+                expectedResult.setResponse(response);
+            }
+        }
+
+        if (object.has("ids") && object.has("factor")) {
+            final List<String> ids = new ArrayList<>();
+            object.getJSONArray("ids").forEach(o -> {
+                ids.add((String)o);
+            });
+
+            double rate = object.getDouble("rate");
+
+            String scenarioType = object.getString("scenario-type");
+            switch (scenarioType) {
+                case "CPU":
+                    scenario = new PerformancePCMCPUScenario(optimizationType, ids, rate);
+                break;
+                case "WORKLOAD":
+                    scenario = new PerformancePCMWorkloadScenario(optimizationType, ids, rate);
+                break;
+            }
+
+            // metric
+            if (object.has("metric")) {
+                scenario.setMetric(PerformanceMetric.valueOf(object.getString("metric")));
+            }
+        }
+
+        return scenario;
+    }
 
     /**
 	 * Bot executor function, this functions generates the UUID and prepares asynchronous execution
@@ -114,17 +173,10 @@ public class NoSpringServer {
                     UnJSONification unJSONification = new UnJSONification(executionUUID);
 					PCMArchitectureInstance architectureInstance = unJSONification.getArchitectureInstance(jsonArchInstance);
 
-					// Scenario - TODO
-					JSONObject jsonScenario = null;
-					List<String> cpuIDs = new ArrayList<String>();
-					cpuIDs.add(TestConstants.CPU_ID);
-					AbstractPerformancePCMScenario scenario = new PerformancePCMCPUScenario(OptimizationType.MINIMIZATION, cpuIDs, 1.0);
-					PCMResult expectedResponse = new PCMResult(ResponseMeasureType.DECIMAL);
-					expectedResponse.setResponse(6.0);
-					scenario.setExpectedResponse(expectedResponse);
-					scenario.setMetric(PerformanceMetric.RESPONSE_TIME);
+					// Scenario
+                    AbstractPerformancePCMScenario scenario = NoSpringServer.getScenarioFromObject(jsonBody.getJSONObject("scenario"));
 
-					// Configuration - TODO
+					// Configuration
 					Configuration configuration = createDefaultConfiguration();
 
 					// Create the bot and context

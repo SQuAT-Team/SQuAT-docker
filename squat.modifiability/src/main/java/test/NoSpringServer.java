@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
@@ -55,6 +56,9 @@ import io.github.squat_team.model.PCMArchitectureInstance;
 import io.github.squat_team.model.PCMResult;
 import io.github.squat_team.model.PCMScenarioResult;
 import io.github.squat_team.model.ResponseMeasureType;
+import io.github.squat_team.modifiability.ModifiabilityElement;
+import io.github.squat_team.modifiability.ModifiabilityInstruction;
+import io.github.squat_team.modifiability.ModifiabilityOperation;
 import io.github.squat_team.modifiability.ModifiabilityPCMScenario;
 import io.github.squat_team.modifiability.kamp.KAMPPCMBot;
 import io.github.squat_team.modifiability.kamp.EvaluationType;
@@ -72,6 +76,76 @@ public class NoSpringServer {
 
     /** Thread pool for executions */
     private final ExecutorService threadPool = Executors.newFixedThreadPool(32);
+
+
+    /**
+     * @param o
+     * @return 
+     */
+    public static ModifiabilityInstruction buildFromJSONObject(JSONObject o) {
+        ModifiabilityInstruction change = new ModifiabilityInstruction();
+
+        if (o.has("operation")) {
+            change.operation = ModifiabilityOperation.valueOf(o.getString("operation"));
+        }
+
+        if (o.has("element")) {
+            change.element = ModifiabilityElement.valueOf(o.getString("element"));
+        }
+
+        if (o.has("parameters")) {
+            change.parameters = new HashMap<>();
+
+            JSONObject map = o.getJSONObject("parameters");
+            for (String key : JSONObject.getNames(map)) {
+                change.parameters.put(key, map.getString(key));
+            }
+        }
+
+        return change;
+    }
+
+    /**
+     * @param object
+     * @return the scenario
+     */
+    public static ModifiabilityPCMScenario getScenarioFromObject(JSONObject object) {
+        OptimizationType optimizationType = null;
+        PCMResult expectedResult = null;
+
+        // Type
+        if (object.has("type")) {
+            optimizationType = OptimizationType.valueOf(object.getString("type"));
+        }
+
+        // Expected Result
+        if (object.has("expectedResult")) {
+            JSONObject jsonExpectedResult = object.getJSONObject("expectedResult");
+            ResponseMeasureType responseMeasureType = null;
+
+            if (jsonExpectedResult.has("responseMeasureType")) {
+                responseMeasureType = ResponseMeasureType.valueOf(jsonExpectedResult.getString("responseMeasureType"));
+            }
+
+            expectedResult = new PCMResult(responseMeasureType);
+
+            if (jsonExpectedResult.has("response")) {
+                Comparable<?> response = jsonExpectedResult.getString("response");
+                expectedResult.setResponse(response);
+            }
+        }
+
+        final ModifiabilityPCMScenario scenario = new ModifiabilityPCMScenario(optimizationType);
+        scenario.setExpectedResponse(expectedResult);
+
+        // Changes
+        if (object.has("changes")) {
+            JSONArray changesArray = object.getJSONArray("changes");
+            changesArray.forEach(o -> scenario.addChange(buildFromJSONObject((JSONObject) o)));
+        }
+
+        return scenario;
+    }
 
     /**
 	 * Bot executor function, this functions generates the UUID and prepares asynchronous execution
@@ -93,16 +167,14 @@ public class NoSpringServer {
 			//
 			// Execute on the Bot thread pool
 			//
-			this.threadPool.execute(() -> {
-				ExecutionStatus status = this.executions.get(executionUUID);
-				if (status == null)
-					return;
-				this.executions.put(executionUUID, ExecutionStatus.EXECUTING);
+                ExecutionStatus status = this.executions.get(executionUUID);
+                if (status == null)
+                    return "";
+                this.executions.put(executionUUID, ExecutionStatus.EXECUTING);
 
-				try {
-					// Retrieve parameters
-					JSONObject jsonBody = new JSONObject(requestBody);
-                    String callbackURL = jsonBody.getString("cbURL");
+                try {
+                    // Retrieve parameters
+                    JSONObject jsonBody = new JSONObject(requestBody);
 
                     // Write from JSON
                     UnJSONification unJSONification = new UnJSONification(executionUUID);
@@ -111,12 +183,12 @@ public class NoSpringServer {
                     unJSONification.getFile(jsonBody.getJSONObject("splitrespn-modular"));
                     unJSONification.getFile(jsonBody.getJSONObject("wrapper-modular"));
 
-					// Architecture instance
+                    // Architecture instance
                     JSONObject jsonArchInstance = jsonBody.getJSONObject("architecture-instance");
-					PCMArchitectureInstance architectureInstance = unJSONification.getArchitectureInstance(jsonArchInstance);
+                    PCMArchitectureInstance architectureInstance = unJSONification.getArchitectureInstance(jsonArchInstance);
 
-                    // Scenario - TODO
-                    ModifiabilityPCMScenario scenario = ModifiabilityBotTest.initializeScenario();
+                    // Scenario
+                    ModifiabilityPCMScenario scenario = NoSpringServer.getScenarioFromObject(jsonBody.getJSONObject("scenario"));
 
                     // Create the bot and context
                     KAMPPCMBot bot = new KAMPPCMBot(scenario);
@@ -129,20 +201,7 @@ public class NoSpringServer {
 
 					// Execute and generate result
                     String result = fn.apply(context, resultStringer);
-
-					// call back the result callback url
-					URL url = new URL(callbackURL);
-					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-					connection.setRequestMethod("POST");
-                    connection.setDoOutput(true);
-                    connection.setRequestProperty( "Content-Length", String.valueOf(result.length()));
-					try (OutputStream outputStream = connection.getOutputStream()) {
-						outputStream.write(result.getBytes());
-						outputStream.flush();
-					}
-
-                    try (InputStream in = connection.getInputStream()) {
-                    }
+                    return result;
 				} catch (JSONException e) {
 					e.printStackTrace();
 				} catch (MalformedURLException e) {
@@ -152,7 +211,7 @@ public class NoSpringServer {
 				} finally {
 					this.executions.remove(executionUUID);
 				}
-			});
+			
 		} catch (JSONException e) {
 		}
         return response;
@@ -228,63 +287,75 @@ public class NoSpringServer {
         });
 
         this.httpServer.createContext("/analyze", exchg -> {
-            String body = readBody(exchg);
-            String rsp = null;
-            if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
-                rsp = this.botFn(body, (ctx, stringer) -> {
-                    KAMPPCMBot bot = ctx.getBot();
-                    PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
-                    PCMScenarioResult result = bot.analyze(architectureInstance);
-                    String resultString;
-                    try {
-                        JSONification jsoNification = new JSONification(stringer);
-                        jsoNification.add(result);
-                        resultString = jsoNification.toJSON();
-                    } catch (JSONException e) {
-                        resultString = e.getMessage();
-                    }
-                    return resultString;
-                });
-            } else {
-                rsp = "INVALID METHOD";
-            }
+            this.threadPool.execute(() -> {
+                String body = readBody(exchg);
+                String rsp = null;
+                if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
+                    rsp = this.botFn(body, (ctx, stringer) -> {
+                        KAMPPCMBot bot = ctx.getBot();
+                        PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
+                        PCMScenarioResult result = bot.analyze(architectureInstance);
+                        String resultString;
+                        try {
+                            JSONification jsoNification = new JSONification(stringer);
+                            jsoNification.add(result);
+                            resultString = jsoNification.toJSON();
+                        } catch (JSONException e) {
+                            resultString = e.getMessage();
+                        }
+                        return resultString;
+                    });
+                } else {
+                    rsp = "INVALID METHOD";
+                }
 
-            exchg.getResponseHeaders().add("Status", "OK");
-			exchg.sendResponseHeaders(200, rsp.length());
-			try (OutputStream os = exchg.getResponseBody()) {
-                os.write(rsp.getBytes());
-                os.flush();
-			}
+                try {
+                    exchg.getResponseHeaders().add("Status", "OK");
+                    exchg.sendResponseHeaders(200, rsp.length());
+                    try (OutputStream os = exchg.getResponseBody()) {
+                        os.write(rsp.getBytes());
+                        os.flush();
+                    } 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         });
 
         this.httpServer.createContext("/searchForAlternatives", exchg -> {
-            String body = readBody(exchg);
-            String rsp = null;
-            if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
-                rsp = this.botFn(body, (ctx, stringer) -> {
-                    KAMPPCMBot bot = ctx.getBot();
-                    PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
-                    List<PCMScenarioResult> results = bot.searchForAlternatives(architectureInstance);
-                    String resultString;
-                    try {
-                        JSONification jsoNification = new JSONification(stringer);
-                        jsoNification.add(results);
-                        resultString = jsoNification.toJSON();
-                    } catch (JSONException e) {
-                        resultString = e.getMessage();
-                    }
-                    return resultString;
-                });
-            } else {
-                rsp = "INVALID METHOD";
-            }
+            this.threadPool.execute(() -> {
+                String body = readBody(exchg);
+                String rsp = null;
+                if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
+                    rsp = this.botFn(body, (ctx, stringer) -> {
+                        KAMPPCMBot bot = ctx.getBot();
+                        PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
+                        List<PCMScenarioResult> results = bot.searchForAlternatives(architectureInstance);
+                        String resultString;
+                        try {
+                            JSONification jsoNification = new JSONification(stringer);
+                            jsoNification.add(results);
+                            resultString = jsoNification.toJSON();
+                        } catch (JSONException e) {
+                            resultString = e.getMessage();
+                        }
+                        return resultString;
+                    });
+                } else {
+                    rsp = "INVALID METHOD";
+                }
 
-            exchg.getResponseHeaders().add("Status", "OK");
-			exchg.sendResponseHeaders(200, rsp.length());
-			try (OutputStream os = exchg.getResponseBody()) {
-                os.write(rsp.getBytes());
-                os.flush();
-			}
+                try {
+                    exchg.getResponseHeaders().add("Status", "OK");
+                    exchg.sendResponseHeaders(200, rsp.length());
+                    try (OutputStream os = exchg.getResponseBody()) {
+                        os.write(rsp.getBytes());
+                        os.flush();
+                    } 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         });
 
         this.httpServer.start();
