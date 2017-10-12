@@ -5,10 +5,10 @@ import io.github.squat_team.performance.peropteryx.PerOpteryxPCMBot;
 
 public class ExecutionContext {
 
-    /** */
+    /** The bot */
     private final PerOpteryxPCMBot bot;
 
-    /** */
+    /** The architecture to analyze */
     private final PCMArchitectureInstance architectureInstance;
 
     /**

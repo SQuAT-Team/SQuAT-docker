@@ -107,7 +107,12 @@ public class JSONification {
 		Objects.requireNonNull(results);
 		this.jsonStringer.key("values");
 		this.jsonStringer.array();
-		results.forEach(this::add);
+		for(PCMScenarioResult scenarioResult : results) {
+			this.jsonStringer.object();
+			this.add(scenarioResult.getResultingArchitecture());
+			this.add(scenarioResult.getResult());
+			this.jsonStringer.endObject();
+		}
 		this.jsonStringer.endArray();
 	}
 
