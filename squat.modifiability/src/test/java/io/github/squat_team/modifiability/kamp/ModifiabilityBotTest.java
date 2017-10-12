@@ -66,37 +66,7 @@ public class ModifiabilityBotTest {
 	 */
 	private ModifiabilityPCMScenario initializeScenario() {
 		Float responseTimeScenario = 120f;
-		return createModifiabilityScenarioForStplus(ResponseMeasureType.DECIMAL, responseTimeScenario);
-	}
-
-	/**
-	 * Creates a modifiability scenario for the stplus model.
-	 * 
-	 * @param type
-	 *            the type of the response measure type.
-	 * @param response
-	 *            the expected response for the scenario.
-	 * @return
-	 */
-	private ModifiabilityPCMScenario createModifiabilityScenarioForStplus(ResponseMeasureType type,
-			Comparable<Float> response) {
-		ModifiabilityPCMScenario scenario = new ModifiabilityPCMScenario(OptimizationType.MINIMIZATION);
-		PCMResult expectedResult = new PCMResult(type);
-		expectedResult.setResponse(response);
-		scenario.setExpectedResponse(expectedResult);
-
-		ModifiabilityInstruction i1 = new ModifiabilityInstruction();
-		i1.operation = ModifiabilityOperation.MODIFY;
-		i1.element = ModifiabilityElement.INTERFACE;
-		i1.parameters.put("name", "IExternalPayment");
-		scenario.addChange(i1);
-		ModifiabilityInstruction i2 = new ModifiabilityInstruction();
-		i2.operation = ModifiabilityOperation.MODIFY;
-		i2.element = ModifiabilityElement.COMPONENT;
-		i2.parameters.put("name", "BusinessTripMgmt");
-		scenario.addChange(i2);
-
-		return scenario;
+		return (new StplusScenarios()).createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, responseTimeScenario);
 	}
 
 }
