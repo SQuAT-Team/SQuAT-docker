@@ -38,8 +38,7 @@ public class BotIntializer {
 	 *            the type of the bot, e.g., performance, modifiability,...
 	 */
 	private static void createBot(JSONObject scenario, String remoteURI, BotType type) {
-		RestBot bot = new RestBot(remoteURI);
-		bot.setScenario(scenario);
+		RestBot bot = new RestBot(remoteURI, scenario);
 		BotManager.getInstance().addBot(bot, type);
 	}
 
