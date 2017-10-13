@@ -35,7 +35,7 @@ public class LoadHelper implements ILoadHelper {
     /**
      * @return the created {@link JSONObject}
      */
-    public static JSONObject createScenarioOfWorkload(double response, ResponseMeasureType type) {
+    public static JSONObject createScenarioOfWorkload(ResponseMeasureType type, double response) {
         ArrayList<String> workloadIDs = new ArrayList<String>();
         workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
         JSONObject scenario = new JSONObject();
@@ -61,7 +61,7 @@ public class LoadHelper implements ILoadHelper {
     /**
      * @return the created {@link JSONObject}
      */
-    public static JSONObject createScenarioOfCPU(double response, ResponseMeasureType type) {
+    public static JSONObject createScenarioOfCPU(ResponseMeasureType type, double response) {
         ArrayList<String> workloadIDs = new ArrayList<String>();
         workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
         JSONObject scenario = new JSONObject();
@@ -105,7 +105,6 @@ public class LoadHelper implements ILoadHelper {
         Objects.requireNonNull(values);
         if (keys.length != values.length)
             return null;
-        ;
         final int LEN = keys.length;
         JSONObject ret = new JSONObject();
         ret.put("operation", String.valueOf(op));
