@@ -350,13 +350,13 @@ public class LoadHelper implements ILoadHelper {
      *  a state where a key can be created
      */
     public static void createModifiabilityScenarioS1(ResponseMeasureType type, 
-            Comparable<Float> response, JSONStringer jsonStringer) {
+            Comparable<Double> response, JSONStringer jsonStringer) {
         jsonStringer.key("scenario");
         jsonStringer.object();
 
         jsonStringer.key("expectedResult").object();
         jsonStringer.key("responseMeasureType").value(type);
-        jsonStringer.key("response").value(response);
+        jsonStringer.key("response").value(String.valueOf(response));
         jsonStringer.endObject();
 
         jsonStringer.key("type").value(OptimizationType.MINIMIZATION);
@@ -388,7 +388,7 @@ public class LoadHelper implements ILoadHelper {
 
         jsonStringer.key("expectedResult").object();
         jsonStringer.key("responseMeasureType").value(type);
-        jsonStringer.key("response").value(response);
+        jsonStringer.key("response").value(String.valueOf(response));
         jsonStringer.endObject();
 
         jsonStringer.key("type").value(OptimizationType.MINIMIZATION);
@@ -407,16 +407,16 @@ public class LoadHelper implements ILoadHelper {
             new String[]{"iname", "oname"}, new String[]{"Analytics", "getLastTrips"});
 
         createModifiabilityInstruction(jsonStringer, 
+            ModifiabilityOperation.CREATE, ModifiabilityElement.COMPONENT, 
+            new String[]{"name"}, new String[]{"Insights"});
+
+        createModifiabilityInstruction(jsonStringer, 
             ModifiabilityOperation.CREATE, ModifiabilityElement.PROVIDEDROLE, 
             new String[]{"cname", "iname"}, new String[]{"Insights", "Analytics"});
 
         createModifiabilityInstruction(jsonStringer, 
-            ModifiabilityOperation.CREATE, ModifiabilityElement.REQUIREDROLE, 
+            ModifiabilityOperation.MODIFY, ModifiabilityElement.REQUIREDROLE, 
             new String[]{"cname", "iname"}, new String[]{"Insights", "ITripDB"});
-
-        createModifiabilityInstruction(jsonStringer, 
-            ModifiabilityOperation.MODIFY, ModifiabilityElement.COMPONENT, 
-            new String[]{"name"}, new String[]{"BusinessTripMgmt"});
 
         jsonStringer.endArray();
         jsonStringer.endObject();
