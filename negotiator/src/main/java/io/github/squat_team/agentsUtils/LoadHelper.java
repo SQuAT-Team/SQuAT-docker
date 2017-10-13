@@ -311,8 +311,25 @@ public class LoadHelper implements ILoadHelper {
     }
     */
 
-    private static void add(JSONStringer jsonStringer, ModifiabilityOperation op, 
-            ModifiabilityElement el, String keys[], String values[]) {
+    /**
+     * Create a ModifiabilityInstruction by the given parameters and add them
+     * to the {@link JSONStringer}
+     *
+     * This method returns without modifying the {@link JSONStringer} if the 
+     * arrays keys and values have not the same length.
+     *
+     * This method will throw {@link NullPointerException} if either the 
+     * jsonStringer, keys or values are null.
+     *
+     * @param jsonStringer the json stringer to serialize the instruction
+     * @param op the {@link ModifiabilityOperation} of the instruction
+     * @param el the {@link ModifiabilityElement} of the instruction
+     * @param keys the parameter keys
+     * @param values the parameter values
+     */
+    private static void createModifiabilityInstruction(JSONStringer jsonStringer, 
+            ModifiabilityOperation op, ModifiabilityElement el, 
+            String keys[], String values[]) throws NullPointerException {
         Objects.requireNonNull(jsonStringer);
         Objects.requireNonNull(keys);
         Objects.requireNonNull(values);
@@ -330,7 +347,16 @@ public class LoadHelper implements ILoadHelper {
         jsonStringer.endObject();
     }
 
-    private void createModifiabilityScenarioS1(ResponseMeasureType type, 
+    /**
+     * Create the first Modifiability scenario
+     *
+     * @param type the {@link ResponseMeasureType} to use for this scenario
+     * @param response the expected response value
+     * @param jsonStringer this json stringer is used to insert the scenario
+     *  into the JSON object. This {@link JSONStringer} is required to be in 
+     *  a state where a key can be created
+     */
+    public static void createModifiabilityScenarioS1(ResponseMeasureType type, 
             Comparable<Float> response, JSONStringer jsonStringer) {
         jsonStringer.key("scenario");
         jsonStringer.object();
@@ -343,17 +369,27 @@ public class LoadHelper implements ILoadHelper {
         jsonStringer.key("type").value(OptimizationType.MINIMIZATION);
         jsonStringer.key("changes").array();
 
-        add(jsonStringer, ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE, 
+        createModifiabilityInstruction(jsonStringer, ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE, 
             new String[]{"name"}, new String[]{"IExternalPayment"});
 
-        add(jsonStringer, ModifiabilityOperation.MODIFY, ModifiabilityElement.COMPONENT, 
+        createModifiabilityInstruction(jsonStringer, ModifiabilityOperation.MODIFY, ModifiabilityElement.COMPONENT, 
             new String[]{"name"}, new String[]{"BusinessTripMgmt"});
 
         jsonStringer.endArray();
         jsonStringer.endObject();
     }
 
-    private static void createModifiabilityScenarioS2(ResponseMeasureType type, Comparable<Float> response, JSONStringer jsonStringer) {
+    /**
+     * Create the second Modifiability scenario
+     *
+     * @param type the {@link ResponseMeasureType} to use for this scenario
+     * @param response the expected response value
+     * @param jsonStringer this json stringer is used to insert the scenario
+     *  into the JSON object. This {@link JSONStringer} is required to be in 
+     *  a state where a key can be created
+     */
+    public static void createModifiabilityScenarioS2(ResponseMeasureType type, 
+            Comparable<Double> response, JSONStringer jsonStringer) {
         jsonStringer.key("scenario");
         jsonStringer.object();
 
@@ -365,22 +401,28 @@ public class LoadHelper implements ILoadHelper {
         jsonStringer.key("type").value(OptimizationType.MINIMIZATION);
         jsonStringer.key("changes").array();
 
-        add(jsonStringer, ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE, 
+        createModifiabilityInstruction(jsonStringer, 
+            ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE, 
             new String[]{"name"}, new String[]{"ITripDB"});
 
-        add(jsonStringer, ModifiabilityOperation.CREATE, ModifiabilityElement.INTERFACE, 
+        createModifiabilityInstruction(jsonStringer, 
+            ModifiabilityOperation.CREATE, ModifiabilityElement.INTERFACE, 
             new String[]{"name"}, new String[]{"Analytics"});
 
-        add(jsonStringer, ModifiabilityOperation.CREATE, ModifiabilityElement.OPERATION, 
-            new String[]{"iname, oname"}, new String[]{"Analytics, getLastTrips"});
+        createModifiabilityInstruction(jsonStringer, 
+            ModifiabilityOperation.CREATE, ModifiabilityElement.OPERATION, 
+            new String[]{"iname", "oname"}, new String[]{"Analytics", "getLastTrips"});
 
-        add(jsonStringer, ModifiabilityOperation.CREATE, ModifiabilityElement.PROVIDEDROLE, 
-            new String[]{"cname, iname"}, new String[]{"Insights, Analytics"});
+        createModifiabilityInstruction(jsonStringer, 
+            ModifiabilityOperation.CREATE, ModifiabilityElement.PROVIDEDROLE, 
+            new String[]{"cname", "iname"}, new String[]{"Insights", "Analytics"});
 
-        add(jsonStringer, ModifiabilityOperation.CREATE, ModifiabilityElement.REQUIREDROLE, 
-            new String[]{"cname, iname"}, new String[]{"Insights, ITripDB"});
+        createModifiabilityInstruction(jsonStringer, 
+            ModifiabilityOperation.CREATE, ModifiabilityElement.REQUIREDROLE, 
+            new String[]{"cname", "iname"}, new String[]{"Insights", "ITripDB"});
 
-        add(jsonStringer, ModifiabilityOperation.MODIFY, ModifiabilityElement.COMPONENT, 
+        createModifiabilityInstruction(jsonStringer, 
+            ModifiabilityOperation.MODIFY, ModifiabilityElement.COMPONENT, 
             new String[]{"name"}, new String[]{"BusinessTripMgmt"});
 
         jsonStringer.endArray();
