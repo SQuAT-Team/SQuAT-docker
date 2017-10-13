@@ -1,5 +1,7 @@
 package io.github.squat_team.model;
 
+import java.util.Objects;
+
 import org.json.JSONObject;
 
 import io.github.squat_team.agentsUtils.BotManager.BotType;
