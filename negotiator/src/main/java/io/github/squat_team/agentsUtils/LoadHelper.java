@@ -267,14 +267,6 @@ public class LoadHelper implements ILoadHelper {
         return ret;
     }
 
-    private static void addType(JSONStringer jsonStringer, String basicPath, String filename, String filetype) {
-        jsonStringer.key(filetype);
-        jsonStringer.object();
-        jsonStringer.key("filename").value(basicPath + "/" + filename + "." + filetype);
-        jsonStringer.key("filecontent").value(buildStringFromFile(basicPath + "/" + filename + "." + filetype));
-        jsonStringer.endObject();
-    }
-
     /**
      * Create a {@link JSONObject} for the given key and file
      *
@@ -298,15 +290,25 @@ public class LoadHelper implements ILoadHelper {
         return null;
     }
 
-    public static void putIfNotNull(JSONObject parent, String key, File file) {
+    /**
+     * Put the file content and name into parent with the specific key if the
+     * file exists and can be read
+     *
+     * @param parent the parent to put the values into
+     * @param key the key to use
+     * @param file the file to be read
+     */
+    private static void putIfNotNull(JSONObject parent, String key, File file) {
         JSONObject child = create(key, file);
         if (child != null)
             parent.put(key, child);
     }
 
     /**
-     * @param name
-     * @return {@link RestArchitecture} instance
+     * Load the initial architecture
+     *
+     * @param name the name of the architecture
+     * @return the created {@link RestArchitecture} instance
      */
     public static RestArchitecture loadSpecificModel(String name) {
         final String MODEL_NAME = "default";
@@ -326,7 +328,7 @@ public class LoadHelper implements ILoadHelper {
         putIfNotNull(architecture, "repository-with-alternatives",
                 new File(BASE + "/" + "alternativeRepository" + ".repository"));
 
-        // Optional architectur part
+        // Optional architecture part
         JSONObject cost = create("cost", new File("" + basicPath + ".cost"));
         JSONObject insinter = create("insinter-modular", new File("" + BASE + "/insinter-modular.henshin"));
         JSONObject splitrespn = create("splitrespn-modular", new File("" + BASE + "/splitrespn-modular.henshin"));
