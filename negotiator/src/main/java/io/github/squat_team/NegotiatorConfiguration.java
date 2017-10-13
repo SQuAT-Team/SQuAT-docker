@@ -48,6 +48,6 @@ public class NegotiatorConfiguration {
 	 *            interaction.
 	 */
 	public static void setAutoAccept(boolean autoAccept) {
-		RUN_SEQUENTIAL = AUTO_ACCEPT;
+		AUTO_ACCEPT = autoAccept;
 	}
 }
