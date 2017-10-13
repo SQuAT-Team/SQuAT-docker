@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import edu.squat.transformations.ArchitecturalVersion;
+import io.github.squat_team.agentsUtils.BotIntializer;
 import io.github.squat_team.agentsUtils.ILoadHelper;
 import io.github.squat_team.agentsUtils.LoadHelper;
 import io.github.squat_team.agentsUtils.Proposal;
@@ -43,6 +44,8 @@ public class SQuATSillyBotsNegotiator {
 	 * @return false when a conflict is reached and true when there is an agreement
 	 */
 	public boolean negotiateBaseOnMultipleArchitectures() {
+		// initialize the bots for the case study.
+		BotIntializer.initialize2P2MBots();
 		// architectureAlternatives=loadArchitecturalAlternatives(); This should be done
 		// for real. Now I'm hardcoding the results
 		// Step 1: Collect initial proposals
