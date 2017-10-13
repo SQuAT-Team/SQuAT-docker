@@ -1,6 +1,11 @@
 package io.github.squat_team.agentsUtils;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -13,6 +18,7 @@ import org.palladiosimulator.pcm.system.System;
 import org.palladiosimulator.pcm.usagemodel.UsageModel;
 
 import edu.squat.transformations.ArchitecturalVersion;
+import io.github.squat_team.json.JSONification;
 import io.github.squat_team.model.OptimizationType;
 import io.github.squat_team.model.PCMArchitectureInstance;
 import io.github.squat_team.model.PCMResult;
@@ -426,6 +432,60 @@ public class LoadHelper implements ILoadHelper {
             new String[]{"name"}, new String[]{"BusinessTripMgmt"});
 
         jsonStringer.endArray();
+        jsonStringer.endObject();
+    }
+
+    /**
+     * @param file the file to read
+     * @return the base64 encoded file
+     */
+    private static String buildStringFromFile(String file) {
+        String ret = "";
+        try (RandomAccessFile raf = new RandomAccessFile(new File(file), "r")) {
+            byte[] fileContent = new byte[(int)raf.length()];
+            raf.read(fileContent);
+            ret = Base64.getEncoder().encodeToString(fileContent);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
+
+    private static void addType(JSONStringer jsonStringer, String basicPath, 
+            String filename, String filetype) {
+        jsonStringer.key(filetype);
+        jsonStringer.object();
+        jsonStringer.key("filename").value(basicPath + "/" + filename + "." + filetype);
+        jsonStringer.key("filecontent").value(buildStringFromFile(basicPath + "/" + filename + "." + filetype));
+        jsonStringer.endObject();
+    }
+
+    /**
+     * @param jsonStringer
+     */
+    public static void loadSpecificModel(JSONStringer jsonStringer, String name) {
+        final String MODEL_NAME = "default";
+        final String MODEL_PATH = "/home/roehrdor/Workspace-oxygen/SQuAT-docker/squat.modifiability/model";
+        final String ALTERNATIVE_REPOSITORY_PATH = "/home/roehrdor/Workspace-oxygen/SQuAT-docker/squat.modifiability/model/alternativeRepository.repository";
+        String BASE = MODEL_PATH;
+        String basicPath = MODEL_PATH + "/default";
+
+        jsonStringer.key("architecture-instance").object();
+        jsonStringer.key("name").value("");
+
+        JSONification jsoNification = new JSONification(jsonStringer);
+        jsoNification.add("repository", new File(basicPath + ".repository"));
+        jsoNification.add("system", new File(basicPath + ".system"));
+        jsoNification.add("allocation", new File(basicPath + ".allocation"));
+        jsoNification.add("resource-environment", new File(basicPath + ".resourceenvironment"));
+        jsoNification.add("usage-model", new File(basicPath + ".usagemodel"));
+        jsoNification.add("repository-with-alternatives", new File(BASE + "/" + "alternativeRepository" + ".repository"));
+
+        jsoNification.add("cost", new File("" + basicPath + ".cost"));
+        jsoNification.add("insinter-modular", new File("" + BASE + "/insinter-modular.henshin"));
+        jsoNification.add("splitrespn-modular", new File("" + BASE + "/splitrespn-modular.henshin"));
+        jsoNification.add("wrapper-modular", new File("" + BASE + "/wrapper-modular.henshin"));
+
         jsonStringer.endObject();
     }
 }
