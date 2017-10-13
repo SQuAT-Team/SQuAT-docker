@@ -97,7 +97,7 @@ public class RestBot {
      * @param obj
      * @return
      */
-    private static RestScenarioResult buildFromRoot(JSONObject obj) {
+    private RestScenarioResult buildFromRoot(JSONObject obj) {
         // Architecture
         JSONObject jsonArchitecture = obj.getJSONObject("architecture-instance");
         JSONObject cost = null;
@@ -121,8 +121,8 @@ public class RestBot {
         PCMResult pcmResult = new PCMResult(responseMeasureType);
         pcmResult.setResponse(response);
 
-        return new RestScenarioResult(jsonArchitecture.getString("name"), jsonArchitecture, pcmResult, cost, insinter,
-                splitrespn, wrapper);
+        return new RestScenarioResult(this.botType, jsonArchitecture.getString("name"), 
+                jsonArchitecture, pcmResult, cost, insinter, splitrespn, wrapper);
     }
 
     /**

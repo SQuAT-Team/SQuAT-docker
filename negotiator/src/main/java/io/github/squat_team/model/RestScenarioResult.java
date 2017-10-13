@@ -2,27 +2,35 @@ package io.github.squat_team.model;
 
 import org.json.JSONObject;
 
+import io.github.squat_team.agentsUtils.BotManager.BotType;
+
 public class RestScenarioResult extends PCMScenarioResult {
 
-    /** */
+    /** The resulting architecture */
     private final RestArchitecture architecture;
+
+    /** The type of the bot that created this result */
+    private final BotType originatingBotType;
 
     /**
      * Create a new RestScenarioResult without unwrapping the result for faster
      * forwarding
      *
+     * @param botType the type of bot that created this result
      * @param name the name of the architecture
      * @param architectureInstance the architecture
      * @param result the result
      */
-    public RestScenarioResult(String name, JSONObject architectureInstance, PCMResult result) {
-        this(name, architectureInstance, result, null, null, null, null);
+    public RestScenarioResult(BotType botType, String name, 
+            JSONObject architectureInstance, PCMResult result) {
+        this(botType, name, architectureInstance, result, null, null, null, null);
     }
 
     /**
      * Create a new RestScenarioResult without unwrapping the result for faster
      * forwarding
      *
+     * @param botType the type of bot that created this result
      * @param name the name of the architecture
      * @param architectureInstance the architecture
      * @param result the result
@@ -31,11 +39,12 @@ public class RestScenarioResult extends PCMScenarioResult {
      * @param splitrespn the splitrespn file
      * @param wrapper the wrapper file
      */
-    public RestScenarioResult(String name, JSONObject architectureInstance, 
-            PCMResult result, JSONObject cost, JSONObject insinter, 
-            JSONObject splitrespn, JSONObject wrapper) {
+    public RestScenarioResult(BotType botType, String name, 
+            JSONObject architectureInstance, PCMResult result, JSONObject cost, 
+            JSONObject insinter, JSONObject splitrespn, JSONObject wrapper) {
         super(null);
         this.setResult(result);
+        this.originatingBotType = Objects.requireNonNull(botType);
         this.architecture = new RestArchitecture(name, architectureInstance, 
             cost, insinter, splitrespn, wrapper);
     }
@@ -80,5 +89,12 @@ public class RestScenarioResult extends PCMScenarioResult {
      */
     public RestArchitecture getArchitecture() {
         return this.architecture;
+    }
+
+    /**
+     * @return the originating bot type
+     */
+    public BotType getOrigininatingBotType() {
+        return this.originatingBotType;
     }
 }
