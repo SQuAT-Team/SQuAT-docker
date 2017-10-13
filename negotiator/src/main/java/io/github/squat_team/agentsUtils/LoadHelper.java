@@ -8,6 +8,8 @@ import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.JSONStringer;
 
 import edu.squat.transformations.ArchitecturalVersion;
@@ -23,7 +25,6 @@ import io.github.squat_team.modifiability.ModifiabilityOperation;
  */
 public class LoadHelper implements ILoadHelper {
 
-    
     public List<SillyBot> loadBotsForArchitecturalAlternatives(List<ArchitecturalVersion> architecturalAlternatives,
             ArchitecturalVersion initialArchitecture) {
         return null;
@@ -37,32 +38,31 @@ public class LoadHelper implements ILoadHelper {
      * arrays keys and values have not the same length.
      *
      * This method will throw {@link NullPointerException} if either the 
-     * jsonStringer, keys or values are null.
+     * keys or values are null.
      *
-     * @param jsonStringer the json stringer to serialize the instruction
      * @param op the {@link ModifiabilityOperation} of the instruction
      * @param el the {@link ModifiabilityElement} of the instruction
      * @param keys the parameter keys
      * @param values the parameter values
      */
-    private static void createModifiabilityInstruction(JSONStringer jsonStringer, 
-            ModifiabilityOperation op, ModifiabilityElement el, 
+    private static JSONObject createModifiabilityInstruction(ModifiabilityOperation op, ModifiabilityElement el,
             String keys[], String values[]) throws NullPointerException {
-        Objects.requireNonNull(jsonStringer);
         Objects.requireNonNull(keys);
         Objects.requireNonNull(values);
         if (keys.length != values.length)
-            return;
+            return null;
+        ;
         final int LEN = keys.length;
-        jsonStringer.object();
-        jsonStringer.key("operation").value(String.valueOf(op));
-        jsonStringer.key("element").value(String.valueOf(el));
-        jsonStringer.key("parameters").object();
+        JSONObject ret = new JSONObject();
+        ret.put("operation", String.valueOf(op));
+        ret.put("element", String.valueOf(el));
+
+        JSONArray parameters = new JSONArray();
+        ret.put("parameters", parameters);
         for (int i = 0; i < LEN; ++i) {
-            jsonStringer.key(keys[i]).value(values[i]);
+            parameters.put(new JSONObject().put(keys[i], values[i]));
         }
-        jsonStringer.endObject();
-        jsonStringer.endObject();
+        return ret;
     }
 
     /**
@@ -70,31 +70,27 @@ public class LoadHelper implements ILoadHelper {
      *
      * @param type the {@link ResponseMeasureType} to use for this scenario
      * @param response the expected response value
-     * @param jsonStringer this json stringer is used to insert the scenario
-     *  into the JSON object. This {@link JSONStringer} is required to be in 
-     *  a state where a key can be created
      */
-    public static void createModifiabilityScenarioS1(ResponseMeasureType type, 
-            Comparable<Double> response, JSONStringer jsonStringer) {
-        jsonStringer.key("scenario");
-        jsonStringer.object();
+    public static JSONObject createModifiabilityScenarioS1(ResponseMeasureType type, Comparable<Double> response) {
 
-        jsonStringer.key("expectedResult").object();
-        jsonStringer.key("responseMeasureType").value(type);
-        jsonStringer.key("response").value(String.valueOf(response));
-        jsonStringer.endObject();
+        JSONObject scenario = new JSONObject();
 
-        jsonStringer.key("type").value(OptimizationType.MINIMIZATION);
-        jsonStringer.key("changes").array();
+        // expected Result
+        JSONObject expectedResult = new JSONObject();
+        expectedResult.put("responseMeasureType", type);
+        expectedResult.put("response", String.valueOf(response));
+        scenario.put("expectedResult", expectedResult);
 
-        createModifiabilityInstruction(jsonStringer, ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE, 
-            new String[]{"name"}, new String[]{"IExternalPayment"});
+        scenario.put("type", OptimizationType.MINIMIZATION);
+        JSONArray changes = new JSONArray();
+        scenario.put("changes", changes);
+        changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE,
+                new String[] { "name" }, new String[] { "IExternalPayment" }));
 
-        createModifiabilityInstruction(jsonStringer, ModifiabilityOperation.MODIFY, ModifiabilityElement.COMPONENT, 
-            new String[]{"name"}, new String[]{"BusinessTripMgmt"});
+        changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.COMPONENT,
+                new String[] { "name" }, new String[] { "BusinessTripMgmt" }));
 
-        jsonStringer.endArray();
-        jsonStringer.endObject();
+        return scenario;
     }
 
     /**
@@ -106,45 +102,40 @@ public class LoadHelper implements ILoadHelper {
      *  into the JSON object. This {@link JSONStringer} is required to be in 
      *  a state where a key can be created
      */
-    public static void createModifiabilityScenarioS2(ResponseMeasureType type, 
-            Comparable<Double> response, JSONStringer jsonStringer) {
-        jsonStringer.key("scenario");
-        jsonStringer.object();
+    public static JSONObject createModifiabilityScenarioS2(ResponseMeasureType type, Comparable<Double> response,
+            JSONStringer jsonStringer) {
 
-        jsonStringer.key("expectedResult").object();
-        jsonStringer.key("responseMeasureType").value(type);
-        jsonStringer.key("response").value(String.valueOf(response));
-        jsonStringer.endObject();
+        JSONObject scenario = new JSONObject();
 
-        jsonStringer.key("type").value(OptimizationType.MINIMIZATION);
-        jsonStringer.key("changes").array();
+        // expected Result
+        JSONObject expectedResult = new JSONObject();
+        expectedResult.put("responseMeasureType", type);
+        expectedResult.put("response", String.valueOf(response));
+        scenario.put("expectedResult", expectedResult);
 
-        createModifiabilityInstruction(jsonStringer, 
-            ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE, 
-            new String[]{"name"}, new String[]{"ITripDB"});
+        scenario.put("type", OptimizationType.MINIMIZATION);
+        JSONArray changes = new JSONArray();
+        scenario.put("changes", changes);
 
-        createModifiabilityInstruction(jsonStringer, 
-            ModifiabilityOperation.CREATE, ModifiabilityElement.INTERFACE, 
-            new String[]{"name"}, new String[]{"Analytics"});
+        changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE,
+                new String[] { "name" }, new String[] { "ITripDB" }));
 
-        createModifiabilityInstruction(jsonStringer, 
-            ModifiabilityOperation.CREATE, ModifiabilityElement.OPERATION, 
-            new String[]{"iname", "oname"}, new String[]{"Analytics", "getLastTrips"});
+        changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.INTERFACE,
+                new String[] { "name" }, new String[] { "Analytics" }));
 
-        createModifiabilityInstruction(jsonStringer, 
-            ModifiabilityOperation.CREATE, ModifiabilityElement.COMPONENT, 
-            new String[]{"name"}, new String[]{"Insights"});
+        changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.OPERATION,
+                new String[] { "iname", "oname" }, new String[] { "Analytics", "getLastTrips" }));
 
-        createModifiabilityInstruction(jsonStringer, 
-            ModifiabilityOperation.CREATE, ModifiabilityElement.PROVIDEDROLE, 
-            new String[]{"cname", "iname"}, new String[]{"Insights", "Analytics"});
+        changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.COMPONENT,
+                new String[] { "name" }, new String[] { "Insights" }));
 
-        createModifiabilityInstruction(jsonStringer, 
-            ModifiabilityOperation.MODIFY, ModifiabilityElement.REQUIREDROLE, 
-            new String[]{"cname", "iname"}, new String[]{"Insights", "ITripDB"});
+        changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.PROVIDEDROLE,
+                new String[] { "cname", "iname" }, new String[] { "Insights", "Analytics" }));
 
-        jsonStringer.endArray();
-        jsonStringer.endObject();
+        changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.REQUIREDROLE,
+                new String[] { "cname", "iname" }, new String[] { "Insights", "ITripDB" }));
+
+        return scenario;
     }
 
     /**
@@ -154,17 +145,16 @@ public class LoadHelper implements ILoadHelper {
     private static String buildStringFromFile(String file) {
         String ret = "";
         try (RandomAccessFile raf = new RandomAccessFile(new File(file), "r")) {
-            byte[] fileContent = new byte[(int)raf.length()];
+            byte[] fileContent = new byte[(int) raf.length()];
             raf.read(fileContent);
             ret = Base64.getEncoder().encodeToString(fileContent);
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return ret;
     }
 
-    private static void addType(JSONStringer jsonStringer, String basicPath, 
-            String filename, String filetype) {
+    private static void addType(JSONStringer jsonStringer, String basicPath, String filename, String filetype) {
         jsonStringer.key(filetype);
         jsonStringer.object();
         jsonStringer.key("filename").value(basicPath + "/" + filename + "." + filetype);
@@ -216,7 +206,8 @@ public class LoadHelper implements ILoadHelper {
         add(jsonStringer, "allocation", new File(basicPath + ".allocation"));
         add(jsonStringer, "resource-environment", new File(basicPath + ".resourceenvironment"));
         add(jsonStringer, "usage-model", new File(basicPath + ".usagemodel"));
-        add(jsonStringer, "repository-with-alternatives", new File(BASE + "/" + "alternativeRepository" + ".repository"));
+        add(jsonStringer, "repository-with-alternatives",
+                new File(BASE + "/" + "alternativeRepository" + ".repository"));
 
         jsonStringer.endObject();
 

@@ -9,34 +9,30 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import java.util.function.Consumer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import io.github.squat_team.json.JSONification;
-import io.github.squat_team.json.UnJSONification;
-import io.github.squat_team.model.PCMArchitectureInstance;
 import io.github.squat_team.model.PCMResult;
-import io.github.squat_team.model.PCMScenario;
-import io.github.squat_team.model.PCMScenarioResult;
 import io.github.squat_team.model.ResponseMeasureType;
+import io.github.squat_team.model.RestArchitecture;
 import io.github.squat_team.model.RestScenarioResult;
 
 public class RestBot {
 
     private final String remoteURI;
 
-    private PCMScenario scenario;
+    private final JSONObject scenario;
 
     private final String botUUID;
 
     /**
      * @param remoteURI
      */
-    public RestBot(String remoteURI) {
+    public RestBot(String remoteURI, JSONObject scenario) {
         this.remoteURI = Objects.requireNonNull(remoteURI);
         this.botUUID = UUID.randomUUID().toString();
+        this.scenario = scenario;
     }
 
     /**
@@ -120,33 +116,45 @@ public class RestBot {
     }
 
     /**
-     * @param body
+     * @param architecture
      * @return
      */
-    public RestScenarioResult analyze(String body) {
-        return buildFromRoot(this.call(body, "analyze"));
+    private String buildBody(RestArchitecture architecture) {
+        JSONObject root = new JSONObject();
+        root.put("scenario", this.scenario);
+        root.put("architecture-instance", architecture.getRestArchitecture());
+        if (architecture.getCost() != null)
+            root.put("cost", architecture.getCost());
+        if (architecture.getInsinter() != null)
+            root.put("insinter-modular", architecture.getInsinter());
+        if (architecture.getSplitrespn() != null)
+            root.put("splitrespn-modular", architecture.getSplitrespn());
+        if (architecture.getWrapper() != null)
+            root.put("wrapper-modular", architecture.getWrapper());
+        return root.toString();
     }
 
     /**
      * @param body
      * @return
      */
-    public List<RestScenarioResult> searchForAlternatives(String body) {
+    public RestScenarioResult analyze(RestArchitecture architecture) {
+        return buildFromRoot(this.call(this.buildBody(architecture), "analyze"));
+    }
+
+    /**
+     * @param body
+     * @return
+     */
+    public List<RestScenarioResult> searchForAlternatives(RestArchitecture architecture) {
         final List<RestScenarioResult> results = new ArrayList<>();
-        JSONObject result = this.call(body, "searchForAlternatives");
+        String body = null;
+        JSONObject result = this.call(this.buildBody(architecture), "searchForAlternatives");
         JSONArray jsonResults = result.getJSONArray("values");
         jsonResults.forEach(o -> {
             results.add(buildFromRoot((JSONObject)o));
         });
         return results;
-    }
-
-    public PCMScenario getScenario() {
-        return scenario;
-    }
-
-    public void setScenario(PCMScenario scenario) {
-        this.scenario = scenario;
     }
 
     public String getBotUUID() {
