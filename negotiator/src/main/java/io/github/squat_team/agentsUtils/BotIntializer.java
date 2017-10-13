@@ -11,47 +11,52 @@ import io.github.squat_team.model.ResponseMeasureType;
  */
 public class BotIntializer {
 
+	// TODO: PA! Set the Docker URI.
+
 	/**
 	 * Initializes 2 Performance bots and 2 Modifiability Bots. The standard setting
 	 * of the STPlus case study.
 	 */
 	public static void initialize2P2MBots() {
-		createBot(LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0), "TODO URI",
+		createBot("M1", LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0), "TODO URI",
 				BotType.MODIFIABILITY);
-		createBot(LoadHelper.createModifiabilityScenarioS2(ResponseMeasureType.DECIMAL, 300.0), "TODO URI",
+		createBot("M2", LoadHelper.createModifiabilityScenarioS2(ResponseMeasureType.DECIMAL, 300.0), "TODO URI",
 				BotType.MODIFIABILITY);
-		createBot(LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 30.0), "TODO URI",
+		createBot("P1", LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 30.0), "TODO URI",
 				BotType.PERFORMANCE);
-		createBot(LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40), "TODO URI", BotType.PERFORMANCE);
+		createBot("P2", LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40), "TODO URI",
+				BotType.PERFORMANCE);
 	}
-	
+
 	/**
 	 * Initializes 2 Performance bots and 2 Modifiability Bots. The standard setting
 	 * of the STPlus case study.
 	 */
 	public static void initialize3P3MBots() {
 		initialize2P2MBots();
-		createBot(LoadHelper.createModifiabilityScenarioS3(ResponseMeasureType.DECIMAL, 98.0), "TODO URI",
+		createBot("M3", LoadHelper.createModifiabilityScenarioS3(ResponseMeasureType.DECIMAL, 98.0), "TODO URI",
 				BotType.MODIFIABILITY);
-		createBot(LoadHelper.createPerformanceScenarioS3(ResponseMeasureType.DECIMAL, 40.0), "TODO URI",
+		createBot("P3", LoadHelper.createPerformanceScenarioS3(ResponseMeasureType.DECIMAL, 40.0), "TODO URI",
 				BotType.PERFORMANCE);
 	}
-	
+
 	/**
 	 * Initializes 2 Performance bots and 2 Modifiability Bots. The standard setting
 	 * of the STPlus case study.
 	 */
 	public static void initialize4P4MBots() {
 		initialize3P3MBots();
-		createBot(LoadHelper.createModifiabilityScenarioS4(ResponseMeasureType.DECIMAL, 199.5), "TODO URI",
+		createBot("M4", LoadHelper.createModifiabilityScenarioS4(ResponseMeasureType.DECIMAL, 199.5), "TODO URI",
 				BotType.MODIFIABILITY);
-		createBot(LoadHelper.createPerformanceScenarioS4(ResponseMeasureType.DECIMAL, 45.0), "TODO URI",
+		createBot("P4", LoadHelper.createPerformanceScenarioS4(ResponseMeasureType.DECIMAL, 45.0), "TODO URI",
 				BotType.PERFORMANCE);
 	}
 
 	/**
 	 * Creates a bot.
 	 * 
+	 * @param name
+	 *            the name that the bot should have.
 	 * @param scenario
 	 *            the scenario the bot should have.
 	 * @param remoteURI
@@ -59,9 +64,9 @@ public class BotIntializer {
 	 * @param type
 	 *            the type of the bot, e.g., performance, modifiability,...
 	 */
-	private static void createBot(JSONObject scenario, String remoteURI, BotType type) {
-		RestBot bot = new RestBot(type, remoteURI, scenario);
-		BotManager.getInstance().addBot(bot, type);
+	private static void createBot(String name, JSONObject scenario, String remoteURI, BotType type) {
+		RestBot bot = new RestBot(name, type, remoteURI, scenario);
+		BotManager.getInstance().addBot(bot);
 	}
 
 }

@@ -1,11 +1,8 @@
 package negotiator;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.squat.transformations.ArchitecturalVersion;
 import io.github.squat_team.SQuATSillyBotsNegotiator;
 import io.github.squat_team.agentsUtils.ILoadHelper;
 import io.github.squat_team.agentsUtils.ModifiabilityProposal;
@@ -13,6 +10,7 @@ import io.github.squat_team.agentsUtils.ModifiabilitySillyBot;
 import io.github.squat_team.agentsUtils.PerformanceProposal;
 import io.github.squat_team.agentsUtils.PerformanceSillyBot;
 import io.github.squat_team.agentsUtils.SillyBot;
+import io.github.squat_team.model.RestArchitecture;
 
 public class SillyBotsTest {
 
@@ -24,9 +22,10 @@ public class SillyBotsTest {
 	}
 
 	private class TestLoadHelper implements ILoadHelper {
+
 		@Override
-		public List<SillyBot> loadBotsForArchitecturalAlternatives(List<ArchitecturalVersion> architecturalAlternatives,
-				ArchitecturalVersion initialArchitecture) {
+		public List<SillyBot> generateSillyBotsAndAnalyze(List<RestArchitecture> architecturalAlternatives,
+				RestArchitecture initialArchitecture) {
 			ModifiabilitySillyBot m1Bot = new ModifiabilitySillyBot(/* 3, */ 115f, "m1", 120f);
 			ModifiabilitySillyBot m2Bot = new ModifiabilitySillyBot(/* 5, */ 190.5f, "m2", 300f);
 			PerformanceSillyBot p1Bot = new PerformanceSillyBot(111.7639f, "p1", 30f);
@@ -3568,6 +3567,7 @@ public class SillyBotsTest {
 			p2Bot.printUtilies();
 			return ret;
 		}
+
 
 	}
 
