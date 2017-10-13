@@ -7,6 +7,7 @@ public class NegotiatorConfiguration {
 	public static final String INITIAL_ARCHITECTURE_ALTERNATIVE_REPOSITORY_FULL_PATH = "/home/model/alternativeRepository.repository"; // /Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/cocomeWithoutPickUpStoreAndServiceAdapter/alternativescocome-cloud.repository
 
 	private static boolean RUN_SEQUENTIAL = false;
+	private static boolean AUTO_ACCEPT = true;
 
 	/**
 	 * Checks whether the bots should work sequential.
@@ -19,6 +20,16 @@ public class NegotiatorConfiguration {
 	}
 
 	/**
+	 * Checks whether the negotiator should accept the first agreement.
+	 * 
+	 * @return true if negotiator should accept first agreement without user
+	 *         interaction.
+	 */
+	public static boolean autoAccept() {
+		return AUTO_ACCEPT;
+	}
+
+	/**
 	 * This should not be done during a run...
 	 * 
 	 * @param runSequential
@@ -27,5 +38,16 @@ public class NegotiatorConfiguration {
 	 */
 	public static void setSequential(boolean runSequential) {
 		RUN_SEQUENTIAL = runSequential;
+	}
+
+	/**
+	 * This should not be done during a run...
+	 * 
+	 * @param autoAccept
+	 *            true if negotiator should accept first agreement without user
+	 *            interaction.
+	 */
+	public static void setAutoAccept(boolean autoAccept) {
+		RUN_SEQUENTIAL = AUTO_ACCEPT;
 	}
 }

@@ -78,14 +78,19 @@ public class SQuATSillyBotsNegotiator {
 				if (checkAgreement(proposals)) {
 					System.out.println("Agreement: " + agreementProposal);
 					printCurrentState(agreementProposal);
-					System.out.println("REDO? (Y/N): ");
-					Scanner scan = new Scanner(System.in);
-					String answer = scan.next();
-					if (!answer.trim().toUpperCase().equals("Y"))
+					if (NegotiatorConfiguration.autoAccept()) {
+						// if auto accept
 						redoRequest = false;
-					else
-						redoRequest = true;
-					// scan.close();
+					} else {
+						System.out.println("REDO? (Y/N): ");
+						Scanner scan = new Scanner(System.in);
+						String answer = scan.next();
+						if (!answer.trim().toUpperCase().equals("Y"))
+							redoRequest = false;
+						else
+							redoRequest = true;
+						// scan.close();
+					}
 				}
 			}
 		}
