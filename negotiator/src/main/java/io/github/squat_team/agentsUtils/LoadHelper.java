@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
@@ -17,6 +18,7 @@ import io.github.squat_team.model.OptimizationType;
 import io.github.squat_team.model.ResponseMeasureType;
 import io.github.squat_team.modifiability.ModifiabilityElement;
 import io.github.squat_team.modifiability.ModifiabilityOperation;
+import io.github.squat_team.performance.PerformanceMetric;
 
 /**
  * Sets up the specific {@link SillyBot} and scenarios used in this specific
@@ -28,6 +30,58 @@ public class LoadHelper implements ILoadHelper {
     public List<SillyBot> loadBotsForArchitecturalAlternatives(List<ArchitecturalVersion> architecturalAlternatives,
             ArchitecturalVersion initialArchitecture) {
         return null;
+    }
+
+    /**
+     * @return the created {@link JSONObject}
+     */
+    public static JSONObject createScenarioOfWorkload(double response, ResponseMeasureType type) {
+        ArrayList<String> workloadIDs = new ArrayList<String>();
+        workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
+        JSONObject scenario = new JSONObject();
+
+        scenario.put("type", OptimizationType.MINIMIZATION);
+        JSONArray ids = new JSONArray();
+        scenario.put("ids", ids);
+        workloadIDs.forEach(ids::put);
+        scenario.put("rate", 1.1);
+        scenario.put("scenario-type", "WORKLOAD");
+
+        // PCMRESULT
+        JSONObject expectedResult = new JSONObject();
+        expectedResult.put("responseMeasureType", type);
+        expectedResult.put("response", String.valueOf(response));
+        scenario.put("expectedResult", expectedResult);
+
+        scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
+
+        return scenario;
+    }
+
+    /**
+     * @return the created {@link JSONObject}
+     */
+    public static JSONObject createScenarioOfCPU(double response, ResponseMeasureType type) {
+        ArrayList<String> workloadIDs = new ArrayList<String>();
+        workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
+        JSONObject scenario = new JSONObject();
+
+        scenario.put("type", OptimizationType.MINIMIZATION);
+        JSONArray ids = new JSONArray();
+        scenario.put("ids", ids);
+        workloadIDs.forEach(ids::put);
+        scenario.put("rate", 0.5);
+        scenario.put("scenario-type", "WORKLOAD");
+
+        // PCMRESULT
+        JSONObject expectedResult = new JSONObject();
+        expectedResult.put("responseMeasureType", type);
+        expectedResult.put("response", String.valueOf(response));
+        scenario.put("expectedResult", expectedResult);
+
+        scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
+
+        return scenario;
     }
 
     /**
@@ -102,8 +156,7 @@ public class LoadHelper implements ILoadHelper {
      *  into the JSON object. This {@link JSONStringer} is required to be in 
      *  a state where a key can be created
      */
-    public static JSONObject createModifiabilityScenarioS2(ResponseMeasureType type, Comparable<Double> response,
-            JSONStringer jsonStringer) {
+    public static JSONObject createModifiabilityScenarioS2(ResponseMeasureType type, Comparable<Double> response) {
 
         JSONObject scenario = new JSONObject();
 

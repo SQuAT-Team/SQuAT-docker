@@ -1,5 +1,6 @@
 package io.github.squat_team.agentsUtils;
 
+import org.json.JSONObject;
 import org.json.JSONStringer;
 
 import io.github.squat_team.RestBot;
@@ -16,14 +17,14 @@ public class BotIntializer {
 	 * Initializes 2 Performance bots and 2 Modifiability Bots. The standard setting of the STPlus case study.
 	 */
 	public static void initialize2P2MBots() {
-		// TODO: LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120, scenarioM1)
-		createBot(, "TODO URI" , BotType.MODIFIABILITY);
-		// TODO: LoadHelper.createModifiabilityScenarioS2(ResponseMeasureType.DECIMAL, 300, scenarioM2)
-		createBot(, "TODO URI" , BotType.MODIFIABILITY);
-		// TODO: LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 30, scenarioP1)
-		createBot(, "TODO URI" , BotType.PERFORMANCE);
-		// TODO: LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 40, scenarioP2)
-		createBot(, "TODO URI" , BotType.PERFORMANCE);
+		createBot(LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0), 
+				"TODO URI" , BotType.MODIFIABILITY);
+		createBot(LoadHelper.createModifiabilityScenarioS2(ResponseMeasureType.DECIMAL, 300.0),
+				"TODO URI" , BotType.MODIFIABILITY);
+		createBot(LoadHelper.createScenarioOfWorkload(ResponseMeasureType.DECIMAL, 30.0),
+				"TODO URI" , BotType.PERFORMANCE);
+		createBot(LoadHelper.createScenarioOfCPU(ResponseMeasureType.DECIMAL, 40),
+				"TODO URI" , BotType.PERFORMANCE);
 	}
 
 	/**
@@ -36,7 +37,7 @@ public class BotIntializer {
 	 * @param type
 	 *            the type of the bot, e.g., performance, modifiability,...
 	 */
-	private static void createBot(PCMScenario scenario, String remoteURI, BotType type) {
+	private static void createBot(JSONObject scenario, String remoteURI, BotType type) {
 		RestBot bot = new RestBot(remoteURI);
 		bot.setScenario(scenario);
 		BotManager.getInstance().addBot(bot, type);
