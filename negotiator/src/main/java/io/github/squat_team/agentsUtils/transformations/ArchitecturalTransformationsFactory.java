@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.json.JSONObject;
 
@@ -47,9 +48,7 @@ public class ArchitecturalTransformationsFactory {
         // architectures created for previous levels
         List<RestArchitecture> ret = new ArrayList<>();
         for (int i = 1; i <= n; i++) {
-            resultPerLevel.get(i).forEach(e -> {
-                ret.add(e.getArchitecture());
-            });
+            resultPerLevel.get(i).stream().map(RestScenarioResult::getArchitecture).forEach(ret::add);
         }
         return ret;
     }
@@ -80,9 +79,8 @@ public class ArchitecturalTransformationsFactory {
      * @param results the list to add the results to
      */
     private void performPerfBot(RestArchitecture arch, List<RestScenarioResult> results) {
-        BotManager.getInstance().getBots(BotType.PERFORMANCE).forEach(b -> {
-            b.searchForAlternatives(arch).forEach(results::add);
-        });
+        BotManager.getInstance().getBots(BotType.PERFORMANCE).
+            stream().map(b -> b.searchForAlternatives(arch)).forEach(results::addAll);
     }
 
     /**
