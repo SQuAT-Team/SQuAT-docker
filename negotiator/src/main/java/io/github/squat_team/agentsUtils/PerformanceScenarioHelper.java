@@ -3,6 +3,8 @@ package io.github.squat_team.agentsUtils;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.json.JSONStringer;
 import org.palladiosimulator.pcm.allocation.Allocation;
 import org.palladiosimulator.pcm.repository.Repository;
@@ -26,63 +28,55 @@ import io.github.squat_team.util.SQuATHelper;
 public class PerformanceScenarioHelper {
 
     /**
-     * @param jsonStringer this json stringer is used to insert the scenario
-     *  into the JSON object. This {@link JSONStringer} is required to be in 
-     *  a state where a key can be created
+     * @return the created {@link JSONObject}
      */
-    public static void createScenarioOfWorkload(JSONStringer jsonStringer) {
+    public static JSONObject createScenarioOfWorkload() {
         ArrayList<String> workloadIDs = new ArrayList<String>();
         workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
+        JSONObject scenario = new JSONObject();
 
-        jsonStringer.key("scenario");
-        jsonStringer.object();
-        
-        jsonStringer.key("type").value(OptimizationType.MINIMIZATION);
-        jsonStringer.key("ids").array();
-        for(String id : workloadIDs) jsonStringer.value(id);
-        jsonStringer.endArray();
-        jsonStringer.key("rate").value(1.1);
-        jsonStringer.key("scenario-type").value("WORKLOAD");
+        scenario.put("type", OptimizationType.MINIMIZATION);
+        JSONArray ids = new JSONArray();
+        scenario.put("ids", ids);
+        workloadIDs.forEach(ids::put);
+        scenario.put("rate", 1.1);
+        scenario.put("scenario-type", "WORKLOAD");
 
         // PCMRESULT
-        jsonStringer.key("expectedResult").object();
-        jsonStringer.key("responseMeasureType").value(ResponseMeasureType.DECIMAL);
-        jsonStringer.key("response").value("120");
-        jsonStringer.endObject();
+        JSONObject expectedResult = new JSONObject();
+        expectedResult.put("responseMeasureType", ResponseMeasureType.DECIMAL);
+        expectedResult.put("response", "120");
+        scenario.put("expectedResult", expectedResult);
 
-        jsonStringer.key("metric").value(PerformanceMetric.RESPONSE_TIME);
+        scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
 
-        jsonStringer.endObject();
+        return scenario;
     }
 
     /**
-     * @param jsonStringer this json stringer is used to insert the scenario
-     *  into the JSON object. This {@link JSONStringer} is required to be in 
-     *  a state where a key can be created
+     * @return the created {@link JSONObject}
      */
-    public static void createScenarioOfCPU(JSONStringer jsonStringer) {
+    public static JSONObject createScenarioOfCPU(JSONStringer jsonStringer) {
         ArrayList<String> workloadIDs = new ArrayList<String>();
-        workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");     // CPU ID
+        workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
+        JSONObject scenario = new JSONObject();
 
-        jsonStringer.key("scenario");
-        jsonStringer.object();
-
-        jsonStringer.key("type").value(OptimizationType.MINIMIZATION);
-        jsonStringer.key("ids").array();
-        for(String id : workloadIDs) jsonStringer.value(id);
-        jsonStringer.endArray();
-        jsonStringer.key("rate").value(0.5);
-        jsonStringer.key("scenario-type").value("WORKLOAD");
+        scenario.put("type", OptimizationType.MINIMIZATION);
+        JSONArray ids = new JSONArray();
+        scenario.put("ids", ids);
+        workloadIDs.forEach(ids::put);
+        scenario.put("rate", 0.5);
+        scenario.put("scenario-type", "WORKLOAD");
 
         // PCMRESULT
-        jsonStringer.key("expectedResult").object();
-        jsonStringer.key("responseMeasureType").value(ResponseMeasureType.DECIMAL);
-        jsonStringer.key("response").value(6.0);
-        jsonStringer.endObject();
+        JSONObject expectedResult = new JSONObject();
+        expectedResult.put("responseMeasureType", ResponseMeasureType.DECIMAL);
+        expectedResult.put("response", "6.0");
+        scenario.put("expectedResult", expectedResult);
 
-        jsonStringer.key("metric").value(PerformanceMetric.RESPONSE_TIME);
+        scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
 
-        jsonStringer.endObject();
+        return scenario;
     }
 
     /*
