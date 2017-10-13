@@ -16,6 +16,7 @@ import org.json.JSONStringer;
 import edu.squat.transformations.ArchitecturalVersion;
 import io.github.squat_team.model.OptimizationType;
 import io.github.squat_team.model.ResponseMeasureType;
+import io.github.squat_team.model.RestArchitecture;
 import io.github.squat_team.modifiability.ModifiabilityElement;
 import io.github.squat_team.modifiability.ModifiabilityOperation;
 import io.github.squat_team.performance.PerformanceMetric;
@@ -59,10 +60,10 @@ public class LoadHelper implements ILoadHelper {
 
         return scenario;
     }
-    
+
     /**
      * A scenario which increases the workload +30%.
-
+    
      * @return the created {@link JSONObject}
      */
     public static JSONObject createPerformanceScenarioS4(ResponseMeasureType type, double response) {
@@ -115,7 +116,7 @@ public class LoadHelper implements ILoadHelper {
 
         return scenario;
     }
-    
+
     /**
      * A scenario which simulates a system failure in the Server1-cluster. (-50% CPU).
      * 
@@ -275,57 +276,62 @@ public class LoadHelper implements ILoadHelper {
     }
 
     /**
-     * Add the given file to the JSON
+     * Create a {@link JSONObject} for the given key and file
      *
-     * @param jsonStringer
      * @param key the key to use for this file
      * @param file the file whose content to add
+     * @return the object or null if file could not be read
      */
-    private static void add(JSONStringer jsonStringer, String key, File file) {
-        Objects.requireNonNull(jsonStringer);
+    private static JSONObject create(String key, File file) {
         Objects.requireNonNull(key);
         Objects.requireNonNull(file);
         try {
+            JSONObject obj = new JSONObject();
             byte[] fileContent = Files.readAllBytes(file.toPath());
-            jsonStringer.key(key);
-            jsonStringer.object();
-            jsonStringer.key("filename");
-            jsonStringer.value(file.getName());
             String encoded = Base64.getEncoder().encodeToString(fileContent);
-            jsonStringer.key("filecontent");
-            jsonStringer.value(encoded);
-            jsonStringer.endObject();
+            obj.put("filename", file.getName());
+            obj.put("filecontent", encoded);
+            return obj;
         } catch (IOException e) {
             e.printStackTrace(System.err);
         }
+        return null;
+    }
+
+    public static void putIfNotNull(JSONObject parent, String key, File file) {
+        JSONObject child = create(key, file);
+        if (child != null)
+            parent.put(key, child);
     }
 
     /**
-     * @param jsonStringer
+     * @param name
+     * @return {@link RestArchitecture} instance
      */
-    public static void loadSpecificModel(JSONStringer jsonStringer, String name) {
+    public static RestArchitecture loadSpecificModel(String name) {
         final String MODEL_NAME = "default";
         final String MODEL_PATH = "/home/roehrdor/Workspace-oxygen/SQuAT-docker/squat.modifiability/model";
         final String ALTERNATIVE_REPOSITORY_PATH = "/home/roehrdor/Workspace-oxygen/SQuAT-docker/squat.modifiability/model/alternativeRepository.repository";
         String BASE = MODEL_PATH;
         String basicPath = MODEL_PATH + "/default";
 
-        jsonStringer.key("architecture-instance").object();
-        jsonStringer.key("name").value("");
-
-        add(jsonStringer, "repository", new File(basicPath + ".repository"));
-        add(jsonStringer, "system", new File(basicPath + ".system"));
-        add(jsonStringer, "allocation", new File(basicPath + ".allocation"));
-        add(jsonStringer, "resource-environment", new File(basicPath + ".resourceenvironment"));
-        add(jsonStringer, "usage-model", new File(basicPath + ".usagemodel"));
-        add(jsonStringer, "repository-with-alternatives",
+        // Architecture
+        JSONObject architecture = new JSONObject();
+        architecture.put("name", name);
+        putIfNotNull(architecture, "repository", new File(basicPath + ".repository"));
+        putIfNotNull(architecture, "system", new File(basicPath + ".system"));
+        putIfNotNull(architecture, "allocation", new File(basicPath + ".allocation"));
+        putIfNotNull(architecture, "resource-environment", new File(basicPath + ".resourceenvironment"));
+        putIfNotNull(architecture, "usage-model", new File(basicPath + ".usagemodel"));
+        putIfNotNull(architecture, "repository-with-alternatives",
                 new File(BASE + "/" + "alternativeRepository" + ".repository"));
 
-        jsonStringer.endObject();
+        // Optional architectur part
+        JSONObject cost = create("cost", new File("" + basicPath + ".cost"));
+        JSONObject insinter = create("insinter-modular", new File("" + BASE + "/insinter-modular.henshin"));
+        JSONObject splitrespn = create("splitrespn-modular", new File("" + BASE + "/splitrespn-modular.henshin"));
+        JSONObject wrapper = create("wrapper-modular", new File("" + BASE + "/wrapper-modular.henshin"));
 
-        add(jsonStringer, "cost", new File("" + basicPath + ".cost"));
-        add(jsonStringer, "insinter-modular", new File("" + BASE + "/insinter-modular.henshin"));
-        add(jsonStringer, "splitrespn-modular", new File("" + BASE + "/splitrespn-modular.henshin"));
-        add(jsonStringer, "wrapper-modular", new File("" + BASE + "/wrapper-modular.henshin"));
+        return new RestArchitecture(name, architecture, cost, insinter, splitrespn, wrapper);
     }
 }
