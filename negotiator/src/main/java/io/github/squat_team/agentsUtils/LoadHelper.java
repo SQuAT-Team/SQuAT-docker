@@ -33,9 +33,11 @@ public class LoadHelper implements ILoadHelper {
     }
 
     /**
+     * A scenario which increases the workload +10%.
+     * 
      * @return the created {@link JSONObject}
      */
-    public static JSONObject createScenarioOfWorkload(ResponseMeasureType type, double response) {
+    public static JSONObject createPerformanceScenarioS1(ResponseMeasureType type, double response) {
         ArrayList<String> workloadIDs = new ArrayList<String>();
         workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
         JSONObject scenario = new JSONObject();
@@ -57,11 +59,13 @@ public class LoadHelper implements ILoadHelper {
 
         return scenario;
     }
-
+    
     /**
+     * A scenario which increases the workload +30%.
+
      * @return the created {@link JSONObject}
      */
-    public static JSONObject createScenarioOfCPU(ResponseMeasureType type, double response) {
+    public static JSONObject createPerformanceScenarioS4(ResponseMeasureType type, double response) {
         ArrayList<String> workloadIDs = new ArrayList<String>();
         workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
         JSONObject scenario = new JSONObject();
@@ -70,8 +74,64 @@ public class LoadHelper implements ILoadHelper {
         JSONArray ids = new JSONArray();
         scenario.put("ids", ids);
         workloadIDs.forEach(ids::put);
-        scenario.put("rate", 0.5);
+        scenario.put("rate", 1.3);
         scenario.put("scenario-type", "WORKLOAD");
+
+        // PCMRESULT
+        JSONObject expectedResult = new JSONObject();
+        expectedResult.put("responseMeasureType", type);
+        expectedResult.put("response", String.valueOf(response));
+        scenario.put("expectedResult", expectedResult);
+
+        scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
+
+        return scenario;
+    }
+
+    /**
+     * A scenario which simulates a system failure in the DB-cluster. (-50% CPU).
+     * 
+     * @return the created {@link JSONObject}
+     */
+    public static JSONObject createPerformanceScenarioS2(ResponseMeasureType type, double response) {
+        ArrayList<String> workloadIDs = new ArrayList<String>();
+        workloadIDs.add("_GecPsF7fEeavvL8WcdoZSg");
+        JSONObject scenario = new JSONObject();
+
+        scenario.put("type", OptimizationType.MINIMIZATION);
+        JSONArray ids = new JSONArray();
+        scenario.put("ids", ids);
+        workloadIDs.forEach(ids::put);
+        scenario.put("rate", 0.5);
+        scenario.put("scenario-type", "CPU");
+
+        // PCMRESULT
+        JSONObject expectedResult = new JSONObject();
+        expectedResult.put("responseMeasureType", type);
+        expectedResult.put("response", String.valueOf(response));
+        scenario.put("expectedResult", expectedResult);
+
+        scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
+
+        return scenario;
+    }
+    
+    /**
+     * A scenario which simulates a system failure in the Server1-cluster. (-50% CPU).
+     * 
+     * @return the created {@link JSONObject}
+     */
+    public static JSONObject createPerformanceScenarioS3(ResponseMeasureType type, double response) {
+        ArrayList<String> workloadIDs = new ArrayList<String>();
+        workloadIDs.add("_psq4IiINEeSC6_3TPN1J7A");
+        JSONObject scenario = new JSONObject();
+
+        scenario.put("type", OptimizationType.MINIMIZATION);
+        JSONArray ids = new JSONArray();
+        scenario.put("ids", ids);
+        workloadIDs.forEach(ids::put);
+        scenario.put("rate", 0.5);
+        scenario.put("scenario-type", "CPU");
 
         // PCMRESULT
         JSONObject expectedResult = new JSONObject();
