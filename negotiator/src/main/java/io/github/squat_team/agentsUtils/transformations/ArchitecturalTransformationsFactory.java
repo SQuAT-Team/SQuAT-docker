@@ -1,87 +1,122 @@
 package io.github.squat_team.agentsUtils.transformations;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import edu.squat.transformations.ArchitecturalVersion;
-import io.github.squat_team.NegotiatorConfiguration;
+import org.json.JSONObject;
+
+import io.github.squat_team.RestBot;
+import io.github.squat_team.agentsUtils.BotManager;
+import io.github.squat_team.agentsUtils.BotManager.BotType;
+import io.github.squat_team.model.RestArchitecture;
+import io.github.squat_team.model.RestScenarioResult;
 
 public class ArchitecturalTransformationsFactory {
 
-	private Hashtable<Integer, List<ArchitecturalVersion>> architecturesByLevel;
-	private ModifiabilityTransformationsFactory modifiabilityTrans;
-	private PerformanceTransformationFactory performanceTrans;
-	// private ArchitecturalVersion initialArchitecture1;
-	private ArchitecturalVersion initialArchitecture;
+    /** The initial architecture */
+    private final RestArchitecture initialArchitecture;
 
-	public ArchitecturalTransformationsFactory() {
-		modifiabilityTrans = new ModifiabilityTransformationsFactory();
-		// initialArchitecture2=new ArchitecturalVersion("default","models","");
-		// initialArchitecture2.setFullPathToAlternativeRepository("/Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/alternativeRepository.repository");
-		initialArchitecture = new ArchitecturalVersion(NegotiatorConfiguration.INITIAL_ARCHITECTURE_NAME,
-				NegotiatorConfiguration.INITIAL_ARCHITECTURE_PATH, "");
-		initialArchitecture.setFullPathToAlternativeRepository(
-				NegotiatorConfiguration.INITIAL_ARCHITECTURE_ALTERNATIVE_REPOSITORY_FULL_PATH);
-		performanceTrans = new PerformanceTransformationFactory();
-		architecturesByLevel = new Hashtable<>();
-	}
+    /** List of Scenario */
+    private final Map<Integer, List<RestScenarioResult>> resultPerLevel;
 
-	public List<ArchitecturalVersion> getArchitecturalTransformationsUntilLevel(int level) {
-		if (architecturesByLevel.get(level) == null)
-			createArchitecturalTransformationsForLevel(level);
+    /**
+     * Create a new Transformation factory with the given initial architecture
+     *
+     * @param initialArchitecture the initial architecture
+     */
+    public ArchitecturalTransformationsFactory(RestArchitecture initialArchitecture) {
+        this.initialArchitecture = initialArchitecture;
+        this.resultPerLevel = new HashMap<>();
+    }
 
-		// The results is the architectures created for this level plus the
-		// architectures created for previous levels
-		List<ArchitecturalVersion> ret = new ArrayList<ArchitecturalVersion>();
-		for (int i = 1; i <= level; i++) {
-			ret.addAll(architecturesByLevel.get(i));
-		}
-		return ret;
-	}
+    /**
+     * Get a list with all architectures that were created by any bot during the
+     * first n levels.
+     *
+     * @param n the number of levels to contain in the list
+     * @return list with all {@link io.github.squat_team.model.RestArchitecture}
+     * 	created within the first and n-th level
+     */
+    public List<RestArchitecture> getArchitecturalTransformationsUntilLevel(int n) {
+        if (resultPerLevel.get(n) == null)
+            createArchitecturalTransformationsForLevel(n);
 
-	private void createArchitecturalTransformationsForLevel(int level) {
-		List<ArchitecturalVersion> transformationForLevel = new ArrayList<ArchitecturalVersion>();
-		architecturesByLevel.put(level, transformationForLevel);
-		if (level == 1) {
-			// Applied transformations to initial architecture and save it on the hashtable
-			transformationForLevel
-					.addAll(generateArchitecturalVersionsUsingModifiabilityTransformations(initialArchitecture));
-			transformationForLevel
-					.addAll(generateArchitecturalVersionsUsingPerformanceTransformations(initialArchitecture));
-		} else {
-			List<ArchitecturalVersion> architecturesPreviousLevel = architecturesByLevel.get(level - 1);
-			for (Iterator<ArchitecturalVersion> iterator = architecturesPreviousLevel.iterator(); iterator.hasNext();) {
-				ArchitecturalVersion architecturalVersion = (ArchitecturalVersion) iterator.next();
-				// if the architecture was modified last time by performance now is going to be
-				// modified for modifiability.
-				if (architecturalVersion.lastModifiedByModifiability()) {
-					transformationForLevel
-							.addAll(generateArchitecturalVersionsUsingPerformanceTransformations(architecturalVersion));
-				} else {
-					transformationForLevel.addAll(
-							generateArchitecturalVersionsUsingModifiabilityTransformations(architecturalVersion));
-				}
-			}
-		}
-	}
+        // The results is the architectures created for this level plus the
+        // architectures created for previous levels
+        List<RestArchitecture> ret = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            resultPerLevel.get(i).forEach(e -> {
+                ret.add(e.getArchitecture());
+            });
+        }
+        return ret;
+    }
 
-	private List<ArchitecturalVersion> generateArchitecturalVersionsUsingModifiabilityTransformations(
-			ArchitecturalVersion architecturalVersion) {
-		return modifiabilityTrans.runModifiabilityTransformationsInAModel(architecturalVersion);
-	}
+    /**
+     * @return the initial architecture as {@link JSONObject}
+     */
+    public RestArchitecture getInitialArchitecture() {
+        return this.initialArchitecture;
+    }
 
-	private List<ArchitecturalVersion> generateArchitecturalVersionsUsingPerformanceTransformations(
-			ArchitecturalVersion architecturalVersion) {
-		return performanceTrans.generateArchitecturalVersionsUsingPerformanceTransformations(architecturalVersion);
-	}
+    /**
+     * @param arch
+     * @param results
+     */
+    private void performModBot(RestArchitecture arch, List<RestScenarioResult> results) {
+        RestBot modBot = BotManager.getInstance().getBots(BotType.MODIFIABILITY).get(0);
+        if (modBot != null)
+            modBot.searchForAlternatives(this.initialArchitecture).forEach(results::add);
+    }
 
-	public List<ArchitecturalVersion> transformationsForLevel(int level) {
-		return architecturesByLevel.get(level);
-	}
+    /**
+     * @param arch
+     * @param results
+     */
+    private void performPerfBot(RestArchitecture arch, List<RestScenarioResult> results) {
+        BotManager.getInstance().getBots(BotType.PERFORMANCE).forEach(b -> {
+            b.searchForAlternatives(arch).forEach(results::add);
+        });
+    }
 
-	public ArchitecturalVersion getInitialArchitecture() {
-		return initialArchitecture;
-	}
+    /**
+     * @param results
+     * @param previousLevelResults
+     */
+    private void createFromPreviousResults(List<RestScenarioResult> results,
+            List<RestScenarioResult> previousLevelResults) {
+        for (RestScenarioResult previousResult : previousLevelResults) {
+            RestArchitecture arch = previousResult.getArchitecture();
+            if (previousResult.getOrigininatingBotType() == BotType.PERFORMANCE) {
+                this.performPerfBot(arch, results);
+            } else {
+                this.performModBot(arch, results);
+            }
+        }
+    }
+
+    /**
+     * @param level
+     */
+    private void createArchitecturalTransformationsForLevel(int level) {
+        // If it already exists, exit doing nothing
+        if (this.resultPerLevel.containsKey(level))
+            return;
+
+        // Create the list and add to map
+        final List<RestScenarioResult> results = new ArrayList<>();
+        this.resultPerLevel.put(level, results);
+
+        // If we need to create the first level, we need to start with the 
+        // initial architecture
+        if (level == 1) {
+            this.performPerfBot(this.initialArchitecture, results);
+            this.performModBot(this.initialArchitecture, results);
+        } else if (this.resultPerLevel.containsKey(level - 1)) {
+            List<RestScenarioResult> previousLevelResults = this.resultPerLevel.get(level - 1);
+            this.createFromPreviousResults(results, previousLevelResults);
+        }
+    }
 }
