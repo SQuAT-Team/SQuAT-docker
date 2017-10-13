@@ -1,11 +1,9 @@
 package io.github.squat_team.agentsUtils;
 
 import org.json.JSONObject;
-import org.json.JSONStringer;
 
 import io.github.squat_team.RestBot;
 import io.github.squat_team.agentsUtils.BotManager.BotType;
-import io.github.squat_team.model.PCMScenario;
 import io.github.squat_team.model.ResponseMeasureType;
 
 /**
@@ -25,6 +23,30 @@ public class BotIntializer {
 		createBot(LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 30.0), "TODO URI",
 				BotType.PERFORMANCE);
 		createBot(LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40), "TODO URI", BotType.PERFORMANCE);
+	}
+	
+	/**
+	 * Initializes 2 Performance bots and 2 Modifiability Bots. The standard setting
+	 * of the STPlus case study.
+	 */
+	public static void initialize3P3MBots() {
+		initialize2P2MBots();
+		createBot(LoadHelper.createModifiabilityScenarioS3(ResponseMeasureType.DECIMAL, 98.0), "TODO URI",
+				BotType.MODIFIABILITY);
+		createBot(LoadHelper.createPerformanceScenarioS3(ResponseMeasureType.DECIMAL, 40.0), "TODO URI",
+				BotType.PERFORMANCE);
+	}
+	
+	/**
+	 * Initializes 2 Performance bots and 2 Modifiability Bots. The standard setting
+	 * of the STPlus case study.
+	 */
+	public static void initialize4P4MBots() {
+		initialize3P3MBots();
+		createBot(LoadHelper.createModifiabilityScenarioS4(ResponseMeasureType.DECIMAL, 199.5), "TODO URI",
+				BotType.MODIFIABILITY);
+		createBot(LoadHelper.createPerformanceScenarioS4(ResponseMeasureType.DECIMAL, 45.0), "TODO URI",
+				BotType.PERFORMANCE);
 	}
 
 	/**

@@ -27,305 +27,398 @@ import io.github.squat_team.performance.PerformanceMetric;
  */
 public class LoadHelper implements ILoadHelper {
 
-    public List<SillyBot> loadBotsForArchitecturalAlternatives(List<ArchitecturalVersion> architecturalAlternatives,
-            ArchitecturalVersion initialArchitecture) {
-        return null;
-    }
+	public List<SillyBot> loadBotsForArchitecturalAlternatives(List<ArchitecturalVersion> architecturalAlternatives,
+			ArchitecturalVersion initialArchitecture) {
+		return null;
+	}
 
-    /**
-     * A scenario which increases the workload +10%.
-     * 
-     * @return the created {@link JSONObject}
-     */
-    public static JSONObject createPerformanceScenarioS1(ResponseMeasureType type, double response) {
-        ArrayList<String> workloadIDs = new ArrayList<String>();
-        workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
-        JSONObject scenario = new JSONObject();
+	/**
+	 * A scenario which increases the workload +10%.
+	 * 
+	 * @return the created {@link JSONObject}
+	 */
+	public static JSONObject createPerformanceScenarioS1(ResponseMeasureType type, double response) {
+		ArrayList<String> workloadIDs = new ArrayList<String>();
+		workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
+		JSONObject scenario = new JSONObject();
 
-        scenario.put("type", OptimizationType.MINIMIZATION);
-        JSONArray ids = new JSONArray();
-        scenario.put("ids", ids);
-        workloadIDs.forEach(ids::put);
-        scenario.put("rate", 1.1);
-        scenario.put("scenario-type", "WORKLOAD");
+		scenario.put("type", OptimizationType.MINIMIZATION);
+		JSONArray ids = new JSONArray();
+		scenario.put("ids", ids);
+		workloadIDs.forEach(ids::put);
+		scenario.put("rate", 1.1);
+		scenario.put("scenario-type", "WORKLOAD");
 
-        // PCMRESULT
-        JSONObject expectedResult = new JSONObject();
-        expectedResult.put("responseMeasureType", type);
-        expectedResult.put("response", String.valueOf(response));
-        scenario.put("expectedResult", expectedResult);
+		// PCMRESULT
+		JSONObject expectedResult = new JSONObject();
+		expectedResult.put("responseMeasureType", type);
+		expectedResult.put("response", String.valueOf(response));
+		scenario.put("expectedResult", expectedResult);
 
-        scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
+		scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
 
-        return scenario;
-    }
-    
-    /**
-     * A scenario which increases the workload +30%.
+		return scenario;
+	}
 
-     * @return the created {@link JSONObject}
-     */
-    public static JSONObject createPerformanceScenarioS4(ResponseMeasureType type, double response) {
-        ArrayList<String> workloadIDs = new ArrayList<String>();
-        workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
-        JSONObject scenario = new JSONObject();
+	/**
+	 * A scenario which increases the workload +30%.
+	 * 
+	 * @return the created {@link JSONObject}
+	 */
+	public static JSONObject createPerformanceScenarioS4(ResponseMeasureType type, double response) {
+		ArrayList<String> workloadIDs = new ArrayList<String>();
+		workloadIDs.add("_Uc-igC6OEd-Jla2o7wkBzQ");
+		JSONObject scenario = new JSONObject();
 
-        scenario.put("type", OptimizationType.MINIMIZATION);
-        JSONArray ids = new JSONArray();
-        scenario.put("ids", ids);
-        workloadIDs.forEach(ids::put);
-        scenario.put("rate", 1.3);
-        scenario.put("scenario-type", "WORKLOAD");
+		scenario.put("type", OptimizationType.MINIMIZATION);
+		JSONArray ids = new JSONArray();
+		scenario.put("ids", ids);
+		workloadIDs.forEach(ids::put);
+		scenario.put("rate", 1.3);
+		scenario.put("scenario-type", "WORKLOAD");
 
-        // PCMRESULT
-        JSONObject expectedResult = new JSONObject();
-        expectedResult.put("responseMeasureType", type);
-        expectedResult.put("response", String.valueOf(response));
-        scenario.put("expectedResult", expectedResult);
+		// PCMRESULT
+		JSONObject expectedResult = new JSONObject();
+		expectedResult.put("responseMeasureType", type);
+		expectedResult.put("response", String.valueOf(response));
+		scenario.put("expectedResult", expectedResult);
 
-        scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
+		scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
 
-        return scenario;
-    }
+		return scenario;
+	}
 
-    /**
-     * A scenario which simulates a system failure in the DB-cluster. (-50% CPU).
-     * 
-     * @return the created {@link JSONObject}
-     */
-    public static JSONObject createPerformanceScenarioS2(ResponseMeasureType type, double response) {
-        ArrayList<String> workloadIDs = new ArrayList<String>();
-        workloadIDs.add("_GecPsF7fEeavvL8WcdoZSg");
-        JSONObject scenario = new JSONObject();
+	/**
+	 * A scenario which simulates a system failure in the DB-cluster. (-50% CPU).
+	 * 
+	 * @return the created {@link JSONObject}
+	 */
+	public static JSONObject createPerformanceScenarioS2(ResponseMeasureType type, double response) {
+		ArrayList<String> workloadIDs = new ArrayList<String>();
+		workloadIDs.add("_GecPsF7fEeavvL8WcdoZSg");
+		JSONObject scenario = new JSONObject();
 
-        scenario.put("type", OptimizationType.MINIMIZATION);
-        JSONArray ids = new JSONArray();
-        scenario.put("ids", ids);
-        workloadIDs.forEach(ids::put);
-        scenario.put("rate", 0.5);
-        scenario.put("scenario-type", "CPU");
+		scenario.put("type", OptimizationType.MINIMIZATION);
+		JSONArray ids = new JSONArray();
+		scenario.put("ids", ids);
+		workloadIDs.forEach(ids::put);
+		scenario.put("rate", 0.5);
+		scenario.put("scenario-type", "CPU");
 
-        // PCMRESULT
-        JSONObject expectedResult = new JSONObject();
-        expectedResult.put("responseMeasureType", type);
-        expectedResult.put("response", String.valueOf(response));
-        scenario.put("expectedResult", expectedResult);
+		// PCMRESULT
+		JSONObject expectedResult = new JSONObject();
+		expectedResult.put("responseMeasureType", type);
+		expectedResult.put("response", String.valueOf(response));
+		scenario.put("expectedResult", expectedResult);
 
-        scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
+		scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
 
-        return scenario;
-    }
-    
-    /**
-     * A scenario which simulates a system failure in the Server1-cluster. (-50% CPU).
-     * 
-     * @return the created {@link JSONObject}
-     */
-    public static JSONObject createPerformanceScenarioS3(ResponseMeasureType type, double response) {
-        ArrayList<String> workloadIDs = new ArrayList<String>();
-        workloadIDs.add("_psq4IiINEeSC6_3TPN1J7A");
-        JSONObject scenario = new JSONObject();
+		return scenario;
+	}
 
-        scenario.put("type", OptimizationType.MINIMIZATION);
-        JSONArray ids = new JSONArray();
-        scenario.put("ids", ids);
-        workloadIDs.forEach(ids::put);
-        scenario.put("rate", 0.5);
-        scenario.put("scenario-type", "CPU");
+	/**
+	 * A scenario which simulates a system failure in the Server1-cluster. (-50%
+	 * CPU).
+	 * 
+	 * @return the created {@link JSONObject}
+	 */
+	public static JSONObject createPerformanceScenarioS3(ResponseMeasureType type, double response) {
+		ArrayList<String> workloadIDs = new ArrayList<String>();
+		workloadIDs.add("_psq4IiINEeSC6_3TPN1J7A");
+		JSONObject scenario = new JSONObject();
 
-        // PCMRESULT
-        JSONObject expectedResult = new JSONObject();
-        expectedResult.put("responseMeasureType", type);
-        expectedResult.put("response", String.valueOf(response));
-        scenario.put("expectedResult", expectedResult);
+		scenario.put("type", OptimizationType.MINIMIZATION);
+		JSONArray ids = new JSONArray();
+		scenario.put("ids", ids);
+		workloadIDs.forEach(ids::put);
+		scenario.put("rate", 0.5);
+		scenario.put("scenario-type", "CPU");
 
-        scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
+		// PCMRESULT
+		JSONObject expectedResult = new JSONObject();
+		expectedResult.put("responseMeasureType", type);
+		expectedResult.put("response", String.valueOf(response));
+		scenario.put("expectedResult", expectedResult);
 
-        return scenario;
-    }
+		scenario.put("metric", PerformanceMetric.RESPONSE_TIME);
 
-    /**
-     * Create a ModifiabilityInstruction by the given parameters and add them
-     * to the {@link JSONStringer}
-     *
-     * This method returns without modifying the {@link JSONStringer} if the 
-     * arrays keys and values have not the same length.
-     *
-     * This method will throw {@link NullPointerException} if either the 
-     * keys or values are null.
-     *
-     * @param op the {@link ModifiabilityOperation} of the instruction
-     * @param el the {@link ModifiabilityElement} of the instruction
-     * @param keys the parameter keys
-     * @param values the parameter values
-     */
-    private static JSONObject createModifiabilityInstruction(ModifiabilityOperation op, ModifiabilityElement el,
-            String keys[], String values[]) throws NullPointerException {
-        Objects.requireNonNull(keys);
-        Objects.requireNonNull(values);
-        if (keys.length != values.length)
-            return null;
-        final int LEN = keys.length;
-        JSONObject ret = new JSONObject();
-        ret.put("operation", String.valueOf(op));
-        ret.put("element", String.valueOf(el));
+		return scenario;
+	}
 
-        JSONArray parameters = new JSONArray();
-        ret.put("parameters", parameters);
-        for (int i = 0; i < LEN; ++i) {
-            parameters.put(new JSONObject().put(keys[i], values[i]));
-        }
-        return ret;
-    }
+	/**
+	 * Create a ModifiabilityInstruction by the given parameters and add them to the
+	 * {@link JSONStringer}
+	 *
+	 * This method returns without modifying the {@link JSONStringer} if the arrays
+	 * keys and values have not the same length.
+	 *
+	 * This method will throw {@link NullPointerException} if either the keys or
+	 * values are null.
+	 *
+	 * @param op
+	 *            the {@link ModifiabilityOperation} of the instruction
+	 * @param el
+	 *            the {@link ModifiabilityElement} of the instruction
+	 * @param keys
+	 *            the parameter keys
+	 * @param values
+	 *            the parameter values
+	 */
+	private static JSONObject createModifiabilityInstruction(ModifiabilityOperation op, ModifiabilityElement el,
+			String keys[], String values[]) throws NullPointerException {
+		Objects.requireNonNull(keys);
+		Objects.requireNonNull(values);
+		if (keys.length != values.length)
+			return null;
+		final int LEN = keys.length;
+		JSONObject ret = new JSONObject();
+		ret.put("operation", String.valueOf(op));
+		ret.put("element", String.valueOf(el));
 
-    /**
-     * Create the first Modifiability scenario
-     *
-     * @param type the {@link ResponseMeasureType} to use for this scenario
-     * @param response the expected response value
-     */
-    public static JSONObject createModifiabilityScenarioS1(ResponseMeasureType type, Comparable<Double> response) {
+		JSONArray parameters = new JSONArray();
+		ret.put("parameters", parameters);
+		for (int i = 0; i < LEN; ++i) {
+			parameters.put(new JSONObject().put(keys[i], values[i]));
+		}
+		return ret;
+	}
 
-        JSONObject scenario = new JSONObject();
+	/**
+	 * Create the first Modifiability scenario
+	 *
+	 * @param type
+	 *            the {@link ResponseMeasureType} to use for this scenario
+	 * @param response
+	 *            the expected response value
+	 */
+	public static JSONObject createModifiabilityScenarioS1(ResponseMeasureType type, Comparable<Double> response) {
 
-        // expected Result
-        JSONObject expectedResult = new JSONObject();
-        expectedResult.put("responseMeasureType", type);
-        expectedResult.put("response", String.valueOf(response));
-        scenario.put("expectedResult", expectedResult);
+		JSONObject scenario = new JSONObject();
 
-        scenario.put("type", OptimizationType.MINIMIZATION);
-        JSONArray changes = new JSONArray();
-        scenario.put("changes", changes);
-        changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE,
-                new String[] { "name" }, new String[] { "IExternalPayment" }));
+		// expected Result
+		JSONObject expectedResult = new JSONObject();
+		expectedResult.put("responseMeasureType", type);
+		expectedResult.put("response", String.valueOf(response));
+		scenario.put("expectedResult", expectedResult);
 
-        changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.COMPONENT,
-                new String[] { "name" }, new String[] { "BusinessTripMgmt" }));
+		scenario.put("type", OptimizationType.MINIMIZATION);
+		JSONArray changes = new JSONArray();
+		scenario.put("changes", changes);
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE,
+				new String[] { "name" }, new String[] { "IExternalPayment" }));
 
-        return scenario;
-    }
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.COMPONENT,
+				new String[] { "name" }, new String[] { "BusinessTripMgmt" }));
 
-    /**
-     * Create the second Modifiability scenario
-     *
-     * @param type the {@link ResponseMeasureType} to use for this scenario
-     * @param response the expected response value
-     * @param jsonStringer this json stringer is used to insert the scenario
-     *  into the JSON object. This {@link JSONStringer} is required to be in 
-     *  a state where a key can be created
-     */
-    public static JSONObject createModifiabilityScenarioS2(ResponseMeasureType type, Comparable<Double> response) {
+		return scenario;
+	}
 
-        JSONObject scenario = new JSONObject();
+	/**
+	 * Create the second Modifiability scenario
+	 *
+	 * @param type
+	 *            the {@link ResponseMeasureType} to use for this scenario
+	 * @param response
+	 *            the expected response value
+	 * @param jsonStringer
+	 *            this json stringer is used to insert the scenario into the JSON
+	 *            object. This {@link JSONStringer} is required to be in a state
+	 *            where a key can be created
+	 */
+	public static JSONObject createModifiabilityScenarioS2(ResponseMeasureType type, Comparable<Double> response) {
 
-        // expected Result
-        JSONObject expectedResult = new JSONObject();
-        expectedResult.put("responseMeasureType", type);
-        expectedResult.put("response", String.valueOf(response));
-        scenario.put("expectedResult", expectedResult);
+		JSONObject scenario = new JSONObject();
 
-        scenario.put("type", OptimizationType.MINIMIZATION);
-        JSONArray changes = new JSONArray();
-        scenario.put("changes", changes);
+		// expected Result
+		JSONObject expectedResult = new JSONObject();
+		expectedResult.put("responseMeasureType", type);
+		expectedResult.put("response", String.valueOf(response));
+		scenario.put("expectedResult", expectedResult);
 
-        changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE,
-                new String[] { "name" }, new String[] { "ITripDB" }));
+		scenario.put("type", OptimizationType.MINIMIZATION);
+		JSONArray changes = new JSONArray();
+		scenario.put("changes", changes);
 
-        changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.INTERFACE,
-                new String[] { "name" }, new String[] { "Analytics" }));
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE,
+				new String[] { "name" }, new String[] { "ITripDB" }));
 
-        changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.OPERATION,
-                new String[] { "iname", "oname" }, new String[] { "Analytics", "getLastTrips" }));
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.INTERFACE,
+				new String[] { "name" }, new String[] { "Analytics" }));
 
-        changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.COMPONENT,
-                new String[] { "name" }, new String[] { "Insights" }));
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.OPERATION,
+				new String[] { "iname", "oname" }, new String[] { "Analytics", "getLastTrips" }));
 
-        changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.PROVIDEDROLE,
-                new String[] { "cname", "iname" }, new String[] { "Insights", "Analytics" }));
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.COMPONENT,
+				new String[] { "name" }, new String[] { "Insights" }));
 
-        changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.REQUIREDROLE,
-                new String[] { "cname", "iname" }, new String[] { "Insights", "ITripDB" }));
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.PROVIDEDROLE,
+				new String[] { "cname", "iname" }, new String[] { "Insights", "Analytics" }));
 
-        return scenario;
-    }
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.REQUIREDROLE,
+				new String[] { "cname", "iname" }, new String[] { "Insights", "ITripDB" }));
 
-    /**
-     * @param file the file to read
-     * @return the base64 encoded file
-     */
-    private static String buildStringFromFile(String file) {
-        String ret = "";
-        try (RandomAccessFile raf = new RandomAccessFile(new File(file), "r")) {
-            byte[] fileContent = new byte[(int) raf.length()];
-            raf.read(fileContent);
-            ret = Base64.getEncoder().encodeToString(fileContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return ret;
-    }
+		return scenario;
+	}
 
-    private static void addType(JSONStringer jsonStringer, String basicPath, String filename, String filetype) {
-        jsonStringer.key(filetype);
-        jsonStringer.object();
-        jsonStringer.key("filename").value(basicPath + "/" + filename + "." + filetype);
-        jsonStringer.key("filecontent").value(buildStringFromFile(basicPath + "/" + filename + "." + filetype));
-        jsonStringer.endObject();
-    }
+	/**
+	 * Create the third Modifiability scenario. Adds a User Managament component.
+	 *
+	 * @param type
+	 *            the {@link ResponseMeasureType} to use for this scenario
+	 * @param response
+	 *            the expected response value
+	 */
+	public static JSONObject createModifiabilityScenarioS3(ResponseMeasureType type, Comparable<Double> response) {
+		JSONObject scenario = new JSONObject();
 
-    /**
-     * Add the given file to the JSON
-     *
-     * @param jsonStringer
-     * @param key the key to use for this file
-     * @param file the file whose content to add
-     */
-    private static void add(JSONStringer jsonStringer, String key, File file) {
-        Objects.requireNonNull(jsonStringer);
-        Objects.requireNonNull(key);
-        Objects.requireNonNull(file);
-        try {
-            byte[] fileContent = Files.readAllBytes(file.toPath());
-            jsonStringer.key(key);
-            jsonStringer.object();
-            jsonStringer.key("filename");
-            jsonStringer.value(file.getName());
-            String encoded = Base64.getEncoder().encodeToString(fileContent);
-            jsonStringer.key("filecontent");
-            jsonStringer.value(encoded);
-            jsonStringer.endObject();
-        } catch (IOException e) {
-            e.printStackTrace(System.err);
-        }
-    }
+		// expected Result
+		JSONObject expectedResult = new JSONObject();
+		expectedResult.put("responseMeasureType", type);
+		expectedResult.put("response", String.valueOf(response));
+		scenario.put("expectedResult", expectedResult);
 
-    /**
-     * @param jsonStringer
-     */
-    public static void loadSpecificModel(JSONStringer jsonStringer, String name) {
-        final String MODEL_NAME = "default";
-        final String MODEL_PATH = "/home/roehrdor/Workspace-oxygen/SQuAT-docker/squat.modifiability/model";
-        final String ALTERNATIVE_REPOSITORY_PATH = "/home/roehrdor/Workspace-oxygen/SQuAT-docker/squat.modifiability/model/alternativeRepository.repository";
-        String BASE = MODEL_PATH;
-        String basicPath = MODEL_PATH + "/default";
+		scenario.put("type", OptimizationType.MINIMIZATION);
+		JSONArray changes = new JSONArray();
+		scenario.put("changes", changes);
 
-        jsonStringer.key("architecture-instance").object();
-        jsonStringer.key("name").value("");
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE,
+				new String[] { "name" }, new String[] { "IBusiness Trip" }));
 
-        add(jsonStringer, "repository", new File(basicPath + ".repository"));
-        add(jsonStringer, "system", new File(basicPath + ".system"));
-        add(jsonStringer, "allocation", new File(basicPath + ".allocation"));
-        add(jsonStringer, "resource-environment", new File(basicPath + ".resourceenvironment"));
-        add(jsonStringer, "usage-model", new File(basicPath + ".usagemodel"));
-        add(jsonStringer, "repository-with-alternatives",
-                new File(BASE + "/" + "alternativeRepository" + ".repository"));
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.INTERFACE,
+				new String[] { "name" }, new String[] { "IUserManagement" }));
 
-        jsonStringer.endObject();
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.OPERATION,
+				new String[] { "iname", "oname" }, new String[] { "IUserManagement", "verifyLoginData" }));
 
-        add(jsonStringer, "cost", new File("" + basicPath + ".cost"));
-        add(jsonStringer, "insinter-modular", new File("" + BASE + "/insinter-modular.henshin"));
-        add(jsonStringer, "splitrespn-modular", new File("" + BASE + "/splitrespn-modular.henshin"));
-        add(jsonStringer, "wrapper-modular", new File("" + BASE + "/wrapper-modular.henshin"));
-    }
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.OPERATION,
+				new String[] { "iname", "oname" }, new String[] { "IUserManagement", "updateUser" }));
+
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.COMPONENT,
+				new String[] { "name" }, new String[] { "UserManagement" }));
+
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.CREATE, ModifiabilityElement.PROVIDEDROLE,
+				new String[] { "cname", "iname" }, new String[] { "UserManagement", "IUserManagement" }));
+
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.REQUIREDROLE,
+				new String[] { "cname", "iname" }, new String[] { "BusinessTripMgmt", "IUserManagement" }));
+
+		return scenario;
+	}
+
+	/**
+	 * Create the first Modifiability scenario. Makes changes to the Business Trip
+	 * Mgmt Component and the interfaces of ITripDB and IBooking, to show additional
+	 * data.
+	 *
+	 * @param type
+	 *            the {@link ResponseMeasureType} to use for this scenario
+	 * @param response
+	 *            the expected response value
+	 */
+	public static JSONObject createModifiabilityScenarioS4(ResponseMeasureType type, Comparable<Double> response) {
+
+		JSONObject scenario = new JSONObject();
+
+		// expected Result
+		JSONObject expectedResult = new JSONObject();
+		expectedResult.put("responseMeasureType", type);
+		expectedResult.put("response", String.valueOf(response));
+		scenario.put("expectedResult", expectedResult);
+
+		scenario.put("type", OptimizationType.MINIMIZATION);
+		JSONArray changes = new JSONArray();
+		scenario.put("changes", changes);
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE,
+				new String[] { "name" }, new String[] { "ITripDB" }));
+		
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.INTERFACE,
+				new String[] { "name" }, new String[] { "IBooking" }));
+
+		changes.put(createModifiabilityInstruction(ModifiabilityOperation.MODIFY, ModifiabilityElement.COMPONENT,
+				new String[] { "name" }, new String[] { "BusinessTripMgmt" }));
+		
+		return scenario;
+	}
+
+	/**
+	 * @param file
+	 *            the file to read
+	 * @return the base64 encoded file
+	 */
+	private static String buildStringFromFile(String file) {
+		String ret = "";
+		try (RandomAccessFile raf = new RandomAccessFile(new File(file), "r")) {
+			byte[] fileContent = new byte[(int) raf.length()];
+			raf.read(fileContent);
+			ret = Base64.getEncoder().encodeToString(fileContent);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return ret;
+	}
+
+	private static void addType(JSONStringer jsonStringer, String basicPath, String filename, String filetype) {
+		jsonStringer.key(filetype);
+		jsonStringer.object();
+		jsonStringer.key("filename").value(basicPath + "/" + filename + "." + filetype);
+		jsonStringer.key("filecontent").value(buildStringFromFile(basicPath + "/" + filename + "." + filetype));
+		jsonStringer.endObject();
+	}
+
+	/**
+	 * Add the given file to the JSON
+	 *
+	 * @param jsonStringer
+	 * @param key
+	 *            the key to use for this file
+	 * @param file
+	 *            the file whose content to add
+	 */
+	private static void add(JSONStringer jsonStringer, String key, File file) {
+		Objects.requireNonNull(jsonStringer);
+		Objects.requireNonNull(key);
+		Objects.requireNonNull(file);
+		try {
+			byte[] fileContent = Files.readAllBytes(file.toPath());
+			jsonStringer.key(key);
+			jsonStringer.object();
+			jsonStringer.key("filename");
+			jsonStringer.value(file.getName());
+			String encoded = Base64.getEncoder().encodeToString(fileContent);
+			jsonStringer.key("filecontent");
+			jsonStringer.value(encoded);
+			jsonStringer.endObject();
+		} catch (IOException e) {
+			e.printStackTrace(System.err);
+		}
+	}
+
+	/**
+	 * @param jsonStringer
+	 */
+	public static void loadSpecificModel(JSONStringer jsonStringer, String name) {
+		final String MODEL_NAME = "default";
+		final String MODEL_PATH = "/home/roehrdor/Workspace-oxygen/SQuAT-docker/squat.modifiability/model";
+		final String ALTERNATIVE_REPOSITORY_PATH = "/home/roehrdor/Workspace-oxygen/SQuAT-docker/squat.modifiability/model/alternativeRepository.repository";
+		String BASE = MODEL_PATH;
+		String basicPath = MODEL_PATH + "/default";
+
+		jsonStringer.key("architecture-instance").object();
+		jsonStringer.key("name").value("");
+
+		add(jsonStringer, "repository", new File(basicPath + ".repository"));
+		add(jsonStringer, "system", new File(basicPath + ".system"));
+		add(jsonStringer, "allocation", new File(basicPath + ".allocation"));
+		add(jsonStringer, "resource-environment", new File(basicPath + ".resourceenvironment"));
+		add(jsonStringer, "usage-model", new File(basicPath + ".usagemodel"));
+		add(jsonStringer, "repository-with-alternatives",
+				new File(BASE + "/" + "alternativeRepository" + ".repository"));
+
+		jsonStringer.endObject();
+
+		add(jsonStringer, "cost", new File("" + basicPath + ".cost"));
+		add(jsonStringer, "insinter-modular", new File("" + BASE + "/insinter-modular.henshin"));
+		add(jsonStringer, "splitrespn-modular", new File("" + BASE + "/splitrespn-modular.henshin"));
+		add(jsonStringer, "wrapper-modular", new File("" + BASE + "/wrapper-modular.henshin"));
+	}
 }
