@@ -5,16 +5,17 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
-import edu.squat.transformations.ArchitecturalVersion;
+import io.github.squat_team.agentsUtils.ArchitectureInitializer;
 import io.github.squat_team.agentsUtils.BotIntializer;
 import io.github.squat_team.agentsUtils.ILoadHelper;
 import io.github.squat_team.agentsUtils.LoadHelper;
 import io.github.squat_team.agentsUtils.Proposal;
 import io.github.squat_team.agentsUtils.SillyBot;
 import io.github.squat_team.agentsUtils.transformations.ArchitecturalTransformationsFactory;
+import io.github.squat_team.model.RestArchitecture;
 
-// TODO: PA! There should not be much to do here. Check if manual input for rerun has to be replaced for experiments.
 public class SQuATSillyBotsNegotiator {
 
 	// private List<PCMArchitectureInstance> architectureAlternatives;
@@ -29,7 +30,9 @@ public class SQuATSillyBotsNegotiator {
 	public SQuATSillyBotsNegotiator() {
 		agreementProposal = null;
 		currentLevelOfTransformations = 1;
-		archTransFactory = new ArchitecturalTransformationsFactory();
+		RestArchitecture initialArchitecture = ArchitectureInitializer
+				.loadSpecificModel(NegotiatorConfiguration.INITIAL_ARCHITECTURE_NAME);
+		archTransFactory = new ArchitecturalTransformationsFactory(initialArchitecture);
 		maxNumberOfLevels = 10;
 		noMoreAlternatives = false;
 		loadHelper = new LoadHelper();
@@ -42,8 +45,10 @@ public class SQuATSillyBotsNegotiator {
 	/**
 	 * 
 	 * @return false when a conflict is reached and true when there is an agreement
+	 * @throws ExecutionException
+	 * @throws InterruptedException
 	 */
-	public boolean negotiateBaseOnMultipleArchitectures() {
+	public boolean negotiateBaseOnMultipleArchitectures() throws InterruptedException, ExecutionException {
 		// initialize the bots for the case study.
 		BotIntializer.initialize2P2MBots();
 		// architectureAlternatives=loadArchitecturalAlternatives(); This should be done
@@ -284,16 +289,16 @@ public class SQuATSillyBotsNegotiator {
 		return true;
 	}
 
-	private HashMap<SillyBot, Proposal> collectInitialProposals() {
+	private HashMap<SillyBot, Proposal> collectInitialProposals() throws InterruptedException, ExecutionException {
 		// REMOVE THIS FIRST LINE. IT ONLY PURPOSES IS TO AVOID THE MODIFIABILITY
 		// TACTICS THAT ARE NOT WORKING WITH THE COMPOSITE COMPONETS
 		// new LoadHelper().loadBotsForArchitecturalAlternatives(new
 		// ArrayList<ArchitecturalVersion>(),archTransFactory.getInitialArchitecture());
 		HashMap<SillyBot, Proposal> ret = new HashMap<>();
 		System.out.println("Level of transformations: " + currentLevelOfTransformations);
-		List<ArchitecturalVersion> versionsUntilLevel = archTransFactory
+		List<RestArchitecture> versionsUntilLevel = archTransFactory
 				.getArchitecturalTransformationsUntilLevel(currentLevelOfTransformations);
-		List<ArchitecturalVersion> versionsForLevel = archTransFactory
+		List<RestArchitecture> versionsForLevel = archTransFactory
 				.transformationsForLevel(currentLevelOfTransformations);
 		if (versionsForLevel.size() == 0) {
 			noMoreAlternatives = true;
@@ -302,7 +307,7 @@ public class SQuATSillyBotsNegotiator {
 
 			// Each agent has to make a ranking with the alternatives and select the best
 			// for its scenario
-			sillyBots = loadHelper.loadBotsForArchitecturalAlternatives(versionsUntilLevel,
+			sillyBots = loadHelper.generateSillyBotsAndAnalyze(versionsUntilLevel,
 					archTransFactory.getInitialArchitecture());
 			System.out.println("Total proposals: " + sillyBots.get(0).getOrderedProposals().size());
 			for (Iterator<SillyBot> iterator = sillyBots.iterator(); iterator.hasNext();) {
@@ -314,10 +319,16 @@ public class SQuATSillyBotsNegotiator {
 		return ret;
 	}
 
+	// TODO: PA! This will be the method for an external call.
 	public void negotiatiateUntilAnAgreementIsReached() {
 		boolean agreement = false;
 		while (!agreement && (currentLevelOfTransformations <= maxNumberOfLevels) && !noMoreAlternatives) {
-			agreement = negotiateBaseOnMultipleArchitectures();
+			try {
+				agreement = negotiateBaseOnMultipleArchitectures();
+			} catch (InterruptedException | ExecutionException e) {
+				// TODO: PA! Do something better here... Fails because of waiting for results
+				e.printStackTrace();
+			}
 			currentLevelOfTransformations++;
 		}
 	}

@@ -2,6 +2,7 @@ package negotiator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import io.github.squat_team.SQuATSillyBotsNegotiator;
 import io.github.squat_team.agentsUtils.ILoadHelper;
@@ -14,7 +15,7 @@ import io.github.squat_team.model.RestArchitecture;
 
 public class SillyBotsTest {
 
-	public void test() {
+	public void test() throws InterruptedException, ExecutionException {
 		SQuATSillyBotsNegotiator negotiator = new SQuATSillyBotsNegotiator();
 		negotiator.setLoadHelper(new TestLoadHelper());
 		negotiator.negotiateBaseOnMultipleArchitectures();

@@ -3,8 +3,8 @@ package io.github.squat_team.agentsUtils;
 public class PerformanceSillyBot extends SillyBot {
 	private float originalResponseTime;
 
-	public PerformanceSillyBot(float originalResponseTime, String name,float scenatioThreshold) {
-		super(name,scenatioThreshold);
+	public PerformanceSillyBot(float originalResponseTime, String name,float scenarioThreshold) {
+		super(name,scenarioThreshold);
 		this.originalResponseTime = originalResponseTime;
 	}
 

@@ -3,8 +3,8 @@ package io.github.squat_team.agentsUtils;
 public class ModifiabilitySillyBot extends SillyBot {
 	//private int originalAffectedComponents;
 	private float originalComplexity;
-	public ModifiabilitySillyBot(/*int originalAffectedComponents,*/ float originalComplexity, String name,float scenatioThreshold) {
-		super(name,scenatioThreshold);
+	public ModifiabilitySillyBot(/*int originalAffectedComponents,*/ float originalComplexity, String name,float scenarioThreshold) {
+		super(name,scenarioThreshold);
 		//this.originalAffectedComponents = originalAffectedComponents;
 		this.originalComplexity = originalComplexity;
 	}
