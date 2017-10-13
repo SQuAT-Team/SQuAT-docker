@@ -13,6 +13,7 @@ import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import io.github.squat_team.agentsUtils.BotManager.BotType;
 import io.github.squat_team.model.PCMResult;
 import io.github.squat_team.model.ResponseMeasureType;
 import io.github.squat_team.model.RestArchitecture;
@@ -20,16 +21,25 @@ import io.github.squat_team.model.RestScenarioResult;
 
 public class RestBot {
 
+    /** The remote URI the bot corresponds to */
     private final String remoteURI;
 
+    /** The scenario we use the bot for */
     private final JSONObject scenario;
 
+    /** The UUID of the bot (not used now) */
     private final String botUUID;
 
+    /** The type of the bot, whether Performance or Modifiability */
+    private final BotType botType;
+
     /**
+     * @param botType
      * @param remoteURI
+     * @param scenario
      */
-    public RestBot(String remoteURI, JSONObject scenario) {
+    public RestBot(BotType botType, String remoteURI, JSONObject scenario) {
+        this.botType = Objects.requireNonNull(botType);
         this.remoteURI = Objects.requireNonNull(remoteURI);
         this.botUUID = UUID.randomUUID().toString();
         this.scenario = scenario;
@@ -111,8 +121,8 @@ public class RestBot {
         PCMResult pcmResult = new PCMResult(responseMeasureType);
         pcmResult.setResponse(response);
 
-        return new RestScenarioResult(jsonArchitecture.getString("name"), 
-            jsonArchitecture, pcmResult, cost, insinter, splitrespn, wrapper);
+        return new RestScenarioResult(jsonArchitecture.getString("name"), jsonArchitecture, pcmResult, cost, insinter,
+                splitrespn, wrapper);
     }
 
     /**
@@ -152,12 +162,22 @@ public class RestBot {
         JSONObject result = this.call(this.buildBody(architecture), "searchForAlternatives");
         JSONArray jsonResults = result.getJSONArray("values");
         jsonResults.forEach(o -> {
-            results.add(buildFromRoot((JSONObject)o));
+            results.add(buildFromRoot((JSONObject) o));
         });
         return results;
     }
 
+    /**
+     * @return the UUID of this bot
+     */
     public String getBotUUID() {
         return this.botUUID;
+    }
+
+    /**
+     * @return the {@link BotType}
+     */
+    public BotType getBotType() {
+        return this.botType;
     }
 }
