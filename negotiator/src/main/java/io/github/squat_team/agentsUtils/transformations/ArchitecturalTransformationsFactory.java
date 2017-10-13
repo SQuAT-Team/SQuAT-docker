@@ -62,8 +62,10 @@ public class ArchitecturalTransformationsFactory {
     }
 
     /**
-     * @param arch
-     * @param results
+     * Search for alternatives using the Modifiability Bot
+     *
+     * @param arch the architecture to perfrom the search on
+     * @param results the list to add the results to
      */
     private void performModBot(RestArchitecture arch, List<RestScenarioResult> results) {
         RestBot modBot = BotManager.getInstance().getBots(BotType.MODIFIABILITY).get(0);
@@ -72,8 +74,10 @@ public class ArchitecturalTransformationsFactory {
     }
 
     /**
-     * @param arch
-     * @param results
+     * Search for alternatives using the Performance Bot
+     *
+     * @param arch the architecture to perfrom the search on
+     * @param results the list to add the results to
      */
     private void performPerfBot(RestArchitecture arch, List<RestScenarioResult> results) {
         BotManager.getInstance().getBots(BotType.PERFORMANCE).forEach(b -> {
@@ -82,8 +86,11 @@ public class ArchitecturalTransformationsFactory {
     }
 
     /**
-     * @param results
-     * @param previousLevelResults
+     * Perform an analysis on the previously generated results given in the list
+     *
+     * @param results the list to add the results to
+     * @param previousLevelResults the list of results generated in the previous
+     *  level
      */
     private void createFromPreviousResults(List<RestScenarioResult> results,
             List<RestScenarioResult> previousLevelResults) {
@@ -98,7 +105,11 @@ public class ArchitecturalTransformationsFactory {
     }
 
     /**
-     * @param level
+     * Search for the given level based in the previous results. Note, if the 
+     * previous level (for level index bigger than 1) does not exist nothing
+     * will be done
+     *
+     * @param level the level to search for
      */
     private void createArchitecturalTransformationsForLevel(int level) {
         // If it already exists, exit doing nothing
