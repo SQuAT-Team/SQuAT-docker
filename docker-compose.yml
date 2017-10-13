@@ -1,6 +1,14 @@
 version: "3"
 services:
-  performancebot:
-    image: squatteam/performance-bot
+  performance-bot:
+    image: squatteam/performance-bot:latest
+    ports:
+      - "9997:9997"
+  negotiator:
+    image: squatteam/negotiator:latest
+    ports:
+      - "9997:9997"
+  modifiability-bot:
+    image: squatteam/modifiability-bot:latest
     ports:
       - "9997:9997"
