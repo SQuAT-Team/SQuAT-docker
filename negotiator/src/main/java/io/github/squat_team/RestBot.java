@@ -61,12 +61,13 @@ public class RestBot {
 
     /**
      * @param body
+     * @param uriPath
      * @return
      */
-    private JSONObject call(String body) {
+    private JSONObject call(String body, String uriPath) {
         JSONObject result = null;
         try {
-            URL url = new URL(this.remoteURI);
+            URL url = new URL(this.remoteURI + "/" + uriPath);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
@@ -114,8 +115,8 @@ public class RestBot {
         PCMResult pcmResult = new PCMResult(responseMeasureType);
         pcmResult.setResponse(response);
 
-        return new RestScenarioResult(jsonArchitecture, pcmResult, cost, 
-            insinter, splitrespn, wrapper);
+        return new RestScenarioResult(jsonArchitecture.getString("name"), 
+            jsonArchitecture, pcmResult, cost, insinter, splitrespn, wrapper);
     }
 
     /**
@@ -123,7 +124,7 @@ public class RestBot {
      * @return
      */
     public RestScenarioResult analyze(String body) {
-        return buildFromRoot(this.call(body));
+        return buildFromRoot(this.call(body, "analyze"));
     }
 
     /**
@@ -132,7 +133,7 @@ public class RestBot {
      */
     public List<RestScenarioResult> searchForAlternatives(String body) {
         final List<RestScenarioResult> results = new ArrayList<>();
-        JSONObject result = this.call(body);
+        JSONObject result = this.call(body, "searchForAlternatives");
         JSONArray jsonResults = result.getJSONArray("values");
         jsonResults.forEach(o -> {
             results.add(buildFromRoot((JSONObject)o));

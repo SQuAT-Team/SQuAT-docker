@@ -39,7 +39,7 @@ public class PerformanceScenarioHelper {
         
         jsonStringer.key("type").value(OptimizationType.MINIMIZATION);
         jsonStringer.key("ids").array();
-        for(String id : workloadIDs) jsonStringer.value(id);    // VERIFY!
+        for(String id : workloadIDs) jsonStringer.value(id);
         jsonStringer.endArray();
         jsonStringer.key("rate").value(1.1);
         jsonStringer.key("scenario-type").value("WORKLOAD");
@@ -47,7 +47,7 @@ public class PerformanceScenarioHelper {
         // PCMRESULT
         jsonStringer.key("expectedResult").object();
         jsonStringer.key("responseMeasureType").value(ResponseMeasureType.DECIMAL);
-        jsonStringer.key("response").value(6.0);
+        jsonStringer.key("response").value("120");
         jsonStringer.endObject();
 
         jsonStringer.key("metric").value(PerformanceMetric.RESPONSE_TIME);
@@ -66,10 +66,10 @@ public class PerformanceScenarioHelper {
 
         jsonStringer.key("scenario");
         jsonStringer.object();
-        
+
         jsonStringer.key("type").value(OptimizationType.MINIMIZATION);
         jsonStringer.key("ids").array();
-        for(String id : workloadIDs) jsonStringer.value(id);    // VERIFY!
+        for(String id : workloadIDs) jsonStringer.value(id);
         jsonStringer.endArray();
         jsonStringer.key("rate").value(0.5);
         jsonStringer.key("scenario-type").value("WORKLOAD");

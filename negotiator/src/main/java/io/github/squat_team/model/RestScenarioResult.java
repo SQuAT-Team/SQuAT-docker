@@ -4,36 +4,26 @@ import org.json.JSONObject;
 
 public class RestScenarioResult extends PCMScenarioResult {
 
-    /** The architecture */
-    private final JSONObject architectureInstance;
-
-    /** The cost */
-    private final JSONObject cost;
-
-    /** The insintenr */
-    private final JSONObject insinter;
-
-    /** The splitRespn */
-    private final JSONObject splitrespn;
-
-    /** The Wrapper */
-    private final JSONObject wrapper;
+    /** */
+    private final RestArchitecture architecture;
 
     /**
      * Create a new RestScenarioResult without unwrapping the result for faster
      * forwarding
      *
+     * @param name the name of the architecture
      * @param architectureInstance the architecture
      * @param result the result
      */
-    public RestScenarioResult(JSONObject architectureInstance, PCMResult result) {
-        this(architectureInstance, result, null, null, null, null);
+    public RestScenarioResult(String name, JSONObject architectureInstance, PCMResult result) {
+        this(name, architectureInstance, result, null, null, null, null);
     }
 
     /**
      * Create a new RestScenarioResult without unwrapping the result for faster
      * forwarding
      *
+     * @param name the name of the architecture
      * @param architectureInstance the architecture
      * @param result the result
      * @param cost the cost file
@@ -41,50 +31,54 @@ public class RestScenarioResult extends PCMScenarioResult {
      * @param splitrespn the splitrespn file
      * @param wrapper the wrapper file
      */
-    public RestScenarioResult(JSONObject architectureInstance, PCMResult result, 
-            JSONObject cost, JSONObject insinter, JSONObject splitrespn,
-            JSONObject wrapper) {
+    public RestScenarioResult(String name, JSONObject architectureInstance, 
+            PCMResult result, JSONObject cost, JSONObject insinter, 
+            JSONObject splitrespn, JSONObject wrapper) {
         super(null);
-        this.architectureInstance = architectureInstance;
         this.setResult(result);
-        this.cost = cost;
-        this.insinter = insinter;
-        this.splitrespn = splitrespn;
-        this.wrapper = wrapper;
+        this.architecture = new RestArchitecture(name, architectureInstance, 
+            cost, insinter, splitrespn, wrapper);
     }
 
     /**
      * @return the architecture
      */
     public JSONObject getRestArchitecture() {
-        return this.architectureInstance;
+        return this.architecture.getRestArchitecture();
     }
 
     /**
      * @return the cost file
      */
     public JSONObject getCost() {
-        return this.cost;
+        return this.architecture.getCost();
     }
 
     /**
      * @return the insinter file
      */
     public JSONObject getInsinter() {
-        return this.insinter;
+        return this.architecture.getInsinter();
     }
 
     /**
      * @return the splitrespn file
      */
     public JSONObject getSplitrespn() {
-        return this.splitrespn;
+        return this.architecture.getSplitrespn();
     }
 
     /**
      * @return the wrapper file
      */
     public JSONObject getWrapper() {
-        return this.wrapper;
+        return this.architecture.getWrapper();
+    }
+
+    /**
+     * @return the architecture
+     */
+    public RestArchitecture getArchitecture() {
+        return this.architecture;
     }
 }
