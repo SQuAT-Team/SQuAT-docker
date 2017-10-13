@@ -1,33 +1,20 @@
 package io.github.squat_team.agentsUtils;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
+import java.nio.file.Files;
 import java.util.Base64;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
 import org.json.JSONStringer;
-import org.palladiosimulator.pcm.allocation.Allocation;
-import org.palladiosimulator.pcm.repository.Repository;
-import org.palladiosimulator.pcm.resourceenvironment.ResourceEnvironment;
-import org.palladiosimulator.pcm.system.System;
-import org.palladiosimulator.pcm.usagemodel.UsageModel;
 
 import edu.squat.transformations.ArchitecturalVersion;
-import io.github.squat_team.json.JSONification;
 import io.github.squat_team.model.OptimizationType;
-import io.github.squat_team.model.PCMArchitectureInstance;
-import io.github.squat_team.model.PCMResult;
-import io.github.squat_team.model.PCMScenario;
-import io.github.squat_team.model.PCMScenarioResult;
 import io.github.squat_team.model.ResponseMeasureType;
 import io.github.squat_team.modifiability.ModifiabilityElement;
 import io.github.squat_team.modifiability.ModifiabilityOperation;
-import io.github.squat_team.util.SQuATHelper;
 
 /**
  * Sets up the specific {@link SillyBot} and scenarios used in this specific
@@ -461,6 +448,32 @@ public class LoadHelper implements ILoadHelper {
     }
 
     /**
+     * Add the given file to the JSON
+     *
+     * @param jsonStringer
+     * @param key the key to use for this file
+     * @param file the file whose content to add
+     */
+    private static void add(JSONStringer jsonStringer, String key, File file) {
+        Objects.requireNonNull(jsonStringer);
+        Objects.requireNonNull(key);
+        Objects.requireNonNull(file);
+        try {
+            byte[] fileContent = Files.readAllBytes(file.toPath());
+            jsonStringer.key(key);
+            jsonStringer.object();
+            jsonStringer.key("filename");
+            jsonStringer.value(file.getName());
+            String encoded = Base64.getEncoder().encodeToString(fileContent);
+            jsonStringer.key("filecontent");
+            jsonStringer.value(encoded);
+            jsonStringer.endObject();
+        } catch (IOException e) {
+            e.printStackTrace(System.err);
+        }
+    }
+
+    /**
      * @param jsonStringer
      */
     public static void loadSpecificModel(JSONStringer jsonStringer, String name) {
@@ -473,19 +486,18 @@ public class LoadHelper implements ILoadHelper {
         jsonStringer.key("architecture-instance").object();
         jsonStringer.key("name").value("");
 
-        JSONification jsoNification = new JSONification(jsonStringer);
-        jsoNification.add("repository", new File(basicPath + ".repository"));
-        jsoNification.add("system", new File(basicPath + ".system"));
-        jsoNification.add("allocation", new File(basicPath + ".allocation"));
-        jsoNification.add("resource-environment", new File(basicPath + ".resourceenvironment"));
-        jsoNification.add("usage-model", new File(basicPath + ".usagemodel"));
-        jsoNification.add("repository-with-alternatives", new File(BASE + "/" + "alternativeRepository" + ".repository"));
-
-        jsoNification.add("cost", new File("" + basicPath + ".cost"));
-        jsoNification.add("insinter-modular", new File("" + BASE + "/insinter-modular.henshin"));
-        jsoNification.add("splitrespn-modular", new File("" + BASE + "/splitrespn-modular.henshin"));
-        jsoNification.add("wrapper-modular", new File("" + BASE + "/wrapper-modular.henshin"));
+        add(jsonStringer, "repository", new File(basicPath + ".repository"));
+        add(jsonStringer, "system", new File(basicPath + ".system"));
+        add(jsonStringer, "allocation", new File(basicPath + ".allocation"));
+        add(jsonStringer, "resource-environment", new File(basicPath + ".resourceenvironment"));
+        add(jsonStringer, "usage-model", new File(basicPath + ".usagemodel"));
+        add(jsonStringer, "repository-with-alternatives", new File(BASE + "/" + "alternativeRepository" + ".repository"));
 
         jsonStringer.endObject();
+
+        add(jsonStringer, "cost", new File("" + basicPath + ".cost"));
+        add(jsonStringer, "insinter-modular", new File("" + BASE + "/insinter-modular.henshin"));
+        add(jsonStringer, "splitrespn-modular", new File("" + BASE + "/splitrespn-modular.henshin"));
+        add(jsonStringer, "wrapper-modular", new File("" + BASE + "/wrapper-modular.henshin"));
     }
 }
