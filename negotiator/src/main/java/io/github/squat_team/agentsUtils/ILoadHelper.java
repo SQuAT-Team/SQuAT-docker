@@ -1,6 +1,7 @@
 package io.github.squat_team.agentsUtils;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import io.github.squat_team.RestBot;
 import io.github.squat_team.model.RestArchitecture;
@@ -12,7 +13,9 @@ public interface ILoadHelper {
 	 * @param initialArchitecture
 	 *            the architecture at the beginning.
 	 * @return the created bots.
+	 * @throws ExecutionException 
+	 * @throws InterruptedException 
 	 */
 	public List<SillyBot> generateSillyBotsAndAnalyze(List<RestArchitecture> architecturalAlternatives,
-			RestArchitecture initialArchitecture);
+			RestArchitecture initialArchitecture) throws InterruptedException, ExecutionException;
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,13 +23,13 @@ import io.github.squat_team.performance.PerformanceMetric;
 
 /**
  * Sets up the specific {@link SillyBot} and scenarios used in this specific
- * case study. TODO: PA! SEQUENTIAL Analysis calls
+ * case study. TODO: PA! SEQUENTIAL/PARALLEL Analysis calls
  */
 public class LoadHelper implements ILoadHelper {
 
 	@Override
 	public List<SillyBot> generateSillyBotsAndAnalyze(List<RestArchitecture> architecturalAlternatives,
-			RestArchitecture initialArchitecture) {
+			RestArchitecture initialArchitecture) throws InterruptedException, ExecutionException {
 		List<SillyBot> sillyBots = new ArrayList<>();
 		for (RestBot currentBot : BotManager.getInstance().getAllBots()) {
 			SillyBot newSillyBot = generateFrom(currentBot, initialArchitecture);
@@ -48,10 +49,12 @@ public class LoadHelper implements ILoadHelper {
 	 * @param initialArchitecture
 	 *            the initial architecture of the whole run.
 	 * @return the generated architecture.
+	 * @throws ExecutionException 
+	 * @throws InterruptedException 
 	 */
-	private SillyBot generateFrom(RestBot bot, RestArchitecture initialArchitecture) {
+	private SillyBot generateFrom(RestBot bot, RestArchitecture initialArchitecture) throws InterruptedException, ExecutionException {
 		SillyBot newSillyBot;
-		Double initialArchitectureResponse = (Double) bot.analyze(initialArchitecture).getResult().getResponse();
+		Double initialArchitectureResponse = (Double) bot.analyze(initialArchitecture).get().getResult().getResponse();
 
 		switch (bot.getBotType()) {
 		case PERFORMANCE:
@@ -78,12 +81,14 @@ public class LoadHelper implements ILoadHelper {
 	 * @param architecturalAlternatives
 	 *            ALL alternatives to analyze.
 	 * @return the bot that contains the analysis results.
+	 * @throws ExecutionException 
+	 * @throws InterruptedException 
 	 */
 	private SillyBot analyzeAlternatives(RestBot bot, SillyBot sillyBot,
-			List<RestArchitecture> architecturalAlternatives) {
+			List<RestArchitecture> architecturalAlternatives) throws InterruptedException, ExecutionException {
 		for (RestArchitecture currentArchitecturalAlternative : architecturalAlternatives) {
 			Proposal propsal;
-			Double currentArchitectureResponse = (Double) bot.analyze(currentArchitecturalAlternative).getResult()
+			Double currentArchitectureResponse = (Double) bot.analyze(currentArchitecturalAlternative).get().getResult()
 					.getResponse();
 
 			switch (bot.getBotType()) {
