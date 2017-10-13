@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import edu.squat.transformations.ArchitecturalVersion;
-import io.github.squat_team.NegotiatorConstants;
+import io.github.squat_team.NegotiatorConfiguration;
 
 public class ArchitecturalTransformationsFactory {
 
@@ -20,10 +20,10 @@ public class ArchitecturalTransformationsFactory {
 		modifiabilityTrans = new ModifiabilityTransformationsFactory();
 		// initialArchitecture2=new ArchitecturalVersion("default","models","");
 		// initialArchitecture2.setFullPathToAlternativeRepository("/Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/alternativeRepository.repository");
-		initialArchitecture = new ArchitecturalVersion(NegotiatorConstants.INITIAL_ARCHITECTURE_NAME,
-				NegotiatorConstants.INITIAL_ARCHITECTURE_PATH, "");
+		initialArchitecture = new ArchitecturalVersion(NegotiatorConfiguration.INITIAL_ARCHITECTURE_NAME,
+				NegotiatorConfiguration.INITIAL_ARCHITECTURE_PATH, "");
 		initialArchitecture.setFullPathToAlternativeRepository(
-				NegotiatorConstants.INITIAL_ARCHITECTURE_ALTERNATIVE_REPOSITORY_FULL_PATH);
+				NegotiatorConfiguration.INITIAL_ARCHITECTURE_ALTERNATIVE_REPOSITORY_FULL_PATH);
 		performanceTrans = new PerformanceTransformationFactory();
 		architecturesByLevel = new Hashtable<>();
 	}
