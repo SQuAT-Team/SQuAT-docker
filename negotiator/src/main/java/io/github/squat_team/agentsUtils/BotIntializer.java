@@ -22,9 +22,9 @@ public class BotIntializer {
 				BotType.MODIFIABILITY);
 		createBot(LoadHelper.createModifiabilityScenarioS2(ResponseMeasureType.DECIMAL, 300.0), "TODO URI",
 				BotType.MODIFIABILITY);
-		createBot(LoadHelper.createScenarioOfWorkload(ResponseMeasureType.DECIMAL, 30.0), "TODO URI",
+		createBot(LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 30.0), "TODO URI",
 				BotType.PERFORMANCE);
-		createBot(LoadHelper.createScenarioOfCPU(ResponseMeasureType.DECIMAL, 40), "TODO URI", BotType.PERFORMANCE);
+		createBot(LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40), "TODO URI", BotType.PERFORMANCE);
 	}
 
 	/**
