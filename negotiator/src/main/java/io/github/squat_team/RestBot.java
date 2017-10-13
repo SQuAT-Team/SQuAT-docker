@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -121,8 +122,8 @@ public class RestBot {
         PCMResult pcmResult = new PCMResult(responseMeasureType);
         pcmResult.setResponse(response);
 
-        return new RestScenarioResult(this.botType, jsonArchitecture.getString("name"), 
-                jsonArchitecture, pcmResult, cost, insinter, splitrespn, wrapper);
+        return new RestScenarioResult(this.botType, jsonArchitecture.getString("name"), jsonArchitecture, pcmResult,
+                cost, insinter, splitrespn, wrapper);
     }
 
     /**
@@ -145,26 +146,30 @@ public class RestBot {
     }
 
     /**
-     * @param body
-     * @return
+     *
+     * @param architecture the architecture to analyze
+     * @return {@link CompletableFuture} to hold the {@link RestScenarioResult}
      */
-    public RestScenarioResult analyze(RestArchitecture architecture) {
-        return buildFromRoot(this.call(this.buildBody(architecture), "analyze"));
+    public CompletableFuture<RestScenarioResult> analyze(RestArchitecture architecture) {
+        return CompletableFuture.supplyAsync(() -> buildFromRoot(this.call(this.buildBody(architecture), "analyze")));
     }
 
     /**
-     * @param body
-     * @return
+     *
+     * @param architecture the architecture to search for alternatives in
+     * @return {@link CompletableFuture} to hold the a List of {@link RestScenarioResult}
      */
-    public List<RestScenarioResult> searchForAlternatives(RestArchitecture architecture) {
-        final List<RestScenarioResult> results = new ArrayList<>();
-        String body = null;
-        JSONObject result = this.call(this.buildBody(architecture), "searchForAlternatives");
-        JSONArray jsonResults = result.getJSONArray("values");
-        jsonResults.forEach(o -> {
-            results.add(buildFromRoot((JSONObject) o));
+    public CompletableFuture<List<RestScenarioResult>> searchForAlternatives(RestArchitecture architecture) {
+        return CompletableFuture.supplyAsync(() -> {
+            final List<RestScenarioResult> results = new ArrayList<>();
+            String body = null;
+            JSONObject result = this.call(this.buildBody(architecture), "searchForAlternatives");
+            JSONArray jsonResults = result.getJSONArray("values");
+            jsonResults.forEach(o -> {
+                results.add(buildFromRoot((JSONObject) o));
+            });
+            return results;
         });
-        return results;
     }
 
     /**
