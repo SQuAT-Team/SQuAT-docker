@@ -38,9 +38,14 @@ public class RestBot {
 	private final String name;
 
 	/**
+	 * Create a new {@link RestBot} with the given Parameters
+	 * 
 	 * @param botType
+	 *            the {@link BotType} of the bot
 	 * @param remoteURI
+	 *            the URI to perform remote call on
 	 * @param scenario
+	 *            the scenario to use and optimize by this bot
 	 */
 	public RestBot(String name, BotType botType, String remoteURI, JSONObject scenario) {
 		this.botType = Objects.requireNonNull(botType);
@@ -51,8 +56,12 @@ public class RestBot {
 	}
 
 	/**
+	 * Read the whole stream from the given {@link InputStream} and return a
+	 * {@link JSONObject} representing the body
+	 * 
 	 * @param is
-	 * @return
+	 *            the {@link InputStream} to read the body from
+	 * @return the {@link JSONObject} representing the body of the request
 	 */
 	private static JSONObject readBody(InputStream is) throws IOException {
 		List<Byte> byteList = new ArrayList<>();
@@ -71,9 +80,14 @@ public class RestBot {
 	}
 
 	/**
+	 * Perform the call to the remote end point
+	 *
 	 * @param body
+	 *            the body of the call, representing the parameters of the function
+	 *            call
 	 * @param uriPath
-	 * @return
+	 *            the path to the end point to call
+	 * @return the response from the end point as {@link JSONObject}
 	 */
 	private JSONObject call(String body, String uriPath) {
 		JSONObject result = null;
@@ -99,10 +113,14 @@ public class RestBot {
 	}
 
 	/**
+	 * Build the {@link RestScenarioResult} from the given {@link JSONObject}. If
+	 * the given object does not contain an architecture {@code null} is returned.
+	 * 
 	 * @param obj
-	 * @return
+	 *            the object to build the result from
+	 * @return the created {@link RestScenarioResult}
 	 */
-	private RestScenarioResult buildFromRoot(JSONObject obj) {
+	private RestScenarioResult buildRestScenarioResult(JSONObject obj) {
 		if (!obj.has("architecture-instance"))
 			return null;
 
@@ -137,10 +155,13 @@ public class RestBot {
 	}
 
 	/**
+	 * Build the body of the call from the given {@link RestArchitecture}
+	 * 
 	 * @param architecture
-	 * @return
+	 *            the architecture to use as parameter
+	 * @return the created body as {@link String}
 	 */
-	private String buildBody(RestArchitecture architecture) {
+	private String buildBodyFromArchitecture(RestArchitecture architecture) {
 		JSONObject root = new JSONObject();
 		root.put("scenario", this.scenario);
 		root.put("architecture-instance", architecture.getRestArchitecture());
@@ -156,17 +177,20 @@ public class RestBot {
 	}
 
 	/**
-	 *
+	 * Analyze the given architecture
+	 * 
 	 * @param architecture
 	 *            the architecture to analyze
 	 * @return {@link CompletableFuture} to hold the {@link RestScenarioResult}
 	 */
 	public CompletableFuture<RestScenarioResult> analyze(RestArchitecture architecture) {
-		return CompletableFuture.supplyAsync(() -> buildFromRoot(this.call(this.buildBody(architecture), "analyze")));
+		return CompletableFuture.supplyAsync(
+				() -> buildRestScenarioResult(this.call(this.buildBodyFromArchitecture(architecture), "analyze")));
 	}
 
 	/**
-	 *
+	 * Search for alternative results in the given architecture
+	 * 
 	 * @param architecture
 	 *            the architecture to search for alternatives in
 	 * @return {@link CompletableFuture} to hold the a List of
@@ -175,10 +199,10 @@ public class RestBot {
 	public CompletableFuture<List<RestScenarioResult>> searchForAlternatives(RestArchitecture architecture) {
 		return CompletableFuture.supplyAsync(() -> {
 			final List<RestScenarioResult> results = new ArrayList<>();
-			JSONObject result = this.call(this.buildBody(architecture), "searchForAlternatives");
+			JSONObject result = this.call(this.buildBodyFromArchitecture(architecture), "searchForAlternatives");
 			JSONArray jsonResults = result.getJSONArray("values");
 			jsonResults.forEach(o -> {
-				results.add(buildFromRoot((JSONObject) o));
+				results.add(buildRestScenarioResult((JSONObject) o));
 			});
 			return results;
 		});
