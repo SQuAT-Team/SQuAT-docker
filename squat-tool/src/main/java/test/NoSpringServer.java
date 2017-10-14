@@ -72,6 +72,12 @@ public class NoSpringServer {
 	private final ExecutorService threadPool = Executors.newFixedThreadPool(32);
 
 	/**
+	 * Synchronize on this object before performing any analyze or search for
+	 * alternatives
+	 */
+	private static final Object LQNS_LOCK = new Object();
+
+	/**
 	 * Create the default {@link Configuration}
 	 *
 	 * @return the default configuration
@@ -181,7 +187,7 @@ public class NoSpringServer {
 				scenario.setMetric(PerformanceMetric.valueOf(object.getString("metric")));
 			}
 		}
-		
+
 		if (scenario != null)
 			scenario.setExpectedResponse(expectedResult);
 		else
@@ -356,7 +362,11 @@ public class NoSpringServer {
 					rsp = this.botFn(body, (ctx, obj) -> {
 						PerOpteryxPCMBot bot = ctx.getBot();
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
-						PCMScenarioResult result = bot.analyze(architectureInstance);
+						PCMScenarioResult result = null;
+						synchronized (LQNS_LOCK) {
+							System.out.println("SFA");
+							result = bot.analyze(architectureInstance);
+						}
 						String resultString;
 						try {
 							buildResult(obj, result, ctx.getRestArchitecture());
@@ -391,7 +401,11 @@ public class NoSpringServer {
 					rsp = this.botFn(body, (ctx, obj) -> {
 						PerOpteryxPCMBot bot = ctx.getBot();
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
-						List<PCMScenarioResult> results = bot.searchForAlternatives(architectureInstance);
+						List<PCMScenarioResult> results = null;
+						synchronized (LQNS_LOCK) {
+							System.out.println("SFA");
+							results = bot.searchForAlternatives(architectureInstance);
+						}
 						String resultString;
 						try {
 							JSONArray jsonResults = new JSONArray();
