@@ -1,28 +1,18 @@
 package test;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,15 +22,10 @@ import org.palladiosimulator.pcm.allocation.Allocation;
 import org.palladiosimulator.pcm.resourceenvironment.ResourceEnvironment;
 import org.palladiosimulator.pcm.usagemodel.UsageModel;
 
-import com.fasterxml.jackson.databind.deser.SettableAnyProperty;
-import com.google.gson.JsonObject;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
-import io.github.squat_team.AbstractPCMBot;
 import io.github.squat_team.json.JSONConverter;
-import io.github.squat_team.json.JSONUtils;
 import io.github.squat_team.json.JSONification;
 import io.github.squat_team.json.UnJSONification;
 import io.github.squat_team.model.OptimizationType;
@@ -58,7 +43,9 @@ import io.github.squat_team.performance.peropteryx.ThreadPoolProvider;
 import io.github.squat_team.performance.peropteryx.configuration.Configuration;
 import io.github.squat_team.util.SQuATHelper;
 
+@SuppressWarnings("restriction")
 public class NoSpringServer {
+
 	/** The port to use */
 	private final int port;
 
@@ -94,19 +81,31 @@ public class NoSpringServer {
 	}
 
 	/**
+	 * Build the {@link JSONObject} representing the result from the given
+	 * {@link PCMScenarioResult} and {@link RestArchitecture}
+	 * 
 	 * @param result
+	 *            the result to insert into the {@link JSONObject}
 	 * @param restArch
+	 *            the rest architecture to get cost, and henshin files from
+	 * @return the created {@link JSONObject}
 	 */
 	private static JSONObject buildResult(PCMScenarioResult result, RestArchitecture restArch) {
 		return buildResult(new JSONObject(), result, restArch);
 	}
 
 	/**
+	 * Build the {@link JSONObject} representing the result from the given
+	 * {@link PCMScenarioResult} and {@link RestArchitecture} inserting it into the
+	 * given target object.
 	 * 
 	 * @param target
+	 *            the target to insert the result into
 	 * @param result
+	 *            the result to insert into the {@link JSONObject}
 	 * @param restArch
-	 * @return
+	 *            the rest architecture to get cost, and henshin files from
+	 * @return the created {@link JSONObject}
 	 */
 	private static JSONObject buildResult(JSONObject target, PCMScenarioResult result, RestArchitecture restArch) {
 		if (result == null)
@@ -138,22 +137,27 @@ public class NoSpringServer {
 	}
 
 	/**
-	 * @param object
-	 * @return the scenario
+	 * Get the {@link AbstractPerformancePCMScenario} from the given
+	 * {@link JSONObject}
+	 *
+	 * @param src
+	 *            the source object to build the
+	 *            {@link AbstractPerformancePCMScenario} from
+	 * @return the created scenario
 	 */
-	public static AbstractPerformancePCMScenario getScenarioFromObject(JSONObject object) {
+	public static AbstractPerformancePCMScenario getScenarioFromObject(JSONObject src) {
 		OptimizationType optimizationType = null;
 		PCMResult expectedResult = null;
 		AbstractPerformancePCMScenario scenario = null;
 
 		// Type
-		if (object.has("type")) {
-			optimizationType = OptimizationType.valueOf(object.getString("type"));
+		if (src.has("type")) {
+			optimizationType = OptimizationType.valueOf(src.getString("type"));
 		}
 
 		// Expected Result
-		if (object.has("expectedResult")) {
-			JSONObject jsonExpectedResult = object.getJSONObject("expectedResult");
+		if (src.has("expectedResult")) {
+			JSONObject jsonExpectedResult = src.getJSONObject("expectedResult");
 			ResponseMeasureType responseMeasureType = null;
 
 			if (jsonExpectedResult.has("responseMeasureType")) {
@@ -168,15 +172,15 @@ public class NoSpringServer {
 			}
 		}
 
-		if (object.has("ids") && object.has("rate")) {
+		if (src.has("ids") && src.has("rate")) {
 			final List<String> ids = new ArrayList<>();
-			object.getJSONArray("ids").forEach(o -> {
+			src.getJSONArray("ids").forEach(o -> {
 				ids.add((String) o);
 			});
 
-			double rate = object.getDouble("rate");
+			double rate = src.getDouble("rate");
 
-			String scenarioType = object.getString("scenario-type");
+			String scenarioType = src.getString("scenario-type");
 			switch (scenarioType) {
 			case "CPU":
 				scenario = new PerformancePCMCPUScenario(optimizationType, ids, rate);
@@ -187,8 +191,8 @@ public class NoSpringServer {
 			}
 
 			// metric
-			if (object.has("metric")) {
-				scenario.setMetric(PerformanceMetric.valueOf(object.getString("metric")));
+			if (src.has("metric")) {
+				scenario.setMetric(PerformanceMetric.valueOf(src.getString("metric")));
 			}
 		}
 
@@ -279,7 +283,10 @@ public class NoSpringServer {
 	}
 
 	/**
-	 * 
+	 * Read the whole body from the {@link InputStream} of the given
+	 * {@link HttpExchange} handle
+	 *
+	 * @return the body as {@link String}
 	 */
 	private static String readBody(HttpExchange exchg) {
 		String body = null;
@@ -304,7 +311,15 @@ public class NoSpringServer {
 		return body;
 	}
 
-	@SuppressWarnings("restriction")
+	/**
+	 * Create the {@link NoSpringServer} and create the contexts
+	 * 
+	 * @param port
+	 *            the port to use
+	 * @param args
+	 *            the arguments to start the server with
+	 * @throws IOException
+	 */
 	public NoSpringServer(int port, String... args) throws IOException {
 		this.port = port;
 		this.executions = Collections.synchronizedMap(new HashMap<>());
