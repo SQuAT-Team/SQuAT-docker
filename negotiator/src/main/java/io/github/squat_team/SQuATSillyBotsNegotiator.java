@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import io.github.squat_team.agentsUtils.ArchitectureInitializer;
@@ -250,7 +251,6 @@ public class SQuATSillyBotsNegotiator {
 		}
 
 		return minUtility;
-
 	}
 
 	private List<SillyBot> getAgentsThatCanConcede() {
@@ -260,6 +260,7 @@ public class SQuATSillyBotsNegotiator {
 			if (bot.canConcede())
 				ret.add(bot);
 		}
+
 		return ret;
 	}
 
@@ -294,12 +295,14 @@ public class SQuATSillyBotsNegotiator {
 		// TACTICS THAT ARE NOT WORKING WITH THE COMPOSITE COMPONETS
 		// new LoadHelper().loadBotsForArchitecturalAlternatives(new
 		// ArrayList<ArchitecturalVersion>(),archTransFactory.getInitialArchitecture());
+
 		HashMap<SillyBot, Proposal> ret = new HashMap<>();
 		System.out.println("Level of transformations: " + currentLevelOfTransformations);
 		List<RestArchitecture> versionsUntilLevel = archTransFactory
-				.getArchitecturalTransformationsUntilLevel(currentLevelOfTransformations);
+				.getArchitecturalTransformationsUntilLevel(currentLevelOfTransformations).get();
 		List<RestArchitecture> versionsForLevel = archTransFactory
 				.transformationsForLevel(currentLevelOfTransformations);
+
 		if (versionsForLevel.size() == 0) {
 			noMoreAlternatives = true;
 		} else {
