@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
@@ -44,17 +45,16 @@ public class ArchitecturalTransformationsFactory {
      * @return list with all {@link io.github.squat_team.model.RestArchitecture}
      *         created within the first and n-th level
      */
-    public List<RestArchitecture> getArchitecturalTransformationsUntilLevel(int n) {
-        if (resultPerLevel.get(n) == null)
-            createArchitecturalTransformationsForLevel(n);
-
-        // The results is the architectures created for this level plus the
-        // architectures created for previous levels
-        List<RestArchitecture> ret = new ArrayList<>();
-        for (int i = 1; i <= n; i++) {
-            resultPerLevel.get(i).stream().map(RestScenarioResult::getArchitecture).forEach(ret::add);
-        }
-        return ret;
+    public CompletableFuture<List<RestArchitecture>> getArchitecturalTransformationsUntilLevel(int n) {
+        return createArchitecturalTransformationsForLevel(n).thenApplyAsync(v -> {
+            // The results is the architectures created for this level plus the
+            // architectures created for previous levels
+            List<RestArchitecture> ret = new ArrayList<>();
+            for (int i = 1; i <= n; i++) {
+                resultPerLevel.get(i).stream().map(RestScenarioResult::getArchitecture).forEach(ret::add);
+            }
+            return ret;
+        });
     }
 
     /**
@@ -62,10 +62,6 @@ public class ArchitecturalTransformationsFactory {
      */
     public RestArchitecture getInitialArchitecture() {
         return this.initialArchitecture;
-    }
-
-    public CompletableFuture<Void> foo(RestArchitecture arch, List<RestScenarioResult> results) {
-        return this.performModBot(arch, results);
     }
 
     /**
@@ -124,16 +120,18 @@ public class ArchitecturalTransformationsFactory {
      * @param previousLevelResults
      *            the list of results generated in the previous level
      */
-    private void createFromPreviousResults(List<RestScenarioResult> results,
+    private CompletableFuture<Void> createFromPreviousResults(List<RestScenarioResult> results,
             List<RestScenarioResult> previousLevelResults) {
+        List<CompletableFuture<?>> futureList = new Vector<>();
         for (RestScenarioResult previousResult : previousLevelResults) {
             RestArchitecture arch = previousResult.getArchitecture();
             if (previousResult.getOrigininatingBotType() == BotType.PERFORMANCE) {
-                this.performPerfBot(arch, results);
+                futureList.add(this.performPerfBot(arch, results));
             } else {
-                this.performModBot(arch, results);
+                futureList.add(this.performModBot(arch, results));
             }
         }
+        return CompletableFuture.allOf(futureList.toArray(new CompletableFuture<?>[futureList.size()]));
     }
 
     /**
@@ -144,10 +142,10 @@ public class ArchitecturalTransformationsFactory {
      * @param level
      *            the level to search for
      */
-    private void createArchitecturalTransformationsForLevel(int level) {
+    private CompletableFuture<Void> createArchitecturalTransformationsForLevel(int level) {
         // If it already exists, exit doing nothing
         if (this.resultPerLevel.containsKey(level))
-            return;
+            return CompletableFuture.supplyAsync(() -> null);
 
         // Create the list and add to map
         final List<RestScenarioResult> results = new ArrayList<>();
@@ -156,11 +154,11 @@ public class ArchitecturalTransformationsFactory {
         // If we need to create the first level, we need to start with the
         // initial architecture
         if (level == 1) {
-            this.performPerfBot(this.initialArchitecture, results);
-            this.performModBot(this.initialArchitecture, results);
+            return CompletableFuture.allOf(this.performPerfBot(this.initialArchitecture, results),
+                    this.performModBot(this.initialArchitecture, results));
         } else if (this.resultPerLevel.containsKey(level - 1)) {
             List<RestScenarioResult> previousLevelResults = this.resultPerLevel.get(level - 1);
-            this.createFromPreviousResults(results, previousLevelResults);
+            return this.createFromPreviousResults(results, previousLevelResults);
         }
     }
 
