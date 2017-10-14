@@ -72,16 +72,18 @@ public class LoadHelper implements ILoadHelper {
 		for (SillyBot sillyBot : analysisCallResults.keySet()) {
 			System.out.println("PRINT SILLY BOT ANALYZED RESULTS:");
 			for (IntermediateResult botsAnalysisCall : analysisCallResults.get(sillyBot)) {
-				System.out.println("For Model " + botsAnalysisCall.name + " metric is " + botsAnalysisCall.analysisResult);
 				Proposal propsal;
 				if (sillyBot instanceof PerformanceSillyBot) {
 					System.out.println();
-
 					propsal = new PerformanceProposal(getResponseValue(botsAnalysisCall.analysisResult),
 							botsAnalysisCall.name);
+					System.out.println("For Model " + botsAnalysisCall.name + " metric is "
+							+ getResponseValue(botsAnalysisCall.analysisResult));
 				} else if (sillyBot instanceof ModifiabilitySillyBot) {
 					propsal = new ModifiabilityProposal(getResponseValue(botsAnalysisCall.analysisResult),
 							botsAnalysisCall.name);
+					System.out.println("For Model " + botsAnalysisCall.name + " metric is "
+							+ getResponseValue(botsAnalysisCall.analysisResult));
 				} else {
 					throw new IllegalArgumentException("Unknown type of Silly Bot.");
 				}
