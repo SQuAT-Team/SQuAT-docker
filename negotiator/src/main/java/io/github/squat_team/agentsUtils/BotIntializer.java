@@ -12,19 +12,21 @@ import io.github.squat_team.model.ResponseMeasureType;
 public class BotIntializer {
 
 	// TODO: PA! Set the Docker URI.
+	public static final String PERF_BOT_URI = "http://127.0.0.1:8080";
+	public static final String MOD_BOT_URI = "http://127.0.0.1:8081";
 
 	/**
 	 * Initializes 2 Performance bots and 2 Modifiability Bots. The standard setting
 	 * of the STPlus case study.
 	 */
 	public static void initialize2P2MBots() {
-		createBot("M1", LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0), "TODO URI",
+		createBot("M1", LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0), MOD_BOT_URI,
 				BotType.MODIFIABILITY);
-		createBot("M2", LoadHelper.createModifiabilityScenarioS2(ResponseMeasureType.DECIMAL, 300.0), "TODO URI",
+		createBot("M2", LoadHelper.createModifiabilityScenarioS2(ResponseMeasureType.DECIMAL, 300.0), MOD_BOT_URI,
 				BotType.MODIFIABILITY);
-		createBot("P1", LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 30.0), "TODO URI",
+		createBot("P1", LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 30.0), PERF_BOT_URI,
 				BotType.PERFORMANCE);
-		createBot("P2", LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40), "TODO URI",
+		createBot("P2", LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40), PERF_BOT_URI,
 				BotType.PERFORMANCE);
 	}
 
@@ -34,9 +36,9 @@ public class BotIntializer {
 	 */
 	public static void initialize3P3MBots() {
 		initialize2P2MBots();
-		createBot("M3", LoadHelper.createModifiabilityScenarioS3(ResponseMeasureType.DECIMAL, 98.0), "TODO URI",
+		createBot("M3", LoadHelper.createModifiabilityScenarioS3(ResponseMeasureType.DECIMAL, 98.0), MOD_BOT_URI,
 				BotType.MODIFIABILITY);
-		createBot("P3", LoadHelper.createPerformanceScenarioS3(ResponseMeasureType.DECIMAL, 40.0), "TODO URI",
+		createBot("P3", LoadHelper.createPerformanceScenarioS3(ResponseMeasureType.DECIMAL, 40.0), PERF_BOT_URI,
 				BotType.PERFORMANCE);
 	}
 
@@ -46,9 +48,9 @@ public class BotIntializer {
 	 */
 	public static void initialize4P4MBots() {
 		initialize3P3MBots();
-		createBot("M4", LoadHelper.createModifiabilityScenarioS4(ResponseMeasureType.DECIMAL, 199.5), "TODO URI",
+		createBot("M4", LoadHelper.createModifiabilityScenarioS4(ResponseMeasureType.DECIMAL, 199.5), MOD_BOT_URI,
 				BotType.MODIFIABILITY);
-		createBot("P4", LoadHelper.createPerformanceScenarioS4(ResponseMeasureType.DECIMAL, 45.0), "TODO URI",
+		createBot("P4", LoadHelper.createPerformanceScenarioS4(ResponseMeasureType.DECIMAL, 45.0), PERF_BOT_URI,
 				BotType.PERFORMANCE);
 	}
 
@@ -70,3 +72,4 @@ public class BotIntializer {
 	}
 
 }
+
