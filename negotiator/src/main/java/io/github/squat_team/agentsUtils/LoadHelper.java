@@ -246,10 +246,10 @@ public class LoadHelper implements ILoadHelper {
 		ret.put("operation", String.valueOf(op));
 		ret.put("element", String.valueOf(el));
 
-		JSONArray parameters = new JSONArray();
+		JSONObject parameters = new JSONObject();
 		ret.put("parameters", parameters);
 		for (int i = 0; i < LEN; ++i) {
-			parameters.put(new JSONObject().put(keys[i], values[i]));
+			parameters.put(keys[i], values[i]);
 		}
 		return ret;
 	}
