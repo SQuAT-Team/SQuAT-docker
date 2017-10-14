@@ -103,6 +103,9 @@ public class RestBot {
 	 * @return
 	 */
 	private RestScenarioResult buildFromRoot(JSONObject obj) {
+		if (!obj.has("architecture-instance"))
+			return null;
+
 		// Architecture
 		JSONObject jsonArchitecture = obj.getJSONObject("architecture-instance");
 		JSONObject cost = null;
