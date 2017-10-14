@@ -48,6 +48,7 @@ import com.sun.net.httpserver.HttpServer;
 import de.uka.ipd.sdq.identifier.IdentifierPackage;
 import de.uka.ipd.sdq.stoex.StoexPackage;
 import io.github.squat_team.AbstractPCMBot;
+import io.github.squat_team.json.JSONConverter;
 import io.github.squat_team.json.JSONUtils;
 import io.github.squat_team.json.JSONification;
 import io.github.squat_team.json.UnJSONification;
@@ -56,6 +57,7 @@ import io.github.squat_team.model.PCMArchitectureInstance;
 import io.github.squat_team.model.PCMResult;
 import io.github.squat_team.model.PCMScenarioResult;
 import io.github.squat_team.model.ResponseMeasureType;
+import io.github.squat_team.model.RestArchitecture;
 import io.github.squat_team.modifiability.ModifiabilityElement;
 import io.github.squat_team.modifiability.ModifiabilityInstruction;
 import io.github.squat_team.modifiability.ModifiabilityOperation;
@@ -152,7 +154,7 @@ public class NoSpringServer {
      * @param requestBody the HTTP POST request body
      * @param fn the function to execute the corresponding function to the rest endpoint
      */
-    private String botFn(String requestBody, BiFunction<ExecutionContext, JSONStringer, String> fn) {
+    private String botFn(String requestBody, BiFunction<ExecutionContext, JSONObject, String> fn) {
         String executionUUID = UUID.randomUUID().toString();
         String response = executionUUID;
         try {
@@ -176,14 +178,24 @@ public class NoSpringServer {
 
             // Write from JSON
             UnJSONification unJSONification = new UnJSONification(executionUUID);
-            unJSONification.getFile(jsonBody.getJSONObject("cost"));
-            unJSONification.getFile(jsonBody.getJSONObject("insinter-modular"));
-            unJSONification.getFile(jsonBody.getJSONObject("splitrespn-modular"));
-            unJSONification.getFile(jsonBody.getJSONObject("wrapper-modular"));
+            RestArchitecture restArchitecture = JSONConverter.buildFromBody(jsonBody);
+
+            if (restArchitecture.getCost() != null) {
+                unJSONification.getFile(restArchitecture.getCost());
+            }
+            if (restArchitecture.getInsinter() != null) {
+                unJSONification.getFile(restArchitecture.getInsinter());
+            }
+            if (restArchitecture.getSplitrespn() != null) {
+                unJSONification.getFile(restArchitecture.getSplitrespn());
+            }
+            if (restArchitecture.getWrapper() != null) {
+                unJSONification.getFile(restArchitecture.getWrapper());
+            }
 
             // Architecture instance
-            JSONObject jsonArchInstance = jsonBody.getJSONObject("architecture-instance");
-            PCMArchitectureInstance architectureInstance = unJSONification.getArchitectureInstance(jsonArchInstance);
+            PCMArchitectureInstance architectureInstance = unJSONification
+                    .getArchitectureInstance(restArchitecture.getRestArchitecture());
 
             // Scenario
             ModifiabilityPCMScenario scenario = NoSpringServer
@@ -192,14 +204,14 @@ public class NoSpringServer {
             // Create the bot and context
             KAMPPCMBot bot = new KAMPPCMBot(scenario);
             bot.setEvaluationType(EvaluationType.COMPLEXITY);
-            ExecutionContext context = new ExecutionContext(bot, architectureInstance);
+            ExecutionContext context = new ExecutionContext(bot, architectureInstance, restArchitecture);
 
-            // Prepare the result stringer
-            JSONStringer resultStringer = new JSONStringer();
-            resultStringer.object().key("executionUUID").value(executionUUID);
+            // Prepare the result object
+            JSONObject rootJSON = new JSONObject();
+            rootJSON.put("executionUUID", executionUUID);
 
             // Execute and generate result
-            String result = fn.apply(context, resultStringer);
+            String result = fn.apply(context, rootJSON);
             return result;
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -211,6 +223,47 @@ public class NoSpringServer {
             this.executions.remove(executionUUID);
         }
         return response;
+    }
+
+    /**
+     * @param result
+     * @param restArch
+     */
+    private static JSONObject buildResult(PCMScenarioResult result, RestArchitecture restArch) {
+    	return buildResult(new JSONObject(), result, restArch);
+    }
+
+    /**
+     * 
+     * @param target
+     * @param result
+     * @param restArch
+     * @return
+     */
+    private static JSONObject buildResult(JSONObject target, PCMScenarioResult result, RestArchitecture restArch) {
+        // Put result
+        PCMResult pcmResult = result.getResult();
+        JSONObject jsonPCMResult = new JSONObject();
+        target.put("pcm-result", jsonPCMResult);
+        jsonPCMResult.put("response", String.valueOf(pcmResult.getResponse()));
+        jsonPCMResult.put("measure-type", pcmResult.getResponseMeasureType());
+
+        // Put name and architecture
+        target.put("name", result.getResultingArchitecture().getName());
+        target.put("architecture-instance", 
+                JSONConverter.build(result.getResultingArchitecture()));
+
+        // Put additional arch
+        if (restArch.getCost() != null)
+        	target.put("cost", restArch.getCost());
+        if (restArch.getInsinter() != null)
+        	target.put("insinter-modular", restArch.getInsinter());
+        if (restArch.getSplitrespn() != null)
+        	target.put("splitrespn-modular", restArch.getSplitrespn());
+        if (restArch.getWrapper() != null)
+        	target.put("wrapper-modular", restArch.getWrapper());
+
+        return target;
     }
 
     /**
@@ -239,7 +292,8 @@ public class NoSpringServer {
         return body;
     }
 
-    public NoSpringServer(int port, String... args) throws IOException {
+    @SuppressWarnings("restriction")
+	public NoSpringServer(int port, String... args) throws IOException {
         this.port = port;
         this.executions = Collections.synchronizedMap(new HashMap<>());
         this.httpServer = HttpServer.create(new InetSocketAddress(this.port), 0);
@@ -287,15 +341,14 @@ public class NoSpringServer {
                 String body = readBody(exchg);
                 String rsp = null;
                 if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
-                    rsp = this.botFn(body, (ctx, stringer) -> {
+                    rsp = this.botFn(body, (ctx, obj) -> {
                         KAMPPCMBot bot = ctx.getBot();
                         PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
                         PCMScenarioResult result = bot.analyze(architectureInstance);
                         String resultString;
                         try {
-                            JSONification jsoNification = new JSONification(stringer);
-                            jsoNification.add(result);
-                            resultString = jsoNification.toJSON();
+                            buildResult(obj, result, ctx.getRestArchitecture());
+                            resultString = obj.toString();
                         } catch (JSONException e) {
                             resultString = e.getMessage();
                         }
@@ -323,15 +376,18 @@ public class NoSpringServer {
                 String body = readBody(exchg);
                 String rsp = null;
                 if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
-                    rsp = this.botFn(body, (ctx, stringer) -> {
+                    rsp = this.botFn(body, (ctx, obj) -> {
                         KAMPPCMBot bot = ctx.getBot();
                         PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
                         List<PCMScenarioResult> results = bot.searchForAlternatives(architectureInstance);
                         String resultString;
                         try {
-                            JSONification jsoNification = new JSONification(stringer);
-                            jsoNification.add(results);
-                            resultString = jsoNification.toJSON();
+                            JSONArray jsonResults = new JSONArray();
+                            obj.put("values", jsonResults);
+                            for (PCMScenarioResult result : results) {
+                                jsonResults.put(buildResult(result, ctx.getRestArchitecture()));
+                            }
+                            resultString = obj.toString();
                         } catch (JSONException e) {
                             resultString = e.getMessage();
                         }
