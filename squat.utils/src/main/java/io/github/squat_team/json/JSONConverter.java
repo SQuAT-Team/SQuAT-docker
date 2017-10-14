@@ -50,7 +50,7 @@ public class JSONConverter {
     public static JSONObject build(PCMArchitectureInstance architectureInstance) {
         JSONObject jsonObject = new JSONObject();
 
-        jsonObject.put("name", architectureInstance);
+        jsonObject.put("name", architectureInstance.getName());
         jsonObject.put("repository", build(architectureInstance.getRepository().eResource()));
         if (architectureInstance.getRepositoryWithAlternatives() != null)
             jsonObject.put("repository-with-alternatives",
