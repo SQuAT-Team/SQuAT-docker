@@ -70,9 +70,13 @@ public class LoadHelper implements ILoadHelper {
 	private void writeAnalysisResults(Map<SillyBot, List<IntermediateResult>> analysisCallResults)
 			throws InterruptedException, ExecutionException {
 		for (SillyBot sillyBot : analysisCallResults.keySet()) {
+			System.out.println("PRINT SILLY BOT ANALYZED RESULTS:");
 			for (IntermediateResult botsAnalysisCall : analysisCallResults.get(sillyBot)) {
+				System.out.println("For Model " + botsAnalysisCall.name + " metric is " + botsAnalysisCall.analysisResult);
 				Proposal propsal;
 				if (sillyBot instanceof PerformanceSillyBot) {
+					System.out.println();
+
 					propsal = new PerformanceProposal(getResponseValue(botsAnalysisCall.analysisResult),
 							botsAnalysisCall.name);
 				} else if (sillyBot instanceof ModifiabilitySillyBot) {
