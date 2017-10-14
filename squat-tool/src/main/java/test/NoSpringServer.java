@@ -109,6 +109,9 @@ public class NoSpringServer {
 	 * @return
 	 */
 	private static JSONObject buildResult(JSONObject target, PCMScenarioResult result, RestArchitecture restArch) {
+		if (result == null)
+			return target;
+
 		// Put result
 		PCMResult pcmResult = result.getResult();
 		JSONObject jsonPCMResult = new JSONObject();
@@ -120,16 +123,17 @@ public class NoSpringServer {
 		target.put("name", result.getResultingArchitecture().getName());
 		target.put("architecture-instance", JSONConverter.build(result.getResultingArchitecture()));
 
-		// Put additional arch
-		if (restArch.getCost() != null)
-			target.put("cost", restArch.getCost());
-		if (restArch.getInsinter() != null)
-			target.put("insinter-modular", restArch.getInsinter());
-		if (restArch.getSplitrespn() != null)
-			target.put("splitrespn-modular", restArch.getSplitrespn());
-		if (restArch.getWrapper() != null)
-			target.put("wrapper-modular", restArch.getWrapper());
-
+		if (restArch != null) {
+			// Put additional arch
+			if (restArch.getCost() != null)
+				target.put("cost", restArch.getCost());
+			if (restArch.getInsinter() != null)
+				target.put("insinter-modular", restArch.getInsinter());
+			if (restArch.getSplitrespn() != null)
+				target.put("splitrespn-modular", restArch.getSplitrespn());
+			if (restArch.getWrapper() != null)
+				target.put("wrapper-modular", restArch.getWrapper());
+		}
 		return target;
 	}
 
@@ -364,7 +368,7 @@ public class NoSpringServer {
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
 						PCMScenarioResult result = null;
 						synchronized (LQNS_LOCK) {
-							System.out.println("SFA");
+							System.out.println("AN");
 							result = bot.analyze(architectureInstance);
 						}
 						String resultString;
