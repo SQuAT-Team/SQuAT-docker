@@ -160,6 +160,8 @@ public class ArchitecturalTransformationsFactory {
             List<RestScenarioResult> previousLevelResults = this.resultPerLevel.get(level - 1);
             return this.createFromPreviousResults(results, previousLevelResults);
         }
+
+        return CompletableFuture.supplyAsync(() -> null);
     }
 
     /**
