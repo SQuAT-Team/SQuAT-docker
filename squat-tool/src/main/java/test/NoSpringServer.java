@@ -109,6 +109,16 @@ public class NoSpringServer {
 	 * @return
 	 */
 	private static JSONObject buildResult(JSONObject target, PCMScenarioResult result, RestArchitecture restArch) {
+		if (result == null)
+			return target;
+
+		// Put result
+		PCMResult pcmResult = result.getResult();
+		JSONObject jsonPCMResult = new JSONObject();
+		target.put("pcm-result", jsonPCMResult);
+		jsonPCMResult.put("response", String.valueOf(pcmResult.getResponse()));
+		jsonPCMResult.put("measure-type", pcmResult.getResponseMeasureType());
+
 		// Put name and architecture
 		target.put("name", result.getResultingArchitecture().getName());
 		target.put("architecture-instance", JSONConverter.build(result.getResultingArchitecture()));
@@ -124,17 +134,6 @@ public class NoSpringServer {
 			if (restArch.getWrapper() != null)
 				target.put("wrapper-modular", restArch.getWrapper());
 		}
-
-		// Put result only when available
-		if (result != null) {
-			// Put result
-			PCMResult pcmResult = result.getResult();
-			JSONObject jsonPCMResult = new JSONObject();
-			target.put("pcm-result", jsonPCMResult);
-			jsonPCMResult.put("response", String.valueOf(pcmResult.getResponse()));
-			jsonPCMResult.put("measure-type", pcmResult.getResponseMeasureType());
-		}
-
 		return target;
 	}
 
