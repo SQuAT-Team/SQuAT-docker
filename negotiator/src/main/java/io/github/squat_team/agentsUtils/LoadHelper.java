@@ -45,21 +45,22 @@ public class LoadHelper implements ILoadHelper {
 	 * @param initialArchitecture
 	 *            the initial architecture of the whole run.
 	 * @return the generated architecture.
-	 * @throws ExecutionException 
-	 * @throws InterruptedException 
+	 * @throws ExecutionException
+	 * @throws InterruptedException
 	 */
-	private SillyBot generateFrom(RestBot bot, RestArchitecture initialArchitecture) throws InterruptedException, ExecutionException {
+	private SillyBot generateFrom(RestBot bot, RestArchitecture initialArchitecture)
+			throws InterruptedException, ExecutionException {
 		SillyBot newSillyBot;
 		Double initialArchitectureResponse = (Double) bot.analyze(initialArchitecture).get().getResult().getResponse();
 
 		switch (bot.getBotType()) {
 		case PERFORMANCE:
 			newSillyBot = new PerformanceSillyBot(initialArchitectureResponse.floatValue(), bot.getName(),
-					bot.getExpectedResult());
+					(float) (double) (Double.valueOf(bot.getExpectedResult())));
 			break;
 		case MODIFIABILITY:
 			newSillyBot = new ModifiabilitySillyBot(initialArchitectureResponse.floatValue(), bot.getName(),
-					bot.getExpectedResult());
+					(float) (double) (Double.valueOf(bot.getExpectedResult())));
 			break;
 		default:
 			throw new IllegalArgumentException("The bot type is not implemented yet: " + bot.getBotType());
@@ -77,8 +78,8 @@ public class LoadHelper implements ILoadHelper {
 	 * @param architecturalAlternatives
 	 *            ALL alternatives to analyze.
 	 * @return the bot that contains the analysis results.
-	 * @throws ExecutionException 
-	 * @throws InterruptedException 
+	 * @throws ExecutionException
+	 * @throws InterruptedException
 	 */
 	private SillyBot analyzeAlternatives(RestBot bot, SillyBot sillyBot,
 			List<RestArchitecture> architecturalAlternatives) throws InterruptedException, ExecutionException {
