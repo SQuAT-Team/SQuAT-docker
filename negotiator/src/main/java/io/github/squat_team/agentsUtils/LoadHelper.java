@@ -1,18 +1,24 @@
 package io.github.squat_team.agentsUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 
+import io.github.squat_team.NegotiatorConfiguration;
 import io.github.squat_team.RestBot;
 import io.github.squat_team.model.OptimizationType;
 import io.github.squat_team.model.ResponseMeasureType;
 import io.github.squat_team.model.RestArchitecture;
+import io.github.squat_team.model.RestScenarioResult;
 import io.github.squat_team.modifiability.ModifiabilityElement;
 import io.github.squat_team.modifiability.ModifiabilityOperation;
 import io.github.squat_team.performance.PerformanceMetric;
@@ -23,18 +29,130 @@ import io.github.squat_team.performance.PerformanceMetric;
  */
 public class LoadHelper implements ILoadHelper {
 
+	/**
+	 * Connects results of the analysis with the analyzed architecture's name.
+	 */
+	private class IntermediateResult {
+		private CompletableFuture<RestScenarioResult> analysisResult;
+		private String name;
+	}
+
 	@Override
 	public List<SillyBot> generateSillyBotsAndAnalyze(List<RestArchitecture> architecturalAlternatives,
 			RestArchitecture initialArchitecture) throws InterruptedException, ExecutionException {
-		List<SillyBot> sillyBots = new ArrayList<>();
-		for (RestBot currentBot : BotManager.getInstance().getAllBots()) {
-			SillyBot newSillyBot = generateFrom(currentBot, initialArchitecture);
-			analyzeAlternatives(currentBot, newSillyBot, architecturalAlternatives);
-			sillyBots.add(newSillyBot);
+		Map<RestBot, SillyBot> botMap = generateFrom(BotManager.getInstance().getAllBots(), initialArchitecture);
+		Map<SillyBot, List<IntermediateResult>> analysisCallResults = callAnalysis(botMap, architecturalAlternatives);
+		writeAnalysisResults(analysisCallResults);
+		return convert(botMap.values());
+	}
 
-			newSillyBot.printUtilies();
+	/**
+	 * Returns the collection of bots as list.
+	 * 
+	 * @param botsToAdd
+	 *            these bots will be part of the list.
+	 * @return the list containing all specified bots.
+	 */
+	private List<SillyBot> convert(Collection<SillyBot> botsToAdd) {
+		List<SillyBot> bots = new ArrayList<>();
+		bots.addAll(botsToAdd);
+		return bots;
+	}
+
+	/**
+	 * Write the Analysis Results to the SillyBots. The analysis has to terminate.
+	 * 
+	 * @param analysisCallResults
+	 *            the results of the analysis calls.
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
+	private void writeAnalysisResults(Map<SillyBot, List<IntermediateResult>> analysisCallResults)
+			throws InterruptedException, ExecutionException {
+		for (SillyBot sillyBot : analysisCallResults.keySet()) {
+			for (IntermediateResult botsAnalysisCall : analysisCallResults.get(sillyBot)) {
+				Proposal propsal;
+				if (sillyBot instanceof PerformanceSillyBot) {
+					propsal = new PerformanceProposal(getResponseValue(botsAnalysisCall.analysisResult),
+							botsAnalysisCall.name);
+				} else if (sillyBot instanceof ModifiabilitySillyBot) {
+					propsal = new ModifiabilityProposal(getResponseValue(botsAnalysisCall.analysisResult),
+							botsAnalysisCall.name);
+				} else {
+					throw new IllegalArgumentException("Unknown type of Silly Bot.");
+				}
+
+				sillyBot.insertInOrder(propsal);
+			}
 		}
-		return sillyBots;
+	}
+
+	/**
+	 * Gets the response value from the analysis call.
+	 * 
+	 * @param analysisCall
+	 *            the result of the analysis call.
+	 * @return the response value or a default value. Never null.
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
+	private float getResponseValue(CompletableFuture<RestScenarioResult> analysisCall)
+			throws InterruptedException, ExecutionException {
+		RestScenarioResult scenarioResult = analysisCall.get();
+		if (scenarioResult != null) {
+			Double responseValue = (Double) scenarioResult.getResult().getResponse();
+			return responseValue.floatValue();
+		} else {
+			return NegotiatorConfiguration.getFailureResponseValue();
+		}
+	}
+
+	/**
+	 * Starts the analysis of all bots for all architecture alternatives.
+	 * 
+	 * @param botMap
+	 *            the RestBots and their associated SillyBot.
+	 * @param architecturalAlternatives
+	 *            the alternatives to analyze.
+	 * @return the results of the call for each SillyBot.
+	 */
+	private Map<SillyBot, List<IntermediateResult>> callAnalysis(Map<RestBot, SillyBot> botMap,
+			List<RestArchitecture> architecturalAlternatives) {
+		Map<SillyBot, List<IntermediateResult>> result = new HashMap<>();
+		// generate empty lists
+		for (SillyBot sillyBot : botMap.values()) {
+			result.put(sillyBot, new ArrayList<>());
+		}
+		// call bots in parallel is better than calling all for one bot first
+		for (RestArchitecture currentArchitecture : architecturalAlternatives) {
+			for (RestBot restBot : botMap.keySet()) {
+				IntermediateResult intermediateResult = new IntermediateResult();
+				intermediateResult.analysisResult = restBot.analyze(currentArchitecture);
+				intermediateResult.name = currentArchitecture.getName();
+				result.get(botMap.get(restBot)).add(intermediateResult);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Generates the {@link SillyBot} from all {@link RestBot}.
+	 * 
+	 * @param bots
+	 *            the bots to generate from.
+	 * @param initialArchitecture
+	 *            the initial architecture of the whole run.
+	 * @return the generated bots.
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
+	private Map<RestBot, SillyBot> generateFrom(List<RestBot> bots, RestArchitecture initialArchitecture)
+			throws InterruptedException, ExecutionException {
+		Map<RestBot, SillyBot> result = new HashMap<>();
+		for (RestBot currentBot : bots) {
+			result.put(currentBot, generateFrom(currentBot, initialArchitecture));
+		}
+		return result;
 	}
 
 	/**
@@ -44,65 +162,28 @@ public class LoadHelper implements ILoadHelper {
 	 *            the bot to generate from.
 	 * @param initialArchitecture
 	 *            the initial architecture of the whole run.
-	 * @return the generated architecture.
+	 * @return the generated bot.
 	 * @throws ExecutionException
 	 * @throws InterruptedException
 	 */
 	private SillyBot generateFrom(RestBot bot, RestArchitecture initialArchitecture)
 			throws InterruptedException, ExecutionException {
 		SillyBot newSillyBot;
-		Double initialArchitectureResponse = (Double) bot.analyze(initialArchitecture).get().getResult().getResponse();
+		float initialArchitectureResponse = getResponseValue(bot.analyze(initialArchitecture));
 
 		switch (bot.getBotType()) {
 		case PERFORMANCE:
-			newSillyBot = new PerformanceSillyBot(initialArchitectureResponse.floatValue(), bot.getName(),
+			newSillyBot = new PerformanceSillyBot(initialArchitectureResponse, bot.getName(),
 					(float) (double) (Double.valueOf(bot.getExpectedResult())));
 			break;
 		case MODIFIABILITY:
-			newSillyBot = new ModifiabilitySillyBot(initialArchitectureResponse.floatValue(), bot.getName(),
+			newSillyBot = new ModifiabilitySillyBot(initialArchitectureResponse, bot.getName(),
 					(float) (double) (Double.valueOf(bot.getExpectedResult())));
 			break;
 		default:
 			throw new IllegalArgumentException("The bot type is not implemented yet: " + bot.getBotType());
 		}
 		return newSillyBot;
-	}
-
-	/**
-	 * Analyzes the alternatives and adds the results to the bot.
-	 * 
-	 * @param bot
-	 *            the real bot related to the silly bot.
-	 * @param sillyBot
-	 *            the bot that will contian the analysis results.
-	 * @param architecturalAlternatives
-	 *            ALL alternatives to analyze.
-	 * @return the bot that contains the analysis results.
-	 * @throws ExecutionException
-	 * @throws InterruptedException
-	 */
-	private SillyBot analyzeAlternatives(RestBot bot, SillyBot sillyBot,
-			List<RestArchitecture> architecturalAlternatives) throws InterruptedException, ExecutionException {
-		for (RestArchitecture currentArchitecturalAlternative : architecturalAlternatives) {
-			Proposal propsal;
-			Double currentArchitectureResponse = (Double) bot.analyze(currentArchitecturalAlternative).get().getResult()
-					.getResponse();
-
-			switch (bot.getBotType()) {
-			case PERFORMANCE:
-				propsal = new PerformanceProposal(currentArchitectureResponse.floatValue(),
-						currentArchitecturalAlternative.getName());
-				break;
-			case MODIFIABILITY:
-				propsal = new ModifiabilityProposal(currentArchitectureResponse.floatValue(),
-						currentArchitecturalAlternative.getName());
-				break;
-			default:
-				throw new IllegalArgumentException("The bot type is not implemented yet: " + bot.getBotType());
-			}
-			sillyBot.insertInOrder(propsal);
-		}
-		return sillyBot;
 	}
 
 	/**

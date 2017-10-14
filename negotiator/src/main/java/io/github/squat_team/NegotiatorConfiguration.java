@@ -6,6 +6,7 @@ public class NegotiatorConfiguration {
 	public static final String INITIAL_ARCHITECTURE_PATH = "/home/pcm"; // models/cocomeWithoutPickUpStoreAndServiceAdapter
 	public static final String INITIAL_ARCHITECTURE_ALTERNATIVE_REPOSITORY_FULL_PATH = "/home/model/alternativeRepository.repository"; // /Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/cocomeWithoutPickUpStoreAndServiceAdapter/alternativescocome-cloud.repository
 
+	private static float FAILURE_RESPONSE_VALUE = 9999f;
 	private static boolean RUN_SEQUENTIAL = false;
 	private static boolean AUTO_ACCEPT = true;
 
@@ -49,5 +50,24 @@ public class NegotiatorConfiguration {
 	 */
 	public static void setAutoAccept(boolean autoAccept) {
 		AUTO_ACCEPT = autoAccept;
+	}
+
+	/**
+	 * Get the value that should be set, if the analysis fails.
+	 * 
+	 * @return the value.
+	 */
+	public static float getFailureResponseValue() {
+		return FAILURE_RESPONSE_VALUE;
+	}
+
+	/**
+	 * This should not be done during a run...
+	 * 
+	 * @param value
+	 *            The value that should be set, if a analysis failed.
+	 */
+	public static void setFailureResponseValue(float value) {
+		FAILURE_RESPONSE_VALUE = value;
 	}
 }
