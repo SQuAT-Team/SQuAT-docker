@@ -109,6 +109,7 @@ public class RestBot {
 		JSONObject insinter = null;
 		JSONObject splitrespn = null;
 		JSONObject wrapper = null;
+		PCMResult pcmResult = null;
 
 		// Set additional architecture fields if available
 		if (obj.has("cost"))
@@ -119,12 +120,14 @@ public class RestBot {
 			wrapper = obj.getJSONObject("wrapper-modular");
 
 		// PCM Result
-		JSONObject jsonResult = obj.getJSONObject("pcm-result");
-		double response = Double.valueOf(jsonResult.getString("response"));
-		String typeString = jsonResult.getString("measure-type");
-		ResponseMeasureType responseMeasureType = ResponseMeasureType.valueOf(typeString);
-		PCMResult pcmResult = new PCMResult(responseMeasureType);
-		pcmResult.setResponse(response);
+		if (obj.has("pcm-result")) {
+			JSONObject jsonResult = obj.getJSONObject("pcm-result");
+			double response = Double.valueOf(jsonResult.getString("response"));
+			String typeString = jsonResult.getString("measure-type");
+			ResponseMeasureType responseMeasureType = ResponseMeasureType.valueOf(typeString);
+			pcmResult = new PCMResult(responseMeasureType);
+			pcmResult.setResponse(response);
+		}
 
 		return new RestScenarioResult(this.botType, jsonArchitecture.getString("name"), jsonArchitecture, pcmResult,
 				cost, insinter, splitrespn, wrapper);
@@ -204,7 +207,7 @@ public class RestBot {
 	 */
 	public Float getExpectedResult() {
 		JSONObject expectedResult = (JSONObject) this.scenario.get("expectedResult");
-		Double response = Double.valueOf((String)expectedResult.get("response"));
+		Double response = Double.valueOf((String) expectedResult.get("response"));
 		return response.floatValue();
 	}
 }
