@@ -204,7 +204,7 @@ public class RestBot {
 	 */
 	public Float getExpectedResult() {
 		JSONObject expectedResult = (JSONObject) this.scenario.get("expectedResult");
-		Double response = (Double) expectedResult.get("response");
+		Double response = Double.valueOf((String)expectedResult.get("response"));
 		return response.floatValue();
 	}
 }
