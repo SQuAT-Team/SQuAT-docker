@@ -139,6 +139,8 @@ public class RestBot {
 			cost = obj.getJSONObject("cost");
 		if (obj.has("insinter-modular"))
 			insinter = obj.getJSONObject("insinter-modular");
+		if (obj.has("splitrespn-modular"))
+			insinter = obj.getJSONObject("splitrespn-modular");
 		if (obj.has("wrapper-modular"))
 			wrapper = obj.getJSONObject("wrapper-modular");
 
