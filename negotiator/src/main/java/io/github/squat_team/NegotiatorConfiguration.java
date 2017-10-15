@@ -9,6 +9,7 @@ public class NegotiatorConfiguration {
 	private static float FAILURE_RESPONSE_VALUE = 9999f;
 	private static boolean RUN_SEQUENTIAL = false;
 	private static boolean AUTO_ACCEPT = true;
+	private static int AUTO_ACCEPT_LEVEL = 2;
 
 	/**
 	 * Checks whether the bots should work sequential.
@@ -31,6 +32,16 @@ public class NegotiatorConfiguration {
 	}
 
 	/**
+	 * The level of the analysis that should be reached before agreement gets auto
+	 * accepted.
+	 * 
+	 * @return the level.
+	 */
+	public static int autoAcceptLevel() {
+		return AUTO_ACCEPT_LEVEL;
+	}
+
+	/**
 	 * This should not be done during a run...
 	 * 
 	 * @param runSequential
@@ -50,6 +61,16 @@ public class NegotiatorConfiguration {
 	 */
 	public static void setAutoAccept(boolean autoAccept) {
 		AUTO_ACCEPT = autoAccept;
+	}
+
+	/**
+	 * This should not be done during a run...
+	 * 
+	 * @param level
+	 *            level that should be reached before agreement is auto accepted.
+	 */
+	public static void setAutoAcceptLevel(int level) {
+		AUTO_ACCEPT_LEVEL = level;
 	}
 
 	/**

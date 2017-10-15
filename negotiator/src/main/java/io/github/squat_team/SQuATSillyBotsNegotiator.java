@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import io.github.squat_team.agentsUtils.ArchitectureInitializer;
@@ -85,8 +84,8 @@ public class SQuATSillyBotsNegotiator {
 					System.out.println("Agreement: " + agreementProposal);
 					printCurrentState(agreementProposal);
 					if (NegotiatorConfiguration.autoAccept()) {
-						// if auto accept
-						redoRequest = false;
+						// if auto accept, redo if level is not reached
+						redoRequest = currentLevelOfTransformations<NegotiatorConfiguration.autoAcceptLevel();
 					} else {
 						System.out.println("REDO? (Y/N): ");
 						Scanner scan = new Scanner(System.in);
