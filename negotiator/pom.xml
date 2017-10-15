@@ -115,7 +115,7 @@
 							<!-- Jar file entry point -->
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>dependency/</classpathPrefix>
-							<mainClass>test.DockerMain</mainClass>
+							<mainClass>main.DockerMain</mainClass>
 						</manifest>
 					</archive>
 					<outputDirectory>target/</outputDirectory>
