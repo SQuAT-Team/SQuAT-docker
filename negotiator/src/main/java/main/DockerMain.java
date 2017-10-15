@@ -2,9 +2,12 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import org.json.JSONObject;
 import org.json.JSONStringer;
 
+import io.github.squat_team.NegotiatorConfiguration;
 import io.github.squat_team.RestBot;
 import io.github.squat_team.SQuATSillyBotsNegotiator;
 import io.github.squat_team.agentsUtils.ArchitectureInitializer;
@@ -18,18 +21,42 @@ import io.github.squat_team.model.RestScenarioResult;
 
 public class DockerMain {
 
+	
+	public static String buildBodyFromArchitecture(RestArchitecture architecture, JSONObject scenario) {
+		JSONObject root = new JSONObject();
+		root.put("scenario", scenario);
+		root.put("architecture-instance", architecture.getRestArchitecture());
+		if (architecture.getCost() != null)
+			root.put("cost", architecture.getCost());
+		if (architecture.getInsinter() != null)
+			root.put("insinter-modular", architecture.getInsinter());
+		if (architecture.getSplitrespn() != null)
+			root.put("splitrespn-modular", architecture.getSplitrespn());
+		if (architecture.getWrapper() != null)
+			root.put("wrapper-modular", architecture.getWrapper());
+		return root.toString();
+	}
+	
     public static void main(String[] args) throws InterruptedException {
         
-//        RestArchitecture initialArch = ArchitectureInitializer.loadSpecificModel("test");
-//        ArchitecturalTransformationsFactory fact = new ArchitecturalTransformationsFactory(initialArch);
-//        RestBot b1 = new RestBot("b1", BotType.MODIFIABILITY, "http://localhost:8081", LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0));
-//        //b1.searchForAlternatives(initialArch).thenAccept(System.out::println);
-//        BotManager.getInstance().addBot(b1);
-//        List<RestScenarioResult> results = new ArrayList<>();
-//        fact.foo(initialArch, results).thenAccept(System.out::println);
+        RestArchitecture initialArch = ArchitectureInitializer.loadSpecificModel("test");
+        //ArchitecturalTransformationsFactory fact = new ArchitecturalTransformationsFactory(initialArch);
+        RestBot b1 = new RestBot("b1", BotType.MODIFIABILITY, "http://performance-bot:8080", LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0));
+        try {
+			System.out.println(b1.searchForAlternatives(initialArch).get());
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        //b1.searchForAlternatives(initialArch).thenAccept(System.out::println);
+        //BotManager.getInstance().addBot(b1);
+        //List<RestScenarioResult> results = new ArrayList<>();
 
-        new SQuATSillyBotsNegotiator().negotiatiateUntilAnAgreementIsReached();
-        Thread.sleep(100000);
+        //new SQuATSillyBotsNegotiator().negotiatiateUntilAnAgreementIsReached();
+    	//RestArchitecture initialArchitecture = ArchitectureInitializer.loadSpecificModel(NegotiatorConfiguration.INITIAL_ARCHITECTURE_NAME);
+    	//JSONObject scJsonObject = LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40.0);
+    	//System.out.println(buildBodyFromArchitecture(initialArchitecture, scJsonObject));
+
         /*
         JSONStringer jsonStringer = new JSONStringer();
         jsonStringer.object();
