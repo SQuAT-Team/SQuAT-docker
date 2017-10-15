@@ -41,13 +41,14 @@ public class DockerMain {
         
         RestArchitecture initialArch = ArchitectureInitializer.loadSpecificModel("test");
         //ArchitecturalTransformationsFactory fact = new ArchitecturalTransformationsFactory(initialArch);
-        RestBot b1 = new RestBot("b1", BotType.MODIFIABILITY, "http://performance-bot:8080", LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0));
+        RestBot b1 = new RestBot("b1", BotType.MODIFIABILITY, "http://performance-bot:8080", LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 0.5));
         try {
 			System.out.println(b1.searchForAlternatives(initialArch).get());
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        Thread.sleep(1000000);
         //b1.searchForAlternatives(initialArch).thenAccept(System.out::println);
         //BotManager.getInstance().addBot(b1);
         //List<RestScenarioResult> results = new ArrayList<>();
