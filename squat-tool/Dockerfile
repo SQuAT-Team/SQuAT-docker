@@ -59,5 +59,8 @@ RUN ["mvn", "package"]
 # the jar is not copied anymore but created by maven
 #ADD squat-tool-performance-bot.jar /home/squat-tool-performance-bot.jar
 
+#Install LQN
+ADD lqn /
+
 ENTRYPOINT java -jar /home/target/squat-tool-performance-bot.jar
 
