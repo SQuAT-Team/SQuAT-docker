@@ -240,7 +240,7 @@ public class PerOpteryxPCMBot extends AbstractPCMBot {
 		configuration.getTacticsConfig().useTactics(true);
 		if (configuration.getPerOpteryxConfig().getGenerationSize() <= 1
 				&& configuration.getPerOpteryxConfig().getMaxIterations() <= 1) {
-			configuration.getPerOpteryxConfig().setGenerationSize(100);
+			configuration.getPerOpteryxConfig().setGenerationSize(300);
 			configuration.getPerOpteryxConfig().setMaxIterations(20);
 		}
 
