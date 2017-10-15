@@ -351,11 +351,13 @@ public class SQuATSillyBotsNegotiator {
 		TimeMeasurements.endTotalTimeMeasurement();
 		TimeMeasurements.printTimes();
 
-		// TODO: PA! Export final results: Candidate and time measurements
-		RestArchitecture agreementCandidate = findAgreementCandidate();
+		System.out.println("Shutting bots down. Number of bots: " + BotManager.getInstance().getAllBots().size());
 		for (RestBot bot : BotManager.getInstance().getAllBots()) {
 			bot.shutTheFuckUp();
 		}
+
+		// TODO: PA! Export final results: Candidate and time measurements
+		RestArchitecture agreementCandidate = findAgreementCandidate();
 	}
 
 	/**
