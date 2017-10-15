@@ -49,12 +49,12 @@ public class DockerMain {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		Thread.sleep(1000000);
 		// b1.searchForAlternatives(initialArch).thenAccept(System.out::println);
 		// BotManager.getInstance().addBot(b1);
 		// List<RestScenarioResult> results = new ArrayList<>();
 
 		new SQuATSillyBotsNegotiator().negotiatiateUntilAnAgreementIsReached();
+		Thread.sleep(1000000);
 		// RestArchitecture initialArchitecture =
 		// ArchitectureInitializer.loadSpecificModel(NegotiatorConfiguration.INITIAL_ARCHITECTURE_NAME);
 		// JSONObject scJsonObject =
