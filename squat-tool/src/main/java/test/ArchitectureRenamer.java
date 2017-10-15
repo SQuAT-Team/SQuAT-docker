@@ -39,7 +39,7 @@ public class ArchitectureRenamer {
 			// then to the architecture, but it is the easiest way.
 			ArchitecturalVersion newAlternative = new ArchitecturalVersion(
 					modelFileRenamed.getName().substring(0, modelFileRenamed.getName().lastIndexOf('.')),
-					modelFileRenamed.getParentFile().getName(), ArchitecturalVersion.PERFORMANCE);
+					modelFileRenamed.getParentFile().getPath(), ArchitecturalVersion.PERFORMANCE);
 			result.setResultingArchitecture(PCMHelper.createArchitecture(newAlternative));
 		}
 	}
