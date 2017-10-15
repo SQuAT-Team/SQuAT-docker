@@ -53,6 +53,9 @@ public class DockerMain {
 		// BotManager.getInstance().addBot(b1);
 		// List<RestScenarioResult> results = new ArrayList<>();
 
+		System.out.println("negotiator starts in 5 seconds...");
+		Thread.sleep(5000);
+		System.out.println("negotiator starting...");
 		new SQuATSillyBotsNegotiator().negotiatiateUntilAnAgreementIsReached();
 		Thread.sleep(1000000);
 		// RestArchitecture initialArchitecture =
