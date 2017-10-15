@@ -16,6 +16,16 @@ public class BotIntializer {
 	public static final String MOD_BOT_URI = "http://127.0.0.1:8081";
 
 	/**
+	 * Initializes only 1 Performance Bot and 1 Modifiability Bot.
+	 */
+	public static void initialize1P1MBots() {
+		createBot("M1", LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0), MOD_BOT_URI,
+				BotType.MODIFIABILITY);
+		createBot("P2", LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40.0), PERF_BOT_URI,
+				BotType.PERFORMANCE);
+	}
+
+	/**
 	 * Initializes 2 Performance bots and 2 Modifiability Bots. The standard setting
 	 * of the STPlus case study.
 	 */
@@ -26,7 +36,7 @@ public class BotIntializer {
 				BotType.MODIFIABILITY);
 		createBot("P1", LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 30.0), PERF_BOT_URI,
 				BotType.PERFORMANCE);
-		createBot("P2", LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40), PERF_BOT_URI,
+		createBot("P2", LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40.0), PERF_BOT_URI,
 				BotType.PERFORMANCE);
 	}
 
@@ -72,4 +82,3 @@ public class BotIntializer {
 	}
 
 }
-
