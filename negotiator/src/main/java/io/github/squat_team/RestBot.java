@@ -22,6 +22,8 @@ import io.github.squat_team.model.RestScenarioResult;
 
 public class RestBot {
 
+	private static final Object LOCK = new Object();
+
 	/** The remote URI the bot corresponds to */
 	private final String remoteURI;
 
@@ -184,8 +186,15 @@ public class RestBot {
 	 * @return {@link CompletableFuture} to hold the {@link RestScenarioResult}
 	 */
 	public CompletableFuture<RestScenarioResult> analyze(RestArchitecture architecture) {
-		return CompletableFuture.supplyAsync(
-				() -> buildRestScenarioResult(this.call(this.buildBodyFromArchitecture(architecture), "analyze")));
+		return CompletableFuture.supplyAsync(() -> {
+			if (NegotiatorConfiguration.sequential()) {
+				synchronized (LOCK) {
+					return buildRestScenarioResult(this.call(this.buildBodyFromArchitecture(architecture), "analyze"));
+				}
+			} else {
+				return buildRestScenarioResult(this.call(this.buildBodyFromArchitecture(architecture), "analyze"));
+			}
+		});
 	}
 
 	/**
@@ -198,13 +207,26 @@ public class RestBot {
 	 */
 	public CompletableFuture<List<RestScenarioResult>> searchForAlternatives(RestArchitecture architecture) {
 		return CompletableFuture.supplyAsync(() -> {
-			final List<RestScenarioResult> results = new ArrayList<>();
-			JSONObject result = this.call(this.buildBodyFromArchitecture(architecture), "searchForAlternatives");
-			JSONArray jsonResults = result.getJSONArray("values");
-			jsonResults.forEach(o -> {
-				results.add(buildRestScenarioResult((JSONObject) o));
-			});
-			return results;
+			if (NegotiatorConfiguration.sequential()) {
+				synchronized (LOCK) {
+					final List<RestScenarioResult> results = new ArrayList<>();
+					JSONObject result = this.call(this.buildBodyFromArchitecture(architecture),
+							"searchForAlternatives");
+					JSONArray jsonResults = result.getJSONArray("values");
+					jsonResults.forEach(o -> {
+						results.add(buildRestScenarioResult((JSONObject) o));
+					});
+					return results;
+				}
+			} else {
+				final List<RestScenarioResult> results = new ArrayList<>();
+				JSONObject result = this.call(this.buildBodyFromArchitecture(architecture), "searchForAlternatives");
+				JSONArray jsonResults = result.getJSONArray("values");
+				jsonResults.forEach(o -> {
+					results.add(buildRestScenarioResult((JSONObject) o));
+				});
+				return results;
+			}
 		});
 	}
 
