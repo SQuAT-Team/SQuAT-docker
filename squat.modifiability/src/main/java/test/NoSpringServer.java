@@ -57,6 +57,12 @@ public class NoSpringServer {
 	private final ExecutorService threadPool = Executors.newFixedThreadPool(32);
 
 	/**
+	 * Synchronize on this object before performing any analyze or search for
+	 * alternatives
+	 */
+	private static final Object LQNS_LOCK = new Object();
+
+	/**
 	 * Build the {@link ModifiabilityInstruction} from the given {@link JSONObject}
 	 * 
 	 * @param o
@@ -354,9 +360,13 @@ public class NoSpringServer {
 					rsp = this.botFn(body, (ctx, obj) -> {
 						KAMPPCMBot bot = ctx.getBot();
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
-						long init = System.currentTimeMillis();
-						PCMScenarioResult result = bot.analyze(architectureInstance);
-						long duration = System.currentTimeMillis() - init;
+						PCMScenarioResult result;
+						long duration;
+						synchronized (LQNS_LOCK) {
+							long init = System.currentTimeMillis();
+							result = bot.analyze(architectureInstance);
+							duration = System.currentTimeMillis() - init;
+						}
 						obj.put("duration", duration);
 						buildResult(obj, result, ctx.getRestArchitecture());
 						return obj.toString();
@@ -386,9 +396,13 @@ public class NoSpringServer {
 					rsp = this.botFn(body, (ctx, obj) -> {
 						KAMPPCMBot bot = ctx.getBot();
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
-						long init = System.currentTimeMillis();
-						List<PCMScenarioResult> results = bot.searchForAlternatives(architectureInstance);
-						long duration = System.currentTimeMillis() - init;
+						long duration;
+						List<PCMScenarioResult> results;
+						synchronized (LQNS_LOCK) {
+							long init = System.currentTimeMillis();
+							results = bot.searchForAlternatives(architectureInstance);
+							duration = System.currentTimeMillis() - init;
+						}
 						obj.put("duration", duration);
 
 						JSONArray jsonResults = new JSONArray();
