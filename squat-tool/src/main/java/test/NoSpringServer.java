@@ -70,13 +70,12 @@ public class NoSpringServer {
 	 * @return the default configuration
 	 */
 	private static Configuration createDefaultConfiguration() {
-		TestConstants testConstants = new TestConstants();
 		Configuration configuration = new Configuration();
 		configuration.getPerOpteryxConfig().setGenerationSize(100);
 		configuration.getPerOpteryxConfig().setMaxIterations(10);
-		configuration.getLqnsConfig().setLqnsOutputDir(testConstants.LQN_OUTPUT);
-		configuration.getExporterConfig().setPcmOutputFolder(testConstants.PCM_STORAGE_PATH);
-		configuration.getPcmModelsConfig().setPathmapFolder(testConstants.PCM_MODEL_FILES);
+		configuration.getLqnsConfig().setLqnsOutputDir(DockerConstants.LQN_OUTPUT);
+		configuration.getExporterConfig().setPcmOutputFolder(DockerConstants.PCM_STORAGE_PATH);
+		configuration.getPcmModelsConfig().setPathmapFolder(DockerConstants.PCM_MODEL_FILES);
 		return configuration;
 	}
 
