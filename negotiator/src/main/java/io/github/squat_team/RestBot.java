@@ -110,6 +110,9 @@ public class RestBot {
 			try (InputStream is = connection.getInputStream()) {
 				result = readBody(is);
 			}
+
+			// log time of bot
+			TimeMeasurements.addTimeForBot(this.name, result.getLong("duration"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -155,9 +158,6 @@ public class RestBot {
 			pcmResult = new PCMResult(responseMeasureType);
 			pcmResult.setResponse(response);
 		}
-
-		// log time of bot
-		TimeMeasurements.addTimeForBot(this.name, obj.getLong("duration"));
 
 		return new RestScenarioResult(this.botType, jsonArchitecture.getString("name"), jsonArchitecture, pcmResult,
 				cost, insinter, splitrespn, wrapper);
