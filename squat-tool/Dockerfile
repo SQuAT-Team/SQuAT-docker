@@ -35,7 +35,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ADD pcm /home/pcm
 ADD src /home/src
 ADD lib /home/lib
-ADD lqn /home/lqn
 ADD pom.xml /home/pom.xml
 
 
@@ -61,7 +60,8 @@ RUN ["mvn", "package"]
 #ADD squat-tool-performance-bot.jar /home/squat-tool-performance-bot.jar
 
 #Install LQN
-RUN rpm -i /home/lqn/lqns-5.9-1.i386_IntelCentos.rpm
+ADD lqn/lqns-5.9-1.i386_IntelCentos.rpm /home/lqn.rpm
+RUN rpm -i lqn.rpm
 
 ENTRYPOINT java -jar /home/target/squat-tool-performance-bot.jar
 
