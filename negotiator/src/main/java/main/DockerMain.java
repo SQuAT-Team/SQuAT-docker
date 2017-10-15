@@ -21,7 +21,6 @@ import io.github.squat_team.model.RestScenarioResult;
 
 public class DockerMain {
 
-	
 	public static String buildBodyFromArchitecture(RestArchitecture architecture, JSONObject scenario) {
 		JSONObject root = new JSONObject();
 		root.put("scenario", scenario);
@@ -36,42 +35,45 @@ public class DockerMain {
 			root.put("wrapper-modular", architecture.getWrapper());
 		return root.toString();
 	}
-	
-    public static void main(String[] args) throws InterruptedException {
-        
-        RestArchitecture initialArch = ArchitectureInitializer.loadSpecificModel("test");
-        //ArchitecturalTransformationsFactory fact = new ArchitecturalTransformationsFactory(initialArch);
-        RestBot b1 = new RestBot("b1", BotType.MODIFIABILITY, "http://performance-bot:8080", LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 0.5));
-        try {
-			System.out.println(b1.searchForAlternatives(initialArch).get());
-		} catch (ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        Thread.sleep(1000000);
-        //b1.searchForAlternatives(initialArch).thenAccept(System.out::println);
-        //BotManager.getInstance().addBot(b1);
-        //List<RestScenarioResult> results = new ArrayList<>();
 
-        //new SQuATSillyBotsNegotiator().negotiatiateUntilAnAgreementIsReached();
-    	//RestArchitecture initialArchitecture = ArchitectureInitializer.loadSpecificModel(NegotiatorConfiguration.INITIAL_ARCHITECTURE_NAME);
-    	//JSONObject scJsonObject = LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40.0);
-    	//System.out.println(buildBodyFromArchitecture(initialArchitecture, scJsonObject));
+	public static void main(String[] args) throws InterruptedException {
 
-        /*
-        JSONStringer jsonStringer = new JSONStringer();
-        jsonStringer.object();
-        //LoadHelper.createModifiabilityScenarioS2(ResponseMeasureType.DECIMAL, 120.0, jsonStringer);
-        //LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0, jsonStringer);
-        //PerformanceScenarioHelper.createScenarioOfWorkload(jsonStringer);
-        LoadHelper.loadSpecificModel(jsonStringer, "");
-        jsonStringer.endObject();
-        String body = jsonStringer.toString();
-        //System.out.println(body);
-        RestBot restbot = new RestBot("http://localhost:8080/searchForAlternatives");
-        restbot.searchForAlternatives(body).forEach(r -> {
-            System.out.println(r.getResult().getResponse());
-        });
-        */
-    }
+//		RestArchitecture initialArch = ArchitectureInitializer.loadSpecificModel("test");
+//		// ArchitecturalTransformationsFactory fact = new
+//		// ArchitecturalTransformationsFactory(initialArch);
+//		RestBot b1 = new RestBot("b1", BotType.MODIFIABILITY, "http://performance-bot:8080",
+//				LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 0.5));
+//		try {
+//			System.out.println(b1.searchForAlternatives(initialArch).get());
+//		} catch (ExecutionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		Thread.sleep(1000000);
+		// b1.searchForAlternatives(initialArch).thenAccept(System.out::println);
+		// BotManager.getInstance().addBot(b1);
+		// List<RestScenarioResult> results = new ArrayList<>();
+
+		new SQuATSillyBotsNegotiator().negotiatiateUntilAnAgreementIsReached();
+		// RestArchitecture initialArchitecture =
+		// ArchitectureInitializer.loadSpecificModel(NegotiatorConfiguration.INITIAL_ARCHITECTURE_NAME);
+		// JSONObject scJsonObject =
+		// LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40.0);
+		// System.out.println(buildBodyFromArchitecture(initialArchitecture,
+		// scJsonObject));
+
+		/*
+		 * JSONStringer jsonStringer = new JSONStringer(); jsonStringer.object();
+		 * //LoadHelper.createModifiabilityScenarioS2(ResponseMeasureType.DECIMAL,
+		 * 120.0, jsonStringer);
+		 * //LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL,
+		 * 120.0, jsonStringer);
+		 * //PerformanceScenarioHelper.createScenarioOfWorkload(jsonStringer);
+		 * LoadHelper.loadSpecificModel(jsonStringer, ""); jsonStringer.endObject();
+		 * String body = jsonStringer.toString(); //System.out.println(body); RestBot
+		 * restbot = new RestBot("http://localhost:8080/searchForAlternatives");
+		 * restbot.searchForAlternatives(body).forEach(r -> {
+		 * System.out.println(r.getResult().getResponse()); });
+		 */
+	}
 }
