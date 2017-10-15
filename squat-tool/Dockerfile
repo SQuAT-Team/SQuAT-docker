@@ -63,7 +63,7 @@ RUN ["mvn", "package"]
 ADD lqn /
 
 #RUN lqns --version
-RUN ["chmod", "+x", "/usr/bin/lqns”]
+RUN ["chmod", "+x", "/usr/bin/lqns"]
 
 ENTRYPOINT java -jar /home/target/squat-tool-performance-bot.jar
 
