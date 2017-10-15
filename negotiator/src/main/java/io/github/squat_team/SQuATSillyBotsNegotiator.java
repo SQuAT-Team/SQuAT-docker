@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import io.github.squat_team.agentsUtils.ArchitectureInitializer;
@@ -27,6 +28,8 @@ public class SQuATSillyBotsNegotiator {
 	private boolean noMoreAlternatives;
 	private ILoadHelper loadHelper;
 
+	private List<Proposal> nonDominated;
+
 	public SQuATSillyBotsNegotiator() {
 		agreementProposal = null;
 		currentLevelOfTransformations = 1;
@@ -36,6 +39,7 @@ public class SQuATSillyBotsNegotiator {
 		maxNumberOfLevels = 10;
 		noMoreAlternatives = false;
 		loadHelper = new LoadHelper();
+		nonDominated = new ArrayList<>();
 	}
 
 	public void setLoadHelper(ILoadHelper loadHelper) {
@@ -112,8 +116,6 @@ public class SQuATSillyBotsNegotiator {
 	}
 
 	private void printNonDominatedAlternatives() {
-		List<Proposal> nonDominated = new ArrayList<>();
-
 		List<Proposal> proposals = sillyBots.get(0).getOrderedProposals();
 		for (Iterator<Proposal> iterator = proposals.iterator(); iterator.hasNext();) {
 			Proposal proposal = (Proposal) iterator.next();
@@ -323,20 +325,20 @@ public class SQuATSillyBotsNegotiator {
 
 	// TODO: PA! This will be the method for an external call.
 	public void negotiatiateUntilAnAgreementIsReached() {
-		handleNegotiationStarted();
+		try {
+			handleNegotiationStarted();
 
-		boolean agreement = false;
-		while (!agreement && (currentLevelOfTransformations <= maxNumberOfLevels) && !noMoreAlternatives) {
-			try {
+			boolean agreement = false;
+			while (!agreement && (currentLevelOfTransformations <= maxNumberOfLevels) && !noMoreAlternatives) {
 				agreement = negotiateBaseOnMultipleArchitectures();
-			} catch (InterruptedException | ExecutionException e) {
-				// TODO: PA! Do something better here... Fails because of waiting for results
-				e.printStackTrace();
+				currentLevelOfTransformations++;
 			}
-			currentLevelOfTransformations++;
-		}
 
-		handleNegotiationFinished();
+			handleNegotiationFinished();
+		} catch (InterruptedException | ExecutionException e) {
+			// TODO: PA! Do something better here... Fails because of waiting for results
+			e.printStackTrace();
+		}
 	}
 
 	private void handleNegotiationStarted() {
@@ -348,13 +350,34 @@ public class SQuATSillyBotsNegotiator {
 		TimeMeasurements.continueNegotiationTimeMeasurement();
 	}
 
-	private void handleNegotiationFinished() {
+	private void handleNegotiationFinished() throws InterruptedException, ExecutionException {
 		// end time time measurements
 		TimeMeasurements.pauseNegotiationTimeMeasurement();
 		TimeMeasurements.endTotalTimeMeasurement();
 		TimeMeasurements.printTimes();
 
-		// TODO: PA! Export final results.
+		// TODO: PA! Export final results: Candidate and time measurements
+		RestArchitecture agreementCandidate = findAgreementCandidate();
+	}
+
+	/**
+	 * Finds the agreement candidate.
+	 * 
+	 * @return agreement candidate or null, if not found.
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
+	private RestArchitecture findAgreementCandidate() throws InterruptedException, ExecutionException {
+		String agreementName = agreementProposal.getArchitectureName();
+		CompletableFuture<List<RestArchitecture>> futureArchitectureList = archTransFactory
+				.getArchitecturalTransformationsUntilLevel(currentLevelOfTransformations);
+		for (RestArchitecture currentArchitecture : futureArchitectureList.get()) {
+			if (agreementName.equals(currentArchitecture.getName())) {
+				return currentArchitecture;
+			}
+		}
+		return null;
+
 	}
 
 	public static void main(String[] args) {
