@@ -323,11 +323,7 @@ public class SQuATSillyBotsNegotiator {
 
 	// TODO: PA! This will be the method for an external call.
 	public void negotiatiateUntilAnAgreementIsReached() {
-		NegotiatorConfiguration.printConfig();
-
-		// start time measurements
-		TimeMeasurements.startTotalTimeMeasurement();
-		TimeMeasurements.continueNegotiationTimeMeasurement();
+		handleNegotiationStarted();
 
 		boolean agreement = false;
 		while (!agreement && (currentLevelOfTransformations <= maxNumberOfLevels) && !noMoreAlternatives) {
@@ -340,9 +336,25 @@ public class SQuATSillyBotsNegotiator {
 			currentLevelOfTransformations++;
 		}
 
+		handleNegotiationFinished();
+	}
+
+	private void handleNegotiationStarted() {
+		NegotiatorConfiguration.printConfig();
+		TimeMeasurements.reset();
+
+		// start time measurements
+		TimeMeasurements.startTotalTimeMeasurement();
+		TimeMeasurements.continueNegotiationTimeMeasurement();
+	}
+
+	private void handleNegotiationFinished() {
 		// end time time measurements
 		TimeMeasurements.pauseNegotiationTimeMeasurement();
 		TimeMeasurements.endTotalTimeMeasurement();
+		TimeMeasurements.printTimes();
+
+		// TODO: PA! Export final results.
 	}
 
 	public static void main(String[] args) {

@@ -156,6 +156,9 @@ public class RestBot {
 			pcmResult.setResponse(response);
 		}
 
+		// log time of bot
+		TimeMeasurements.addTimeForBot(this.name, obj.getLong("duration"));
+
 		return new RestScenarioResult(this.botType, jsonArchitecture.getString("name"), jsonArchitecture, pcmResult,
 				cost, insinter, splitrespn, wrapper);
 	}
