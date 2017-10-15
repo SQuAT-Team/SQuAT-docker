@@ -434,6 +434,15 @@ public class NoSpringServer {
 			});
 		});
 
+
+		this.httpServer.createContext("/shutTheFuckUp", exchg -> {
+			this.threadPool.execute(() -> {
+				System.out.println("Shutting the fuck up! FINALLY");
+				this.httpServer.stop(1);
+				this.threadPool.shutdownNow();
+			});
+		});
+
 		this.httpServer.start();
 	}
 }

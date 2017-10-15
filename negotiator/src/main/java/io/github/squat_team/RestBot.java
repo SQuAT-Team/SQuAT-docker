@@ -242,6 +242,10 @@ public class RestBot {
 		});
 	}
 
+	public void shutTheFuckUp() {
+		this.call("","shutTheFuckUp");
+	}
+
 	/**
 	 * @return the UUID of this bot
 	 */

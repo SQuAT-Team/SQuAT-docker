@@ -8,12 +8,7 @@ import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import io.github.squat_team.agentsUtils.ArchitectureInitializer;
-import io.github.squat_team.agentsUtils.BotIntializer;
-import io.github.squat_team.agentsUtils.ILoadHelper;
-import io.github.squat_team.agentsUtils.LoadHelper;
-import io.github.squat_team.agentsUtils.Proposal;
-import io.github.squat_team.agentsUtils.SillyBot;
+import io.github.squat_team.agentsUtils.*;
 import io.github.squat_team.agentsUtils.transformations.ArchitecturalTransformationsFactory;
 import io.github.squat_team.model.RestArchitecture;
 
@@ -358,6 +353,9 @@ public class SQuATSillyBotsNegotiator {
 
 		// TODO: PA! Export final results: Candidate and time measurements
 		RestArchitecture agreementCandidate = findAgreementCandidate();
+		for (RestBot bot : BotManager.getInstance().getAllBots()) {
+			bot.shutTheFuckUp();
+		}
 	}
 
 	/**
