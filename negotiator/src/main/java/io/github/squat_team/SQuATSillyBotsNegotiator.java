@@ -50,7 +50,7 @@ public class SQuATSillyBotsNegotiator {
 	 */
 	public boolean negotiateBaseOnMultipleArchitectures() throws InterruptedException, ExecutionException {
 		// initialize the bots for the case study.
-		BotIntializer.initialize2P2MBots();
+		BotIntializer.initialize1P1MBots();
 		// architectureAlternatives=loadArchitecturalAlternatives(); This should be done
 		// for real. Now I'm hardcoding the results
 		// Step 1: Collect initial proposals

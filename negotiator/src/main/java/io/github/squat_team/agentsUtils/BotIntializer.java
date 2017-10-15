@@ -12,8 +12,8 @@ import io.github.squat_team.model.ResponseMeasureType;
 public class BotIntializer {
 
 	// TODO: PA! Set the Docker URI.
-	public static final String PERF_BOT_URI = "http://127.0.0.1:8080";
-	public static final String MOD_BOT_URI = "http://127.0.0.1:8081";
+	public static final String PERF_BOT_URI = "http://performance-bot:8080";
+	public static final String MOD_BOT_URI = "http://modifiability-bot:8081";
 
 	/**
 	 * Initializes only 1 Performance Bot and 1 Modifiability Bot.

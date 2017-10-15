@@ -250,16 +250,17 @@ public class NoSpringServer {
 		target.put("name", result.getResultingArchitecture().getName());
 		target.put("architecture-instance", JSONConverter.build(result.getResultingArchitecture()));
 
-		// Put additional arch
-		if (restArch.getCost() != null)
-			target.put("cost", restArch.getCost());
-		if (restArch.getInsinter() != null)
-			target.put("insinter-modular", restArch.getInsinter());
-		if (restArch.getSplitrespn() != null)
-			target.put("splitrespn-modular", restArch.getSplitrespn());
-		if (restArch.getWrapper() != null)
-			target.put("wrapper-modular", restArch.getWrapper());
-
+		if (restArch != null) {
+			// Put additional arch
+			if (restArch.getCost() != null)
+				target.put("cost", restArch.getCost());
+			if (restArch.getInsinter() != null)
+				target.put("insinter-modular", restArch.getInsinter());
+			if (restArch.getSplitrespn() != null)
+				target.put("splitrespn-modular", restArch.getSplitrespn());
+			if (restArch.getWrapper() != null)
+				target.put("wrapper-modular", restArch.getWrapper());
+		}
 		return target;
 	}
 
@@ -357,14 +358,8 @@ public class NoSpringServer {
 						PCMScenarioResult result = bot.analyze(architectureInstance);
 						long duration = System.currentTimeMillis() - init;
 						obj.put("duration", duration);
-						String resultString;
-						try {
-							buildResult(obj, result, ctx.getRestArchitecture());
-							resultString = obj.toString();
-						} catch (JSONException e) {
-							resultString = e.getMessage();
-						}
-						return resultString;
+						buildResult(obj, result, ctx.getRestArchitecture());
+						return obj.toString();
 					});
 				} else {
 					rsp = "INVALID METHOD";
@@ -395,18 +390,13 @@ public class NoSpringServer {
 						List<PCMScenarioResult> results = bot.searchForAlternatives(architectureInstance);
 						long duration = System.currentTimeMillis() - init;
 						obj.put("duration", duration);
-						String resultString;
-						try {
-							JSONArray jsonResults = new JSONArray();
-							obj.put("values", jsonResults);
-							for (PCMScenarioResult result : results) {
-								jsonResults.put(buildResult(result, ctx.getRestArchitecture()));
-							}
-							resultString = obj.toString();
-						} catch (JSONException e) {
-							resultString = e.getMessage();
+
+						JSONArray jsonResults = new JSONArray();
+						obj.put("values", jsonResults);
+						for (PCMScenarioResult result : results) {
+							jsonResults.put(buildResult(result, ctx.getRestArchitecture()));
 						}
-						return resultString;
+						return obj.toString();
 					});
 				} else {
 					rsp = "INVALID METHOD";
