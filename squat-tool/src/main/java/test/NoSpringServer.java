@@ -355,27 +355,6 @@ public class NoSpringServer {
 			}
 		});
 
-		this.httpServer.createContext("/run", exchg -> {
-			String input = readBody(exchg);
-
-			ThreadPoolProvider.BOT_POOL.execute(() -> {
-				try {
-					new SQuATMain(new TestConstants());
-					SQuATMain.mainFn(null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			});
-
-			System.out.println(input);
-			exchg.getResponseHeaders().add("Status", "OK");
-			exchg.sendResponseHeaders(200, input.length());
-			try (OutputStream os = exchg.getResponseBody()) {
-				os.write(input.getBytes());
-				os.flush();
-			}
-		});
-
 		this.httpServer.createContext("/analyze", exchg -> {
 			this.threadPool.execute(() -> {
 				String body = readBody(exchg);
@@ -456,22 +435,5 @@ public class NoSpringServer {
 		});
 
 		this.httpServer.start();
-
-		if (args.length > 0 && "print".equalsIgnoreCase(args[0])) {
-			String basicPath = TestConstants.BASIC_FILE_PATH;
-			Allocation allocation = SQuATHelper.loadAllocationModel("file:/" + basicPath + ".allocation");
-			org.palladiosimulator.pcm.system.System system = SQuATHelper
-					.loadSystemModel("file:/" + basicPath + ".system");
-			ResourceEnvironment resourceenvironment = SQuATHelper
-					.loadResourceEnvironmentModel("file:/" + basicPath + ".resourceenvironment");
-			Repository repository = SQuATHelper.loadRepositoryModel("file:/" + basicPath + ".repository");
-			UsageModel usageModel = SQuATHelper.loadUsageModel("file:/" + basicPath + ".usagemodel");
-			PCMArchitectureInstance architectureInstance = new PCMArchitectureInstance("", repository, system,
-					allocation, resourceenvironment, usageModel);
-			JSONification jsoNification2 = new JSONification();
-			jsoNification2.add(architectureInstance);
-			String jsonArch = jsoNification2.toJSON();
-			System.out.println(jsonArch);
-		}
 	}
 }
