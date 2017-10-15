@@ -4,12 +4,16 @@ services:
     image: squatteam/performance-bot:latest
     ports:
       - "8080"
+  modifiability-bot:
+    image: squatteam/modifiability-bot:latest
+    ports:
+      - "8081"
   negotiator:
     image: squatteam/negotiator:latest
     ports:
       - "8080"
       - "8081"
-  modifiability-bot:
-    image: squatteam/modifiability-bot:latest
-    ports:
-      - "8081"
+      - "8082:8082"
+    depends_on:
+      - performance-bot
+      - modifiability-bot
