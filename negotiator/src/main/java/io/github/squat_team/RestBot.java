@@ -194,7 +194,6 @@ public class RestBot {
 	 */
 	public CompletableFuture<RestScenarioResult> analyze(RestArchitecture architecture) {
 		return CompletableFuture.supplyAsync(() -> {
-			TimeMeasurements.pauseNegotiationTimeMeasurement();
 			RestScenarioResult result;
 			if (NegotiatorConfiguration.sequential()) {
 				synchronized (LOCK) {
@@ -206,7 +205,6 @@ public class RestBot {
 			} else {
 				result = buildRestScenarioResult(this.call(this.buildBodyFromArchitecture(architecture), "analyze"));
 			}
-			TimeMeasurements.continueNegotiationTimeMeasurement();
 			return result;
 		});
 	}
