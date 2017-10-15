@@ -72,7 +72,7 @@ public class KAMPPCMBot extends AbstractPCMBot {
 
 		List<PCMScenarioResult> results = new ArrayList<>();
 		for (ArchitecturalVersion transformationResult : transformationResults) {
-			results.add(analyze(PCMHelper.loadSpecificModel(transformationResult)));
+			results.add(analyze(PCMHelper.createArchitecture(transformationResult)));
 		}
 		return results;
 	}
