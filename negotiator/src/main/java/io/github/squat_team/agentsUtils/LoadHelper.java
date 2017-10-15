@@ -177,6 +177,8 @@ public class LoadHelper implements ILoadHelper {
 		SillyBot newSillyBot;
 		float initialArchitectureResponse = getResponseValue(bot.analyze(initialArchitecture));
 
+		System.out.println("Generate bot "  + bot.getName() + " with initial metric: " + initialArchitectureResponse);
+		
 		switch (bot.getBotType()) {
 		case PERFORMANCE:
 			newSillyBot = new PerformanceSillyBot(initialArchitectureResponse, bot.getName(),
