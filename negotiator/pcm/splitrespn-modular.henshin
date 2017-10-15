@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<henshin:Module xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:henshin="http://www.eclipse.org/emf/2011/Henshin" xmi:id="_ROhWwO-dEea6wfovznEgkw">
+  <imports href="http://palladiosimulator.org/PalladioComponentModel/5.1#/"/>
+  <imports href="http://www.eclipse.org/emf/2011/Henshin/Trace#/"/>
+  <units xsi:type="henshin:Rule" xmi:id="_wM0a8O-dEea6wfovznEgkw" name="markComponents2Split">
+    <lhs xmi:id="_wM-L8O-dEea6wfovznEgkw" name="Lhs">
+      <nodes xmi:id="_OEenMO-eEea6wfovznEgkw">
+        <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+      </nodes>
+      <nodes xmi:id="_UzqxIO-gEea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+        <attributes xmi:id="_WqrWEO-gEea6wfovznEgkw" value="&quot;root&quot;">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+        </attributes>
+      </nodes>
+    </lhs>
+    <rhs xmi:id="_wM-L8e-dEea6wfovznEgkw" name="Rhs">
+      <nodes xmi:id="_OEf1UO-eEea6wfovznEgkw">
+        <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+      </nodes>
+      <nodes xmi:id="_UzqxIe-gEea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+        <attributes xmi:id="_WqrWEe-gEea6wfovznEgkw" value="&quot;root&quot;">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+        </attributes>
+      </nodes>
+    </rhs>
+    <mappings xmi:id="_OEf1Ue-eEea6wfovznEgkw" origin="_OEenMO-eEea6wfovznEgkw" image="_OEf1UO-eEea6wfovznEgkw"/>
+    <mappings xmi:id="_UzqxIu-gEea6wfovznEgkw" origin="_UzqxIO-gEea6wfovznEgkw" image="_UzqxIe-gEea6wfovznEgkw"/>
+    <multiRules xmi:id="_mJWVcO-eEea6wfovznEgkw" name="comp">
+      <lhs xmi:id="_mJWVce-eEea6wfovznEgkw" name="Lhs">
+        <nodes xmi:id="_mJWVeO-eEea6wfovznEgkw" outgoing="_UtzroO-eEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+        </nodes>
+        <nodes xmi:id="_SK4b4O-eEea6wfovznEgkw" name="seedC" incoming="_UtzroO-eEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+        </nodes>
+        <nodes xmi:id="_UzrYMO-gEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+        </nodes>
+        <edges xmi:id="_UtzroO-eEea6wfovznEgkw" source="_mJWVeO-eEea6wfovznEgkw" target="_SK4b4O-eEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+        </edges>
+      </lhs>
+      <rhs xmi:id="_mJWVcu-eEea6wfovznEgkw" name="Rhs">
+        <nodes xmi:id="_mJWVc--eEea6wfovznEgkw" outgoing="_Ut0SsO-eEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+        </nodes>
+        <nodes xmi:id="_UQLUcO-eEea6wfovznEgkw" name="seedC" incoming="_Ut0SsO-eEea6wfovznEgkw _JVrq4O-gEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+        </nodes>
+        <nodes xmi:id="_eK9GEO-fEea6wfovznEgkw" incoming="_VbT_8O-gEea6wfovznEgkw" outgoing="_JVrq4O-gEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+          <attributes xmi:id="_iecUgO-fEea6wfovznEgkw" value="&quot;splittable&quot;">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_UzqxI--gEea6wfovznEgkw" outgoing="_VbT_8O-gEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+        </nodes>
+        <edges xmi:id="_Ut0SsO-eEea6wfovznEgkw" source="_mJWVc--eEea6wfovznEgkw" target="_UQLUcO-eEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+        </edges>
+        <edges xmi:id="_JVrq4O-gEea6wfovznEgkw" source="_eK9GEO-fEea6wfovznEgkw" target="_UQLUcO-eEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+        </edges>
+        <edges xmi:id="_VbT_8O-gEea6wfovznEgkw" source="_UzqxI--gEea6wfovznEgkw" target="_eK9GEO-fEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+        </edges>
+      </rhs>
+      <mappings xmi:id="_mJW8ge-eEea6wfovznEgkw" origin="_mJWVeO-eEea6wfovznEgkw" image="_mJWVc--eEea6wfovznEgkw"/>
+      <mappings xmi:id="_UQLUce-eEea6wfovznEgkw" origin="_SK4b4O-eEea6wfovznEgkw" image="_UQLUcO-eEea6wfovznEgkw"/>
+      <mappings xmi:id="_UzrYMu-gEea6wfovznEgkw" origin="_UzrYMO-gEea6wfovznEgkw" image="_UzqxI--gEea6wfovznEgkw"/>
+      <multiRules xmi:id="_nhl6xO-eEea6wfovznEgkw" name="int">
+        <lhs xmi:id="_nhl6xe-eEea6wfovznEgkw" name="Lhs">
+          <nodes xmi:id="_nhl6zO-eEea6wfovznEgkw" outgoing="_nhl60O-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+          </nodes>
+          <nodes xmi:id="_nhl6zu-eEea6wfovznEgkw" incoming="_nhl60O-eEea6wfovznEgkw" outgoing="_pSYi8O-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+          </nodes>
+          <nodes xmi:id="_iPwNsO-eEea6wfovznEgkw" incoming="_pSYi8O-eEea6wfovznEgkw" outgoing="_pe6jEO-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationProvidedRole"/>
+          </nodes>
+          <nodes xmi:id="_bszeEO-eEea6wfovznEgkw" name="seedI" incoming="_pe6jEO-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationInterface"/>
+          </nodes>
+          <nodes xmi:id="_UzrYNe-gEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+          </nodes>
+          <edges xmi:id="_nhl60O-eEea6wfovznEgkw" source="_nhl6zO-eEea6wfovznEgkw" target="_nhl6zu-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+          </edges>
+          <edges xmi:id="_pSYi8O-eEea6wfovznEgkw" source="_nhl6zu-eEea6wfovznEgkw" target="_iPwNsO-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/InterfaceProvidingEntity/providedRoles_InterfaceProvidingEntity"/>
+          </edges>
+          <edges xmi:id="_pe6jEO-eEea6wfovznEgkw" source="_iPwNsO-eEea6wfovznEgkw" target="_bszeEO-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+          </edges>
+        </lhs>
+        <rhs xmi:id="_nhl6xu-eEea6wfovznEgkw" name="Rhs">
+          <nodes xmi:id="_nhl6x--eEea6wfovznEgkw" outgoing="_nhl6y--eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+          </nodes>
+          <nodes xmi:id="_nhl6ye-eEea6wfovznEgkw" incoming="_nhl6y--eEea6wfovznEgkw _JVrq6--gEea6wfovznEgkw" outgoing="_pSYi8e-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+          </nodes>
+          <nodes xmi:id="_iPwNse-eEea6wfovznEgkw" incoming="_pSYi8e-eEea6wfovznEgkw" outgoing="_pe7KIO-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationProvidedRole"/>
+          </nodes>
+          <nodes xmi:id="_bszeEe-eEea6wfovznEgkw" name="seedI" incoming="_pe7KIO-eEea6wfovznEgkw _l-6YUO-kEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationInterface"/>
+          </nodes>
+          <nodes xmi:id="_fvk6gO-fEea6wfovznEgkw" incoming="_SwIzIO-gEea6wfovznEgkw" outgoing="_l-6YUO-kEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+            <attributes xmi:id="_pngB4O-fEea6wfovznEgkw" value="&quot;splitint&quot;">
+              <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_JVrq6O-gEea6wfovznEgkw" incoming="_VbT_8e-gEea6wfovznEgkw" outgoing="_JVrq6--gEea6wfovznEgkw _SwIzIO-gEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+            <attributes xmi:id="_JVrq6e-gEea6wfovznEgkw" value="&quot;split-comp&quot;">
+              <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_UzrYM--gEea6wfovznEgkw" outgoing="_VbT_8e-gEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+          </nodes>
+          <edges xmi:id="_nhl6y--eEea6wfovznEgkw" source="_nhl6x--eEea6wfovznEgkw" target="_nhl6ye-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+          </edges>
+          <edges xmi:id="_pSYi8e-eEea6wfovznEgkw" source="_nhl6ye-eEea6wfovznEgkw" target="_iPwNse-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/InterfaceProvidingEntity/providedRoles_InterfaceProvidingEntity"/>
+          </edges>
+          <edges xmi:id="_pe7KIO-eEea6wfovznEgkw" source="_iPwNse-eEea6wfovznEgkw" target="_bszeEe-eEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+          </edges>
+          <edges xmi:id="_JVrq6--gEea6wfovznEgkw" source="_JVrq6O-gEea6wfovznEgkw" target="_nhl6ye-eEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+          </edges>
+          <edges xmi:id="_SwIzIO-gEea6wfovznEgkw" source="_JVrq6O-gEea6wfovznEgkw" target="_fvk6gO-fEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+          </edges>
+          <edges xmi:id="_VbT_8e-gEea6wfovznEgkw" source="_UzrYM--gEea6wfovznEgkw" target="_JVrq6O-gEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+          </edges>
+          <edges xmi:id="_l-6YUO-kEea6wfovznEgkw" source="_fvk6gO-fEea6wfovznEgkw" target="_bszeEe-eEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+          </edges>
+        </rhs>
+        <mappings xmi:id="_nhl60e-eEea6wfovznEgkw" origin="_nhl6zO-eEea6wfovznEgkw" image="_nhl6x--eEea6wfovznEgkw"/>
+        <mappings xmi:id="_nhl60u-eEea6wfovznEgkw" origin="_nhl6zu-eEea6wfovznEgkw" image="_nhl6ye-eEea6wfovznEgkw"/>
+        <mappings xmi:id="_nhl6w--eEea6wfovznEgkw" origin="_iPwNsO-eEea6wfovznEgkw" image="_iPwNse-eEea6wfovznEgkw"/>
+        <mappings xmi:id="_oxyXVO-eEea6wfovznEgkw" origin="_bszeEO-eEea6wfovznEgkw" image="_bszeEe-eEea6wfovznEgkw"/>
+        <mappings xmi:id="_UzrYN--gEea6wfovznEgkw" origin="_UzrYNe-gEea6wfovznEgkw" image="_UzrYM--gEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_nhl6yO-eEea6wfovznEgkw" origin="_mJWVc--eEea6wfovznEgkw" image="_nhl6x--eEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_nhl6yu-eEea6wfovznEgkw" origin="_UQLUcO-eEea6wfovznEgkw" image="_nhl6ye-eEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_nhl6ze-eEea6wfovznEgkw" origin="_mJWVeO-eEea6wfovznEgkw" image="_nhl6zO-eEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_nhl6z--eEea6wfovznEgkw" origin="_SK4b4O-eEea6wfovznEgkw" image="_nhl6zu-eEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_JVrq6u-gEea6wfovznEgkw" origin="_eK9GEO-fEea6wfovznEgkw" image="_JVrq6O-gEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_UzrYNO-gEea6wfovznEgkw" origin="_UzqxI--gEea6wfovznEgkw" image="_UzrYM--gEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_UzrYNu-gEea6wfovznEgkw" origin="_UzrYMO-gEea6wfovznEgkw" image="_UzrYNe-gEea6wfovznEgkw"/>
+      </multiRules>
+      <multiMappings xmi:id="_mJWVdO-eEea6wfovznEgkw" origin="_OEf1UO-eEea6wfovznEgkw" image="_mJWVc--eEea6wfovznEgkw"/>
+      <multiMappings xmi:id="_mJWVee-eEea6wfovznEgkw" origin="_OEenMO-eEea6wfovznEgkw" image="_mJWVeO-eEea6wfovznEgkw"/>
+      <multiMappings xmi:id="_UzqxJO-gEea6wfovznEgkw" origin="_UzqxIe-gEea6wfovznEgkw" image="_UzqxI--gEea6wfovznEgkw"/>
+      <multiMappings xmi:id="_UzrYMe-gEea6wfovznEgkw" origin="_UzqxIO-gEea6wfovznEgkw" image="_UzrYMO-gEea6wfovznEgkw"/>
+    </multiRules>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_LEeVsO-lEea6wfovznEgkw" name="createInitialTrace">
+    <lhs xmi:id="_LEgK4O-lEea6wfovznEgkw" name="Lhs">
+      <nodes xmi:id="_Odb1kO-lEea6wfovznEgkw">
+        <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+      </nodes>
+    </lhs>
+    <rhs xmi:id="_LEgK4e-lEea6wfovznEgkw" name="Rhs">
+      <nodes xmi:id="_Odb1ke-lEea6wfovznEgkw">
+        <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+      </nodes>
+      <nodes xmi:id="_PhIHMO-lEea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+        <attributes xmi:id="_QZ8lkO-lEea6wfovznEgkw" value="&quot;root&quot;">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+        </attributes>
+      </nodes>
+    </rhs>
+    <mappings xmi:id="_Odb1ku-lEea6wfovznEgkw" origin="_Odb1kO-lEea6wfovznEgkw" image="_Odb1ke-lEea6wfovznEgkw"/>
+  </units>
+  <units xsi:type="henshin:Rule" xmi:id="_2G5KsO-zEea6wfovznEgkw" name="splitComp4Interface" description="" checkDangling="false">
+    <parameters xmi:id="_MgVn4PEzEea6wfovznEgkw" name="cName" kind="VAR"/>
+    <parameters xmi:id="_MgVn4fEzEea6wfovznEgkw" name="iName" kind="VAR"/>
+    <parameters xmi:id="_qryS0PEzEea6wfovznEgkw" name="seedC" kind="VAR"/>
+    <parameters xmi:id="_qryS0fEzEea6wfovznEgkw" name="seedI" kind="VAR"/>
+    <lhs xmi:id="_2G81EO-zEea6wfovznEgkw" name="Lhs">
+      <nodes xmi:id="_6FnDAO-zEea6wfovznEgkw" outgoing="_HjOesO-0Eea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+        <attributes xmi:id="_AZbKcO-0Eea6wfovznEgkw" value="&quot;root&quot;">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_7X5KQO-zEea6wfovznEgkw" outgoing="_bremYO-0Eea6wfovznEgkw">
+        <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+      </nodes>
+      <nodes xmi:id="_9ssecO-zEea6wfovznEgkw" incoming="_HjOesO-0Eea6wfovznEgkw" outgoing="_f8zRoO-0Eea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+        <attributes xmi:id="_-j8PgO-zEea6wfovznEgkw" value="&quot;splittable&quot;">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_Jc7yUO-0Eea6wfovznEgkw" name="seedC" incoming="_bremYO-0Eea6wfovznEgkw _f8zRoO-0Eea6wfovznEgkw">
+        <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+        <attributes xmi:id="_yBrMUO-0Eea6wfovznEgkw" value="cName">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+        </attributes>
+      </nodes>
+      <edges xmi:id="_HjOesO-0Eea6wfovznEgkw" source="_6FnDAO-zEea6wfovznEgkw" target="_9ssecO-zEea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+      </edges>
+      <edges xmi:id="_bremYO-0Eea6wfovznEgkw" source="_7X5KQO-zEea6wfovznEgkw" target="_Jc7yUO-0Eea6wfovznEgkw">
+        <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+      </edges>
+      <edges xmi:id="_f8zRoO-0Eea6wfovznEgkw" source="_9ssecO-zEea6wfovznEgkw" target="_Jc7yUO-0Eea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+      </edges>
+    </lhs>
+    <rhs xmi:id="_2G81Ee-zEea6wfovznEgkw" name="Rhs">
+      <nodes xmi:id="_6FnDAe-zEea6wfovznEgkw" outgoing="_HjOese-0Eea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+        <attributes xmi:id="_AZbKce-0Eea6wfovznEgkw" value="&quot;root&quot;">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_7X5KQe-zEea6wfovznEgkw" outgoing="_bremYe-0Eea6wfovznEgkw">
+        <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+      </nodes>
+      <nodes xmi:id="_9ssece-zEea6wfovznEgkw" incoming="_HjOese-0Eea6wfovznEgkw" outgoing="_f8zRoe-0Eea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+        <attributes xmi:id="_-j8Pge-zEea6wfovznEgkw" value="&quot;splittable&quot;">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+        </attributes>
+      </nodes>
+      <nodes xmi:id="_Jc8ZYO-0Eea6wfovznEgkw" name="seedC" incoming="_bremYe-0Eea6wfovznEgkw _f8zRoe-0Eea6wfovznEgkw">
+        <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+        <attributes xmi:id="_yBrMUe-0Eea6wfovznEgkw" value="cName">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+        </attributes>
+      </nodes>
+      <edges xmi:id="_HjOese-0Eea6wfovznEgkw" source="_6FnDAe-zEea6wfovznEgkw" target="_9ssece-zEea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+      </edges>
+      <edges xmi:id="_bremYe-0Eea6wfovznEgkw" source="_7X5KQe-zEea6wfovznEgkw" target="_Jc8ZYO-0Eea6wfovznEgkw">
+        <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+      </edges>
+      <edges xmi:id="_f8zRoe-0Eea6wfovznEgkw" source="_9ssece-zEea6wfovznEgkw" target="_Jc8ZYO-0Eea6wfovznEgkw">
+        <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+      </edges>
+    </rhs>
+    <mappings xmi:id="_6FnDAu-zEea6wfovznEgkw" origin="_6FnDAO-zEea6wfovznEgkw" image="_6FnDAe-zEea6wfovznEgkw"/>
+    <mappings xmi:id="_7X5KQu-zEea6wfovznEgkw" origin="_7X5KQO-zEea6wfovznEgkw" image="_7X5KQe-zEea6wfovznEgkw"/>
+    <mappings xmi:id="_9ssecu-zEea6wfovznEgkw" origin="_9ssecO-zEea6wfovznEgkw" image="_9ssece-zEea6wfovznEgkw"/>
+    <mappings xmi:id="_Jc8ZYe-0Eea6wfovznEgkw" origin="_Jc7yUO-0Eea6wfovznEgkw" image="_Jc8ZYO-0Eea6wfovznEgkw"/>
+    <multiRules xmi:id="_cW4KIPEwEea6wfovznEgkw" name="int">
+      <parameters xmi:id="_MgVn5PEzEea6wfovznEgkw" name="cName" kind="VAR"/>
+      <parameters xmi:id="_MgVn5fEzEea6wfovznEgkw" name="iName" kind="VAR"/>
+      <parameters xmi:id="_MgVn5vEzEea6wfovznEgkw" name="seedC" kind="VAR"/>
+      <parameters xmi:id="_MgVn5_EzEea6wfovznEgkw" name="seedI" kind="VAR"/>
+      <lhs xmi:id="_cW4KIfEwEea6wfovznEgkw" name="Lhs">
+        <nodes xmi:id="_cW4KKvEwEea6wfovznEgkw" outgoing="_cW4KMPEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+          <attributes xmi:id="_cW4KK_EwEea6wfovznEgkw" value="&quot;root&quot;">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_cW4KLfEwEea6wfovznEgkw" incoming="_cW4KMPEwEea6wfovznEgkw" outgoing="_cW4xPPEwEea6wfovznEgkw _glQ2IPEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+          <attributes xmi:id="_cW4KLvEwEea6wfovznEgkw" value="&quot;splittable&quot;">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_cW4xNPEwEea6wfovznEgkw" outgoing="_cW4xOfEwEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+        </nodes>
+        <nodes xmi:id="_cW4xNvEwEea6wfovznEgkw" name="seed" incoming="_cW4xOfEwEea6wfovznEgkw _cW4xPPEwEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+          <attributes xmi:id="_cW4xN_EwEea6wfovznEgkw" value="cName">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_cW2U8PEwEea6wfovznEgkw" incoming="_glQ2IPEwEea6wfovznEgkw" outgoing="_iqAVEPEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+          <attributes xmi:id="_jwTOwPEwEea6wfovznEgkw" value="&quot;splitint&quot;">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_dYpwMPEwEea6wfovznEgkw" name="seedI" incoming="_iqAVEPEwEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationInterface"/>
+          <attributes xmi:id="_mqJwwPEwEea6wfovznEgkw" value="iName">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+          </attributes>
+        </nodes>
+        <edges xmi:id="_cW4KMPEwEea6wfovznEgkw" source="_cW4KKvEwEea6wfovznEgkw" target="_cW4KLfEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+        </edges>
+        <edges xmi:id="_cW4xOfEwEea6wfovznEgkw" source="_cW4xNPEwEea6wfovznEgkw" target="_cW4xNvEwEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+        </edges>
+        <edges xmi:id="_cW4xPPEwEea6wfovznEgkw" source="_cW4KLfEwEea6wfovznEgkw" target="_cW4xNvEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+        </edges>
+        <edges xmi:id="_glQ2IPEwEea6wfovznEgkw" source="_cW4KLfEwEea6wfovznEgkw" target="_cW2U8PEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+        </edges>
+        <edges xmi:id="_iqAVEPEwEea6wfovznEgkw" source="_cW2U8PEwEea6wfovznEgkw" target="_dYpwMPEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+        </edges>
+      </lhs>
+      <rhs xmi:id="_cW4KIvEwEea6wfovznEgkw" name="Rhs">
+        <nodes xmi:id="_cW4KI_EwEea6wfovznEgkw" outgoing="_cW4KKfEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+          <attributes xmi:id="_cW4KJPEwEea6wfovznEgkw" value="&quot;root&quot;">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_cW4KJvEwEea6wfovznEgkw" incoming="_cW4KKfEwEea6wfovznEgkw" outgoing="_cW4xO_EwEea6wfovznEgkw _glQ2IfEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+          <attributes xmi:id="_cW4KJ_EwEea6wfovznEgkw" value="&quot;splittable&quot;">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_cW4KMvEwEea6wfovznEgkw" outgoing="_cW4xM_EwEea6wfovznEgkw _0K4x4PEwEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+        </nodes>
+        <nodes xmi:id="_cW4xMPEwEea6wfovznEgkw" name="seed" incoming="_cW4xM_EwEea6wfovznEgkw _cW4xO_EwEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+          <attributes xmi:id="_cW4xMfEwEea6wfovznEgkw" value="cName">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_cW3jEPEwEea6wfovznEgkw" incoming="_glQ2IfEwEea6wfovznEgkw" outgoing="_iqAVEfEwEea6wfovznEgkw _VlrRMPEyEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+          <attributes xmi:id="_jwT10PEwEea6wfovznEgkw" value="&quot;splitint&quot;">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_dYqXQPEwEea6wfovznEgkw" name="seedI" incoming="_iqAVEfEwEea6wfovznEgkw _gu5oYPEyEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationInterface"/>
+          <attributes xmi:id="_mqJwwfEwEea6wfovznEgkw" value="iName">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_syVP8PEwEea6wfovznEgkw" incoming="_0K4x4PEwEea6wfovznEgkw _VlrRMPEyEea6wfovznEgkw" outgoing="_gc8VsPEyEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+          <attributes xmi:id="_t6pi4PEwEea6wfovznEgkw" value="cName+&quot;-&quot;+RunnerHelper.getSplitIdentifier(seedC, seedI)">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+          </attributes>
+        </nodes>
+        <nodes xmi:id="_fx50oPEyEea6wfovznEgkw" incoming="_gc8VsPEyEea6wfovznEgkw" outgoing="_gu5oYPEyEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationProvidedRole"/>
+        </nodes>
+        <edges xmi:id="_cW4KKfEwEea6wfovznEgkw" source="_cW4KI_EwEea6wfovznEgkw" target="_cW4KJvEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+        </edges>
+        <edges xmi:id="_cW4xM_EwEea6wfovznEgkw" source="_cW4KMvEwEea6wfovznEgkw" target="_cW4xMPEwEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+        </edges>
+        <edges xmi:id="_cW4xO_EwEea6wfovznEgkw" source="_cW4KJvEwEea6wfovznEgkw" target="_cW4xMPEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+        </edges>
+        <edges xmi:id="_glQ2IfEwEea6wfovznEgkw" source="_cW4KJvEwEea6wfovznEgkw" target="_cW3jEPEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+        </edges>
+        <edges xmi:id="_iqAVEfEwEea6wfovznEgkw" source="_cW3jEPEwEea6wfovznEgkw" target="_dYqXQPEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+        </edges>
+        <edges xmi:id="_0K4x4PEwEea6wfovznEgkw" source="_cW4KMvEwEea6wfovznEgkw" target="_syVP8PEwEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+        </edges>
+        <edges xmi:id="_VlrRMPEyEea6wfovznEgkw" source="_cW3jEPEwEea6wfovznEgkw" target="_syVP8PEwEea6wfovznEgkw">
+          <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/target"/>
+        </edges>
+        <edges xmi:id="_gc8VsPEyEea6wfovznEgkw" source="_syVP8PEwEea6wfovznEgkw" target="_fx50oPEyEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/InterfaceProvidingEntity/providedRoles_InterfaceProvidingEntity"/>
+        </edges>
+        <edges xmi:id="_gu5oYPEyEea6wfovznEgkw" source="_fx50oPEyEea6wfovznEgkw" target="_dYqXQPEwEea6wfovznEgkw">
+          <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+        </edges>
+      </rhs>
+      <mappings xmi:id="_cW4KMfEwEea6wfovznEgkw" origin="_cW4KKvEwEea6wfovznEgkw" image="_cW4KI_EwEea6wfovznEgkw"/>
+      <mappings xmi:id="_cW4xOvEwEea6wfovznEgkw" origin="_cW4xNPEwEea6wfovznEgkw" image="_cW4KMvEwEea6wfovznEgkw"/>
+      <mappings xmi:id="_cW4xPfEwEea6wfovznEgkw" origin="_cW4KLfEwEea6wfovznEgkw" image="_cW4KJvEwEea6wfovznEgkw"/>
+      <mappings xmi:id="_cW4xPvEwEea6wfovznEgkw" origin="_cW4xNvEwEea6wfovznEgkw" image="_cW4xMPEwEea6wfovznEgkw"/>
+      <mappings xmi:id="_cW3jEfEwEea6wfovznEgkw" origin="_cW2U8PEwEea6wfovznEgkw" image="_cW3jEPEwEea6wfovznEgkw"/>
+      <mappings xmi:id="_dYqXQfEwEea6wfovznEgkw" origin="_dYpwMPEwEea6wfovznEgkw" image="_dYqXQPEwEea6wfovznEgkw"/>
+      <multiRules xmi:id="_rEYOdfEyEea6wfovznEgkw" name="affected">
+        <parameters xmi:id="_MgWO8PEzEea6wfovznEgkw" name="cName" kind="VAR"/>
+        <parameters xmi:id="_MgWO8fEzEea6wfovznEgkw" name="iName" kind="VAR"/>
+        <parameters xmi:id="_MgWO8vEzEea6wfovznEgkw" name="seedC" kind="VAR"/>
+        <parameters xmi:id="_MgWO8_EzEea6wfovznEgkw" name="seedI" kind="VAR"/>
+        <lhs xmi:id="_rEYOdvEyEea6wfovznEgkw" name="Lhs">
+          <nodes xmi:id="_rEYOf_EyEea6wfovznEgkw" outgoing="_rEYOhfEyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+            <attributes xmi:id="_rEYOgPEyEea6wfovznEgkw" value="&quot;root&quot;">
+              <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_rEYOgvEyEea6wfovznEgkw" incoming="_rEYOhfEyEea6wfovznEgkw" outgoing="_rEYOkvEyEea6wfovznEgkw _rEYOlvEyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+            <attributes xmi:id="_rEYOg_EyEea6wfovznEgkw" value="&quot;splittable&quot;">
+              <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_rEYOj_EyEea6wfovznEgkw" name="seed" incoming="_rEYOkvEyEea6wfovznEgkw _rEYOofEyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+            <attributes xmi:id="_rEYOkPEyEea6wfovznEgkw" value="cName">
+              <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_rEYOk_EyEea6wfovznEgkw" incoming="_rEYOlvEyEea6wfovznEgkw" outgoing="_rEYOrPEyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+            <attributes xmi:id="_rEYOlPEyEea6wfovznEgkw" value="&quot;splitint&quot;">
+              <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_rEYOn_EyEea6wfovznEgkw" outgoing="_rEYOofEyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+          </nodes>
+          <nodes xmi:id="_rEYOqfEyEea6wfovznEgkw" name="int" incoming="_rEYOrPEyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationInterface"/>
+            <attributes xmi:id="_rEYOqvEyEea6wfovznEgkw" value="iName">
+              <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+            </attributes>
+          </nodes>
+          <edges xmi:id="_rEYOhfEyEea6wfovznEgkw" source="_rEYOf_EyEea6wfovznEgkw" target="_rEYOgvEyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+          </edges>
+          <edges xmi:id="_rEYOkvEyEea6wfovznEgkw" source="_rEYOgvEyEea6wfovznEgkw" target="_rEYOj_EyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+          </edges>
+          <edges xmi:id="_rEYOlvEyEea6wfovznEgkw" source="_rEYOgvEyEea6wfovznEgkw" target="_rEYOk_EyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+          </edges>
+          <edges xmi:id="_rEYOofEyEea6wfovznEgkw" source="_rEYOn_EyEea6wfovznEgkw" target="_rEYOj_EyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+          </edges>
+          <edges xmi:id="_rEYOrPEyEea6wfovznEgkw" source="_rEYOk_EyEea6wfovznEgkw" target="_rEYOqfEyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+          </edges>
+        </lhs>
+        <rhs xmi:id="_rEYOd_EyEea6wfovznEgkw" name="Rhs">
+          <nodes xmi:id="_rEYOePEyEea6wfovznEgkw" outgoing="_rEYOfvEyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+            <attributes xmi:id="_rEYOefEyEea6wfovznEgkw" value="&quot;root&quot;">
+              <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_rEYOe_EyEea6wfovznEgkw" incoming="_rEYOfvEyEea6wfovznEgkw" outgoing="_rEYOivEyEea6wfovznEgkw _rEYOjvEyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+            <attributes xmi:id="_rEYOfPEyEea6wfovznEgkw" value="&quot;splittable&quot;">
+              <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_rEYOh_EyEea6wfovznEgkw" name="seed" incoming="_rEYOivEyEea6wfovznEgkw _rEYOmvEyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+            <attributes xmi:id="_rEYOiPEyEea6wfovznEgkw" value="cName">
+              <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_rEYOi_EyEea6wfovznEgkw" incoming="_rEYOjvEyEea6wfovznEgkw" outgoing="_rEYOp_EyEea6wfovznEgkw _rEYOqPEyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace"/>
+            <attributes xmi:id="_rEYOjPEyEea6wfovznEgkw" value="&quot;splitint&quot;">
+              <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/name"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_rEYOmPEyEea6wfovznEgkw" outgoing="_rEYOmvEyEea6wfovznEgkw _rEYOnvEyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository"/>
+          </nodes>
+          <nodes xmi:id="_rEYOm_EyEea6wfovznEgkw" incoming="_rEYOnvEyEea6wfovznEgkw _rEYOqPEyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/BasicComponent"/>
+            <attributes xmi:id="_rEYOnPEyEea6wfovznEgkw" value="cName+&quot;-&quot;+RunnerHelper.getSplitIdentifier(comp, int)">
+              <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_rEYOpPEyEea6wfovznEgkw" name="int" incoming="_rEYOp_EyEea6wfovznEgkw _rEYOsPEyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationInterface"/>
+            <attributes xmi:id="_rEYOpfEyEea6wfovznEgkw" value="iName">
+              <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//core/entity/NamedElement/entityName"/>
+            </attributes>
+          </nodes>
+          <nodes xmi:id="_rEYOrvEyEea6wfovznEgkw" outgoing="_rEYOsPEyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationProvidedRole"/>
+          </nodes>
+          <edges xmi:id="_rEYOfvEyEea6wfovznEgkw" source="_rEYOePEyEea6wfovznEgkw" target="_rEYOe_EyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+          </edges>
+          <edges xmi:id="_rEYOivEyEea6wfovznEgkw" source="_rEYOe_EyEea6wfovznEgkw" target="_rEYOh_EyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+          </edges>
+          <edges xmi:id="_rEYOjvEyEea6wfovznEgkw" source="_rEYOe_EyEea6wfovznEgkw" target="_rEYOi_EyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/subTraces"/>
+          </edges>
+          <edges xmi:id="_rEYOmvEyEea6wfovznEgkw" source="_rEYOmPEyEea6wfovznEgkw" target="_rEYOh_EyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+          </edges>
+          <edges xmi:id="_rEYOnvEyEea6wfovznEgkw" source="_rEYOmPEyEea6wfovznEgkw" target="_rEYOm_EyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/Repository/components__Repository"/>
+          </edges>
+          <edges xmi:id="_rEYOp_EyEea6wfovznEgkw" source="_rEYOi_EyEea6wfovznEgkw" target="_rEYOpPEyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/source"/>
+          </edges>
+          <edges xmi:id="_rEYOqPEyEea6wfovznEgkw" source="_rEYOi_EyEea6wfovznEgkw" target="_rEYOm_EyEea6wfovznEgkw">
+            <type href="http://www.eclipse.org/emf/2011/Henshin/Trace#//Trace/target"/>
+          </edges>
+          <edges xmi:id="_rEYOsPEyEea6wfovznEgkw" source="_rEYOrvEyEea6wfovznEgkw" target="_rEYOpPEyEea6wfovznEgkw">
+            <type href="http://palladiosimulator.org/PalladioComponentModel/5.1#//repository/OperationProvidedRole/providedInterface__OperationProvidedRole"/>
+          </edges>
+        </rhs>
+        <mappings xmi:id="_rEYOhvEyEea6wfovznEgkw" origin="_rEYOf_EyEea6wfovznEgkw" image="_rEYOePEyEea6wfovznEgkw"/>
+        <mappings xmi:id="_rEYOl_EyEea6wfovznEgkw" origin="_rEYOgvEyEea6wfovznEgkw" image="_rEYOe_EyEea6wfovznEgkw"/>
+        <mappings xmi:id="_rEYOovEyEea6wfovznEgkw" origin="_rEYOn_EyEea6wfovznEgkw" image="_rEYOmPEyEea6wfovznEgkw"/>
+        <mappings xmi:id="_rEYOo_EyEea6wfovznEgkw" origin="_rEYOj_EyEea6wfovznEgkw" image="_rEYOh_EyEea6wfovznEgkw"/>
+        <mappings xmi:id="_rEYOrfEyEea6wfovznEgkw" origin="_rEYOk_EyEea6wfovznEgkw" image="_rEYOi_EyEea6wfovznEgkw"/>
+        <mappings xmi:id="_rEYOsfEyEea6wfovznEgkw" origin="_rEYOqfEyEea6wfovznEgkw" image="_rEYOpPEyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOevEyEea6wfovznEgkw" origin="_cW4KI_EwEea6wfovznEgkw" image="_rEYOePEyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOffEyEea6wfovznEgkw" origin="_cW4KJvEwEea6wfovznEgkw" image="_rEYOe_EyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOgfEyEea6wfovznEgkw" origin="_cW4KKvEwEea6wfovznEgkw" image="_rEYOf_EyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOhPEyEea6wfovznEgkw" origin="_cW4KLfEwEea6wfovznEgkw" image="_rEYOgvEyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOifEyEea6wfovznEgkw" origin="_cW4xMPEwEea6wfovznEgkw" image="_rEYOh_EyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOjfEyEea6wfovznEgkw" origin="_cW3jEPEwEea6wfovznEgkw" image="_rEYOi_EyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOkfEyEea6wfovznEgkw" origin="_cW4xNvEwEea6wfovznEgkw" image="_rEYOj_EyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOlfEyEea6wfovznEgkw" origin="_cW2U8PEwEea6wfovznEgkw" image="_rEYOk_EyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOmfEyEea6wfovznEgkw" origin="_cW4KMvEwEea6wfovznEgkw" image="_rEYOmPEyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOnfEyEea6wfovznEgkw" origin="_syVP8PEwEea6wfovznEgkw" image="_rEYOm_EyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOoPEyEea6wfovznEgkw" origin="_cW4xNPEwEea6wfovznEgkw" image="_rEYOn_EyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOpvEyEea6wfovznEgkw" origin="_dYqXQPEwEea6wfovznEgkw" image="_rEYOpPEyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOq_EyEea6wfovznEgkw" origin="_dYpwMPEwEea6wfovznEgkw" image="_rEYOqfEyEea6wfovznEgkw"/>
+        <multiMappings xmi:id="_rEYOr_EyEea6wfovznEgkw" origin="_fx50oPEyEea6wfovznEgkw" image="_rEYOrvEyEea6wfovznEgkw"/>
+      </multiRules>
+      <multiMappings xmi:id="_cW4KJfEwEea6wfovznEgkw" origin="_6FnDAe-zEea6wfovznEgkw" image="_cW4KI_EwEea6wfovznEgkw"/>
+      <multiMappings xmi:id="_cW4KKPEwEea6wfovznEgkw" origin="_9ssece-zEea6wfovznEgkw" image="_cW4KJvEwEea6wfovznEgkw"/>
+      <multiMappings xmi:id="_cW4KLPEwEea6wfovznEgkw" origin="_6FnDAO-zEea6wfovznEgkw" image="_cW4KKvEwEea6wfovznEgkw"/>
+      <multiMappings xmi:id="_cW4KL_EwEea6wfovznEgkw" origin="_9ssecO-zEea6wfovznEgkw" image="_cW4KLfEwEea6wfovznEgkw"/>
+      <multiMappings xmi:id="_cW4KM_EwEea6wfovznEgkw" origin="_7X5KQe-zEea6wfovznEgkw" image="_cW4KMvEwEea6wfovznEgkw"/>
+      <multiMappings xmi:id="_cW4xMvEwEea6wfovznEgkw" origin="_Jc8ZYO-0Eea6wfovznEgkw" image="_cW4xMPEwEea6wfovznEgkw"/>
+      <multiMappings xmi:id="_cW4xNfEwEea6wfovznEgkw" origin="_7X5KQO-zEea6wfovznEgkw" image="_cW4xNPEwEea6wfovznEgkw"/>
+      <multiMappings xmi:id="_cW4xOPEwEea6wfovznEgkw" origin="_Jc7yUO-0Eea6wfovznEgkw" image="_cW4xNvEwEea6wfovznEgkw"/>
+    </multiRules>
+    <javaImports>edu.squat.transformations.modifiability.RunnerHelper</javaImports>
+  </units>
+</henshin:Module>
