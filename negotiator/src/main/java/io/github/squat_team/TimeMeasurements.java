@@ -112,11 +112,17 @@ public class TimeMeasurements {
 	public static void printTimes() {
 		System.out.println("TIME MEASUREMENTS:");
 		System.out.println("Total Runtime: " + totalTime);
-		System.out.println("Total Negotiatior Runtime: " + negotiationTime);
 		if (NegotiatorConfiguration.sequential()) {
+			Long sequentialTime = negotiationTime;
+			System.out.println("Total Negotiatior Runtime: " + negotiationTime);
 			for (String botName : timeOfBots.keySet()) {
+				long botTime = timeOfBots.get(botName);
 				System.out.println("Total Bot " + botName + " Runtime: " + timeOfBots.get(botName));
+				sequentialTime += botTime;
 			}
+			double withoutRestRatio = Double.valueOf(sequentialTime) / Double.valueOf(totalTime);
+			System.out.println("Total Sequential Runtime Without REST: " + sequentialTime + " ("
+					+ (100 * withoutRestRatio) + "%)");
 		}
 	}
 }
