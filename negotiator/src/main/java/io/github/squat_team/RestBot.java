@@ -50,11 +50,13 @@ public class RestBot {
 	 *            the scenario to use and optimize by this bot
 	 */
 	public RestBot(String name, BotType botType, String remoteURI, JSONObject scenario) {
+		TimeMeasurements.pauseNegotiationTimeMeasurement();
 		this.botType = Objects.requireNonNull(botType);
 		this.remoteURI = Objects.requireNonNull(remoteURI);
 		this.botUUID = UUID.randomUUID().toString();
 		this.scenario = scenario;
 		this.name = name;
+		TimeMeasurements.continueNegotiationTimeMeasurement();
 	}
 
 	/**
@@ -189,13 +191,18 @@ public class RestBot {
 	 */
 	public CompletableFuture<RestScenarioResult> analyze(RestArchitecture architecture) {
 		return CompletableFuture.supplyAsync(() -> {
+			TimeMeasurements.pauseNegotiationTimeMeasurement();
+			RestScenarioResult result;
 			if (NegotiatorConfiguration.sequential()) {
 				synchronized (LOCK) {
-					return buildRestScenarioResult(this.call(this.buildBodyFromArchitecture(architecture), "analyze"));
+					result = buildRestScenarioResult(
+							this.call(this.buildBodyFromArchitecture(architecture), "analyze"));
 				}
 			} else {
-				return buildRestScenarioResult(this.call(this.buildBodyFromArchitecture(architecture), "analyze"));
+				result = buildRestScenarioResult(this.call(this.buildBodyFromArchitecture(architecture), "analyze"));
 			}
+			TimeMeasurements.continueNegotiationTimeMeasurement();
+			return result;
 		});
 	}
 
@@ -209,26 +216,26 @@ public class RestBot {
 	 */
 	public CompletableFuture<List<RestScenarioResult>> searchForAlternatives(RestArchitecture architecture) {
 		return CompletableFuture.supplyAsync(() -> {
+			TimeMeasurements.pauseNegotiationTimeMeasurement();
+			final List<RestScenarioResult> results = new ArrayList<>();
 			if (NegotiatorConfiguration.sequential()) {
 				synchronized (LOCK) {
-					final List<RestScenarioResult> results = new ArrayList<>();
 					JSONObject result = this.call(this.buildBodyFromArchitecture(architecture),
 							"searchForAlternatives");
 					JSONArray jsonResults = result.getJSONArray("values");
 					jsonResults.forEach(o -> {
 						results.add(buildRestScenarioResult((JSONObject) o));
 					});
-					return results;
 				}
 			} else {
-				final List<RestScenarioResult> results = new ArrayList<>();
 				JSONObject result = this.call(this.buildBodyFromArchitecture(architecture), "searchForAlternatives");
 				JSONArray jsonResults = result.getJSONArray("values");
 				jsonResults.forEach(o -> {
 					results.add(buildRestScenarioResult((JSONObject) o));
 				});
-				return results;
 			}
+			TimeMeasurements.continueNegotiationTimeMeasurement();
+			return results;
 		});
 	}
 
