@@ -380,23 +380,16 @@ public class NoSpringServer {
 				if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
 					rsp = this.botFn(body, (ctx, obj) -> {
 						PerOpteryxPCMBot bot = ctx.getBot();
-						long init = System.currentTimeMillis();
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
-						long duration = System.currentTimeMillis() - init;
-						obj.put("duration", duration);
 						PCMScenarioResult result = null;
 						synchronized (LQNS_LOCK) {
-							System.out.println("AN");
+							long init = System.currentTimeMillis();
 							result = bot.analyze(architectureInstance);
+							long duration = System.currentTimeMillis() - init;
+							obj.put("duration", duration);
 						}
-						String resultString;
-						try {
-							buildResult(obj, result, ctx.getRestArchitecture());
-							resultString = obj.toString();
-						} catch (JSONException e) {
-							resultString = e.getMessage();
-						}
-						return resultString;
+						buildResult(obj, result, ctx.getRestArchitecture());
+						return obj.toString();
 					});
 				} else {
 					rsp = "INVALID METHOD";
@@ -422,30 +415,24 @@ public class NoSpringServer {
 				if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
 					rsp = this.botFn(body, (ctx, obj) -> {
 						PerOpteryxPCMBot bot = ctx.getBot();
-						long init = System.currentTimeMillis();
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
-						long duration = System.currentTimeMillis() - init;
-						obj.put("duration", duration);
 
 						List<PCMScenarioResult> results = null;
 						synchronized (LQNS_LOCK) {
-							System.out.println("SFA");
+							long init = System.currentTimeMillis();
 							results = bot.searchForAlternatives(architectureInstance);
+							long duration = System.currentTimeMillis() - init;
+							obj.put("duration", duration);
 							ArchitectureRenamer.rename(results);
 						}
 
-						String resultString;
-						try {
-							JSONArray jsonResults = new JSONArray();
-							obj.put("values", jsonResults);
-							for (PCMScenarioResult result : results) {
-								jsonResults.put(buildResult(result, ctx.getRestArchitecture()));
-							}
-							resultString = obj.toString();
-						} catch (JSONException e) {
-							resultString = e.getMessage();
+						JSONArray jsonResults = new JSONArray();
+						obj.put("values", jsonResults);
+						for (PCMScenarioResult result : results) {
+							jsonResults.put(buildResult(result, ctx.getRestArchitecture()));
 						}
-						return resultString;
+						return obj.toString();
+
 					});
 
 				} else {
