@@ -40,6 +40,9 @@ public class ArchitectureRenamer {
 			ArchitecturalVersion newAlternative = new ArchitecturalVersion(
 					modelFileRenamed.getName().substring(0, modelFileRenamed.getName().lastIndexOf('.')),
 					modelFileRenamed.getParentFile().getPath(), ArchitecturalVersion.PERFORMANCE);
+			File alternativeRepositoryFile = new File(
+					architectureInstanceRenamed.getRepositoryWithAlternatives().eResource().getURI().toFileString());
+			newAlternative.setFullPathToAlternativeRepository(alternativeRepositoryFile.getAbsolutePath());
 			result.setResultingArchitecture(PCMHelper.createArchitecture(newAlternative));
 		}
 	}
