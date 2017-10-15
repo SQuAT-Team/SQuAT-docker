@@ -1,5 +1,6 @@
 package test;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -73,9 +74,12 @@ public class NoSpringServer {
 		Configuration configuration = new Configuration();
 		configuration.getPerOpteryxConfig().setGenerationSize(100);
 		configuration.getPerOpteryxConfig().setMaxIterations(10);
-		configuration.getLqnsConfig().setLqnsOutputDir(DockerConstants.LQN_OUTPUT);
-		configuration.getExporterConfig().setPcmOutputFolder(DockerConstants.PCM_STORAGE_PATH);
-		configuration.getPcmModelsConfig().setPathmapFolder(DockerConstants.PCM_MODEL_FILES);
+		configuration.getLqnsConfig().setLqnsOutputDir(File.separator + "home" + File.separator + "Bot_out"
+				+ File.separator + "pcmtests" + File.separator + "lqnout");
+		configuration.getExporterConfig().setPcmOutputFolder(File.separator + "home" + File.separator + "Bot_out"
+				+ File.separator + "pcmtests" + File.separator + "testspace");
+		configuration.getPcmModelsConfig().setPathmapFolder(
+				"file:/home" + File.separator + "pcm" + File.separator + "defaultModels" + File.separator);
 		return configuration;
 	}
 
