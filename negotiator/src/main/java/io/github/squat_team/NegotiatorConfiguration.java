@@ -91,4 +91,12 @@ public class NegotiatorConfiguration {
 	public static void setFailureResponseValue(float value) {
 		FAILURE_RESPONSE_VALUE = value;
 	}
+
+	public static void printConfig() {
+		System.out.println("NEGOTIATOR CONFIGURATION:");
+		System.out.println("Run Sequential: " + RUN_SEQUENTIAL);
+		System.out.println("Auto Accept: " + AUTO_ACCEPT);
+		System.out.println("Auto Accept Level: " + AUTO_ACCEPT_LEVEL);
+
+	}
 }

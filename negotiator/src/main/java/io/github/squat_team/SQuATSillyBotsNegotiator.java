@@ -85,7 +85,7 @@ public class SQuATSillyBotsNegotiator {
 					printCurrentState(agreementProposal);
 					if (NegotiatorConfiguration.autoAccept()) {
 						// if auto accept, redo if level is not reached
-						redoRequest = currentLevelOfTransformations<NegotiatorConfiguration.autoAcceptLevel();
+						redoRequest = currentLevelOfTransformations < NegotiatorConfiguration.autoAcceptLevel();
 					} else {
 						System.out.println("REDO? (Y/N): ");
 						Scanner scan = new Scanner(System.in);
@@ -323,6 +323,7 @@ public class SQuATSillyBotsNegotiator {
 
 	// TODO: PA! This will be the method for an external call.
 	public void negotiatiateUntilAnAgreementIsReached() {
+		NegotiatorConfiguration.printConfig();
 		boolean agreement = false;
 		while (!agreement && (currentLevelOfTransformations <= maxNumberOfLevels) && !noMoreAlternatives) {
 			try {
