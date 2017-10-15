@@ -1,55 +1,32 @@
 package test;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONStringer;
 import org.palladiosimulator.pcm.repository.Repository;
-import org.palladiosimulator.pcm.repository.RepositoryPackage;
 import org.palladiosimulator.pcm.allocation.Allocation;
-import org.palladiosimulator.pcm.allocation.AllocationPackage;
-import org.palladiosimulator.pcm.core.CorePackage;
-import org.palladiosimulator.pcm.core.entity.EntityPackage;
 import org.palladiosimulator.pcm.resourceenvironment.ResourceEnvironment;
-import org.palladiosimulator.pcm.resourceenvironment.ResourceenvironmentPackage;
-import org.palladiosimulator.pcm.seff.SeffPackage;
-import org.palladiosimulator.pcm.system.SystemPackage;
 import org.palladiosimulator.pcm.usagemodel.UsageModel;
-import org.palladiosimulator.pcm.usagemodel.UsagemodelPackage;
-
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
-import de.uka.ipd.sdq.identifier.IdentifierPackage;
-import de.uka.ipd.sdq.stoex.StoexPackage;
-import io.github.squat_team.AbstractPCMBot;
 import io.github.squat_team.json.JSONConverter;
-import io.github.squat_team.json.JSONUtils;
 import io.github.squat_team.json.JSONification;
 import io.github.squat_team.json.UnJSONification;
 import io.github.squat_team.model.OptimizationType;
@@ -376,7 +353,10 @@ public class NoSpringServer {
 					rsp = this.botFn(body, (ctx, obj) -> {
 						KAMPPCMBot bot = ctx.getBot();
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
+						long init = System.currentTimeMillis();
 						PCMScenarioResult result = bot.analyze(architectureInstance);
+						long duration = System.currentTimeMillis() - init;
+						obj.put("duration", duration);
 						String resultString;
 						try {
 							buildResult(obj, result, ctx.getRestArchitecture());
@@ -411,7 +391,10 @@ public class NoSpringServer {
 					rsp = this.botFn(body, (ctx, obj) -> {
 						KAMPPCMBot bot = ctx.getBot();
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
+						long init = System.currentTimeMillis();
 						List<PCMScenarioResult> results = bot.searchForAlternatives(architectureInstance);
+						long duration = System.currentTimeMillis() - init;
+						obj.put("duration", duration);
 						String resultString;
 						try {
 							JSONArray jsonResults = new JSONArray();
