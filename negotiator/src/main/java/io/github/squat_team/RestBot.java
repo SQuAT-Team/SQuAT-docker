@@ -198,8 +198,10 @@ public class RestBot {
 			RestScenarioResult result;
 			if (NegotiatorConfiguration.sequential()) {
 				synchronized (LOCK) {
+					TimeMeasurements.pauseNegotiationTimeMeasurement();
 					result = buildRestScenarioResult(
 							this.call(this.buildBodyFromArchitecture(architecture), "analyze"));
+					TimeMeasurements.continueNegotiationTimeMeasurement();
 				}
 			} else {
 				result = buildRestScenarioResult(this.call(this.buildBodyFromArchitecture(architecture), "analyze"));
@@ -219,16 +221,17 @@ public class RestBot {
 	 */
 	public CompletableFuture<List<RestScenarioResult>> searchForAlternatives(RestArchitecture architecture) {
 		return CompletableFuture.supplyAsync(() -> {
-			TimeMeasurements.pauseNegotiationTimeMeasurement();
 			final List<RestScenarioResult> results = new ArrayList<>();
 			if (NegotiatorConfiguration.sequential()) {
 				synchronized (LOCK) {
+					TimeMeasurements.pauseNegotiationTimeMeasurement();
 					JSONObject result = this.call(this.buildBodyFromArchitecture(architecture),
 							"searchForAlternatives");
 					JSONArray jsonResults = result.getJSONArray("values");
 					jsonResults.forEach(o -> {
 						results.add(buildRestScenarioResult((JSONObject) o));
 					});
+					TimeMeasurements.continueNegotiationTimeMeasurement();
 				}
 			} else {
 				JSONObject result = this.call(this.buildBodyFromArchitecture(architecture), "searchForAlternatives");
@@ -237,7 +240,6 @@ public class RestBot {
 					results.add(buildRestScenarioResult((JSONObject) o));
 				});
 			}
-			TimeMeasurements.continueNegotiationTimeMeasurement();
 			return results;
 		});
 	}
