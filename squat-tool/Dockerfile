@@ -60,8 +60,7 @@ RUN ["mvn", "package"]
 #ADD squat-tool-performance-bot.jar /home/squat-tool-performance-bot.jar
 
 #Install LQN
-ADD lqn/lqns-5.9-1.i386_IntelCentos.rpm /home/lqn.rpm
-RUN rpm -i lqn.rpm
+ADD lqn /
 
 ENTRYPOINT java -jar /home/target/squat-tool-performance-bot.jar
 
