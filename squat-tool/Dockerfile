@@ -62,5 +62,7 @@ RUN ["mvn", "package"]
 #Install LQN
 ADD lqn /
 
+#RUN lqns --version
+
 ENTRYPOINT java -jar /home/target/squat-tool-performance-bot.jar
 

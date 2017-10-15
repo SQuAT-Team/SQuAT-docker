@@ -266,7 +266,7 @@ public class NoSpringServer {
 
 			// Create the bot and context
 			PerOpteryxPCMBot bot = new PerOpteryxPCMBot(scenario, configuration);
-			bot.setDebugMode(false);
+			bot.setDebugMode(true);
 			bot.setDetailedAnalysis(true);
 			ExecutionContext context = new ExecutionContext(bot, architectureInstance, restArchitecture);
 
