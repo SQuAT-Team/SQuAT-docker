@@ -397,9 +397,12 @@ public class NoSpringServer {
 				if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
 					rsp = this.botFn(body, (ctx, obj) -> {
 						PerOpteryxPCMBot bot = ctx.getBot();
-						bot.setDebugMode(true);
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
-
+						boolean debug = false;
+						if (exchg.getRequestURI().getPath().contains("debug")) {
+							debug = true;
+						}
+						bot.setDebugMode(debug);
 						List<PCMScenarioResult> results = null;
 						synchronized (LQNS_LOCK) {
 							long init = System.currentTimeMillis();
