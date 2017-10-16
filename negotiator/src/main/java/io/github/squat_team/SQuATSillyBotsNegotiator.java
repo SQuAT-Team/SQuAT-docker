@@ -345,21 +345,22 @@ public class SQuATSillyBotsNegotiator {
 		TimeMeasurements.continueNegotiationTimeMeasurement();
 	}
 
-	private void handleNegotiationFinished() throws InterruptedException, ExecutionException {
+	public RestArchitecture handleNegotiationFinished() throws InterruptedException, ExecutionException {
 		// end time time measurements
 		TimeMeasurements.pauseNegotiationTimeMeasurement();
 		TimeMeasurements.endTotalTimeMeasurement();
 		TimeMeasurements.printTimes();
 
-		//TODO tell the modifiability bots to shut the fuck up!
-		//TODO delete bot list?
-		System.out.println("Shutting bots down. Number of bots: " + BotManager.getInstance().getAllBots().size());
-		for (RestBot bot : BotManager.getInstance().getAllBots()) {
-			bot.shutTheFuckUp();
-		}
+//		// TODO tell the modifiability bots to shut the fuck up!
+//		// TODO delete bot list?
+//		System.out.println("Shutting bots down. Number of bots: " + BotManager.getInstance().getAllBots().size());
+//		for (RestBot bot : BotManager.getInstance().getAllBots()) {
+//			bot.shutTheFuckUp();
+//		}
 
 		// TODO: PA! Export final results: Candidate and time measurements
-//		RestArchitecture agreementCandidate = findAgreementCandidate();
+		RestArchitecture agreementCandidate = findAgreementCandidate();
+		return agreementCandidate;
 	}
 
 	/**
@@ -369,11 +370,10 @@ public class SQuATSillyBotsNegotiator {
 	 * @throws InterruptedException
 	 * @throws ExecutionException
 	 */
-	private RestArchitecture findAgreementCandidate() throws InterruptedException, ExecutionException {
+	public RestArchitecture findAgreementCandidate() throws InterruptedException, ExecutionException {
 		String agreementName = agreementProposal.getArchitectureName();
-		CompletableFuture<List<RestArchitecture>> futureArchitectureList = archTransFactory
-				.getArchitecturalTransformationsUntilLevel(currentLevelOfTransformations);
-		for (RestArchitecture currentArchitecture : futureArchitectureList.get()) {
+		List<RestArchitecture> archList = archTransFactory.returnForLevel(currentLevelOfTransformations - 1);
+		for (RestArchitecture currentArchitecture : archList) {
 			if (agreementName.equals(currentArchitecture.getName())) {
 				return currentArchitecture;
 			}
