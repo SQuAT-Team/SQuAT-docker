@@ -357,7 +357,7 @@ public class SQuATSillyBotsNegotiator {
 		}
 
 		// TODO: PA! Export final results: Candidate and time measurements
-		RestArchitecture agreementCandidate = findAgreementCandidate();
+//		RestArchitecture agreementCandidate = findAgreementCandidate();
 	}
 
 	/**
