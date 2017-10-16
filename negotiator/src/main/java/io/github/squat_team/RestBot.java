@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -83,8 +84,6 @@ public class RestBot {
 		return new JSONObject(new String(b));
 	}
 
-	private static int callNo = 0;
-
 	/**
 	 * Perform the call to the remote end point
 	 *
@@ -96,9 +95,6 @@ public class RestBot {
 	 * @return the response from the end point as {@link JSONObject}
 	 */
 	private JSONObject call(String body, String uriPath) {
-		System.out.println(String.format("Performing call number %d to end point %s (BotType %s)", ++callNo, uriPath,
-				this.getBotType()));
-
 		JSONObject result = null;
 		try {
 			URL url = new URL(this.remoteURI + "/" + uriPath);
