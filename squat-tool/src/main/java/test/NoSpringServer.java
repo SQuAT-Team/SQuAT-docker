@@ -397,13 +397,16 @@ public class NoSpringServer {
 				if ("POST".equalsIgnoreCase(exchg.getRequestMethod())) {
 					rsp = this.botFn(body, (ctx, obj) -> {
 						PerOpteryxPCMBot bot = ctx.getBot();
+						bot.setDebugMode(true);
 						PCMArchitectureInstance architectureInstance = ctx.getArchitectureInstance();
 
 						List<PCMScenarioResult> results = null;
 						synchronized (LQNS_LOCK) {
 							long init = System.currentTimeMillis();
+							System.out.println("SFA");
 							results = bot.searchForAlternatives(architectureInstance);
 							long duration = System.currentTimeMillis() - init;
+							System.out.println(duration + " ms");
 							obj.put("duration", duration);
 							ArchitectureRenamer.rename(results);
 						}
