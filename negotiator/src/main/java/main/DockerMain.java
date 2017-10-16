@@ -12,6 +12,7 @@ import io.github.squat_team.NegotiatorConfiguration;
 import io.github.squat_team.RestBot;
 import io.github.squat_team.SQuATSillyBotsNegotiator;
 import io.github.squat_team.agentsUtils.ArchitectureInitializer;
+import io.github.squat_team.agentsUtils.BotIntializer;
 import io.github.squat_team.agentsUtils.BotManager;
 import io.github.squat_team.agentsUtils.LoadHelper;
 import io.github.squat_team.agentsUtils.BotManager.BotType;
@@ -38,31 +39,30 @@ public class DockerMain {
 	}
 
 	public static void main(String[] args) throws InterruptedException, IOException {
-
-		// RestArchitecture initialArch =
-		// ArchitectureInitializer.loadSpecificModel("test");
-		// // ArchitecturalTransformationsFactory fact = new
-		// // ArchitecturalTransformationsFactory(initialArch);
-		// RestBot b1 = new RestBot("b1", BotType.MODIFIABILITY,
-		// "http://127.0.0.1:8081",
-		// LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL,
-		// 120.0));
-		// try {
-		// System.out.println(b1.searchForAlternatives(initialArch).get());
-		// } catch (ExecutionException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// b1.searchForAlternatives(initialArch).thenAccept(System.out::println);
-		// BotManager.getInstance().addBot(b1);
-		// List<RestScenarioResult> results = new ArrayList<>();
-
+		System.out.println("negotiator starts in 5 seconds...");
+		Thread.sleep(5000);
+		System.out.println("negotiator starting...");
+		RestArchitecture initialArch = ArchitectureInitializer.loadSpecificModel("test");
+		// ArchitecturalTransformationsFactory fact = new
+		// ArchitecturalTransformationsFactory(initialArch);
+		RestBot b1 = new RestBot("b1", BotType.PERFORMANCE, BotIntializer.PERF_BOT_URIS[0], LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 30.0));
+		RestBot b2 = new RestBot("b2", BotType.PERFORMANCE, BotIntializer.PERF_BOT_URIS[1], LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40.0));
+		try {
+			System.out.println(b1.searchForAlternatives(initialArch).get());
+			System.out.println("---------------");
+			System.out.println(b2.searchForAlternatives(initialArch).get());
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+/*
 		System.out.println("negotiator starts in 5 seconds...");
 		Thread.sleep(5000);
 		System.out.println("negotiator starting...");
 		SQuATSillyBotsNegotiator n = new SQuATSillyBotsNegotiator();
 		new NoSpringServer(n, 8082);
 		n.negotiatiateUntilAnAgreementIsReached();
+		*/
 		// RestArchitecture initialArchitecture =
 		// ArchitectureInitializer.loadSpecificModel(NegotiatorConfiguration.INITIAL_ARCHITECTURE_NAME);
 		// JSONObject scJsonObject =
