@@ -3,6 +3,7 @@ package main;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONObject;
@@ -48,9 +49,11 @@ public class DockerMain {
 		RestBot b1 = new RestBot("b1", BotType.PERFORMANCE, BotIntializer.PERF_BOT_URIS[0], LoadHelper.createPerformanceScenarioS1(ResponseMeasureType.DECIMAL, 30.0));
 		RestBot b2 = new RestBot("b2", BotType.PERFORMANCE, BotIntializer.PERF_BOT_URIS[1], LoadHelper.createPerformanceScenarioS2(ResponseMeasureType.DECIMAL, 40.0));
 		try {
-			System.out.println(b1.searchForAlternatives(initialArch).get());
+			CompletableFuture<List<RestScenarioResult>> f1 = b1.searchForAlternatives(initialArch);
+			CompletableFuture<List<RestScenarioResult>> f2 = b2.searchForAlternatives(initialArch);
+			System.out.println(f1.get());
 			System.out.println("---------------");
-			System.out.println(b2.searchForAlternatives(initialArch).get());
+			System.out.println(f2.get());
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
