@@ -351,6 +351,8 @@ public class SQuATSillyBotsNegotiator {
 		TimeMeasurements.endTotalTimeMeasurement();
 		TimeMeasurements.printTimes();
 
+		//TODO tell the modifiability bots to shut the fuck up!
+		//TODO delete bot list?
 		System.out.println("Shutting bots down. Number of bots: " + BotManager.getInstance().getAllBots().size());
 		for (RestBot bot : BotManager.getInstance().getAllBots()) {
 			bot.shutTheFuckUp();
