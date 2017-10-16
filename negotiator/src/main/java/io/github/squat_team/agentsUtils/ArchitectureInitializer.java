@@ -66,8 +66,8 @@ public class ArchitectureInitializer {
 	public static RestArchitecture loadSpecificModel(String name) {
 		final String MODEL_NAME = "default";
 		// TODO: PA! Replace this with NegotiatorConfiguration variable
-		final String MODEL_PATH = "/home/pcm";
-		final String ALTERNATIVE_REPOSITORY_PATH = "/home/pcm/alternativeRepository.repository";
+		final String MODEL_PATH = "/home/roehrdor/Workspace-oxygen/SQuAT-docker/negotiator/pcm";
+		final String ALTERNATIVE_REPOSITORY_PATH = "/home/roehrdor/Workspace-oxygen/SQuAT-docker/negotiator/pcm/alternativeRepository.repository";
 		String BASE = MODEL_PATH;
 		String basicPath = MODEL_PATH + "/default"; // TODO: PA! Wouldnt it be better to have sth like File.separator +
 													// name?
