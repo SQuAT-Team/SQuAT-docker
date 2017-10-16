@@ -248,7 +248,8 @@ public class RestBot {
 	}
 
 	public void shutTheFuckUp() {
-		this.call("", "shutTheFuckUp");
+		System.out.println("Should call to shut up");
+		//this.call("", "shutTheFuckUp");
 	}
 
 	/**
