@@ -1,5 +1,6 @@
 package main;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -36,19 +37,22 @@ public class DockerMain {
 		return root.toString();
 	}
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 
-//		RestArchitecture initialArch = ArchitectureInitializer.loadSpecificModel("test");
-//		// ArchitecturalTransformationsFactory fact = new
-//		// ArchitecturalTransformationsFactory(initialArch);
-//		RestBot b1 = new RestBot("b1", BotType.MODIFIABILITY, "http://127.0.0.1:8081",
-//				LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL, 120.0));
-//		try {
-//			System.out.println(b1.searchForAlternatives(initialArch).get());
-//		} catch (ExecutionException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// RestArchitecture initialArch =
+		// ArchitectureInitializer.loadSpecificModel("test");
+		// // ArchitecturalTransformationsFactory fact = new
+		// // ArchitecturalTransformationsFactory(initialArch);
+		// RestBot b1 = new RestBot("b1", BotType.MODIFIABILITY,
+		// "http://127.0.0.1:8081",
+		// LoadHelper.createModifiabilityScenarioS1(ResponseMeasureType.DECIMAL,
+		// 120.0));
+		// try {
+		// System.out.println(b1.searchForAlternatives(initialArch).get());
+		// } catch (ExecutionException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 		// b1.searchForAlternatives(initialArch).thenAccept(System.out::println);
 		// BotManager.getInstance().addBot(b1);
 		// List<RestScenarioResult> results = new ArrayList<>();
@@ -56,8 +60,9 @@ public class DockerMain {
 		System.out.println("negotiator starts in 5 seconds...");
 		Thread.sleep(5000);
 		System.out.println("negotiator starting...");
-		new SQuATSillyBotsNegotiator().negotiatiateUntilAnAgreementIsReached();
-		Thread.sleep(1000000);
+		SQuATSillyBotsNegotiator n = new SQuATSillyBotsNegotiator();
+		new NoSpringServer(n, 8082);
+		n.negotiatiateUntilAnAgreementIsReached();
 		// RestArchitecture initialArchitecture =
 		// ArchitectureInitializer.loadSpecificModel(NegotiatorConfiguration.INITIAL_ARCHITECTURE_NAME);
 		// JSONObject scJsonObject =
