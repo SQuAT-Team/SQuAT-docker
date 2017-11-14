@@ -9,7 +9,7 @@ public class NegotiatorConfiguration {
 	private static float FAILURE_RESPONSE_VALUE = 9999f;
 	private static boolean RUN_SEQUENTIAL = false;
 	private static boolean AUTO_ACCEPT = true;
-	private static int AUTO_ACCEPT_LEVEL = 1;
+	private static int AUTO_ACCEPT_LEVEL = 2;
 
 	/**
 	 * Checks whether the bots should work sequential.
