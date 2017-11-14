@@ -1,10 +1,34 @@
-version: "3"
+version: "2"
 services:
-  performance-bot:
+  performance-bot-1:
     image: squatteam/performance-bot:latest
     ports:
       - "8080"
-  modifiability-bot:
+  performance-bot-2:
+    image: squatteam/performance-bot:latest
+    ports:
+      - "8080"
+  performance-bot-3:
+    image: squatteam/performance-bot:latest
+    ports:
+      - "8080"
+  performance-bot-4:
+    image: squatteam/performance-bot:latest
+    ports:
+      - "8080"
+  modifiability-bot-1:
+    image: squatteam/modifiability-bot:latest
+    ports:
+      - "8081"
+  modifiability-bot-2:
+    image: squatteam/modifiability-bot:latest
+    ports:
+      - "8081"
+  modifiability-bot-3:
+    image: squatteam/modifiability-bot:latest
+    ports:
+      - "8081"
+  modifiability-bot-4:
     image: squatteam/modifiability-bot:latest
     ports:
       - "8081"
@@ -13,5 +37,11 @@ services:
     ports:
       - "8082:8082"
     depends_on:
-      - performance-bot
-      - modifiability-bot
+      - performance-bot-1
+      - performance-bot-2
+      - performance-bot-3
+      - performance-bot-4
+      - modifiability-bot-1
+      - modifiability-bot-2
+      - modifiability-bot-3
+      - modifiability-bot-4
