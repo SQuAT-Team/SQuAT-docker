@@ -7,7 +7,7 @@ public class NegotiatorConfiguration {
 	public static final String INITIAL_ARCHITECTURE_ALTERNATIVE_REPOSITORY_FULL_PATH = "/home/model/alternativeRepository.repository"; // /Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/cocomeWithoutPickUpStoreAndServiceAdapter/alternativescocome-cloud.repository
 
 	private static float FAILURE_RESPONSE_VALUE = 9999f;
-	private static boolean RUN_SEQUENTIAL = false;
+	private static boolean RUN_SEQUENTIAL = true;
 	private static boolean AUTO_ACCEPT = true;
 	private static int AUTO_ACCEPT_LEVEL = 2;
 
