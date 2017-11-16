@@ -25,7 +25,6 @@ public class ModifiabilityBotTest {
 	public static final String MODEL_PATH = "/home/model"; // models/cocomeWithoutPickUpStoreAndServiceAdapter
 	public static final String ALTERNATIVE_REPOSITORY_PATH = "/home/model/alternativeRepository.repository"; // /Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/cocomeWithoutPickUpStoreAndServiceAdapter/alternativescocome-cloud.repository
 
-	@Test
 	public void runStplusTest() throws Exception {
 		System.out.println("Start STPLUS Test");
 		System.out.println("Initialize Architecture");
