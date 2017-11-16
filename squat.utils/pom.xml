@@ -31,16 +31,16 @@
 			<version>2.10.1</version>
 		</dependency>
 
-		<!--<dependency>
-			<groupId>org.eclipse.emf</groupId>
-			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
-			<version>2.10.2</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.palladiosimulator</groupId>
 			<artifactId>pcm</artifactId>
 			<version>4.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+			<version>2.10.2</version>
 		</dependency>
 
 		<dependency>
@@ -53,14 +53,13 @@
 			<groupId>org.eclipse.emf</groupId>
 			<artifactId>org.eclipse.emf.cdo.common</artifactId>
 			<version>4.3.0</version>
-		</dependency>-->
-		
-		<!-- TODO: Load this from the repo
+		</dependency>
+
 		<dependency>
 			<groupId>de.uka.ipd.sdq</groupId>
 			<artifactId>de.uka.ipd.sdq.identifier</artifactId>
 			<version>2.1.0.201608251324</version>
-		</dependency> -->
+		</dependency>
 
 		<dependency>
 			<groupId>org.json</groupId>
@@ -91,7 +90,7 @@
 							<artifactId>pcm</artifactId>
 							<version>4.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/sebastian/git/SQuAT-docker/squat.utils/lib/org.palladiosimulator.pcm_4.0.1.201609011648.jar</file>
+							<file>lib/org.palladiosimulator.pcm_4.0.1.201609011648.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -105,7 +104,7 @@
 							<artifactId>org.eclipse.emf.cdo.common</artifactId>
 							<version>4.3.0</version>
 							<packaging>jar</packaging>
-							<file>/home/sebastian/git/SQuAT-docker/squat.utils/lib/org.eclipse.emf.cdo.common_4.3.0.v20140309-0644.jar</file>
+							<file>lib/org.eclipse.emf.cdo.common_4.3.0.v20140309-0644.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -119,7 +118,7 @@
 							<artifactId>org.eclipse.emf.cdo</artifactId>
 							<version>4.3.0</version>
 							<packaging>jar</packaging>
-							<file>/home/sebastian/git/SQuAT-docker/squat.utils/lib/org.eclipse.emf.cdo_4.3.0.v20140520-1823.jar</file>
+							<file>lib/org.eclipse.emf.cdo_4.3.0.v20140520-1823.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -133,7 +132,7 @@
 							<artifactId>org.eclipse.emf.common</artifactId>
 							<version>2.10.1</version>
 							<packaging>jar</packaging>
-							<file>/home/sebastian/git/SQuAT-docker/squat.utils/lib/org.eclipse.emf.common_2.10.1.v20150123-0348.jar</file>
+							<file>lib/org.eclipse.emf.common_2.10.1.v20150123-0348.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -147,7 +146,7 @@
 							<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
 							<version>2.10.2</version>
 							<packaging>jar</packaging>
-							<file>/home/sebastian/git/SQuAT-docker/squat.utils/lib/org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar</file>
+							<file>lib/org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -161,7 +160,7 @@
 							<artifactId>org.eclipse.emf.ecore</artifactId>
 							<version>2.10.2</version>
 							<packaging>jar</packaging>
-							<file>//home/sebastian/git/SQuAT-docker/squat.utils/lib/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar</file>
+							<file>lib/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -175,7 +174,7 @@
 							<artifactId>de.uka.ipd.sdq.identifier</artifactId>
 							<version>2.1.0.201608251324</version>
 							<packaging>jar</packaging>
-							<file>/home/sebastian/git/SQuAT-docker/squat.utils/lib/de.uka.ipd.sdq.identifier_2.1.0.201608251324.jar</file>
+							<file>lib/de.uka.ipd.sdq.identifier_2.1.0.201608251324.jar</file>
 						</configuration>
 					</execution>
 				</executions>
