@@ -66,7 +66,7 @@
 							<artifactId>squat.utils</artifactId>
 							<version>0.0.1-SNAPSHOT</version>
 							<packaging>jar</packaging>
-							<file>/home/lib/squat-util.jar</file>
+							<file>lib/squat-util.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -80,7 +80,7 @@
 							<artifactId>pcm</artifactId>
 							<version>4.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib/org.palladiosimulator.pcm_4.0.1.201609011648.jar</file>
+							<file>lib/org.palladiosimulator.pcm_4.0.1.201609011648.jar</file>
 						</configuration>
 					</execution>
 				</executions>
