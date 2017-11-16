@@ -22,8 +22,9 @@ import io.github.squat_team.util.PCMHelper;
  */
 public class ModifiabilityBotTest {
 	public static final String MODEL_NAME = "default"; // cocome-cloud
-	public static final String MODEL_PATH = "/home/model"; // models/cocomeWithoutPickUpStoreAndServiceAdapter
-	public static final String ALTERNATIVE_REPOSITORY_PATH = "/home/model/alternativeRepository.repository"; // /Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/cocomeWithoutPickUpStoreAndServiceAdapter/alternativescocome-cloud.repository
+	public static final String MODEL_PATH = "model"; // models/cocomeWithoutPickUpStoreAndServiceAdapter
+	public static final String ALTERNATIVE_REPOSITORY_PATH = System.getProperty("user.dir") // <- HACK: For some reason, the implementation expects an absolute path 
+			+ "/model/alternativeRepository.repository"; // /Users/santiagovidal/Documents/Programacion/kamp-test/squat-tool/models/cocomeWithoutPickUpStoreAndServiceAdapter/alternativescocome-cloud.repository
 
 	@Test
 	public void runStplusTest() throws Exception {

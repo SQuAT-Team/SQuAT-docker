@@ -241,7 +241,7 @@
 							<artifactId>squat.utils</artifactId>
 							<version>0.0.1-SNAPSHOT</version>
 							<packaging>jar</packaging>
-							<file>/home/lib/squat-util.jar</file>
+							<file>lib/squat-util.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -255,7 +255,7 @@
 							<artifactId>org.eclipse.emf.cdo.common</artifactId>
 							<version>4.3.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib/org.eclipse.emf.cdo.common_4.3.0.v20140309-0644.jar</file>
+							<file>lib/org.eclipse.emf.cdo.common_4.3.0.v20140309-0644.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -269,7 +269,7 @@
 							<artifactId>org.eclipse.emf.compare</artifactId>
 							<version>3.3.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib/org.eclipse.emf.compare_3.3.1.201608311750.jar</file>
+							<file>lib/org.eclipse.emf.compare_3.3.1.201608311750.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -283,7 +283,7 @@
 							<artifactId>org.eclipse.equinox.common</artifactId>
 							<version>3.8.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib/org.eclipse.equinox.common_3.8.0.v20160509-1230.jar</file>
+							<file>lib/org.eclipse.equinox.common_3.8.0.v20160509-1230.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -297,7 +297,7 @@
 							<artifactId>org.eclipse.net4j.util</artifactId>
 							<version>3.7.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib/org.eclipse.net4j.util_3.7.0.v20170521-0536.jar</file>
+							<file>lib/org.eclipse.net4j.util_3.7.0.v20170521-0536.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -311,7 +311,7 @@
 							<artifactId>org.eclipse.ocl</artifactId>
 							<version>3.4.2</version>
 							<packaging>jar</packaging>
-							<file>/home/lib/org.eclipse.ocl_3.4.2.v20140725-2242.jar</file>
+							<file>lib/org.eclipse.ocl_3.4.2.v20140725-2242.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -325,7 +325,7 @@
 							<artifactId>org.eclipse.ocl.ecore</artifactId>
 							<version>3.3.100</version>
 							<packaging>jar</packaging>
-							<file>/home/lib/org.eclipse.ocl.ecore_3.3.100.v20140610-0641.jar</file>
+							<file>lib/org.eclipse.ocl.ecore_3.3.100.v20140610-0641.jar</file>
 						</configuration>
 					</execution>
 					<!-- Libraries in home/lib2 -->
@@ -340,7 +340,7 @@
 							<artifactId>de.uka.ipd.sdq.errorhandling</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/de.uka.ipd.sdq.errorhandling-0.0.1.jar</file>
+							<file>lib2/de.uka.ipd.sdq.errorhandling-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -354,7 +354,7 @@
 							<artifactId>de.uka.ipd.sdq.de.uka.ipd.sdq.identifier</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/de.uka.ipd.sdq.identifier-0.0.1.jar</file>
+							<file>lib2/de.uka.ipd.sdq.identifier-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -368,7 +368,7 @@
 							<artifactId>de.uka.ipd.sdq.probfunction</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/de.uka.ipd.sdq.probfunction-0.0.1.jar</file>
+							<file>lib2/de.uka.ipd.sdq.probfunction-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -382,7 +382,7 @@
 							<artifactId>de.uka.ipd.sdq.stoex</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/de.uka.ipd.sdq.stoex-0.0.1.jar</file>
+							<file>lib2/de.uka.ipd.sdq.stoex-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -396,7 +396,7 @@
 							<artifactId>de.uka.ipd.sdq.units</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/de.uka.ipd.sdq.units-0.0.1.jar</file>
+							<file>lib2/de.uka.ipd.sdq.units-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -410,7 +410,7 @@
 							<artifactId>edu.kit.ipd.sdq.kamp</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/edu.kit.ipd.sdq.kamp-0.0.1.jar</file>
+							<file>lib2/edu.kit.ipd.sdq.kamp-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -424,7 +424,7 @@
 							<artifactId>edu.kit.ipd.sdq.kamp.model.fieldofactivityannotations</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/edu.kit.ipd.sdq.kamp.model.fieldofactivityannotations-0.0.1.jar</file>
+							<file>lib2/edu.kit.ipd.sdq.kamp.model.fieldofactivityannotations-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -438,7 +438,7 @@
 							<artifactId>edu.kit.ipd.sdq.kamp.model.modificationmarks</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/edu.kit.ipd.sdq.kamp.model.modificationmarks-0.0.1.jar</file>
+							<file>lib2/edu.kit.ipd.sdq.kamp.model.modificationmarks-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -452,7 +452,7 @@
 							<artifactId>org.palladiosimulator.pcm</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/org.palladiosimulator.pcm-0.0.1.jar</file>
+							<file>lib2/org.palladiosimulator.pcm-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -466,7 +466,7 @@
 							<artifactId>org.palladiosimulator.pcm.componentinternaldependencies</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/org.palladiosimulator.pcm.componentinternaldependencies-0.0.1.jar</file>
+							<file>lib2/org.palladiosimulator.pcm.componentinternaldependencies-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -480,7 +480,7 @@
 							<artifactId>org.palladiosimulator.pcm.fieldofactivityannotations</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/org.palladiosimulator.pcm.fieldofactivityannotations-0.0.1.jar</file>
+							<file>lib2/org.palladiosimulator.pcm.fieldofactivityannotations-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -494,7 +494,7 @@
 							<artifactId>org.palladiosimulator.pcm.internalmodificationmark</artifactId>
 							<version>0.0.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib2/org.palladiosimulator.pcm.internalmodificationmark-0.0.1.jar</file>
+							<file>lib2/org.palladiosimulator.pcm.internalmodificationmark-0.0.1.jar</file>
 						</configuration>
 					</execution>
 					<!-- Libraries in home/lib3 -->
@@ -509,7 +509,7 @@
 							<artifactId>org.eclipse.emf.cdo</artifactId>
 							<version>4.4.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.cdo_4.4.1.v20151007-1653.jar</file>
+							<file>lib3/org.eclipse.emf.cdo_4.4.1.v20151007-1653.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -523,7 +523,7 @@
 							<artifactId>org.eclipse.emf.common</artifactId>
 							<version>2.10.1</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.common_2.10.1.v20150123-0348.jar</file>
+							<file>lib3/org.eclipse.emf.common_2.10.1.v20150123-0348.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -537,7 +537,7 @@
 							<artifactId>org.eclipse.emf.ecore</artifactId>
 							<version>2.10.2</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar</file>
+							<file>lib3/org.eclipse.emf.ecore.xmi_2.10.2.v20150123-0348.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -551,7 +551,7 @@
 							<artifactId>org.eclipse.emf.ecore.xmi</artifactId>
 							<version>2.10.2</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar</file>
+							<file>lib3/org.eclipse.emf.ecore_2.10.2.v20150123-0348.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -565,7 +565,7 @@
 							<artifactId>org.eclipse.emf.henshin.cpa</artifactId>
 							<version>.1.5.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.henshin.cpa_1.5.0.201701170502.jar</file>
+							<file>lib3/org.eclipse.emf.henshin.cpa_1.5.0.201701170502.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -579,7 +579,7 @@
 							<artifactId>org.eclipse.emf.henshin.diagram</artifactId>
 							<version>.1.5.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.henshin.diagram_1.5.0.201701170502.jar</file>
+							<file>lib3/org.eclipse.emf.henshin.diagram_1.5.0.201701170502.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -593,7 +593,7 @@
 							<artifactId>org.eclipse.emf.henshin.examples</artifactId>
 							<version>.1.5.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.henshin.examples_1.5.0.201701170502.jar</file>
+							<file>lib3/org.eclipse.emf.henshin.examples_1.5.0.201701170502.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -607,7 +607,7 @@
 							<artifactId>org.eclipse.emf.henshin.giraph</artifactId>
 							<version>.1.5.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.henshin.giraph_1.5.0.201701170502.jar</file>
+							<file>lib3/org.eclipse.emf.henshin.giraph_1.5.0.201701170502.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -621,7 +621,7 @@
 							<artifactId>org.eclipse.emf.henshin.interpreter</artifactId>
 							<version>.1.5.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.henshin.interpreter_1.5.0.201701170502.jar</file>
+							<file>lib3/org.eclipse.emf.henshin.interpreter_1.5.0.201701170502.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -635,7 +635,7 @@
 							<artifactId>org.eclipse.emf.henshin.model</artifactId>
 							<version>.1.5.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.henshin.model_1.5.0.201701170502.jar</file>
+							<file>lib3/org.eclipse.emf.henshin.model_1.5.0.201701170502.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -649,7 +649,7 @@
 							<artifactId>org.eclipse.emf.henshin.statespace</artifactId>
 							<version>.1.5.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.henshin.statespace_1.5.0.201701170502.jar</file>
+							<file>lib3/org.eclipse.emf.henshin.statespace_1.5.0.201701170502.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -663,7 +663,7 @@
 							<artifactId>org.eclipse.emf.henshin.statespace.external</artifactId>
 							<version>.1.5.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.henshin.statespace.external_1.5.0.201701170502.jar</file>
+							<file>lib3/org.eclipse.emf.henshin.statespace.external_1.5.0.201701170502.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -677,7 +677,7 @@
 							<artifactId>org.eclipse.emf.henshin.trace</artifactId>
 							<version>.1.5.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.henshin.trace_1.5.0.201701170502.jar</file>
+							<file>lib3/org.eclipse.emf.henshin.trace_1.5.0.201701170502.jar</file>
 						</configuration>
 					</execution>
 					<execution>
@@ -691,7 +691,7 @@
 							<artifactId>org.eclipse.emf.henshin.wrap</artifactId>
 							<version>.1.5.0</version>
 							<packaging>jar</packaging>
-							<file>/home/lib3/org.eclipse.emf.henshin.wrap_1.5.0.201701170502.jar</file>
+							<file>lib3/org.eclipse.emf.henshin.wrap_1.5.0.201701170502.jar</file>
 						</configuration>
 					</execution>
 				</executions>
