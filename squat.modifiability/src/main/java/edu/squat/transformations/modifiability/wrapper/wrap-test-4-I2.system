@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ASCII"?>
+<system:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.1" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.1" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.1" id="_XdKZoO71Eea6wfovznEgkw" entityName="defaultSystem">
+  <assemblyContexts__ComposedStructure id="_y0k2sO71Eea6wfovznEgkw" entityName="Assembly_C1 &lt;C1>">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="wrap-test-4-I2.repository#_t1_eQO5wEeax88fmO4XU3A"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_15IM0O71Eea6wfovznEgkw" entityName="Assembly_C2 &lt;C2>">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="wrap-test-4-I2.repository#_w6AB0O5wEeax88fmO4XU3A"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_2ucrQO71Eea6wfovznEgkw" entityName="Assembly_C3 &lt;C3>">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="wrap-test-4-I2.repository#_wQr_EO5wEeax88fmO4XU3A"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_3eMGIO71Eea6wfovznEgkw" entityName="Assembly_C4 &lt;C4>">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="wrap-test-4-I2.repository#_irb04O5xEeax88fmO4XU3A"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_DWw2oO72Eea6wfovznEgkw" entityName="Assembly_C3 &lt;C3>">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="wrap-test-4-I2.repository#_wQr_EO5wEeax88fmO4XU3A"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_fSx3IPQ8EeaUiskPcoQQvw" entityName="Assembly_I2-Wrapper &lt;I2-Wrapper>">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="wrap-test-4-I2.repository#_fSuMwfQ8EeaUiskPcoQQvw"/>
+  </assemblyContexts__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_dtXW8O72Eea6wfovznEgkw" entityName="Connector Assembly_C1 &lt;C1> -> Assembly_C3 &lt;C3>" requiringAssemblyContext_AssemblyConnector="_y0k2sO71Eea6wfovznEgkw" providingAssemblyContext_AssemblyConnector="_2ucrQO71Eea6wfovznEgkw">
+    <providedRole_AssemblyConnector href="wrap-test-4-I2.repository#_RxajwO5xEeax88fmO4XU3A"/>
+    <requiredRole_AssemblyConnector href="wrap-test-4-I2.repository#_aaXWkO5xEeax88fmO4XU3A"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_gZAd0O72Eea6wfovznEgkw" entityName="Connector Assembly_C3 &lt;C3> -> Assembly_C1 &lt;C1>" requiringAssemblyContext_AssemblyConnector="_2ucrQO71Eea6wfovznEgkw" providingAssemblyContext_AssemblyConnector="_y0k2sO71Eea6wfovznEgkw">
+    <providedRole_AssemblyConnector href="wrap-test-4-I2.repository#_QlWZQO5xEeax88fmO4XU3A"/>
+    <requiredRole_AssemblyConnector href="wrap-test-4-I2.repository#_WKvUcO5xEeax88fmO4XU3A"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_rI-AcO72Eea6wfovznEgkw" entityName="Connector Assembly_C4 &lt;C4> -> Assembly_C1 &lt;C1>" requiringAssemblyContext_AssemblyConnector="_3eMGIO71Eea6wfovznEgkw" providingAssemblyContext_AssemblyConnector="_y0k2sO71Eea6wfovznEgkw">
+    <providedRole_AssemblyConnector href="wrap-test-4-I2.repository#_QlWZQO5xEeax88fmO4XU3A"/>
+    <requiredRole_AssemblyConnector href="wrap-test-4-I2.repository#_rcI1gO5xEeax88fmO4XU3A"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_wr_kIO72Eea6wfovznEgkw" entityName="Connector Assembly_C2 &lt;C2> -> Assembly_C1 &lt;C1>" requiringAssemblyContext_AssemblyConnector="_15IM0O71Eea6wfovznEgkw" providingAssemblyContext_AssemblyConnector="_y0k2sO71Eea6wfovznEgkw">
+    <providedRole_AssemblyConnector href="wrap-test-4-I2.repository#_QlWZQO5xEeax88fmO4XU3A"/>
+    <requiredRole_AssemblyConnector href="wrap-test-4-I2.repository#_VH-P4O5xEeax88fmO4XU3A"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_znGqYO72Eea6wfovznEgkw" entityName="Connector Assembly_C3 &lt;C3> -> Assembly_C1 &lt;C1>" requiringAssemblyContext_AssemblyConnector="_DWw2oO72Eea6wfovznEgkw" providingAssemblyContext_AssemblyConnector="_y0k2sO71Eea6wfovznEgkw">
+    <providedRole_AssemblyConnector href="wrap-test-4-I2.repository#_QlWZQO5xEeax88fmO4XU3A"/>
+    <requiredRole_AssemblyConnector href="wrap-test-4-I2.repository#_WKvUcO5xEeax88fmO4XU3A"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_5nHFAO72Eea6wfovznEgkw" entityName="Connector Assembly_C2 &lt;C2> -> Assembly_C3 &lt;C3>" requiringAssemblyContext_AssemblyConnector="_15IM0O71Eea6wfovznEgkw" providingAssemblyContext_AssemblyConnector="_DWw2oO72Eea6wfovznEgkw">
+    <providedRole_AssemblyConnector href="wrap-test-4-I2.repository#_RxajwO5xEeax88fmO4XU3A"/>
+    <requiredRole_AssemblyConnector href="wrap-test-4-I2.repository#_ZGYmMO5xEeax88fmO4XU3A"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_fSx3IfQ8EeaUiskPcoQQvw" entityName="Connector Assembly_I2-Wrapper &lt;I2-Wrapper> -> Assembly_C2 &lt;C2>" requiringAssemblyContext_AssemblyConnector="_fSx3IPQ8EeaUiskPcoQQvw" providingAssemblyContext_AssemblyConnector="_15IM0O71Eea6wfovznEgkw">
+    <providedRole_AssemblyConnector href="wrap-test-4-I2.repository#_QDMucO5xEeax88fmO4XU3A"/>
+    <requiredRole_AssemblyConnector href="wrap-test-4-I2.repository#_fSuMw_Q8EeaUiskPcoQQvw"/>
+  </connectors__ComposedStructure>
+</system:System>

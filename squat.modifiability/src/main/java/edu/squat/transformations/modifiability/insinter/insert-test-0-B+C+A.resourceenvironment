@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<resourceenvironment:ResourceEnvironment xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:resourceenvironment="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.1">
+  <linkingResources__ResourceEnvironment id="_dyFfAO1uEeab86LP4wB6tQ" entityName="Network" connectedResourceContainers_LinkingResource="_Xp1HUO1uEeab86LP4wB6tQ _4L_ncO1tEeab86LP4wB6tQ">
+    <communicationLinkResourceSpecifications_LinkingResource id="_dyV9sO1uEeab86LP4wB6tQ" failureProbability="0.001">
+      <communicationLinkResourceType_CommunicationLinkResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_o3sScH2AEdyH8uerKnHYug"/>
+      <latency_CommunicationLinkResourceSpecification specification="0.35"/>
+      <throughput_CommunicationLinkResourceSpecification specification="1000*1000"/>
+    </communicationLinkResourceSpecifications_LinkingResource>
+  </linkingResources__ResourceEnvironment>
+  <resourceContainer_ResourceEnvironment id="_4L_ncO1tEeab86LP4wB6tQ" entityName="Server1">
+    <activeResourceSpecifications_ResourceContainer id="_5yrRYO1tEeab86LP4wB6tQ" MTTR="7200000.0" MTTF="3.78432E11" numberOfReplicas="8">
+      <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#FCFS"/>
+      <activeResourceType_ActiveResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+      <processingRate_ProcessingResourceSpecification specification="1000*1000"/>
+    </activeResourceSpecifications_ResourceContainer>
+  </resourceContainer_ResourceEnvironment>
+  <resourceContainer_ResourceEnvironment id="_Xp1HUO1uEeab86LP4wB6tQ" entityName="Server2">
+    <activeResourceSpecifications_ResourceContainer id="_YZzLsO1uEeab86LP4wB6tQ" MTTR="7200000.0" MTTF="3.78432E11">
+      <schedulingPolicy href="pathmap://PCM_MODELS/Palladio.resourcetype#ProcessorSharing"/>
+      <activeResourceType_ActiveResourceSpecification href="pathmap://PCM_MODELS/Palladio.resourcetype#_oro4gG3fEdy4YaaT-RYrLQ"/>
+      <processingRate_ProcessingResourceSpecification specification="1000*1000"/>
+    </activeResourceSpecifications_ResourceContainer>
+  </resourceContainer_ResourceEnvironment>
+</resourceenvironment:ResourceEnvironment>

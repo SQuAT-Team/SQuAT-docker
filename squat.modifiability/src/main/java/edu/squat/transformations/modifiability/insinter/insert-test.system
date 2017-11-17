@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.1" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.1" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.1" id="_uGsn4O1sEeab86LP4wB6tQ" entityName="defaultSystem">
+  <assemblyContexts__ComposedStructure id="_vQXlsO1sEeab86LP4wB6tQ" entityName="Assembly_Component1 &lt;Component1>">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="insert-test.repository#_ZU70oMI0Eea2uLfVNtEP3w"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_DMCC4O1tEeab86LP4wB6tQ" entityName="Assembly_Component2 &lt;Component2>">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="insert-test.repository#_arMc8MI0Eea2uLfVNtEP3w"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_EHzHkO1tEeab86LP4wB6tQ" entityName="Assembly_Component3 &lt;Component3>">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="insert-test.repository#_bhKboMI0Eea2uLfVNtEP3w"/>
+  </assemblyContexts__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_Ulnk4O1tEeab86LP4wB6tQ" entityName="Connector Assembly_Component2 &lt;Component2> -> Assembly_Component1 &lt;Component1>" requiringAssemblyContext_AssemblyConnector="_DMCC4O1tEeab86LP4wB6tQ" providingAssemblyContext_AssemblyConnector="_vQXlsO1sEeab86LP4wB6tQ">
+    <providedRole_AssemblyConnector href="insert-test.repository#_z_gZ0MI0Eea2uLfVNtEP3w"/>
+    <requiredRole_AssemblyConnector href="insert-test.repository#_-KOhYMI0Eea2uLfVNtEP3w"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_Y68mYO1tEeab86LP4wB6tQ" entityName="Connector Assembly_Component1 &lt;Component1> -> Assembly_Component2 &lt;Component2>" requiringAssemblyContext_AssemblyConnector="_vQXlsO1sEeab86LP4wB6tQ" providingAssemblyContext_AssemblyConnector="_DMCC4O1tEeab86LP4wB6tQ">
+    <providedRole_AssemblyConnector href="insert-test.repository#_8TIc4MI0Eea2uLfVNtEP3w"/>
+    <requiredRole_AssemblyConnector href="insert-test.repository#_yqu_QMI0Eea2uLfVNtEP3w"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_aQI3sO1tEeab86LP4wB6tQ" entityName="Connector Assembly_Component1 &lt;Component1> -> Assembly_Component3 &lt;Component3>" requiringAssemblyContext_AssemblyConnector="_vQXlsO1sEeab86LP4wB6tQ" providingAssemblyContext_AssemblyConnector="_EHzHkO1tEeab86LP4wB6tQ">
+    <providedRole_AssemblyConnector href="insert-test.repository#_7dKeMMI0Eea2uLfVNtEP3w"/>
+    <requiredRole_AssemblyConnector href="insert-test.repository#_xUYQUMI0Eea2uLfVNtEP3w"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_bCBnoO1tEeab86LP4wB6tQ" entityName="Connector Assembly_Component3 &lt;Component3> -> Assembly_Component1 &lt;Component1>" requiringAssemblyContext_AssemblyConnector="_EHzHkO1tEeab86LP4wB6tQ" providingAssemblyContext_AssemblyConnector="_vQXlsO1sEeab86LP4wB6tQ">
+    <providedRole_AssemblyConnector href="insert-test.repository#_z_gZ0MI0Eea2uLfVNtEP3w"/>
+    <requiredRole_AssemblyConnector href="insert-test.repository#_-_ptgMI0Eea2uLfVNtEP3w"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_b0MrcO1tEeab86LP4wB6tQ" entityName="Connector Assembly_Component3 &lt;Component3> -> Assembly_Component2 &lt;Component2>" requiringAssemblyContext_AssemblyConnector="_EHzHkO1tEeab86LP4wB6tQ" providingAssemblyContext_AssemblyConnector="_DMCC4O1tEeab86LP4wB6tQ">
+    <providedRole_AssemblyConnector href="insert-test.repository#_8TIc4MI0Eea2uLfVNtEP3w"/>
+    <requiredRole_AssemblyConnector href="insert-test.repository#_buH5kNgtEeaRSskp9rqpCg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_cNVkMO1tEeab86LP4wB6tQ" entityName="Connector Assembly_Component2 &lt;Component2> -> Assembly_Component3 &lt;Component3>" requiringAssemblyContext_AssemblyConnector="_DMCC4O1tEeab86LP4wB6tQ" providingAssemblyContext_AssemblyConnector="_EHzHkO1tEeab86LP4wB6tQ">
+    <providedRole_AssemblyConnector href="insert-test.repository#_7dKeMMI0Eea2uLfVNtEP3w"/>
+    <requiredRole_AssemblyConnector href="insert-test.repository#_bCCPoNgtEeaRSskp9rqpCg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:ProvidedDelegationConnector" id="_x-6aIO1tEeab86LP4wB6tQ" entityName="ProvDelegation Provided_A -> Provided_A_Component1" outerProvidedRole_ProvidedDelegationConnector="_tv6DEO1tEeab86LP4wB6tQ" assemblyContext_ProvidedDelegationConnector="_vQXlsO1sEeab86LP4wB6tQ">
+    <innerProvidedRole_ProvidedDelegationConnector href="insert-test.repository#_z_gZ0MI0Eea2uLfVNtEP3w"/>
+  </connectors__ComposedStructure>
+  <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_tv6DEO1tEeab86LP4wB6tQ" entityName="Provided_A">
+    <providedInterface__OperationProvidedRole href="insert-test.repository#_i4fOgMI0Eea2uLfVNtEP3w"/>
+  </providedRoles_InterfaceProvidingEntity>
+</system:System>

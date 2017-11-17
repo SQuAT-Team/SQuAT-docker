@@ -1,0 +1,250 @@
+.\" -*- nroff -*-
+.TH lqn2lqx 1 "01 December 2015"  "5.9"
+.\" $Id: lqn2lqx.1 12339 2015-12-01 17:24:28Z greg $
+.\"
+.\" --------------------------------
+.SH "NAME"
+lqn2lqx \- generate layered queueing network models from an existing model file.
+.SH "SYNOPSIS"
+.br
+.B lqngen
+[\fIOPTION \&.\|.\|.\fP]
+[
+FILE
+]
+.SH "DESCRIPTION"
+\fBlqn2lqx\fP is used to convert an LQN input file to use either SPEX or LQX to control execution.
+All constant input parameters are converted to variables initialized with the values from the original
+input file.  Existing variables within the input file are not
+modified.  Note however, that variables initialized in an XML input file with LQX are \fBnot\fP initialized
+in the converted output file because the LQX program must be executed in order to do so.  To convert input formats without the conversion of parameters to
+variables, use \fBlqn2ps\fP(1) with \fB--format\fP=\fIxml\fP( or \fIlqn\fP).
+.PP
+\fBlqn2lqx\fP reads its input from \fIfilename\fP, specified at the
+command line if present, or from the standard input otherwise.  Output
+for an input file \fIfilename\fP specified on the command line will be
+placed in the file \fIfilename.ext\fP, where \fI.ext\fP is \fIlqnx\fP
+for SPEX conversion and \fIxml\fPfor LQX conversion.
+If the output file name is the same as the input file name, 
+the output is written back to the original file name.
+The original file is renamed to \fIfilename.ext~\fP
+Output can be directed to a new file with the \fB\-\-output\fP option.
+If several input files are given, then each is treated as a separate model and
+output will be placed in separate output files.
+.SH "OPTIONS"
+.TP
+\fB\-N\fR, \fB\-\-experiments=\fIARG\fR
+Generate \fIARG\fP experiments within one model file. The experiments
+will be run using either SPEX (for LQN input), or LQX (for XML input).
+This option will turn on either \fB\-\-spex-output\fP, or \fB\-\-lqx-output\fP
+depending on the output format.
+.TP
+\fB\-S\fR, \fB\-\-sensitivity=\fIARG\fR
+Create a factorial expermiment varying all non-reference task service times by a factor of plus or minus \fIARG\fP.  This option precludes the use of \fB\-N\fP\fI\fP.
+.TP
+\fB\-O\fR, \fB\-\-format=\fIARG\fR
+Set the output file format, \fIARG\fP, to: \fIxml\fP, \fIlqn\fP.
+.TP
+\fB\-c\fR, \fB\-\-customers=\fIARG\fR
+Set the \fImean\fP number of customers at each of the client reference tasks to \fIARG\fP.
+.TP
+\fB\-i\fR, \fB\-\-infinite-server=\fIARG\fR
+Set the probability that a server is infinite to \fIARG\fP.
+.TP
+\fB\-p\fR, \fB\-\-processor-multiplicity=\fIARG\fR
+Set the \fImean\fP processor multiplicity for each processor to
+\fIARG\fP.  The
+number of copies of each processor is set using the current discreet (or uniform) random number generator.
+.TP
+\fB\-s\fR, \fB\-\-service-time=\fIARG\fR
+Set the \fImean\fP phase service time to \fIARG\fP.  The mean phase
+service time is set using the current continuous random number generator.
+.TP
+\fB\-t\fR, \fB\-\-task-multiplicity=\fIARG\fR
+Set the \fImean\fP task multiplicity for each task to
+\fIARG\fP.  The
+number of copies of each task is set using the current discreet (or uniform) random number generator.
+.TP
+\fB\-y\fR, \fB\-\-request-rate=\fIARG\fR
+Set the mean rendezous (synchronous call) rate to \fIARG\fP.  
+The mean rendezvous rate is set using the current continuous random number generator.
+.TP
+\fB\-z\fR, \fB\-\-think-time=\fIARG\fR
+Set the mean think time at reference tasks to \fIARG\fP.  
+The mean think time is set using the current continuous random number generator.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Print out a brief help summary and exit.
+.TP
+\fB\-o\fR, \fB\-\-output=\fIARG\fR
+Redirect output to the file named \fIARG\fP.  If \fIARG\fP is \fB-\fP,
+output is redirected to \fIstdout\fP.  This option cannot be used with \fB\-\-models\fP.
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR
+Verbose output (whatever that is...)
+.TP
+\fB\-\-comment=\fIARG\fR
+Set the model comment to \fIARG\fP.  By default, the comment is set to
+the command line options of the invocation of \fBlqn2lqx\fP.
+.TP
+\fB\-\-convergence-value=\fIARG\fR
+Set the model convergence limit to \fIARG\fP.  By default, the
+convergence limit is set to 0.00001.
+.TP
+\fB\-\-under-relaxation=\fIARG\fR
+Set the model under-relaxation to \fIARG\fP.  By default, the
+under-relaxation is set to 0.9.
+.TP
+\fB\-\-iteration-limit=\fIARG\fR
+Set the model iteration limit to \fIARG\fP.  By default, the iteration
+limit is set to 50.  For models with many layers, this  value should
+be higher.
+.TP
+\fB\-\-seed=\fIARG\fR
+Set the seed value for the random number generator to \fIARG\fP.
+.TP
+\fB\-\-constant\fR
+Use \fIconstant\fP values for all subsequent parameters.
+.TP
+\fB\-\-normal=\fIARG\fR
+Set the continuous random variable generator to use a Normal
+distribution with a standard deviation of \fIARG\fP for any subsequent
+flag that uses a continuous distribution.
+.TP
+\fB\-\-gamma=\fIARG\fR
+Set the continuous random variable generator to use a Gamma
+distribution with a shape parameter of \fIARG\fP  for any subsequent
+flag that uses a continuous distribution.  Integer values of
+\fIARG\fP will generate random numbers with an Erlang distribution.  A
+shape value of 1 will generate random numbers with an Exponential
+distribution.  Note that the parameter argument for subsequent
+\fB\-\-service-time\fP, \fB\-\-rendezvous-rate\fP, and
+\fB\-\-think-time\fP options set the distribution's \fIscale\fP value,
+and not it's mean.
+.TP
+\fB\-\-poisson\fR
+Use a Poisson distribution for all subsequent options that use a
+discreet random variable generator.
+.TP
+\fB\-\-uniform=\fIARG\fR
+Use a uniform distribution for all subsequent options that use a
+discreet or continuous random variable generator.  The spread of the
+distribution is set to \fIARG\fP.
+.TP
+\fB\-\-no-customers\fR
+The default operation is to convert all constants in the input file into variables.
+Do not convert constant parameters for reference task multiplicites (customers)
+to variables.
+.TP
+\fB\-\-no-infinite-server\fR
+Do not convert tasks or processors into infinite servers.
+.TP
+\fB\-\-no-processor-multiplicity\fR
+The default operation is to convert all constants in the input file into variables.
+Do not convert constant parameters for processor multiplicities to variables.
+.TP
+\fB\-\-no-service-time\fR
+The default operation is to convert all constants in the input file into variables.
+Do not convert constant parameters for phase service times to variables.
+.TP
+\fB\-\-no-task-multiplicity\fR
+The default operation is to convert all constants in the input file into variables.
+Do not convert constant parameters for task multiplicities to variables.
+.TP
+\fB\-\-no-request-rate\fR
+The default operation is to convert all constants in the input file into variables.
+Do not convert constant parameters for request rates to variables.
+.TP
+\fB\-\-no-think-time\fR
+The default operation is to convert all constants in the input file into variables.
+Do not convert constant parameters for reference task (customer) think times to variables.
+.TP
+\fB\-\-[no-]annotate\fR
+Annotate (do not annotate) LQN-type input files.  This option has no effect for
+XML output.  The default is to annotate LQN model files.
+.TP
+\fB\-\-xml-output\fR
+Output the input model in eXtensible Markup Language (XML).
+.TP
+\fB\-\-lqx-output\fR
+Generate LQX control code for XML output files.  Variables will be
+created for all parameters set by the options above and will be
+initialized using the current random number generator.  If
+\fB\-\-experiments\fP=\fIARG\fP is also used, loop code will be
+produced to generate \fIARG\fP runs.  This option will enable XML output.
+.TP
+\fB\-\-spex-output\fR
+Generate SPEX control code for LQN output files.  Variables will be
+created for all parameters set by the options above and will be
+initialized using the current random number generator.  If
+\fB\-\-experiments\fP=\fIARG\fP is also used, loop code will be
+produce to generate \fIARG\fP runs.  This option will enable LQN
+output.
+.TP
+\fB\-\-[no-]input-parameters\fR
+If this flag is set, output the values of any parameter which is varied, otherwise input parameter
+values are not shown. The default is to show the value of input variables that can be changed as
+the SPEX/LQX program runs.
+.TP
+\fB\-\-[no-]utilization\fR
+Insert LQX or SPEX code to either observe or not observe processor utilization for all ``interesting'' processors.
+Interesting processors are those which might have contention present.
+The default is to observe processor utilization.
+.TP
+\fB\-\-[no-]throughput\fR
+Insert LQX code or SPEX observation variables to output task throughput for all ``intersting'' tasks.
+Interesting tasks are those which might have contention present.
+The default is to insert observation variables.
+.TP
+\fB\-\-[no-]residence-time\fR
+Insert LQX code or SPEX observation variables to output entry service (residence) time.
+The default is to insert observation variables.
+.TP
+\fB\-\-[no-]mva-waits\fR
+Insert LQX code or SPEX observation variables to output the number of calls to wait().
+The default is to not insert observation variables.
+.TP
+\fB\-\-[no-]iterations\fR
+Insert LQX code or SPEX observation variables to output the number of solver iterations.
+The default is to not insert observation variables.
+.TP
+\fB\-\-[no-]elapsed-time\fR
+Insert LQX code or SPEX observation variables to output the solver's ELAPSED time.
+The default is to not insert observation variables.
+.TP
+\fB\-\-[no-]user-cpu-time\fR
+Insert LQX code or SPEX observation variables to output the solver's USER CPU time.
+The default is to not insert observation variables.
+.TP
+\fB\-\-[no-]system-cpu-time\fR
+Insert LQX code or SPEX observation variables to output the solver's SYSTEM CPU time.
+The default is to not insert observation variables.
+.TP
+\fB\-\-manual-page\fR
+Generate the manual page and send the output to \fIstdout\fP.
+
+.SH "SEE ALSO"
+\fBlqn2lqx\fP(1), \fBlqns\fP(1), \fBlqsim\fP(1), \fBlqn2ps\fP(1)
+
+.SH "EXAMPLES"
+To convert an existing model file to SPEX:
+.sp
+.ti 0.75i
+\f(CWlqn2lqx model.lqn\fP
+.sp
+Note that the output will be in a file named \fImodel.xlqn\fP.
+.sp
+To convert an existing model file to SPEX with running two experiments varying service time:
+.sp
+.ti 0.75i
+\f(CWlqn2lqx -N2 -s2 model.lqn\fP
+.sp
+Note that the output will be in a file named \fImodel.xlqn\fP.
+.sp
+To convert an existing model file to LQX, varying the service time at all entries by 1.5x:
+.sp
+.ti 0.75i
+\f(CWlqn2lqx --lqx-output --sensitivity=1.5 --no-customers --no-request-rate model.lqn\fP
+.sp
+.
+.sp

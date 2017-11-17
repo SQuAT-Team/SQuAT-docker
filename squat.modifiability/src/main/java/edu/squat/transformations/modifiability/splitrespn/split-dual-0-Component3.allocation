@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ASCII"?>
+<allocation:Allocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.1" id="_DRiX0Oc0EeaYi_qKETszAw" entityName="defaultAllocation">
+  <targetResourceEnvironment_Allocation href="split-dual-0-Component3.resourceenvironment#/"/>
+  <system_Allocation href="split-dual-0-Component3.system#_uw6zcOczEeaYi_qKETszAw"/>
+  <allocationContexts_Allocation id="_zGEj4Oc1EeaYi_qKETszAw" entityName="Allocation_Assembly_Component1 &lt;Component1> &lt;Component1>">
+    <resourceContainer_AllocationContext href="split-dual-0-Component3.resourceenvironment#_iHTyIOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual-0-Component3.system#_IPgtsOc0EeaYi_qKETszAw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_0UMj4Oc1EeaYi_qKETszAw" entityName="Allocation_Assembly_Component2 &lt;Component2> &lt;Component2>">
+    <resourceContainer_AllocationContext href="split-dual-0-Component3.resourceenvironment#_iHTyIOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual-0-Component3.system#_NzYl8Oc0EeaYi_qKETszAw"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_IatnwPIiEeaol5Qr5J_yfg" entityName="Allocation_Assembly_Component3-A &lt;Component3-A> &lt;Component3-A>">
+    <resourceContainer_AllocationContext href="split-dual-0-Component3.resourceenvironment#_jHKFkOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual-0-Component3.system#_IatApfIiEeaol5Qr5J_yfg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_Iatnv_IiEeaol5Qr5J_yfg" entityName="Allocation_Assembly_Component3-B &lt;Component3-B> &lt;Component3-B>">
+    <resourceContainer_AllocationContext href="split-dual-0-Component3.resourceenvironment#_jHKFkOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual-0-Component3.system#_IatApPIiEeaol5Qr5J_yfg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_Iatnu_IiEeaol5Qr5J_yfg" entityName="Allocation_Assembly_Component3-C &lt;Component3-C> &lt;Component3-C>">
+    <resourceContainer_AllocationContext href="split-dual-0-Component3.resourceenvironment#_jHKFkOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual-0-Component3.system#_IatAoPIiEeaol5Qr5J_yfg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_IatnvPIiEeaol5Qr5J_yfg" entityName="Allocation_Assembly_Component3-B &lt;Component3-B> &lt;Component3-B>">
+    <resourceContainer_AllocationContext href="split-dual-0-Component3.resourceenvironment#_jHKFkOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual-0-Component3.system#_IatAofIiEeaol5Qr5J_yfg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_IatnvfIiEeaol5Qr5J_yfg" entityName="Allocation_Assembly_Component3-A &lt;Component3-A> &lt;Component3-A>">
+    <resourceContainer_AllocationContext href="split-dual-0-Component3.resourceenvironment#_jHKFkOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual-0-Component3.system#_IatAovIiEeaol5Qr5J_yfg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_IatnvvIiEeaol5Qr5J_yfg" entityName="Allocation_Assembly_Component3-C &lt;Component3-C> &lt;Component3-C>">
+    <resourceContainer_AllocationContext href="split-dual-0-Component3.resourceenvironment#_jHKFkOc0EeaYi_qKETszAw"/>
+    <assemblyContext_AllocationContext href="split-dual-0-Component3.system#_IatAo_IiEeaol5Qr5J_yfg"/>
+  </allocationContexts_Allocation>
+</allocation:Allocation>

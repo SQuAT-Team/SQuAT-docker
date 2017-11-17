@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ASCII"?>
+<usagemodel:UsageModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:stoex="http://sdq.ipd.uka.de/StochasticExpressions/2.2" xmlns:usagemodel="http://palladiosimulator.org/PalladioComponentModel/UsageModel/5.1">
+  <usageScenario_UsageModel id="_Uc-igC6OEd-Jla2o7wkBzQ" entityName="stplus.usageScenario">
+    <scenarioBehaviour_UsageScenario id="_Uc-igS6OEd-Jla2o7wkBzQ" entityName="stplus.usageScenarioBehaviour">
+      <actions_ScenarioBehaviour xsi:type="usagemodel:Start" id="_Uc-igi6OEd-Jla2o7wkBzQ" successor="_-g15UWCGEeaQ-qRnqvu5Tg"/>
+      <actions_ScenarioBehaviour xsi:type="usagemodel:Stop" id="_Uc-igy6OEd-Jla2o7wkBzQ" predecessor="_-g15UWCGEeaQ-qRnqvu5Tg"/>
+      <actions_ScenarioBehaviour xsi:type="usagemodel:Branch" id="_-g15UWCGEeaQ-qRnqvu5Tg" successor="_Uc-igy6OEd-Jla2o7wkBzQ" predecessor="_Uc-igi6OEd-Jla2o7wkBzQ">
+        <branchTransitions_Branch branchProbability="0.9">
+          <branchedBehaviour_BranchTransition id="_E8o4EGCHEeaQ-qRnqvu5Tg">
+            <actions_ScenarioBehaviour xsi:type="usagemodel:Start" id="_GpNupGCHEeaQ-qRnqvu5Tg" successor="_Vc6VgC6OEd-Jla2o7wkBzQ"/>
+            <actions_ScenarioBehaviour xsi:type="usagemodel:EntryLevelSystemCall" id="_Vc6VgC6OEd-Jla2o7wkBzQ" entityName="callPlan" successor="_HQfKA2CHEeaQ-qRnqvu5Tg" predecessor="_GpNupGCHEeaQ-qRnqvu5Tg">
+              <providedRole_EntryLevelSystemCall href="stplus-split-5-IBusiness%20Trip.system#_WazzEC6MEd-Jla2o7wkBzQ"/>
+              <operationSignature__EntryLevelSystemCall href="stplus-split-5-IBusiness%20Trip.repository#_8A9Bka7LEd-Z7e7zQl8I9w"/>
+              <inputParameterUsages_EntryLevelSystemCall>
+                <variableCharacterisation_VariableUsage type="VALUE">
+                  <specification_VariableCharacterisation specification="BoolPMF[ (true;0.8) (false;0.2) ]"/>
+                </variableCharacterisation_VariableUsage>
+                <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="isBook"/>
+              </inputParameterUsages_EntryLevelSystemCall>
+              <inputParameterUsages_EntryLevelSystemCall>
+                <variableCharacterisation_VariableUsage type="VALUE">
+                  <specification_VariableCharacterisation specification="BoolPMF[(true;0.4)(false;0.6)]"/>
+                </variableCharacterisation_VariableUsage>
+                <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="isBank"/>
+              </inputParameterUsages_EntryLevelSystemCall>
+            </actions_ScenarioBehaviour>
+            <actions_ScenarioBehaviour xsi:type="usagemodel:Stop" id="_HQfKA2CHEeaQ-qRnqvu5Tg" predecessor="_Vc6VgC6OEd-Jla2o7wkBzQ"/>
+          </branchedBehaviour_BranchTransition>
+        </branchTransitions_Branch>
+        <branchTransitions_Branch branchProbability="0.1">
+          <branchedBehaviour_BranchTransition id="_ePhRkGCHEeaQ-qRnqvu5Tg">
+            <actions_ScenarioBehaviour xsi:type="usagemodel:Start" id="_em3alGCHEeaQ-qRnqvu5Tg" successor="_gCKT4GCHEeaQ-qRnqvu5Tg"/>
+            <actions_ScenarioBehaviour xsi:type="usagemodel:EntryLevelSystemCall" id="_gCKT4GCHEeaQ-qRnqvu5Tg" entityName="callExport" successor="_fcsPU2CHEeaQ-qRnqvu5Tg" predecessor="_em3alGCHEeaQ-qRnqvu5Tg">
+              <providedRole_EntryLevelSystemCall href="stplus-split-5-IBusiness%20Trip.system#_WazzEC6MEd-Jla2o7wkBzQ"/>
+              <operationSignature__EntryLevelSystemCall href="stplus-split-5-IBusiness%20Trip.repository#_e8D_0F_JEeahZew5WJ0QOQ"/>
+              <outputParameterUsages_EntryLevelSystemCall>
+                <variableCharacterisation_VariableUsage type="BYTESIZE">
+                  <specification_VariableCharacterisation specification="RETURNEXPORT.BYTESIZE"/>
+                </variableCharacterisation_VariableUsage>
+                <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="files"/>
+              </outputParameterUsages_EntryLevelSystemCall>
+              <inputParameterUsages_EntryLevelSystemCall>
+                <variableCharacterisation_VariableUsage type="NUMBER_OF_ELEMENTS">
+                  <specification_VariableCharacterisation specification="IntPMF[(1; 0.35)(2; 0.25)(3; 0.15)(4; 0.1)(5; 0.08)(6; 0.05)(7; 0.02)]"/>
+                </variableCharacterisation_VariableUsage>
+                <namedReference__VariableUsage xsi:type="stoex:VariableReference" referenceName="idz"/>
+              </inputParameterUsages_EntryLevelSystemCall>
+            </actions_ScenarioBehaviour>
+            <actions_ScenarioBehaviour xsi:type="usagemodel:Stop" id="_fcsPU2CHEeaQ-qRnqvu5Tg" predecessor="_gCKT4GCHEeaQ-qRnqvu5Tg"/>
+          </branchedBehaviour_BranchTransition>
+        </branchTransitions_Branch>
+      </actions_ScenarioBehaviour>
+    </scenarioBehaviour_UsageScenario>
+    <workload_UsageScenario xsi:type="usagemodel:OpenWorkload">
+      <interArrivalTime_OpenWorkload specification="Exp(0.5)"/>
+    </workload_UsageScenario>
+  </usageScenario_UsageModel>
+</usagemodel:UsageModel>

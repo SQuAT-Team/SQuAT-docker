@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ASCII"?>
+<system:System xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:composition="http://palladiosimulator.org/PalladioComponentModel/Core/Composition/5.1" xmlns:repository="http://palladiosimulator.org/PalladioComponentModel/Repository/5.1" xmlns:system="http://palladiosimulator.org/PalladioComponentModel/System/5.1" id="_VreA0C6MEd-Jla2o7wkBzQ" entityName="stplus.ystem">
+  <assemblyContexts__ComposedStructure id="_X594sC6MEd-Jla2o7wkBzQ" entityName="Assembly_BusinessTripMgmt">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="stplus-1-Payment%20System.repository#_YyVn8C6IEd-Jla2o7wkBzQ"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_YXdtAC6MEd-Jla2o7wkBzQ" entityName="Assembly_BookingSystem">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="stplus-1-Payment%20System.repository#_ZZH7IC6IEd-Jla2o7wkBzQ"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_C1syEO1jEeaVDI-nCmFxWg" entityName="Assembly_PaymentSystem-B">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="stplus-1-Payment%20System.repository#_C1Z3IO1jEeaVDI-nCmFxWg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_-tTDEF7oEeavvL8WcdoZSg" entityName="Assembly_TripDB">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="stplus-1-Payment%20System.repository#_letEAF41EeavvL8WcdoZSg"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_Ha2JcGCTEeaQ-qRnqvu5Tg" entityName="Assembly_Exporter">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="stplus-1-Payment%20System.repository#_QWlc0F_MEeahZew5WJ0QOQ"/>
+  </assemblyContexts__ComposedStructure>
+  <assemblyContexts__ComposedStructure id="_C1qV0O1jEeaVDI-nCmFxWg" entityName="Assembly_PaymentSystem-A">
+    <encapsulatedComponent__AssemblyContext xsi:type="repository:BasicComponent" href="stplus-1-Payment%20System.repository#_C1R7UO1jEeaVDI-nCmFxWg"/>
+  </assemblyContexts__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_cIRFIC6MEd-Jla2o7wkBzQ" entityName="Connector Assembly_C1 &lt;C1> -> Assembly_C2 &lt;C2>" requiringAssemblyContext_AssemblyConnector="_X594sC6MEd-Jla2o7wkBzQ" providingAssemblyContext_AssemblyConnector="_YXdtAC6MEd-Jla2o7wkBzQ">
+    <providedRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_gCeNsC6IEd-Jla2o7wkBzQ"/>
+    <requiredRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_frf4IC6IEd-Jla2o7wkBzQ"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_C1xqke1jEeaVDI-nCmFxWg" entityName="Connector Assembly_PaymentSystem-B &lt;Payment System-B> -> Assembly_PaymentSystem-A &lt;Payment System-A>" requiringAssemblyContext_AssemblyConnector="_C1qV0O1jEeaVDI-nCmFxWg" providingAssemblyContext_AssemblyConnector="_C1syEO1jEeaVDI-nCmFxWg">
+    <providedRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_C1Z3Ie1jEeaVDI-nCmFxWg"/>
+    <requiredRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_C1iaAO1jEeaVDI-nCmFxWg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_C1xqkO1jEeaVDI-nCmFxWg" entityName="Connector Assembly_PaymentSystem-A &lt;Payment System-A> -> Assembly_PaymentSystem-B &lt;Payment System-B>" requiringAssemblyContext_AssemblyConnector="_C1syEO1jEeaVDI-nCmFxWg" providingAssemblyContext_AssemblyConnector="_C1qV0O1jEeaVDI-nCmFxWg">
+    <providedRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_C1R7Ue1jEeaVDI-nCmFxWg"/>
+    <requiredRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_C1iaAe1jEeaVDI-nCmFxWg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:ProvidedDelegationConnector" id="_bwKHIC6MEd-Jla2o7wkBzQ" entityName="ProvDelegation Provided_I1 -> Provided_I1_C1" outerProvidedRole_ProvidedDelegationConnector="_WazzEC6MEd-Jla2o7wkBzQ" assemblyContext_ProvidedDelegationConnector="_X594sC6MEd-Jla2o7wkBzQ">
+    <innerProvidedRole_ProvidedDelegationConnector href="stplus-1-Payment%20System.repository#_fYvUMC6IEd-Jla2o7wkBzQ"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_l6_ftl7rEeavvL8WcdoZSg" entityName="DBConnector" requiringAssemblyContext_AssemblyConnector="_X594sC6MEd-Jla2o7wkBzQ" providingAssemblyContext_AssemblyConnector="_-tTDEF7oEeavvL8WcdoZSg">
+    <providedRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_-P7lIV45EeavvL8WcdoZSg"/>
+    <requiredRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_zpVJ5V7pEeavvL8WcdoZSg"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_RMitBmCTEeaQ-qRnqvu5Tg" entityName="Connector Exporter-Front" requiringAssemblyContext_AssemblyConnector="_X594sC6MEd-Jla2o7wkBzQ" providingAssemblyContext_AssemblyConnector="_Ha2JcGCTEeaQ-qRnqvu5Tg">
+    <providedRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_gsQ_4V_OEeahZew5WJ0QOQ"/>
+    <requiredRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_vUtoRV_UEeahZew5WJ0QOQ"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_aNtLhmCTEeaQ-qRnqvu5Tg" entityName="Connector Exporter-Back" requiringAssemblyContext_AssemblyConnector="_Ha2JcGCTEeaQ-qRnqvu5Tg" providingAssemblyContext_AssemblyConnector="_-tTDEF7oEeavvL8WcdoZSg">
+    <providedRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_-P7lIV45EeavvL8WcdoZSg"/>
+    <requiredRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_iUC2BV_OEeahZew5WJ0QOQ"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_C1vOUO1jEeaVDI-nCmFxWg" entityName="Connector Assembly_C1 &lt;C1> -> Assembly_C3 &lt;C3>-A" requiringAssemblyContext_AssemblyConnector="_X594sC6MEd-Jla2o7wkBzQ" providingAssemblyContext_AssemblyConnector="_C1qV0O1jEeaVDI-nCmFxWg">
+    <providedRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_C1R7Ue1jEeaVDI-nCmFxWg"/>
+    <requiredRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_rng-MC6IEd-Jla2o7wkBzQ"/>
+  </connectors__ComposedStructure>
+  <connectors__ComposedStructure xsi:type="composition:AssemblyConnector" id="_C1xDge1jEeaVDI-nCmFxWg" entityName="Connector Assembly_BookingSystem -> Assembly_PaymentSystem-B" requiringAssemblyContext_AssemblyConnector="_YXdtAC6MEd-Jla2o7wkBzQ" providingAssemblyContext_AssemblyConnector="_C1syEO1jEeaVDI-nCmFxWg">
+    <providedRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_C1Z3Ie1jEeaVDI-nCmFxWg"/>
+    <requiredRole_AssemblyConnector href="stplus-1-Payment%20System.repository#_6D7mkOtYEd-m3_hR0FtH3Q"/>
+  </connectors__ComposedStructure>
+  <providedRoles_InterfaceProvidingEntity xsi:type="repository:OperationProvidedRole" id="_WazzEC6MEd-Jla2o7wkBzQ" entityName="Provided_I1">
+    <providedInterface__OperationProvidedRole href="stplus-1-Payment%20System.repository#_bh5lgC6IEd-Jla2o7wkBzQ"/>
+  </providedRoles_InterfaceProvidingEntity>
+</system:System>

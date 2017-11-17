@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.1" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:resourceenvironment="http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.1" xsi:schemaLocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.1 http://palladiosimulator.org/PalladioComponentModel/5.1#//allocation http://palladiosimulator.org/PalladioComponentModel/ResourceEnvironment/5.1 http://palladiosimulator.org/PalladioComponentModel/5.1#//resourceenvironment" xmi:id="_DRk0EOc0EeaYi_qKETszAw" type="allocation" name="split-dual.allocation_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_xb3r4Oc1EeaYi_qKETszAw" type="2003" fontName=".SF NS Text">
+    <children xmi:type="notation:DecorationNode" xmi:id="_xb46AOc1EeaYi_qKETszAw" type="5008"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_xb46Aec1EeaYi_qKETszAw" type="7003">
+      <children xmi:type="notation:Shape" xmi:id="_zz8WgOc1EeaYi_qKETszAw" type="3002" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_zz8Wguc1EeaYi_qKETszAw" type="5006"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_zz8Wg-c1EeaYi_qKETszAw" type="5007"/>
+        <element xmi:type="allocation:AllocationContext" href="split-dual.allocation#_zGEj4Oc1EeaYi_qKETszAw"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zz8Wgec1EeaYi_qKETszAw" x="39" y="29"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_0qmRsOc1EeaYi_qKETszAw" type="3002" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_0qmRsuc1EeaYi_qKETszAw" type="5006"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_0qmRs-c1EeaYi_qKETszAw" type="5007"/>
+        <element xmi:type="allocation:AllocationContext" href="split-dual.allocation#_0UMj4Oc1EeaYi_qKETszAw"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0qmRsec1EeaYi_qKETszAw" x="39" y="117"/>
+      </children>
+    </children>
+    <element xmi:type="resourceenvironment:ResourceContainer" href="split-dual.resourceenvironment#_iHTyIOc0EeaYi_qKETszAw"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xb3r4ec1EeaYi_qKETszAw" x="40" y="52" width="397" height="249"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_xb46Auc1EeaYi_qKETszAw" type="2003" fontName=".SF NS Text">
+    <children xmi:type="notation:DecorationNode" xmi:id="_xb5hEOc1EeaYi_qKETszAw" type="5008"/>
+    <children xmi:type="notation:DecorationNode" xmi:id="_xb5hEec1EeaYi_qKETszAw" type="7003">
+      <children xmi:type="notation:Shape" xmi:id="_1YNloOc1EeaYi_qKETszAw" type="3002" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_1YNlouc1EeaYi_qKETszAw" type="5006"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_1YNlo-c1EeaYi_qKETszAw" type="5007"/>
+        <element xmi:type="allocation:AllocationContext" href="split-dual.allocation#_1BQeMOc1EeaYi_qKETszAw"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1YNloec1EeaYi_qKETszAw" x="63" y="82"/>
+      </children>
+      <children xmi:type="notation:Shape" xmi:id="_2UUokOc1EeaYi_qKETszAw" type="3002" fontName=".SF NS Text">
+        <children xmi:type="notation:DecorationNode" xmi:id="_2UVPoOc1EeaYi_qKETszAw" type="5006"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_2UVPoec1EeaYi_qKETszAw" type="5007"/>
+        <element xmi:type="allocation:AllocationContext" href="split-dual.allocation#_1oT3IOc1EeaYi_qKETszAw"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_2UUokec1EeaYi_qKETszAw" x="63" y="13"/>
+      </children>
+    </children>
+    <element xmi:type="resourceenvironment:ResourceContainer" href="split-dual.resourceenvironment#_jHKFkOc0EeaYi_qKETszAw"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_xb46A-c1EeaYi_qKETszAw" x="544" y="88" width="457" height="164"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_DRlbIOc0EeaYi_qKETszAw"/>
+  <element xmi:type="allocation:Allocation" href="split-dual.allocation#_DRiX0Oc0EeaYi_qKETszAw"/>
+</notation:Diagram>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ASCII"?>
+<allocation:Allocation xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:allocation="http://palladiosimulator.org/PalladioComponentModel/Allocation/5.1" id="_pY23oFc-Ed23wcZsd06DZg" entityName="defaultAllocation">
+  <targetResourceEnvironment_Allocation href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#/"/>
+  <system_Allocation href="cocome-0-TradingSystem.Inventory.Application.Store.system#_3Sgb8FcmEd23wcZsd06DZg"/>
+  <allocationContexts_Allocation id="_vvwIQFc-Ed23wcZsd06DZg" entityName="Application.ProductDispatcher_EnterpriseServer">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_bTYxAOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_-W_gcFcoEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_-Wg9UFc-Ed23wcZsd06DZg" entityName="Application.Reporting_EnterpriseServer">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_bTYxAOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_FPU0wFcqEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_DLE4gFc_Ed23wcZsd06DZg" entityName="Data.Persistence_EnterpriseServer">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_bTYxAOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_jN79kFcqEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_RGit0Fc_Ed23wcZsd06DZg" entityName="Data.Store_EnterpriseServer">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_bTYxAOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_07dvQFcqEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_ZY7awFc_Ed23wcZsd06DZg" entityName="GUI.Reporting_EnterpriseClient">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_W6WUMOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_Yy964FcnEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_CJpfk_n0EeagYKwji7feSg" entityName="Allocation_Assembly_TradingSystem.Inventory.Application.Store-A &lt;TradingSystem.Inventory.Application.Store-A> &lt;TradingSystem.Inventory.Application.Store-A>">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_PNgBAVcdEd23wcZsd06DZg"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_CJoRcvn0EeagYKwji7feSg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_tgb7kFc_Ed23wcZsd06DZg" entityName="Application.Reporting_Store_1_Server">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_ZVdrwOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_yO4eIFczEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_zTCzYFc_Ed23wcZsd06DZg" entityName="Data.Persistence_Store_1_Server">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_ZVdrwOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_d2D1wFcxEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_67bhEFc_Ed23wcZsd06DZg" entityName="Data.Enterprise_Store_1_Server">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_ZVdrwOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_2uaPYFcxEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_-KEAQFc_Ed23wcZsd06DZg" entityName="Data.Store_Store_1_Server">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_ZVdrwOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_MX0AwFcyEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_M9D6gFdAEd23wcZsd06DZg" entityName="Application.Reporting_Store_2_Server">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_PNgBAVcdEd23wcZsd06DZg"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_9sosIFc5Ed23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_CJpfkvn0EeagYKwji7feSg" entityName="Allocation_Assembly_TradingSystem.Inventory.Application.Store-B &lt;TradingSystem.Inventory.Application.Store-B> &lt;TradingSystem.Inventory.Application.Store-B>">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_PNgBAVcdEd23wcZsd06DZg"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_CJoRcfn0EeagYKwji7feSg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_WiY2AFdAEd23wcZsd06DZg" entityName="Data.Persistence_Store_2_Server">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_PNgBAVcdEd23wcZsd06DZg"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_sREGwFcxEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_Z8UmQFdAEd23wcZsd06DZg" entityName="Data.Enterprise_Store_2_Server">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_PNgBAVcdEd23wcZsd06DZg"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_DtLL4FcyEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_d0mfYFdAEd23wcZsd06DZg" entityName="Data.Store_Store_2_Server">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_PNgBAVcdEd23wcZsd06DZg"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_XiFg0FcyEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_qen68FdAEd23wcZsd06DZg" entityName="GUI.Store_Store_1_Client">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_mpMBEOEgEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_nf0w4FcnEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_u-8EcFdAEd23wcZsd06DZg" entityName="GUI.Reporting_Store_1_Client">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_mpMBEOEgEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_jcqnAFczEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_CeraoFdBEd23wcZsd06DZg" entityName="GUI.Reporting_Store_2_Client">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_me5D4VcdEd23wcZsd06DZg"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_WolfQFctEd23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_FwvBQFdBEd23wcZsd06DZg" entityName="GUI.Store_Store_2_Client">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_me5D4VcdEd23wcZsd06DZg"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_8jo5MFc4Ed23wcZsd06DZg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_d-oBAFfjEd26K8JlmYJ10w" entityName="Data.Enterprise_EnterpriseServer">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_bTYxAOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_LoXbYFfjEd26K8JlmYJ10w"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_CJpfkPn0EeagYKwji7feSg" entityName="Allocation_Assembly_TradingSystem.Inventory.Application.Store-B &lt;TradingSystem.Inventory.Application.Store-B> &lt;TradingSystem.Inventory.Application.Store-B>">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_ZVdrwOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_CJnqYPn0EeagYKwji7feSg"/>
+  </allocationContexts_Allocation>
+  <allocationContexts_Allocation id="_CJpfkfn0EeagYKwji7feSg" entityName="Allocation_Assembly_TradingSystem.Inventory.Application.Store-A &lt;TradingSystem.Inventory.Application.Store-A> &lt;TradingSystem.Inventory.Application.Store-A>">
+    <resourceContainer_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.resourceenvironment#_ZVdrwOEhEduBSuO8WivxSA"/>
+    <assemblyContext_AllocationContext href="cocome-0-TradingSystem.Inventory.Application.Store.system#_CJoRcPn0EeagYKwji7feSg"/>
+  </allocationContexts_Allocation>
+</allocation:Allocation>
