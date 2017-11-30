@@ -21,6 +21,13 @@ After cloning the repository, you should be able to execute the current configur
 docker-compose up
 ```
 
+## How to run the projects in Eclipse
+The project dependencies are configured to work with the docker containers, but this will probably not work locally. For a local execution of a project (e.g. the modifiability bot) in Eclipse the following steps can be done:
+- Hide some error messages from the pom.xml. Window > Preferences > Maven > Errors/Warnings > Plugin executiuon not covered by lifecycle configuration. Select Ignore or Warning.
+- Add the jars from the lib folders to the build path manually. Do this for each project.
+- Remove all dependencies with errors from the pom.xml.
+- Update the project. There should not be any errors now.
+
 ## Configurung automatic build of Docker containers
 
 For each Docker Container which should be built automatically, an own Docker Cloud repository is required.
